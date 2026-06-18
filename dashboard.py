@@ -707,45 +707,74 @@ MAIN_MENU_HTML = """<!DOCTYPE html>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; min-height: 100vh; }
-  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 20px 24px; }
-  .header h1 { font-size: 20px; font-weight: 700; }
-  .header p { color: #64748b; font-size: 13px; margin-top: 4px; }
-  .container { padding: 24px; max-width: 700px; margin: 0 auto; }
-  .menu-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 8px; }
-  @media(min-width: 600px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
-  .menu-card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 16px;
-               padding: 24px; text-decoration: none; color: inherit; display: block;
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 18px 20px; }
+  .header h1 { font-size: 19px; font-weight: 700; }
+  .header .sub { color: #64748b; font-size: 12px; margin-top: 3px; }
+  .status-bar { display: flex; flex-direction: column; gap: 6px; margin-top: 12px; }
+  @media(min-width: 480px) { .status-bar { flex-direction: row; gap: 20px; } }
+  .status-item { font-size: 12px; color: #64748b; }
+  .status-item .dot { display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+                      background: #22c55e; margin-right: 5px; vertical-align: middle; }
+  .status-item .dot.next { background: #6366f1; }
+  .status-item strong { color: #e2e8f0; font-weight: 500; }
+  .container { padding: 16px; max-width: 720px; margin: 0 auto; }
+  .menu-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 4px; }
+  @media(min-width: 480px) { .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
+  @media(min-width: 700px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
+  .menu-card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 14px;
+               padding: 16px 18px; text-decoration: none; color: inherit;
+               display: flex; align-items: center; gap: 14px;
                transition: border-color .15s, background .15s; }
+  @media(min-width: 480px) {
+    .menu-card { flex-direction: column; align-items: flex-start; gap: 10px; padding: 20px; }
+  }
   .menu-card:hover { border-color: #6366f1; background: #1e2235; }
-  .menu-card .icon { font-size: 36px; display: block; margin-bottom: 12px; }
-  .menu-card h2 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .menu-card:active { background: #232640; }
+  .menu-card .icon { font-size: 26px; flex-shrink: 0; }
+  @media(min-width: 480px) { .menu-card .icon { font-size: 30px; } }
+  .menu-card h2 { font-size: 15px; font-weight: 700; margin-bottom: 2px; }
   .menu-card p { font-size: 12px; color: #64748b; line-height: 1.5; }
+  @media(max-width: 479px) { .menu-card p { display: none; } }
 </style>
 </head>
 <body>
 <div class="header">
   <h1>📊 Panel de Control</h1>
-  <p>Gmail MCP — Automatización financiera y de correos</p>
+  <div class="sub">Gmail MCP — Automatización financiera y de correos</div>
+  <div class="status-bar" id="status-bar" style="display:none">
+    <div class="status-item">
+      <span class="dot"></span>Última actualización: <strong id="last-update">—</strong>
+    </div>
+    <div class="status-item">
+      <span class="dot next"></span>Próxima actualización: <strong id="next-update">—</strong>
+    </div>
+  </div>
 </div>
 <div class="container">
   <div class="menu-grid">
     <a href="/finanzas" class="menu-card">
       <span class="icon">💰</span>
-      <h2>Finanzas</h2>
-      <p>Transacciones, gastos por banco, saldos de tarjetas y estados de cuenta</p>
+      <div><h2>Finanzas</h2><p>Transacciones, gastos por banco, saldos de tarjetas y estados de cuenta</p></div>
     </a>
     <a href="/emails" class="menu-card">
       <span class="icon">📧</span>
-      <h2>Correos</h2>
-      <p>Correos recientes, etiquetados, sin etiquetar y estadísticas por etiqueta</p>
+      <div><h2>Correos</h2><p>Correos recientes, etiquetados, sin etiquetar y estadísticas por etiqueta</p></div>
     </a>
     <a href="/logs" class="menu-card">
       <span class="icon">📋</span>
-      <h2>Logs</h2>
-      <p>Logs del orchestrator, cleanup, labeler y financial extractor</p>
+      <div><h2>Logs</h2><p>Logs del orchestrator, cleanup, labeler y financial extractor</p></div>
     </a>
   </div>
 </div>
+<script>
+fetch('/api/status').then(r => r.json()).then(s => {
+  if (s.last_update || s.next_update) {
+    document.getElementById('status-bar').style.display = 'flex';
+    if (s.last_update) document.getElementById('last-update').textContent = s.last_update;
+    if (s.next_update) document.getElementById('next-update').textContent = s.next_update;
+  }
+}).catch(() => {});
+</script>
 </body>
 </html>"""
 
