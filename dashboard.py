@@ -791,20 +791,30 @@ EMAILS_HTML = """<!DOCTYPE html>
             display: flex; align-items: center; gap: 12px; }
   .header a { color: #6366f1; text-decoration: none; font-size: 13px; }
   .header h1 { font-size: 17px; font-weight: 700; }
-  .container { padding: 16px; max-width: 960px; margin: 0 auto; }
-  .tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid #2a2d3e; padding-bottom: 0; }
-  .tab { background: none; border: none; color: #64748b; padding: 10px 16px; font-size: 13px;
-         cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .container { padding: 12px; max-width: 960px; margin: 0 auto; }
+  .tabs { display: flex; gap: 0; margin-bottom: 12px; border-bottom: 1px solid #2a2d3e; overflow-x: auto; }
+  .tab { background: none; border: none; color: #64748b; padding: 9px 11px; font-size: 12px;
+         cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px;
+         white-space: nowrap; flex-shrink: 0; }
+  @media(min-width:480px){ .tab { padding: 10px 16px; font-size: 13px; } }
   .tab.active { color: #6366f1; border-bottom-color: #6366f1; font-weight: 600; }
   .tab-content { display: none; }
   .tab-content.active { display: block; }
-  .card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
-  table { width: 100%; border-collapse: collapse; font-size: 12px; }
-  th { text-align: left; color: #64748b; font-weight: 500; padding: 6px 8px;
-       border-bottom: 1px solid #2a2d3e; font-size: 11px; text-transform: uppercase; }
-  td { padding: 8px; border-bottom: 1px solid #1e2130; vertical-align: top; max-width: 300px;
-       overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px;
+          padding: 0; margin-bottom: 12px; overflow: hidden; }
+  .card-inner { padding: 16px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; table-layout: fixed; }
+  th { text-align: left; color: #64748b; font-weight: 500; padding: 8px 10px;
+       border-bottom: 1px solid #2a2d3e; font-size: 11px; text-transform: uppercase;
+       white-space: nowrap; }
+  td { padding: 8px 10px; border-bottom: 1px solid #1e2130; vertical-align: middle;
+       overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 0; }
   tr:hover td { background: rgba(99,102,241,0.04); }
+  .col-fecha { width: 80px; }
+  .col-de { width: 28%; }
+  .col-asunto { width: 100%; }
+  .col-extra { width: 120px; }
+  @media(max-width:479px){ .col-extra { display: none; } }
   .badge { padding: 2px 7px; border-radius: 99px; font-size: 10px; font-weight: 600;
            background: rgba(99,102,241,0.15); color: #a5b4fc; white-space: nowrap; }
   .badge.green { background: rgba(34,197,94,0.15); color: #86efac; }
@@ -818,8 +828,6 @@ EMAILS_HTML = """<!DOCTYPE html>
   .loading { color: #64748b; font-size: 13px; padding: 24px; text-align: center; }
   .monto { font-weight: 600; color: #ef4444; }
   .monto.credit { color: #22c55e; }
-  .from-cell { max-width: 160px; }
-  .subject-cell { max-width: 220px; }
 </style>
 </head>
 <body>
@@ -839,7 +847,7 @@ EMAILS_HTML = """<!DOCTYPE html>
     <div class="loading" id="load-recientes">Cargando...</div>
     <div class="card" style="display:none" id="table-recientes">
       <table>
-        <thead><tr><th>Fecha</th><th>De</th><th>Asunto</th><th>Etiqueta</th></tr></thead>
+        <thead><tr><th class="col-fecha">Fecha</th><th class="col-de">De</th><th class="col-asunto">Asunto</th><th class="col-extra">Etiqueta</th></tr></thead>
         <tbody id="body-recientes"></tbody>
       </table>
     </div>
@@ -849,7 +857,7 @@ EMAILS_HTML = """<!DOCTYPE html>
     <div class="loading" id="load-sin-etiquetar">Cargando...</div>
     <div class="card" style="display:none" id="table-sin-etiquetar">
       <table>
-        <thead><tr><th>Fecha</th><th>De</th><th>Asunto</th><th>Snippet</th></tr></thead>
+        <thead><tr><th class="col-fecha">Fecha</th><th class="col-de">De</th><th class="col-asunto">Asunto</th><th class="col-extra">Snippet</th></tr></thead>
         <tbody id="body-sin-etiquetar"></tbody>
       </table>
     </div>
@@ -859,7 +867,7 @@ EMAILS_HTML = """<!DOCTYPE html>
     <div class="loading" id="load-financieros">Cargando...</div>
     <div class="card" style="display:none" id="table-financieros">
       <table>
-        <thead><tr><th>Fecha</th><th>Banco</th><th>Comercio</th><th>Tipo</th><th>Monto</th></tr></thead>
+        <thead><tr><th class="col-fecha">Fecha</th><th class="col-de">Banco</th><th class="col-asunto">Comercio</th><th class="col-extra">Tipo</th><th style="width:80px">Monto</th></tr></thead>
         <tbody id="body-financieros"></tbody>
       </table>
     </div>
@@ -901,10 +909,10 @@ async function loadTab(name) {
       document.getElementById('table-recientes').style.display = 'block';
       document.getElementById('body-recientes').innerHTML = data.map(e => `
         <tr>
-          <td style="white-space:nowrap">${shortDate(e.date)}</td>
-          <td class="from-cell" title="${e.from}">${e.from.replace(/<[^>]+>/g,'').substring(0,30)}</td>
-          <td class="subject-cell" title="${e.subject}">${e.subject.substring(0,50)}</td>
-          <td>${e.labels.length ? e.labels.map(l => labelBadge(l)).join(' ') : '<span style="color:#64748b;font-size:11px">—</span>'}</td>
+          <td class="col-fecha">${shortDate(e.date)}</td>
+          <td class="col-de" title="${e.from}">${e.from.replace(/<[^>]+>/g,'').substring(0,28)}</td>
+          <td class="col-asunto" title="${e.subject}">${e.subject.substring(0,60)}</td>
+          <td class="col-extra">${e.labels.length ? e.labels.map(l => labelBadge(l)).join(' ') : '<span style="color:#64748b;font-size:11px">—</span>'}</td>
         </tr>`).join('');
     }
     else if (name === 'sin-etiquetar') {
@@ -914,10 +922,10 @@ async function loadTab(name) {
       document.getElementById('table-sin-etiquetar').style.display = 'block';
       document.getElementById('body-sin-etiquetar').innerHTML = data.length ? data.map(e => `
         <tr>
-          <td style="white-space:nowrap">${shortDate(e.date)}</td>
-          <td class="from-cell" title="${e.from}">${e.from.replace(/<[^>]+>/g,'').substring(0,30)}</td>
-          <td class="subject-cell" title="${e.subject}">${e.subject.substring(0,50)}</td>
-          <td style="color:#64748b;font-size:11px;max-width:200px">${e.snippet}</td>
+          <td class="col-fecha">${shortDate(e.date)}</td>
+          <td class="col-de" title="${e.from}">${e.from.replace(/<[^>]+>/g,'').substring(0,28)}</td>
+          <td class="col-asunto" title="${e.subject}">${e.subject.substring(0,60)}</td>
+          <td class="col-extra" style="color:#64748b;font-size:11px">${e.snippet}</td>
         </tr>`).join('') : '<tr><td colspan="4" style="color:#64748b;padding:20px;text-align:center">Sin correos sin etiquetar</td></tr>';
     }
     else if (name === 'financieros') {
@@ -927,10 +935,10 @@ async function loadTab(name) {
       document.getElementById('body-financieros').innerHTML = data.slice(0,100).map(r => {
         const isIngreso = (r.tipo||'').includes('credito');
         return `<tr>
-          <td>${r.fecha_iso||'-'}</td>
-          <td><span style="font-size:11px">${(r.banco||'').replace('Banco ','').substring(0,10)}</span></td>
-          <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.comercio||r.descripcion?.substring(0,30)||'-'}</td>
-          <td><span style="color:${isIngreso?'#22c55e':'#ef4444'};font-size:10px;font-weight:600">${isIngreso?'▲':'▼'}</span> <span style="color:#64748b;font-size:10px">${r.tipo||'-'}</span></td>
+          <td class="col-fecha">${r.fecha_iso||'-'}</td>
+          <td class="col-de"><span style="font-size:11px">${(r.banco||'').replace('Banco ','').substring(0,10)}</span></td>
+          <td class="col-asunto">${r.comercio||r.descripcion?.substring(0,30)||'-'}</td>
+          <td class="col-extra"><span style="color:${isIngreso?'#22c55e':'#ef4444'};font-size:10px;font-weight:600">${isIngreso?'▲':'▼'}</span> <span style="color:#64748b;font-size:10px">${r.tipo||'-'}</span></td>
           <td class="monto ${isIngreso?'credit':''}">$${parseFloat(r.monto||0).toFixed(2)}</td>
         </tr>`;
       }).join('');
