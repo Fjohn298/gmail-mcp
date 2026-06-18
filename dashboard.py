@@ -1,10 +1,21 @@
 import os
 import csv
 import json
+import logging
 from datetime import datetime
 from flask import Flask, jsonify, request, render_template_string, session, redirect
+from gmail_logger import setup_logger
 
 app = Flask(__name__)
+
+_logger = setup_logger('dashboard')
+app.logger.handlers = _logger.handlers
+app.logger.setLevel(logging.INFO)
+app.logger.propagate = False
+
+_wz = logging.getLogger('werkzeug')
+_wz.handlers = _logger.handlers
+_wz.propagate = False
 app.secret_key = os.environ.get('FLASK_SECRET', 'gmail-dashboard-secret-2026')
 
 DASHBOARD_PASSWORD = os.environ.get('DASHBOARD_PASSWORD', 'jonathan2026').strip()
