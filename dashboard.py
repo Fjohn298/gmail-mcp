@@ -471,9 +471,64 @@ def api_correct():
     return jsonify(rows)
 
 
+@app.route('/logs')
+def logs():
+    log_dir = 'logs'
+    if not os.path.exists(log_dir):
+        return render_template_string(LOGS_HTML, files=[], content='Sin logs todavía.', current='')
+    files = sorted(os.listdir(log_dir), reverse=True)
+    selected = request.args.get('f', files[0] if files else '')
+    content = ''
+    if selected and os.path.exists(os.path.join(log_dir, selected)):
+        with open(os.path.join(log_dir, selected), 'r', encoding='utf-8') as f:
+            content = f.read()
+    return render_template_string(LOGS_HTML, files=files, content=content, current=selected)
+
+
 @app.route('/health')
 def health():
     return jsonify({'status': 'ok', 'time': datetime.now().isoformat()})
+
+
+LOGS_HTML = """<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logs</title>
+<style>
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; margin: 0; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 14px; }
+  .header h1 { font-size: 16px; margin: 0; }
+  .container { padding: 16px; max-width: 900px; margin: 0 auto; }
+  select { width: 100%; background: #1a1d27; border: 1px solid #2a2d3e; color: #e2e8f0;
+           padding: 8px 12px; border-radius: 8px; font-size: 14px; margin-bottom: 12px; }
+  pre { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 8px;
+        padding: 16px; font-size: 11px; overflow-x: auto; white-space: pre-wrap;
+        word-break: break-all; color: #94a3b8; max-height: 70vh; overflow-y: auto; }
+  .error { color: #ef4444; } .warn { color: #f59e0b; } .info { color: #94a3b8; }
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Dashboard</a>
+  <h1>📋 Logs del servidor</h1>
+</div>
+<div class="container">
+  <form method="GET">
+    <select name="f" onchange="this.form.submit()">
+      {% for f in files %}
+      <option value="{{ f }}" {% if f == current %}selected{% endif %}>{{ f }}</option>
+      {% endfor %}
+    </select>
+  </form>
+  <pre>{% for line in content.split('\\n') %}<span class="{% if '[ERROR]' in line %}error{% elif '[WARNING]' in line %}warn{% else %}info{% endif %}">{{ line }}
+</span>{% endfor %}</pre>
+</div>
+</body>
+</html>"""
 
 
 if __name__ == '__main__':
