@@ -7,7 +7,7 @@ from flask import Flask, jsonify, request, render_template_string, session, redi
 app = Flask(__name__)
 app.secret_key = os.environ.get('FLASK_SECRET', 'gmail-dashboard-secret-2026')
 
-DASHBOARD_PASSWORD = os.environ.get('DASHBOARD_PASSWORD', 'jonathan2026')
+DASHBOARD_PASSWORD = os.environ.get('DASHBOARD_PASSWORD', 'jonathan2026').strip()
 
 def get_csv_path():
     with open('config/settings.json') as f:
