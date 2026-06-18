@@ -123,6 +123,7 @@ HTML = """<!DOCTYPE html>
   <span style="font-size:24px">💰</span>
   <h1>Finanzas Jonathan</h1>
   <span class="badge" id="total-count">0 registros</span>
+  <span style="font-size:11px;color:#64748b;margin-left:4px" id="last-update"></span>
   <div class="month-selector">
     <select id="month-filter" onchange="filterByMonth()">
       <option value="">Todo</option>
@@ -395,6 +396,13 @@ async function saveEdit() {
   }
 }
 
+// Estado del sistema
+fetch('/api/status').then(r => r.json()).then(s => {
+  if (s.last_update) {
+    document.getElementById('last-update').textContent = 'Actualizado: ' + s.last_update;
+  }
+});
+
 // Cargar datos
 fetch('/api/transactions').then(r => r.json()).then(data => {
   allData = data;
@@ -448,6 +456,18 @@ def logout():
 @app.route('/')
 def index():
     return render_template_string(HTML)
+
+
+@app.route('/api/status')
+def api_status():
+    path = get_csv_path()
+    last_update = None
+    count = 0
+    if os.path.exists(path):
+        last_update = datetime.fromtimestamp(os.path.getmtime(path)).strftime('%Y-%m-%d %H:%M')
+        with open(path, 'r', encoding='utf-8') as f:
+            count = sum(1 for _ in f) - 1
+    return jsonify({'last_update': last_update, 'total_records': count})
 
 
 @app.route('/api/transactions')
