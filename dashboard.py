@@ -440,40 +440,23 @@ LOGIN_HTML = """<!DOCTYPE html>
 </html>"""
 
 
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    if request.method == 'POST':
-        if request.form.get('password') == DASHBOARD_PASSWORD:
-            session['auth'] = True
-            return redirect('/')
-        return render_template_string(LOGIN_HTML, error='Contraseña incorrecta')
-    return render_template_string(LOGIN_HTML, error=None)
-
-
 @app.route('/logout')
 def logout():
-    session.clear()
-    return redirect('/login')
+    return redirect('/')
 
 
 @app.route('/')
 def index():
-    if not session.get('auth'):
-        return redirect('/login')
     return render_template_string(HTML)
 
 
 @app.route('/api/transactions')
 def api_transactions():
-    if not session.get('auth'):
-        return jsonify({'error': 'unauthorized'}), 401
     return jsonify(load_transactions())
 
 
 @app.route('/api/correct', methods=['POST'])
 def api_correct():
-    if not session.get('auth'):
-        return jsonify({'error': 'unauthorized'}), 401
     data = request.get_json()
     rows = load_transactions()
     idx = int(data['idx'])
