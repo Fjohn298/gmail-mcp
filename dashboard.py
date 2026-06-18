@@ -3,8 +3,11 @@ import csv
 import json
 import logging
 from datetime import datetime
+from zoneinfo import ZoneInfo
 from flask import Flask, jsonify, request, render_template_string, session, redirect
 from gmail_logger import setup_logger
+
+_TZ = ZoneInfo('America/El_Salvador')
 
 app = Flask(__name__)
 
@@ -483,7 +486,7 @@ def api_status():
     last_update = None
     count = 0
     if os.path.exists(path):
-        last_update = datetime.fromtimestamp(os.path.getmtime(path)).strftime('%Y-%m-%d %H:%M')
+        last_update = datetime.fromtimestamp(os.path.getmtime(path), tz=_TZ).strftime('%Y-%m-%d %H:%M')
         with open(path, 'r', encoding='utf-8') as f:
             count = sum(1 for _ in f) - 1
     return jsonify({'last_update': last_update, 'total_records': count})
