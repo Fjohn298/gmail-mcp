@@ -18,3 +18,4 @@ dist/
 # Entorno
 .env
 .env.local
+.claude/worktrees/
