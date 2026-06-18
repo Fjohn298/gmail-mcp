@@ -22,6 +22,18 @@ CORRECTIONS = {
     'Label_13': ['datacamp', 'notify.thinkific', 'kaggle', 'platzi', 'netec', 'coursera'],
 }
 
+OUR_LABELS = set(SKIP_IF_HAS)
+
+LABEL_PRIORITY = {
+    'Label_1834638960901538876': 1,  # Banco Cuscatlán (most specific)
+    'Label_3': 2,     # Recibos
+    'Label_4': 3,     # Trabajo
+    'Label_2': 4,     # Cursos
+    'Label_6': 5,     # Archivo
+    'Label_15': 6,    # Newsletters
+    'Label_13': 7,    # Promociones
+}
+
 def load_rules():
     settings = load_settings()
     with open(settings['paths']['label_rules_file'], 'r', encoding='utf-8') as f:
@@ -50,7 +62,7 @@ def needs_correction(from_header: str, existing_labels: list):
                 return True, wrong_label
     return False, None
 
-def _process_messages(service, query, rules, start, deadline, labeled, corrected, skipped, label_counts):
+def _process_messages(service, query, rules, start, deadline, labeled, corrected, skipped, label_counts, cleaned=0):
     page_token = None
     settings = load_settings()
     page_size = settings['gmail']['page_size']
@@ -70,7 +82,7 @@ def _process_messages(service, query, rules, start, deadline, labeled, corrected
 
         for msg in messages:
             if (datetime.now() - start).total_seconds() >= deadline:
-                return labeled, corrected, skipped, label_counts, False  # deadline hit
+                return labeled, corrected, skipped, label_counts, cleaned, False  # deadline hit
 
             m = api_call_with_retry(
                 service.users().messages().get(
@@ -82,6 +94,22 @@ def _process_messages(service, query, rules, start, deadline, labeled, corrected
             from_header = next(
                 (h['value'] for h in m['payload']['headers'] if h['name'] == 'From'), ''
             )
+
+            # Enforce single label: if >1 of our labels, remove lower-priority ones
+            our_labels_present = [lbl for lbl in existing_labels if lbl in OUR_LABELS]
+            if len(our_labels_present) > 1:
+                to_keep = min(our_labels_present, key=lambda l: LABEL_PRIORITY.get(l, 99))
+                to_remove = [l for l in our_labels_present if l != to_keep]
+                api_call_with_retry(
+                    service.users().messages().modify(
+                        userId='me', id=msg['id'],
+                        body={'removeLabelIds': to_remove}
+                    ).execute
+                )
+                cleaned += 1
+                logger.info(f"  Dedup: {from_header[:40]} | kept={to_keep}, removed={to_remove}")
+                skipped += 1
+                continue
 
             wrong, wrong_label_id = needs_correction(from_header, existing_labels)
             if wrong:
@@ -117,7 +145,7 @@ def _process_messages(service, query, rules, start, deadline, labeled, corrected
         if not page_token:
             break
 
-    return labeled, corrected, skipped, label_counts, True  # finished normally
+    return labeled, corrected, skipped, label_counts, cleaned, True  # finished normally
 
 def label_messages():
     logger.info("=== Etiquetado iniciado (ventana 5 min) ===")
@@ -130,15 +158,15 @@ def label_messages():
             logger.warning("Sin reglas.")
             return 0
 
-        labeled, corrected, skipped = 0, 0, 0
+        labeled, corrected, skipped, cleaned = 0, 0, 0, 0
         label_counts = {}
 
         # FASE 1 — últimos 7 días (hasta 4m30s)
         logger.info(f"  Fase 1: últimos {LOOKBACK_DAYS} días")
-        labeled, corrected, skipped, label_counts, done = _process_messages(
+        labeled, corrected, skipped, label_counts, cleaned, done = _process_messages(
             service, f'in:inbox newer_than:{LOOKBACK_DAYS}d',
             rules, start, PHASE1_SECONDS,
-            labeled, corrected, skipped, label_counts
+            labeled, corrected, skipped, label_counts, cleaned
         )
 
         # FASE 2 — correos más antiguos sin etiquetar (tiempo restante)
@@ -146,10 +174,10 @@ def label_messages():
         remaining = TOTAL_SECONDS - elapsed
         if remaining > 10:
             logger.info(f"  Fase 2: correos sin etiqueta ({remaining:.0f}s disponibles)")
-            labeled, corrected, skipped, label_counts, _ = _process_messages(
+            labeled, corrected, skipped, label_counts, cleaned, _ = _process_messages(
                 service, 'in:inbox has:nouserlabels',
                 rules, start, TOTAL_SECONDS,
-                labeled, corrected, skipped, label_counts
+                labeled, corrected, skipped, label_counts, cleaned
             )
         else:
             logger.info("  Fase 2 omitida: sin tiempo disponible")
@@ -157,7 +185,7 @@ def label_messages():
         duration = (datetime.now() - start).total_seconds()
         logger.info(
             f"=== Etiquetado finalizado: {labeled} nuevos, {corrected} corregidos, "
-            f"{skipped} ya etiquetados — {duration:.1f}s ==="
+            f"{cleaned} dedup, {skipped} ya etiquetados — {duration:.1f}s ==="
         )
         if label_counts:
             for lid, count in sorted(label_counts.items(), key=lambda x: x[1], reverse=True):
