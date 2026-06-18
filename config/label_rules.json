@@ -140,6 +140,17 @@
     ]
   },
 
+  "fun_capital_conciertos": {
+    "_label_id": "Label_17",
+    "_label_name": "Fun Capital/Conciertos",
+    "senders": [
+      "no_reply@funcapital.com",
+      "noreply@funcapital.com",
+      "funcapital.com",
+      "noreply@sostengo.com"
+    ]
+  },
+
   "_notes": {
     "ISEADE_bug": "ecomercial@iseade.edu.sv estaba mal etiquetado como Banco Cuscatlán — corregido a Promociones",
     "Netflix_split": "info@account.netflix.com = recibos (Label_3), info@members.netflix.com = recomendaciones (Label_13)",

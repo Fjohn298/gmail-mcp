@@ -11,7 +11,8 @@ PHASE1_SECONDS = 270  # primero: últimos 7 días
 
 SKIP_IF_HAS = {
     'Label_2', 'Label_3', 'Label_4', 'Label_6',
-    'Label_13', 'Label_15', 'Label_1834638960901538876',
+    'Label_13', 'Label_15', 'Label_17',
+    'Label_1834638960901538876',
     'Label_8650347335116413717', 'Label_11',
     'Label_8229819340533470960', 'Label_1938252154982079077',
     'Label_1714922903715444819',
@@ -26,12 +27,13 @@ OUR_LABELS = set(SKIP_IF_HAS)
 
 LABEL_PRIORITY = {
     'Label_1834638960901538876': 1,  # Banco Cuscatlán (most specific)
-    'Label_3': 2,     # Recibos
-    'Label_4': 3,     # Trabajo
-    'Label_2': 4,     # Cursos
-    'Label_6': 5,     # Archivo
-    'Label_15': 6,    # Newsletters
-    'Label_13': 7,    # Promociones
+    'Label_17': 2,    # Fun Capital/Conciertos
+    'Label_3': 3,     # Recibos
+    'Label_4': 4,     # Trabajo
+    'Label_2': 5,     # Cursos
+    'Label_6': 6,     # Archivo
+    'Label_15': 7,    # Newsletters
+    'Label_13': 8,    # Promociones
 }
 
 def load_rules():
