@@ -447,9 +447,10 @@ async function saveEdit() {
 
 // Estado del sistema
 fetch('/api/status').then(r => r.json()).then(s => {
-  if (s.last_update) {
-    document.getElementById('last-update').textContent = 'Actualizado: ' + s.last_update;
-  }
+  let text = '';
+  if (s.last_update) text += 'Actualizado: ' + s.last_update;
+  if (s.next_update) text += (text ? ' · ' : '') + 'Próxima: ' + s.next_update;
+  if (text) document.getElementById('last-update').textContent = text;
 });
 
 // Cargar datos
@@ -532,6 +533,7 @@ def finanzas():
 
 @app.route('/api/status')
 def api_status():
+    from datetime import timedelta
     path = get_csv_path()
     last_update = None
     count = 0
@@ -539,7 +541,15 @@ def api_status():
         last_update = datetime.fromtimestamp(os.path.getmtime(path), tz=_TZ).strftime('%Y-%m-%d %H:%M')
         with open(path, 'r', encoding='utf-8') as f:
             count = sum(1 for _ in f) - 1
-    return jsonify({'last_update': last_update, 'total_records': count})
+    settings = load_settings()
+    financial_time = settings['schedule']['financial_extractor_time']
+    h, m = map(int, financial_time.split(':'))
+    now = datetime.now(tz=_TZ)
+    next_run = now.replace(hour=h, minute=m, second=0, microsecond=0)
+    if next_run <= now:
+        next_run += timedelta(days=1)
+    next_update = next_run.strftime('%Y-%m-%d %H:%M')
+    return jsonify({'last_update': last_update, 'total_records': count, 'next_update': next_update})
 
 
 @app.route('/api/transactions')
