@@ -1,0 +1,150 @@
+{
+  "_comment": "Reglas de etiquetado. Clave = categoría, senders = fragmentos del remitente (lowercase). El orden importa: la primera coincidencia gana.",
+
+  "banco_cuscatlan": {
+    "_label_id": "Label_1834638960901538876",
+    "_label_name": "Banco Cuscatlán",
+    "senders": [
+      "notificaciones@bancocuscatlan.com",
+      "comunicaciones@bancocuscatlan.com.sv",
+      "facturaelectronica@bancocuscatlan.com.sv"
+    ]
+  },
+
+  "recibos": {
+    "_label_id": "Label_3",
+    "_label_name": "Recibos",
+    "senders": [
+      "info@baccredomatic.com",
+      "alerta@baccredomatic.com",
+      "alertas@baccredomatic.com",
+      "notificaciones_bac@baccredomatic.sv",
+      "notificaciones@baccredomatic.com",
+      "info@sv.baccredomatic.com",
+      "estadodecuenta@www.sucursalelectronica.com",
+      "canalesdigitales@notificacionesbancoagricola.com",
+      "transacciones@notificacionesbancoagricola.com",
+      "notificaciones@notificacionesbancoagricola.com",
+      "estadosdecuenta@bancoagricolasv.com",
+      "e.factura@bancoagricola.com",
+      "invoice+statements@mail.anthropic.com",
+      "no-reply@mail.anthropic.com",
+      "mail.anthropic.com",
+      "noreply@infile.sv",
+      "no-reply@payway.email",
+      "payments-noreply@google.com",
+      "servicioalcliente@totto.com.sv",
+      "webmaster@papajohns.com.sv",
+      "info@account.netflix.com",
+      "no-reply@account.netflix.com"
+    ]
+  },
+
+  "trabajo": {
+    "_label_id": "Label_4",
+    "_label_name": "Trabajo",
+    "senders": [
+      "no-reply@classroom.google.com",
+      "noreply@classroom.google.com",
+      "PlatformNotifications-noreply@google.com",
+      "noreply@github.com",
+      "notifications@github.com",
+      "no-reply@github.com",
+      "jobs-noreply@linkedin.com",
+      "jobs@linkedin.com",
+      "jobalerts@linkedin.com",
+      "no-reply@tecoloco.com"
+    ]
+  },
+
+  "cursos": {
+    "_label_id": "Label_2",
+    "_label_name": "Cursos",
+    "senders": [
+      "team@datacamp.com",
+      "demand@mail.datacamp.com",
+      "learn@datacamp.com",
+      "no-reply@datacamp.com",
+      "no-reply@kaggle.com",
+      "reply@e.udemymail.com",
+      "support@udemy.com",
+      "team@platzi.com",
+      "servicio@netec.com",
+      "info@netec.com",
+      "no-reply@m.mail.coursera.org",
+      "coursera.org",
+      "edx.org",
+      "emercadeo@iseade.edu.sv",
+      "ecomercial@iseade.edu.sv",
+      "contacto@iseade.edu.sv",
+      "iseade.edu.sv",
+      "estefani.ramirez@utec.edu.sv",
+      "utec.edu.sv",
+      "noreply@notify.thinkific.com"
+    ]
+  },
+
+  "newsletters": {
+    "_label_id": "Label_15",
+    "_label_name": "Newsletters",
+    "senders": [
+      "log@newsletter.moure.dev",
+      "googledev-noreply@google.com",
+      "nerdearla@nerdear.la",
+      "noreply@medium.com",
+      "do-not-reply@hello.stackoverflow.email",
+      "no-reply@substack.com",
+      "post+the-weekender@substack.com",
+      "kaizenpodcast@substack.com",
+      "substack.com",
+      "alejoxadam@mail.beehiiv.com",
+      "hello@mail.beehiiv.com",
+      "beehiiv.com",
+      "info@em.isaca.org",
+      "isaca@em.isaca.org",
+      "isaca.org",
+      "newsletter@jaspersoft.com"
+    ]
+  },
+
+  "promociones": {
+    "_label_id": "Label_13",
+    "_label_name": "Promociones",
+    "senders": [
+      "messages-noreply@linkedin.com",
+      "no-reply@linkedin.com",
+      "tuchance@fundaciongloriakriete.org",
+      "googlecommunityteam-noreply@google.com",
+      "google-gemini-noreply@google.com",
+      "no-reply@email.claude.com",
+      "noreply@mail.audible.es",
+      "start@engage.canva.com",
+      "info@members.netflix.com",
+      "noreply@multipuntoscuscatlan.com"
+    ]
+  },
+
+  "archivo": {
+    "_label_id": "Label_6",
+    "_label_name": "Archivo",
+    "senders": [
+      "no-reply@accounts.google.com",
+      "security@accounts.google.com",
+      "google-noreply@google.com",
+      "noreply-maps-timeline@google.com",
+      "drive-shares-dm-noreply@google.com",
+      "notificaciones.binaes@cultura.gob.sv",
+      "no-reply@tiendasadoc.com",
+      "noreply@email.openai.com",
+      "no-reply@legal.spotify.com"
+    ]
+  },
+
+  "_notes": {
+    "ISEADE_bug": "ecomercial@iseade.edu.sv estaba mal etiquetado como Banco Cuscatlán — corregido a Promociones",
+    "Netflix_split": "info@account.netflix.com = recibos (Label_3), info@members.netflix.com = recomendaciones (Label_13)",
+    "Totto": "servicioalcliente@totto.com.sv = órdenes de compra → Label_3 (Recibos)",
+    "Payway": "no-reply@payway.email = pagos de servicios → Label_3",
+    "Google_payments": "payments-noreply@google.com = pagos Google Cloud → Label_3"
+  }
+}

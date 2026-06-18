@@ -1,0 +1,20 @@
+# Credenciales OAuth - NUNCA commitear
+token.json
+credentials.json
+
+# Datos generados localmente
+data/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+.uv/
+*.egg-info/
+dist/
+
+# Entorno
+.env
+.env.local

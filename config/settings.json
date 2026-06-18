@@ -1,0 +1,30 @@
+{
+  "auth": {
+    "token_file": "token.json",
+    "credentials_file": "credentials.json",
+    "scopes": ["https://www.googleapis.com/auth/gmail.modify"]
+  },
+  "schedule": {
+    "cleanup_interval_hours": 1,
+    "labeler_interval_hours": 1,
+    "financial_extractor_time": "08:00"
+  },
+  "paths": {
+    "logs_dir": "logs",
+    "config_dir": "config",
+    "data_dir": "data",
+    "spam_senders_file": "config/spam_senders.txt",
+    "label_rules_file": "config/label_rules.json",
+    "financial_csv": "data/financial_data.csv"
+  },
+  "gmail": {
+    "page_size": 50,
+    "rate_limit_retries": 3,
+    "rate_limit_wait_seconds": 5,
+    "protected_labels": ["Label_3", "Label_1834638960901538876"]
+  },
+  "logging": {
+    "level": "INFO",
+    "max_log_files": 30
+  }
+}

@@ -1,0 +1,50 @@
+# Remitentes de spam - uno por línea
+# Líneas que empiezan con # son comentarios
+# Puedes usar dominio completo o email exacto
+
+# AliExpress (múltiples dominios)
+deals.aliexpress.com
+newarrival.aliexpress.com
+promotion@aliexpress.com
+selections.aliexpress.com
+aliexpress.com
+
+# Banco Cuscatlán MARKETING (no son notificaciones financieras)
+promociones@bancocuscatlan.com
+productos.digitales@bancocuscatlan.com
+
+# Banco Agrícola MARKETING
+info@mercadeobancoagricola.com
+promociones@mercadeobancoagricola.com
+
+# Empleos genéricos (no relevantes)
+candidatos@unmejorempleo.com.sv
+noreply@mifuturoempleo.com
+
+# Udemy MARKETING (no recibos ni cursos activos)
+no-reply@e.udemymail.com
+hello@students.udemy.com
+
+# Tiendas SV marketing
+radioshack@radioshacksv.com
+
+# Directorios / clasificados
+recomendados@encuentra24.com
+info@notificacionesleal360.co
+noreply@notificacionesleal360.co
+
+# Naturaleza / hobbies no deseados
+noreply-cornellbirds@birds.cornell.edu
+cornellbirds@bird.cornell.edu
+
+# Apps marketing
+hello@mail.grammarly.com
+news@mail.dazn.com
+laliga@fans.laliga.com
+news@mkt.clarovideo.com
+feedback@feedback.opiniones-verificadas.com.co
+notifications@ppt.bandsintown.com
+notifications@reclaim.ai
+
+# Webinars / eventos genéricos
+events@discover.jaspersoft.com
