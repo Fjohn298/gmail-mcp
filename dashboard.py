@@ -278,16 +278,21 @@ function renderTable(search = '') {
   }
   noData.style.display = 'none';
 
-  tbody.innerHTML = data.slice(0, 200).map((r, i) => `
+  tbody.innerHTML = data.slice(0, 200).map((r, i) => {
+    const isIngreso = (r.tipo||'').includes('credito');
+    return `
     <tr>
       <td>${r.fecha_iso || '-'}</td>
       <td>${bancoBadge(r.banco)}</td>
       <td>${r.comercio || r.descripcion?.substring(0,30) || '-'}</td>
-      <td><span style="color:var(--muted);font-size:11px">${r.tipo || '-'}</span></td>
-      <td class="monto ${(r.tipo||'').includes('credito') ? 'credit' : ''}">${fmt(r.monto)}</td>
+      <td>
+        <span style="color:${isIngreso?'var(--green)':'var(--red)'};font-size:10px;font-weight:600">${isIngreso?'▲ Ingreso':'▼ Egreso'}</span>
+        <div style="color:var(--muted);font-size:10px">${r.tipo || '-'}</div>
+      </td>
+      <td class="monto ${isIngreso ? 'credit' : ''}">${fmt(r.monto)}</td>
       <td><button class="btn-edit" onclick="openEdit(${allData.indexOf(r)})">✏️</button></td>
     </tr>
-  `).join('');
+  `}).join('');
 }
 
 function updateCards() {
@@ -355,7 +360,10 @@ function populateMonths() {
     opt.value = m; opt.textContent = m;
     sel.appendChild(opt);
   });
-  if (months[0]) { sel.value = months[0]; activeMonth = months[0]; }
+  const now = new Date();
+  const currentMonth = now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+  const defaultMonth = months.includes(currentMonth) ? currentMonth : (months[0] || '');
+  if (defaultMonth) { sel.value = defaultMonth; activeMonth = defaultMonth; }
 }
 
 function filterByMonth() {
