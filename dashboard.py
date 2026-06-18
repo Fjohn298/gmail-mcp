@@ -6,6 +6,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 from flask import Flask, jsonify, request, render_template_string, session, redirect
 from gmail_logger import setup_logger
+from gmail_auth import api_call_with_retry
 
 _TZ = ZoneInfo('America/El_Salvador')
 
@@ -42,6 +43,27 @@ def save_transactions(rows):
         writer = csv.DictWriter(f, fieldnames=rows[0].keys())
         writer.writeheader()
         writer.writerows(rows)
+
+def load_settings():
+    with open('config/settings.json') as f:
+        return json.load(f)
+
+def load_label_names():
+    settings = load_settings()
+    rules_path = settings['paths']['label_rules_file']
+    if not os.path.exists(rules_path):
+        return {}
+    with open(rules_path, 'r', encoding='utf-8') as f:
+        raw = json.load(f)
+    return {data['_label_id']: cat for cat, data in raw.items()
+            if not cat.startswith('_') and '_label_id' in data}
+
+def get_gmail_service():
+    try:
+        from gmail_auth import get_service, api_call_with_retry
+        return get_service(), None
+    except Exception as e:
+        return None, str(e)
 
 HTML = """<!DOCTYPE html>
 <html lang="es">
@@ -135,7 +157,7 @@ HTML = """<!DOCTYPE html>
 <body>
 <div class="header">
   <span style="font-size:24px">💰</span>
-  <h1>Finanzas Jonathan</h1>
+  <a href="/" style="color:var(--muted);font-size:13px;text-decoration:none;margin-right:4px">← Inicio</a><h1>Finanzas Jonathan</h1>
   <span class="badge" id="total-count">0 registros</span>
   <span style="font-size:11px;color:#64748b;margin-left:4px" id="last-update"></span>
   <div class="month-selector">
@@ -167,6 +189,11 @@ HTML = """<!DOCTYPE html>
       <div class="value" id="card-cusc">$0</div>
       <div class="sub">Cuenta·5261</div>
     </div>
+  </div>
+
+  <div id="balance-section" style="display:none;margin-bottom:16px">
+    <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">SALDOS POR TARJETA</div>
+    <div id="balance-cards" class="cards"></div>
   </div>
 
   <div class="charts">
@@ -431,6 +458,24 @@ fetch('/api/transactions').then(r => r.json()).then(data => {
   populateMonths();
   refresh();
 });
+
+fetch('/api/balances').then(r => r.json()).then(balances => {
+  const entries = Object.values(balances);
+  if (!entries.length) return;
+  document.getElementById('balance-section').style.display = 'block';
+  document.getElementById('balance-cards').innerHTML = entries.map(b => `
+    <div class="card" style="border-left:3px solid var(--yellow)">
+      <div class="label">${b.banco} *${b.tarjeta_ultimos4 || '????'}</div>
+      <div class="value" style="font-size:18px;color:var(--yellow)">$${(b.saldo_calculado ?? b.saldo_estado_cuenta).toFixed(2)}</div>
+      <div class="sub">EC: $${b.saldo_estado_cuenta.toFixed(2)} — ${b.fecha}</div>
+      <div class="sub" style="margin-top:4px">
+        <span style="color:var(--red)">↓ $${(b.gastos_desde_ec||0).toFixed(2)}</span>
+        &nbsp;
+        <span style="color:var(--green)">↑ $${(b.ingresos_desde_ec||0).toFixed(2)}</span>
+      </div>
+    </div>
+  `).join('');
+});
 </script>
 </body>
 </html>
@@ -477,6 +522,11 @@ def logout():
 
 @app.route('/')
 def index():
+    return render_template_string(MAIN_MENU_HTML)
+
+
+@app.route('/finanzas')
+def finanzas():
     return render_template_string(HTML)
 
 
@@ -513,6 +563,112 @@ def api_correct():
     return jsonify(rows)
 
 
+@app.route('/emails')
+def emails():
+    return render_template_string(EMAILS_HTML)
+
+
+@app.route('/api/balances')
+def api_balances():
+    settings = load_settings()
+    data_dir = settings['paths']['data_dir']
+    balances_path = os.path.join(data_dir, 'balances.json')
+    if not os.path.exists(balances_path):
+        return jsonify({})
+    with open(balances_path, 'r', encoding='utf-8') as f:
+        balances = json.load(f)
+    txns = load_transactions()
+    for key, bal in balances.items():
+        banco = bal['banco']
+        fecha_ec = bal['fecha']
+        since_ec = [r for r in txns
+                    if r.get('banco') == banco
+                    and r.get('fecha_iso', '') >= fecha_ec
+                    and not r.get('tipo', '').startswith('estado_cuenta')]
+        gastos = sum(float(r.get('monto') or 0) for r in since_ec
+                     if not r.get('tipo', '').startswith('credito'))
+        ingresos = sum(float(r.get('monto') or 0) for r in since_ec
+                       if r.get('tipo', '').startswith('credito'))
+        bal['gastos_desde_ec'] = round(gastos, 2)
+        bal['ingresos_desde_ec'] = round(ingresos, 2)
+        bal['saldo_calculado'] = round(bal['saldo_estado_cuenta'] - gastos + ingresos, 2)
+    return jsonify(balances)
+
+
+@app.route('/api/emails/recent')
+def api_emails_recent():
+    service, err = get_gmail_service()
+    if err:
+        return jsonify({'error': err}), 500
+    label_names = load_label_names()
+    SYSTEM = {'INBOX','SENT','DRAFT','SPAM','TRASH','STARRED','IMPORTANT','UNREAD',
+              'CATEGORY_PERSONAL','CATEGORY_SOCIAL','CATEGORY_PROMOTIONS',
+              'CATEGORY_UPDATES','CATEGORY_FORUMS'}
+    result = api_call_with_retry(
+        service.users().messages().list(
+            userId='me', q='in:inbox newer_than:7d', maxResults=30
+        ).execute)
+    emails = []
+    for msg in result.get('messages', []):
+        m = api_call_with_retry(service.users().messages().get(
+            userId='me', id=msg['id'], format='metadata',
+            metadataHeaders=['From', 'Subject', 'Date']).execute)
+        h = {x['name']: x['value'] for x in m['payload']['headers']}
+        user_labels = [label_names.get(l, l) for l in m.get('labelIds', []) if l not in SYSTEM]
+        emails.append({'id': msg['id'], 'from': h.get('From',''),
+                       'subject': h.get('Subject',''), 'date': h.get('Date',''),
+                       'labels': user_labels, 'snippet': m.get('snippet','')[:100]})
+    return jsonify(emails)
+
+
+@app.route('/api/emails/unlabeled')
+def api_emails_unlabeled():
+    service, err = get_gmail_service()
+    if err:
+        return jsonify({'error': err}), 500
+    result = api_call_with_retry(
+        service.users().messages().list(
+            userId='me', q='in:inbox has:nouserlabels', maxResults=20
+        ).execute)
+    emails = []
+    for msg in result.get('messages', []):
+        m = api_call_with_retry(service.users().messages().get(
+            userId='me', id=msg['id'], format='metadata',
+            metadataHeaders=['From', 'Subject', 'Date']).execute)
+        h = {x['name']: x['value'] for x in m['payload']['headers']}
+        emails.append({'id': msg['id'], 'from': h.get('From',''),
+                       'subject': h.get('Subject',''), 'date': h.get('Date',''),
+                       'snippet': m.get('snippet','')[:100]})
+    return jsonify(emails)
+
+
+@app.route('/api/emails/financial')
+def api_emails_financial():
+    txns = load_transactions()
+    financial_types = {'compra','transferencia','transfer365','debito','credito',
+                       'pago_tarjeta','pago_servicio','suscripcion',
+                       'estado_cuenta','estado_cuenta_pago_minimo'}
+    result = [r for r in txns if r.get('tipo') in financial_types]
+    result.sort(key=lambda r: r.get('fecha_iso',''), reverse=True)
+    return jsonify(result[:200])
+
+
+@app.route('/api/emails/label-stats')
+def api_emails_label_stats():
+    service, err = get_gmail_service()
+    if err:
+        return jsonify({'error': err}), 500
+    label_names = load_label_names()
+    result = api_call_with_retry(service.users().labels().list(userId='me').execute)
+    stats = [
+        {'id': l['id'], 'name': label_names.get(l['id'], l['name']),
+         'messages_total': l.get('messagesTotal', 0),
+         'messages_unread': l.get('messagesUnread', 0)}
+        for l in result.get('labels', []) if l['type'] == 'user'
+    ]
+    return jsonify(sorted(stats, key=lambda x: x['messages_total'], reverse=True))
+
+
 @app.route('/logs')
 def logs():
     log_dir = 'logs'
@@ -531,6 +687,239 @@ def logs():
 def health():
     return jsonify({'status': 'ok', 'time': datetime.now().isoformat()})
 
+
+MAIN_MENU_HTML = """<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Panel de Control</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; min-height: 100vh; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 20px 24px; }
+  .header h1 { font-size: 20px; font-weight: 700; }
+  .header p { color: #64748b; font-size: 13px; margin-top: 4px; }
+  .container { padding: 24px; max-width: 700px; margin: 0 auto; }
+  .menu-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-top: 8px; }
+  @media(min-width: 600px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
+  .menu-card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 16px;
+               padding: 24px; text-decoration: none; color: inherit; display: block;
+               transition: border-color .15s, background .15s; }
+  .menu-card:hover { border-color: #6366f1; background: #1e2235; }
+  .menu-card .icon { font-size: 36px; display: block; margin-bottom: 12px; }
+  .menu-card h2 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+  .menu-card p { font-size: 12px; color: #64748b; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>📊 Panel de Control</h1>
+  <p>Gmail MCP — Automatización financiera y de correos</p>
+</div>
+<div class="container">
+  <div class="menu-grid">
+    <a href="/finanzas" class="menu-card">
+      <span class="icon">💰</span>
+      <h2>Finanzas</h2>
+      <p>Transacciones, gastos por banco, saldos de tarjetas y estados de cuenta</p>
+    </a>
+    <a href="/emails" class="menu-card">
+      <span class="icon">📧</span>
+      <h2>Correos</h2>
+      <p>Correos recientes, etiquetados, sin etiquetar y estadísticas por etiqueta</p>
+    </a>
+    <a href="/logs" class="menu-card">
+      <span class="icon">📋</span>
+      <h2>Logs</h2>
+      <p>Logs del orchestrator, cleanup, labeler y financial extractor</p>
+    </a>
+  </div>
+</div>
+</body>
+</html>"""
+
+EMAILS_HTML = """<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📧 Correos</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 13px; }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .container { padding: 16px; max-width: 960px; margin: 0 auto; }
+  .tabs { display: flex; gap: 4px; margin-bottom: 16px; border-bottom: 1px solid #2a2d3e; padding-bottom: 0; }
+  .tab { background: none; border: none; color: #64748b; padding: 10px 16px; font-size: 13px;
+         cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+  .tab.active { color: #6366f1; border-bottom-color: #6366f1; font-weight: 600; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px; padding: 16px; margin-bottom: 12px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { text-align: left; color: #64748b; font-weight: 500; padding: 6px 8px;
+       border-bottom: 1px solid #2a2d3e; font-size: 11px; text-transform: uppercase; }
+  td { padding: 8px; border-bottom: 1px solid #1e2130; vertical-align: top; max-width: 300px;
+       overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  tr:hover td { background: rgba(99,102,241,0.04); }
+  .badge { padding: 2px 7px; border-radius: 99px; font-size: 10px; font-weight: 600;
+           background: rgba(99,102,241,0.15); color: #a5b4fc; white-space: nowrap; }
+  .badge.green { background: rgba(34,197,94,0.15); color: #86efac; }
+  .badge.red { background: rgba(239,68,68,0.15); color: #fca5a5; }
+  .stat-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+  @media(min-width:600px){ .stat-grid { grid-template-columns: repeat(4,1fr); } }
+  .stat-card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
+  .stat-card .name { font-size: 11px; color: #64748b; margin-bottom: 4px; text-transform: uppercase; }
+  .stat-card .count { font-size: 24px; font-weight: 700; color: #6366f1; }
+  .stat-card .unread { font-size: 11px; color: #f59e0b; margin-top: 2px; }
+  .loading { color: #64748b; font-size: 13px; padding: 24px; text-align: center; }
+  .monto { font-weight: 600; color: #ef4444; }
+  .monto.credit { color: #22c55e; }
+  .from-cell { max-width: 160px; }
+  .subject-cell { max-width: 220px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Inicio</a>
+  <h1>📧 Correos</h1>
+</div>
+<div class="container">
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('recientes',this)">Recientes</button>
+    <button class="tab" onclick="showTab('sin-etiquetar',this)">Sin etiquetar</button>
+    <button class="tab" onclick="showTab('financieros',this)">Financieros</button>
+    <button class="tab" onclick="showTab('estadisticas',this)">Estadísticas</button>
+  </div>
+
+  <div id="tab-recientes" class="tab-content active">
+    <div class="loading" id="load-recientes">Cargando...</div>
+    <div class="card" style="display:none" id="table-recientes">
+      <table>
+        <thead><tr><th>Fecha</th><th>De</th><th>Asunto</th><th>Etiqueta</th></tr></thead>
+        <tbody id="body-recientes"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-sin-etiquetar" class="tab-content">
+    <div class="loading" id="load-sin-etiquetar">Cargando...</div>
+    <div class="card" style="display:none" id="table-sin-etiquetar">
+      <table>
+        <thead><tr><th>Fecha</th><th>De</th><th>Asunto</th><th>Snippet</th></tr></thead>
+        <tbody id="body-sin-etiquetar"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-financieros" class="tab-content">
+    <div class="loading" id="load-financieros">Cargando...</div>
+    <div class="card" style="display:none" id="table-financieros">
+      <table>
+        <thead><tr><th>Fecha</th><th>Banco</th><th>Comercio</th><th>Tipo</th><th>Monto</th></tr></thead>
+        <tbody id="body-financieros"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="tab-estadisticas" class="tab-content">
+    <div class="loading" id="load-estadisticas">Cargando...</div>
+    <div id="stats-content" style="display:none"></div>
+  </div>
+</div>
+
+<script>
+const loaded = {};
+
+function showTab(name, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+  if (!loaded[name]) { loadTab(name); loaded[name] = true; }
+}
+
+function shortDate(str) {
+  if (!str) return '-';
+  const m = str.match(/(\\d{1,2}\\s+\\w+\\s+\\d{4})/);
+  return m ? m[1] : str.substring(0, 16);
+}
+
+function labelBadge(label) {
+  return `<span class="badge">${label}</span>`;
+}
+
+async function loadTab(name) {
+  try {
+    if (name === 'recientes') {
+      const data = await fetch('/api/emails/recent').then(r => r.json());
+      if (data.error) { document.getElementById('load-recientes').textContent = 'Error: ' + data.error; return; }
+      document.getElementById('load-recientes').style.display = 'none';
+      document.getElementById('table-recientes').style.display = 'block';
+      document.getElementById('body-recientes').innerHTML = data.map(e => `
+        <tr>
+          <td style="white-space:nowrap">${shortDate(e.date)}</td>
+          <td class="from-cell" title="${e.from}">${e.from.replace(/<[^>]+>/g,'').substring(0,30)}</td>
+          <td class="subject-cell" title="${e.subject}">${e.subject.substring(0,50)}</td>
+          <td>${e.labels.length ? e.labels.map(l => labelBadge(l)).join(' ') : '<span style="color:#64748b;font-size:11px">—</span>'}</td>
+        </tr>`).join('');
+    }
+    else if (name === 'sin-etiquetar') {
+      const data = await fetch('/api/emails/unlabeled').then(r => r.json());
+      if (data.error) { document.getElementById('load-sin-etiquetar').textContent = 'Error: ' + data.error; return; }
+      document.getElementById('load-sin-etiquetar').style.display = 'none';
+      document.getElementById('table-sin-etiquetar').style.display = 'block';
+      document.getElementById('body-sin-etiquetar').innerHTML = data.length ? data.map(e => `
+        <tr>
+          <td style="white-space:nowrap">${shortDate(e.date)}</td>
+          <td class="from-cell" title="${e.from}">${e.from.replace(/<[^>]+>/g,'').substring(0,30)}</td>
+          <td class="subject-cell" title="${e.subject}">${e.subject.substring(0,50)}</td>
+          <td style="color:#64748b;font-size:11px;max-width:200px">${e.snippet}</td>
+        </tr>`).join('') : '<tr><td colspan="4" style="color:#64748b;padding:20px;text-align:center">Sin correos sin etiquetar</td></tr>';
+    }
+    else if (name === 'financieros') {
+      const data = await fetch('/api/emails/financial').then(r => r.json());
+      document.getElementById('load-financieros').style.display = 'none';
+      document.getElementById('table-financieros').style.display = 'block';
+      document.getElementById('body-financieros').innerHTML = data.slice(0,100).map(r => {
+        const isIngreso = (r.tipo||'').includes('credito');
+        return `<tr>
+          <td>${r.fecha_iso||'-'}</td>
+          <td><span style="font-size:11px">${(r.banco||'').replace('Banco ','').substring(0,10)}</span></td>
+          <td style="max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${r.comercio||r.descripcion?.substring(0,30)||'-'}</td>
+          <td><span style="color:${isIngreso?'#22c55e':'#ef4444'};font-size:10px;font-weight:600">${isIngreso?'▲':'▼'}</span> <span style="color:#64748b;font-size:10px">${r.tipo||'-'}</span></td>
+          <td class="monto ${isIngreso?'credit':''}">$${parseFloat(r.monto||0).toFixed(2)}</td>
+        </tr>`;
+      }).join('');
+    }
+    else if (name === 'estadisticas') {
+      const data = await fetch('/api/emails/label-stats').then(r => r.json());
+      if (data.error) { document.getElementById('load-estadisticas').textContent = 'Error: ' + data.error; return; }
+      document.getElementById('load-estadisticas').style.display = 'none';
+      const cont = document.getElementById('stats-content');
+      cont.style.display = 'block';
+      cont.innerHTML = '<div class="stat-grid">' + data.map(s => `
+        <div class="stat-card">
+          <div class="name">${s.name}</div>
+          <div class="count">${s.messages_total}</div>
+          ${s.messages_unread ? `<div class="unread">${s.messages_unread} no leídos</div>` : ''}
+        </div>`).join('') + '</div>';
+    }
+  } catch(e) {
+    console.error(name, e);
+  }
+}
+
+// Load first tab immediately
+loaded['recientes'] = true;
+loadTab('recientes');
+</script>
+</body>
+</html>"""
 
 LOGS_HTML = """<!DOCTYPE html>
 <html lang="es">
@@ -555,7 +944,7 @@ LOGS_HTML = """<!DOCTYPE html>
 </head>
 <body>
 <div class="header">
-  <a href="/">← Dashboard</a>
+  <a href="/">← Inicio</a>
   <h1>📋 Logs del servidor</h1>
 </div>
 <div class="container">

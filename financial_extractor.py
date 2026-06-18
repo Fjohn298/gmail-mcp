@@ -9,6 +9,39 @@ from gmail_logger import setup_logger
 
 logger = setup_logger('financial_extractor')
 
+
+def save_balance(settings: dict, record: dict):
+    saldo = record.get('saldo', '')
+    if not saldo:
+        return
+    try:
+        saldo_float = float(str(saldo).replace(',', ''))
+    except ValueError:
+        return
+    data_dir = settings['paths']['data_dir']
+    os.makedirs(data_dir, exist_ok=True)
+    balances_path = os.path.join(data_dir, 'balances.json')
+    balances = {}
+    if os.path.exists(balances_path):
+        with open(balances_path, 'r', encoding='utf-8') as f:
+            try:
+                balances = json.load(f)
+            except json.JSONDecodeError:
+                pass
+    banco = record.get('banco', 'Desconocido')
+    tarjeta = record.get('tarjeta_ultimos4', 'xxxx')
+    key = f"{banco}_{tarjeta}"
+    fecha = record.get('fecha_iso', date.today().isoformat())
+    if balances.get(key, {}).get('fecha', '') <= fecha:
+        balances[key] = {
+            'banco': banco, 'tarjeta_ultimos4': tarjeta,
+            'saldo_estado_cuenta': saldo_float, 'fecha': fecha,
+            'message_id': record.get('message_id', '')
+        }
+        with open(balances_path, 'w', encoding='utf-8') as f:
+            json.dump(balances, f, ensure_ascii=False, indent=2)
+        logger.info(f"  Balance guardado: {banco} *{tarjeta} = ${saldo_float:.2f} ({fecha})")
+
 # Etiquetas financieras (IDs reales)
 FINANCIAL_LABEL_IDS = ['Label_3', 'Label_1834638960901538876']
 
@@ -126,6 +159,16 @@ def parse_agricola(body: str, subject: str) -> dict:
                 r['fecha_iso'] = datetime.strptime(m3.group(1), '%d/%m/%Y').date().isoformat()
             except ValueError:
                 pass
+        # Intentar extraer saldo actual
+        for pat in [
+            r'[Ss]aldo\s+(?:[Aa]ctual|[Tt]otal|[Aa]l\s+[Cc]orte)\s*[:\$]?\s*([\d,]+\.?\d*)',
+            r'[Tt]otal\s+a\s+[Pp]agar\s*[:\$]?\s*([\d,]+\.?\d*)',
+            r'[Ss]aldo\s+[Cc]ontado\s*[:\$]?\s*([\d,]+\.?\d*)',
+        ]:
+            m_saldo = re.search(pat, body, re.IGNORECASE | re.DOTALL)
+            if m_saldo:
+                r['saldo'] = m_saldo.group(1).replace(',', '')
+                break
         return r
 
     # Transfer365
@@ -419,6 +462,9 @@ def extract_financial_data():
                         continue
 
                     new_records.append(parsed)
+
+                    if parsed.get('tipo', '').startswith('estado_cuenta') and parsed.get('saldo'):
+                        save_balance(settings, parsed)
 
                     # Descargar y parsear PDFs adjuntos
                     for fname, att_id, mime in attachments:
