@@ -22,6 +22,26 @@
       {"name": "VISA Agrícola", "last4": "6114", "balance": 220.16}
     ]
   },
+  "prestamos": [
+    {
+      "nombre": "Préstamo Consumo Agrícola",
+      "numero": "2132201069",
+      "saldo": 6274.65,
+      "cuota_mensual": 147.11,
+      "tasa_anual": 14.38,
+      "fecha_pago_dia": 7,
+      "cuotas_restantes": 60
+    }
+  ],
+  "fondos_ahorro": [
+    {
+      "nombre": "Mi Ahorro MultiMoney",
+      "banco": "Agrícola",
+      "saldo": 501.35,
+      "tasa_anual": 3.5,
+      "intocable": true
+    }
+  ],
   "intrafinanciamientos": [
     {
       "ref": "000001",

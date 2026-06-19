@@ -614,6 +614,7 @@ def api_plan_config():
             json.dump(settings, f, ensure_ascii=False, indent=2)
 
         from payment_planner import build_plan, save_plan
+        planner['prestamos'] = settings.get('prestamos', [])
         plan = build_plan(planner)
         if plan:
             save_plan(plan)
@@ -635,6 +636,26 @@ def api_plan_send():
         label = _period_label(datetime.now(tz=_TZ))
         send_plan_email(plan, label)
         return jsonify({'ok': True})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/plan/fondos', methods=['GET'])
+def api_plan_fondos():
+    try:
+        settings = load_settings()
+        fondos = settings.get('fondos_ahorro', [])
+        prestamos = settings.get('prestamos', [])
+        result_fondos = []
+        for f in fondos:
+            mensual = round(f['saldo'] * f['tasa_anual'] / 100 / 12, 2)
+            anual = round(f['saldo'] * f['tasa_anual'] / 100, 2)
+            result_fondos.append({**f, 'ganancia_mensual': mensual, 'ganancia_anual': anual})
+        result_prestamos = []
+        for p in prestamos:
+            por_quincena = round(p['cuota_mensual'] / 2, 2)
+            result_prestamos.append({**p, 'cuota_quincenal': por_quincena})
+        return jsonify({'fondos': result_fondos, 'prestamos': result_prestamos})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
@@ -952,6 +973,24 @@ PLAN_HTML = """<!DOCTYPE html>
               border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
   .fi-total .fi-total-label { font-size: 12px; color: #64748b; }
   .fi-total .fi-total-val { font-size: 15px; font-weight: 700; color: #0ea5e9; }
+  .prestamo-row { display: flex; justify-content: space-between; align-items: center;
+                  padding: 10px 0; border-bottom: 1px solid #1e2130; }
+  .prestamo-row:last-child { border-bottom: none; }
+  .prestamo-name { font-size: 13px; color: #e2e8f0; font-weight: 600; }
+  .prestamo-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
+  .prestamo-cuota { text-align: right; }
+  .prestamo-cuota .amount { font-size: 16px; font-weight: 700; color: #f59e0b; }
+  .prestamo-cuota .per { font-size: 10px; color: #64748b; }
+  .fondo-card { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+                border-radius: 10px; padding: 14px; display: flex; justify-content: space-between;
+                align-items: center; }
+  .fondo-balance { font-size: 24px; font-weight: 700; color: #22c55e; }
+  .fondo-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .fondo-meta { font-size: 12px; color: #86efac; margin-top: 4px; }
+  .fondo-right { text-align: right; }
+  .fondo-tasa { font-size: 20px; font-weight: 700; color: #22c55e; }
+  .fondo-intocable { display: inline-block; background: rgba(34,197,94,.15); color: #86efac;
+                     font-size: 10px; padding: 2px 7px; border-radius: 99px; margin-top: 6px; }
 </style>
 </head>
 <body>
@@ -1027,6 +1066,18 @@ PLAN_HTML = """<!DOCTYPE html>
     </table>
 
     <div class="estimate" id="estimate" style="display:none"></div>
+  </div>
+
+  <!-- Préstamos fijos -->
+  <div class="section" id="prestamos-section" style="display:none">
+    <h2>🏛️ Préstamos fijos</h2>
+    <div id="prestamos-list"></div>
+  </div>
+
+  <!-- Fondo de emergencia -->
+  <div class="section" id="fondo-section" style="display:none">
+    <h2>🛡️ Fondo de emergencia <span style="font-size:10px;color:#22c55e;background:rgba(34,197,94,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">intocable</span></h2>
+    <div id="fondo-list"></div>
   </div>
 
   <!-- Financiamientos Cuscatlán -->
@@ -1119,10 +1170,11 @@ function renderPlan(plan) {
   document.getElementById('r-free').textContent = fmt(plan.free_to_spend);
 
   const savPct = Math.round(plan.savings / plan.salary * 100);
+  const loanPct = Math.round((plan.total_prestamos || 0) / plan.salary * 100);
   const cardPct = Math.round(plan.total_payments / plan.salary * 100);
-  const freePct = 100 - savPct - cardPct;
+  const freePct = 100 - savPct - loanPct - cardPct;
   document.getElementById('bar-l1').textContent = `ahorro ${savPct}%`;
-  document.getElementById('bar-l2').textContent = `tarjetas ${cardPct}%`;
+  document.getElementById('bar-l2').textContent = `préstamos ${loanPct}% · tarjetas ${cardPct}%`;
   document.getElementById('bar-l3').textContent = `libre ${freePct}%`;
 
   const tbody = document.getElementById('pay-tbody');
@@ -1173,6 +1225,45 @@ async function sendEmail() {
   else showToast(json.error || 'Error al enviar', true);
 }
 
+function renderFondos(data) {
+  if (!data) return;
+  const { fondos = [], prestamos = [] } = data;
+
+  if (prestamos.length) {
+    document.getElementById('prestamos-section').style.display = 'block';
+    document.getElementById('prestamos-list').innerHTML = prestamos.map(p => `
+      <div class="prestamo-row">
+        <div>
+          <div class="prestamo-name">${p.nombre}</div>
+          <div class="prestamo-meta">Saldo: $${p.saldo.toFixed(2)} · ${p.tasa_anual}% anual · vence día ${p.fecha_pago_dia}</div>
+          <div class="prestamo-meta">~${p.cuotas_restantes} cuotas restantes (${Math.round(p.cuotas_restantes/12 * 10)/10} años)</div>
+        </div>
+        <div class="prestamo-cuota">
+          <div class="amount">$${p.cuota_quincenal.toFixed(2)}</div>
+          <div class="per">/quincena</div>
+          <div class="per" style="color:#94a3b8">$${p.cuota_mensual.toFixed(2)}/mes</div>
+        </div>
+      </div>`).join('');
+  }
+
+  if (fondos.length) {
+    document.getElementById('fondo-section').style.display = 'block';
+    document.getElementById('fondo-list').innerHTML = fondos.map(f => `
+      <div class="fondo-card">
+        <div>
+          <div class="fondo-label">${f.nombre} · ${f.banco}</div>
+          <div class="fondo-balance">$${f.saldo.toFixed(2)}</div>
+          <div class="fondo-meta">+$${f.ganancia_mensual.toFixed(2)}/mes · +$${f.ganancia_anual.toFixed(2)}/año</div>
+          ${f.intocable ? '<span class="fondo-intocable">🔒 colchón intocable</span>' : ''}
+        </div>
+        <div class="fondo-right">
+          <div class="fondo-tasa">${f.tasa_anual}%</div>
+          <div style="font-size:10px;color:#64748b">anual</div>
+        </div>
+      </div>`).join('');
+  }
+}
+
 function renderFinanciamientos(data) {
   if (!data || !data.items || !data.items.length) return;
   const section = document.getElementById('fi-section');
@@ -1202,8 +1293,9 @@ function renderFinanciamientos(data) {
 
 // Load existing config on start
 (async () => {
-  // Load financiamientos
+  // Load financiamientos y fondos
   fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
+  fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
 
   try {
     const res = await fetch('/api/plan');

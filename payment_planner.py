@@ -24,16 +24,21 @@ def build_plan(config: dict) -> dict | None:
 
     savings_pct = config.get('savings_percentage', 0.10)
     cards = [c.copy() for c in config.get('cards', []) if c.get('balance', 0) > 0]
+    prestamos = config.get('prestamos', [])
 
     savings = round(salary * savings_pct, 2)
     available = round(salary - savings, 2)
+
+    # Fixed loan payments: monthly cuota split into 2 quincenas
+    total_prestamos = round(sum(p.get('cuota_mensual', 0) / 2 for p in prestamos), 2)
+    available_for_cards = round(available - total_prestamos, 2)
 
     # Minimum: 5 % of balance or $25, whichever is higher
     for card in cards:
         card['min_payment'] = max(round(card['balance'] * 0.05, 2), 25.0)
 
     total_minimum = round(sum(c['min_payment'] for c in cards), 2)
-    extra = max(round(available - total_minimum, 2), 0)
+    extra = max(round(available_for_cards - total_minimum, 2), 0)
 
     # Avalanche: send all extra to the highest-balance card
     sorted_cards = sorted(cards, key=lambda x: x['balance'], reverse=True)
@@ -58,7 +63,7 @@ def build_plan(config: dict) -> dict | None:
         })
 
     total_payments = round(sum(p['payment'] for p in payments), 2)
-    free_to_spend = round(available - total_payments, 2)
+    free_to_spend = round(available_for_cards - total_payments, 2)
     total_debt = round(sum(c['balance'] for c in config.get('cards', [])), 2)
 
     # Rough estimate: how many periods until debt-free (assumes constant payments)
@@ -69,6 +74,8 @@ def build_plan(config: dict) -> dict | None:
         'savings': savings,
         'savings_pct': savings_pct,
         'available': available,
+        'total_prestamos': total_prestamos,
+        'available_for_cards': available_for_cards,
         'total_minimum': total_minimum,
         'extra_for_debt': extra,
         'payments': payments,
@@ -130,6 +137,12 @@ def _build_email_html(plan: dict, period_label: str) -> str:
 
     pct = round(plan['savings_pct'] * 100)
     now_str = datetime.now(tz=_TZ).strftime('%d/%m/%Y %H:%M')
+    prestamos_row = ''
+    if plan.get('total_prestamos', 0) > 0:
+        prestamos_row = f"""<tr>
+        <td style="padding:10px 12px;color:#f59e0b">🏛️ Préstamos fijos (quinc.)</td>
+        <td style="padding:10px 12px;text-align:right;font-weight:700;color:#f59e0b">${plan['total_prestamos']:.2f}</td>
+      </tr>"""
 
     return f"""<!DOCTYPE html>
 <html lang="es">
@@ -152,6 +165,7 @@ def _build_email_html(plan: dict, period_label: str) -> str:
         <td style="padding:10px 12px;color:#16a34a">🏦 Ahorro ({pct}%)</td>
         <td style="padding:10px 12px;text-align:right;font-weight:700;color:#16a34a">${plan['savings']:.2f}</td>
       </tr>
+      {prestamos_row}
       <tr style="background:#f8fafc">
         <td style="padding:10px 12px;color:#6366f1">💳 Total pago tarjetas</td>
         <td style="padding:10px 12px;text-align:right;font-weight:700;color:#6366f1">${plan['total_payments']:.2f}</td>
@@ -230,6 +244,7 @@ def run_planner(force: bool = False):
     label = _period_label(now)
     logger.info(f"▶ Generando plan para: {label}")
 
+    planner['prestamos'] = settings.get('prestamos', [])
     plan = build_plan(planner)
     if not plan:
         logger.warning("No se pudo generar el plan")
