@@ -16,10 +16,112 @@
     "run_days": [13, 28],
     "notify_email": "nehe298@gmail.com",
     "cards": [
-      {"name": "AMEX BAC", "last4": "3328", "balance": 400.00},
-      {"name": "VISA BAC", "last4": "2117", "balance": 300.00}
+      {"name": "AMEX BAC",       "last4": "3328", "balance": 400.00,  "tasa_anual": 43.08, "fecha_pago_dia": 9,  "min_pago": 13.00},
+      {"name": "VISA BAC",       "last4": "2117", "balance": 300.00,  "tasa_anual": 43.92, "fecha_pago_dia": 15, "min_pago": 13.00},
+      {"name": "VISA Cuscatlán", "last4": "2789", "balance": 480.00,  "tasa_anual": 34.99, "fecha_pago_dia": 18, "min_pago": 104.75},
+      {"name": "VISA Agrícola",  "last4": "6114", "balance": 220.16,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "min_pago": 60.87}
     ]
   },
+  "prestamos": [
+    {
+      "nombre": "Préstamo Consumo Agrícola",
+      "numero": "2132201069",
+      "saldo": 6274.65,
+      "cuota_mensual": 147.11,
+      "tasa_anual": 14.38,
+      "fecha_pago_dia": 7,
+      "cuotas_restantes": 60
+    }
+  ],
+  "fondos_ahorro": [
+    {
+      "nombre": "Mi Ahorro MultiMoney",
+      "banco": "Agrícola",
+      "saldo": 501.35,
+      "tasa_anual": 3.5,
+      "intocable": true
+    }
+  ],
+  "intrafinanciamientos": [
+    {
+      "ref": "000001",
+      "descripcion": "Intrafinanciamiento $1,500 / 60m",
+      "monto_original": 1500.00,
+      "cuota_mensual": 8.53,
+      "saldo_actual": 277.08,
+      "cuotas_pagadas": 14,
+      "cuotas_total": 60,
+      "tasa_mensual": 1.58,
+      "fecha_corte": "2026-05-23",
+      "banco": "Cuscatlán",
+      "tarjeta_last4": "2789"
+    },
+    {
+      "ref": "000002",
+      "descripcion": "Intrafinanciamiento $1,200 / 24m",
+      "monto_original": 1200.00,
+      "cuota_mensual": 62.47,
+      "saldo_actual": 613.89,
+      "cuotas_pagadas": 13,
+      "cuotas_total": 24,
+      "tasa_mensual": 1.92,
+      "fecha_corte": "2026-05-23",
+      "banco": "Cuscatlán",
+      "tarjeta_last4": "2789"
+    },
+    {
+      "ref": "000004",
+      "descripcion": "Intrafinanciamiento $300 / 48m",
+      "monto_original": 300.00,
+      "cuota_mensual": 8.94,
+      "saldo_actual": 253.84,
+      "cuotas_pagadas": 10,
+      "cuotas_total": 48,
+      "tasa_mensual": 1.58,
+      "fecha_corte": "2026-05-23",
+      "banco": "Cuscatlán",
+      "tarjeta_last4": "2789"
+    },
+    {
+      "ref": "60667239",
+      "descripcion": "Laptop / Extrafinanciamiento",
+      "monto_original": 185.04,
+      "cuota_mensual": 15.42,
+      "saldo_actual": 154.16,
+      "cuotas_pagadas": 2,
+      "cuotas_total": 12,
+      "tasa_mensual": 0.0,
+      "fecha_corte": "2026-05-18",
+      "banco": "BAC",
+      "tarjeta_last4": "3328"
+    },
+    {
+      "ref": "51805702",
+      "descripcion": "Honda / Extrafinanciamiento",
+      "monto_original": 211.08,
+      "cuota_mensual": 17.59,
+      "saldo_actual": 35.18,
+      "cuotas_pagadas": 10,
+      "cuotas_total": 12,
+      "tasa_mensual": 0.0,
+      "fecha_corte": "2026-05-27",
+      "banco": "BAC",
+      "tarjeta_last4": "2117"
+    },
+    {
+      "ref": "51805703",
+      "descripcion": "Honda / Extrafinanciamiento",
+      "monto_original": 145.56,
+      "cuota_mensual": 12.13,
+      "saldo_actual": 24.26,
+      "cuotas_pagadas": 10,
+      "cuotas_total": 12,
+      "tasa_mensual": 0.0,
+      "fecha_corte": "2026-05-27",
+      "banco": "BAC",
+      "tarjeta_last4": "2117"
+    }
+  ],
   "paths": {
     "logs_dir": "logs",
     "config_dir": "config",
