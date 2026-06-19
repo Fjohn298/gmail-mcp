@@ -1122,9 +1122,9 @@ PLAN_HTML = """<!DOCTYPE html>
     <div id="fondo-list"></div>
   </div>
 
-  <!-- Financiamientos Cuscatlán -->
+  <!-- Compras a plazos / Extrafinanciamientos -->
   <div class="section" id="fi-section" style="display:none">
-    <h2>🏦 Intrafinanciamientos Cuscatlán <span style="font-size:10px;color:#0ea5e9;background:rgba(14,165,233,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">VISA ···2789</span></h2>
+    <h2>🏦 Compras a plazos <span style="font-size:10px;color:#0ea5e9;background:rgba(14,165,233,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">cuotas activas</span></h2>
     <div class="fi-grid" id="fi-grid"></div>
     <div class="fi-total">
       <span class="fi-total-label">Deuda total financiamientos</span>
@@ -1355,10 +1355,22 @@ function renderFinanciamientos(data) {
   document.getElementById('fi-total-saldo').textContent = '$' + data.total_saldo.toFixed(2);
   document.getElementById('fi-total-cuota').textContent = '$' + data.total_cuota.toFixed(2) + '/mes';
   const grid = document.getElementById('fi-grid');
+  const bancoColor = { 'BAC': '#e4002b', 'Cuscatlán': '#004b87', 'Agrícola': '#2b7a3c' };
   grid.innerHTML = data.items.map(fi => {
     const isNear = fi.cuotas_restantes <= 12;
-    return `<div class="fi-card${isNear ? ' urgent' : ''}">
-      <div class="fi-ref">Ref ${fi.ref}</div>
+    const banco = fi.banco || 'Otro';
+    const color = bancoColor[banco] || '#64748b';
+    const cardChip = fi.tarjeta_last4
+      ? `<span style="font-size:10px;color:${color};background:${color}22;padding:1px 6px;border-radius:99px;margin-left:4px">···${fi.tarjeta_last4}</span>`
+      : '';
+    const tasaText = fi.tasa_mensual > 0
+      ? `· ${fi.tasa_mensual}%/mes`
+      : '· 0% interés';
+    return `<div class="fi-card${isNear ? ' urgent' : ''}" style="border-left:3px solid ${color}">
+      <div class="fi-ref" style="display:flex;align-items:center;gap:4px">
+        <span style="font-size:10px;color:${color};font-weight:700">${banco}</span>${cardChip}
+        <span style="margin-left:auto;font-size:10px;color:#64748b">Ref ${fi.ref}</span>
+      </div>
       <div class="fi-desc">${fi.descripcion}</div>
       <div class="fi-cuota">$${fi.cuota_mensual.toFixed(2)} <span>/mes</span></div>
       <div class="fi-progress">
@@ -1369,7 +1381,7 @@ function renderFinanciamientos(data) {
         <span>${fi.cuotas_restantes} restantes → ${fi.payoff_label}</span>
       </div>
       <div class="fi-saldo">Saldo: <strong>$${fi.saldo_actual.toFixed(2)}</strong>
-        <span style="color:#64748b;font-size:10px"> · ${fi.tasa_mensual}%/mes</span>
+        <span style="color:#64748b;font-size:10px"> ${tasaText}</span>
       </div>
     </div>`;
   }).join('');
