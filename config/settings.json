@@ -7,7 +7,18 @@
   "schedule": {
     "cleanup_interval_hours": 1,
     "labeler_interval_hours": 1,
-    "financial_extractor_time": "08:00"
+    "financial_extractor_time": "08:00",
+    "planner_time": "07:00"
+  },
+  "planner": {
+    "salary_per_period": 0,
+    "savings_percentage": 0.10,
+    "run_days": [13, 28],
+    "notify_email": "nehe298@gmail.com",
+    "cards": [
+      {"name": "AMEX BAC", "last4": "3328", "balance": 400.00},
+      {"name": "VISA BAC", "last4": "2117", "balance": 300.00}
+    ]
   },
   "paths": {
     "logs_dir": "logs",
