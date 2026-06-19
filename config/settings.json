@@ -17,9 +17,45 @@
     "notify_email": "nehe298@gmail.com",
     "cards": [
       {"name": "AMEX BAC", "last4": "3328", "balance": 400.00},
-      {"name": "VISA BAC", "last4": "2117", "balance": 300.00}
+      {"name": "VISA BAC", "last4": "2117", "balance": 300.00},
+      {"name": "VISA Cuscatlán", "last4": "2789", "balance": 475.50}
     ]
   },
+  "intrafinanciamientos": [
+    {
+      "ref": "000001",
+      "descripcion": "Intrafinanciamiento $1,500 / 60m",
+      "monto_original": 1500.00,
+      "cuota_mensual": 8.53,
+      "saldo_actual": 277.08,
+      "cuotas_pagadas": 14,
+      "cuotas_total": 60,
+      "tasa_mensual": 1.58,
+      "fecha_corte": "2026-05-23"
+    },
+    {
+      "ref": "000002",
+      "descripcion": "Intrafinanciamiento $1,200 / 24m",
+      "monto_original": 1200.00,
+      "cuota_mensual": 62.47,
+      "saldo_actual": 613.89,
+      "cuotas_pagadas": 13,
+      "cuotas_total": 24,
+      "tasa_mensual": 1.92,
+      "fecha_corte": "2026-05-23"
+    },
+    {
+      "ref": "000004",
+      "descripcion": "Intrafinanciamiento $300 / 48m",
+      "monto_original": 300.00,
+      "cuota_mensual": 8.94,
+      "saldo_actual": 253.84,
+      "cuotas_pagadas": 10,
+      "cuotas_total": 48,
+      "tasa_mensual": 1.58,
+      "fecha_corte": "2026-05-23"
+    }
+  ],
   "paths": {
     "logs_dir": "logs",
     "config_dir": "config",

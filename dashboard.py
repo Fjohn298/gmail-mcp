@@ -639,6 +639,32 @@ def api_plan_send():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/plan/financiamientos', methods=['GET'])
+def api_plan_financiamientos():
+    try:
+        settings = load_settings()
+        items = settings.get('intrafinanciamientos', [])
+        result = []
+        today = datetime.now(tz=_TZ).date()
+        for item in items:
+            cuotas_restantes = item['cuotas_total'] - item['cuotas_pagadas']
+            # Estimate payoff from corte date + cuotas_restantes months
+            from datetime import date as _date
+            corte = _date.fromisoformat(item['fecha_corte'])
+            raw_month = corte.month - 1 + cuotas_restantes
+            payoff_year = corte.year + raw_month // 12
+            payoff_month = raw_month % 12 + 1
+            payoff_label = f"{['', 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'][payoff_month]} {payoff_year}"
+            progress_pct = round(item['cuotas_pagadas'] / item['cuotas_total'] * 100)
+            result.append({**item, 'cuotas_restantes': cuotas_restantes,
+                           'payoff_label': payoff_label, 'progress_pct': progress_pct})
+        total_saldo = round(sum(i['saldo_actual'] for i in result), 2)
+        total_cuota = round(sum(i['cuota_mensual'] for i in result), 2)
+        return jsonify({'items': result, 'total_saldo': total_saldo, 'total_cuota': total_cuota})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/balances')
 def api_balances():
     settings = load_settings()
@@ -908,6 +934,24 @@ PLAN_HTML = """<!DOCTYPE html>
   .bar-inner { height: 100%; border-radius: 99px;
                background: linear-gradient(90deg, #22c55e 0%, #6366f1 60%, #f59e0b 100%); }
   .bar-labels { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; }
+  .fi-grid { display: grid; gap: 10px; }
+  @media(min-width:540px){ .fi-grid { grid-template-columns: repeat(3,1fr); } }
+  .fi-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
+  .fi-card.urgent { border-color: #ef4444; }
+  .fi-ref { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .06em; }
+  .fi-desc { font-size: 12px; color: #a5b4fc; font-weight: 600; margin: 4px 0 8px; }
+  .fi-cuota { font-size: 18px; font-weight: 700; color: #e2e8f0; }
+  .fi-cuota span { font-size: 11px; color: #64748b; font-weight: 400; }
+  .fi-progress { height: 6px; background: #2a2d3e; border-radius: 99px; margin: 10px 0 4px; overflow: hidden; }
+  .fi-progress-bar { height: 100%; border-radius: 99px; background: #0ea5e9; }
+  .fi-progress-bar.near { background: #ef4444; }
+  .fi-meta { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 6px; }
+  .fi-saldo { font-size: 12px; color: #94a3b8; margin-top: 6px; }
+  .fi-saldo strong { color: #e2e8f0; }
+  .fi-total { margin-top: 12px; padding: 10px 12px; background: #1a1d27; border: 1px solid #2a2d3e;
+              border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .fi-total .fi-total-label { font-size: 12px; color: #64748b; }
+  .fi-total .fi-total-val { font-size: 15px; font-weight: 700; color: #0ea5e9; }
 </style>
 </head>
 <body>
@@ -983,6 +1027,20 @@ PLAN_HTML = """<!DOCTYPE html>
     </table>
 
     <div class="estimate" id="estimate" style="display:none"></div>
+  </div>
+
+  <!-- Financiamientos Cuscatlán -->
+  <div class="section" id="fi-section" style="display:none">
+    <h2>🏦 Intrafinanciamientos Cuscatlán <span style="font-size:10px;color:#0ea5e9;background:rgba(14,165,233,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">VISA ···2789</span></h2>
+    <div class="fi-grid" id="fi-grid"></div>
+    <div class="fi-total">
+      <span class="fi-total-label">Deuda total financiamientos</span>
+      <span class="fi-total-val" id="fi-total-saldo">-</span>
+    </div>
+    <div class="fi-total" style="margin-top:6px">
+      <span class="fi-total-label">Cuota mensual combinada</span>
+      <span class="fi-total-val" id="fi-total-cuota">-</span>
+    </div>
   </div>
 
 </div>
@@ -1115,8 +1173,38 @@ async function sendEmail() {
   else showToast(json.error || 'Error al enviar', true);
 }
 
+function renderFinanciamientos(data) {
+  if (!data || !data.items || !data.items.length) return;
+  const section = document.getElementById('fi-section');
+  section.style.display = 'block';
+  document.getElementById('fi-total-saldo').textContent = '$' + data.total_saldo.toFixed(2);
+  document.getElementById('fi-total-cuota').textContent = '$' + data.total_cuota.toFixed(2) + '/mes';
+  const grid = document.getElementById('fi-grid');
+  grid.innerHTML = data.items.map(fi => {
+    const isNear = fi.cuotas_restantes <= 12;
+    return `<div class="fi-card${isNear ? ' urgent' : ''}">
+      <div class="fi-ref">Ref ${fi.ref}</div>
+      <div class="fi-desc">${fi.descripcion}</div>
+      <div class="fi-cuota">$${fi.cuota_mensual.toFixed(2)} <span>/mes</span></div>
+      <div class="fi-progress">
+        <div class="fi-progress-bar${isNear ? ' near' : ''}" style="width:${fi.progress_pct}%"></div>
+      </div>
+      <div class="fi-meta">
+        <span>${fi.cuotas_pagadas}/${fi.cuotas_total} cuotas</span>
+        <span>${fi.cuotas_restantes} restantes → ${fi.payoff_label}</span>
+      </div>
+      <div class="fi-saldo">Saldo: <strong>$${fi.saldo_actual.toFixed(2)}</strong>
+        <span style="color:#64748b;font-size:10px"> · ${fi.tasa_mensual}%/mes</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
 // Load existing config on start
 (async () => {
+  // Load financiamientos
+  fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
+
   try {
     const res = await fetch('/api/plan');
     const plan = await res.json();
@@ -1124,7 +1212,6 @@ async function sendEmail() {
       // Pre-fill form from saved plan
       document.getElementById('inp-salary').value = plan.salary;
       document.getElementById('inp-savings-pct').value = Math.round(plan.savings_pct * 100);
-      const saved = await fetch('/api/plan/current-config').catch(() => null);
       // Show cards from plan
       plan.payments.forEach(p => addCard(p.name, p.last4, p.balance));
       renderPlan(plan);
@@ -1132,10 +1219,12 @@ async function sendEmail() {
       // Default cards
       addCard('AMEX BAC', '3328', 400);
       addCard('VISA BAC', '2117', 300);
+      addCard('VISA Cuscatlán', '2789', 475.50);
     }
   } catch {
     addCard('AMEX BAC', '3328', 400);
     addCard('VISA BAC', '2117', 300);
+    addCard('VISA Cuscatlán', '2789', 475.50);
   }
 })();
 </script>
