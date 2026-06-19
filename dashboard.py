@@ -991,6 +991,28 @@ PLAN_HTML = """<!DOCTYPE html>
   .fondo-tasa { font-size: 20px; font-weight: 700; color: #22c55e; }
   .fondo-intocable { display: inline-block; background: rgba(34,197,94,.15); color: #86efac;
                      font-size: 10px; padding: 2px 7px; border-radius: 99px; margin-top: 6px; }
+  .pri-badge { display:inline-flex;align-items:center;justify-content:center;
+               width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700; }
+  .pri-1 { background:#6366f1;color:white; }
+  .pri-n { background:#2a2d3e;color:#94a3b8; }
+  .payoff-lbl { font-size:11px;color:#22c55e; }
+  .rate-lbl { font-size:12px;font-weight:700;color:#f59e0b; }
+  .cal-grid { display:grid;gap:10px; }
+  @media(min-width:500px){ .cal-grid { grid-template-columns:1fr 1fr; } }
+  .cal-quincena { background:#0f1117;border:1px solid #2a2d3e;border-radius:10px;padding:14px; }
+  .cal-q-header { font-size:12px;font-weight:700;color:#6366f1;margin-bottom:10px;
+                  padding-bottom:8px;border-bottom:1px solid #2a2d3e; }
+  .cal-item { display:flex;justify-content:space-between;align-items:center;
+              padding:8px 0;border-bottom:1px solid #1a1e2e; }
+  .cal-item:last-child { border-bottom:none;padding-bottom:0; }
+  .cal-item-left .cal-name { font-size:13px;font-weight:600;color:#e2e8f0; }
+  .cal-item-left .cal-meta { font-size:10px;color:#64748b;margin-top:1px; }
+  .cal-item-right .cal-amt { font-size:15px;font-weight:700;color:#6366f1; }
+  .cal-item-right .cal-per { font-size:10px;color:#64748b; }
+  .cal-item.focus-item .cal-amt { color:#a5b4fc; }
+  .cal-empty { font-size:12px;color:#475569;padding:6px 0; }
+  .cal-unknown { margin-top:10px;padding:10px;background:#0f1117;border:1px dashed #2a2d3e;
+                 border-radius:8px;font-size:12px;color:#64748b; }
 </style>
 </head>
 <body>
@@ -1055,17 +1077,37 @@ PLAN_HTML = """<!DOCTYPE html>
     <table class="pay-table" style="margin-top:16px">
       <thead>
         <tr>
+          <th style="width:30px">#</th>
           <th>Tarjeta</th>
           <th style="text-align:right">Saldo</th>
-          <th style="text-align:right">Pagar</th>
+          <th style="text-align:right">Tasa</th>
+          <th style="text-align:right">Pagar/qna</th>
           <th style="text-align:right">Queda</th>
-          <th>Tipo</th>
+          <th>Libre en</th>
         </tr>
       </thead>
       <tbody id="pay-tbody"></tbody>
     </table>
 
     <div class="estimate" id="estimate" style="display:none"></div>
+  </div>
+
+  <!-- Calendario de pagos -->
+  <div class="section" id="calendar-section" style="display:none">
+    <h2>📅 Calendario de pagos por quincena</h2>
+    <div class="cal-grid">
+      <div class="cal-quincena">
+        <div class="cal-q-header">💰 Cobras el 15 — paga antes del:</div>
+        <div id="cal-q15"></div>
+      </div>
+      <div class="cal-quincena">
+        <div class="cal-q-header">💰 Cobras el 30 — paga antes del:</div>
+        <div id="cal-q30"></div>
+      </div>
+    </div>
+    <div class="cal-unknown" id="cal-unknown" style="display:none">
+      ⚠️ <strong>Confirmar fecha de pago:</strong> <span id="cal-unknown-list"></span>
+    </div>
   </div>
 
   <!-- Préstamos fijos -->
@@ -1180,21 +1222,27 @@ function renderPlan(plan) {
   const tbody = document.getElementById('pay-tbody');
   tbody.innerHTML = plan.payments.map(p => `
     <tr>
+      <td><span class="pri-badge ${p.priority === 1 ? 'pri-1' : 'pri-n'}">${p.priority}</span></td>
       <td><strong>${p.name}</strong><br><span style="font-size:11px;color:#64748b">···${p.last4}</span></td>
       <td style="text-align:right;color:#ef4444">${fmt(p.balance)}</td>
+      <td style="text-align:right"><span class="rate-lbl">${(p.tasa_anual||30).toFixed(1)}%</span></td>
       <td style="text-align:right"><span class="pay-amount">${fmt(p.payment)}</span></td>
       <td style="text-align:right"><span class="balance-after">${fmt(p.balance_after)}</span></td>
-      <td>${p.is_focus
-        ? '<span class="focus-badge">🎯 Foco</span>'
-        : '<span class="min-badge">Mínimo</span>'}</td>
+      <td><span class="payoff-lbl">${p.payoff_label || '—'}</span></td>
     </tr>`).join('');
 
+  renderCalendar(plan);
+
   const est = document.getElementById('estimate');
-  if (plan.periods_to_debt_free) {
-    const months = Math.round(plan.periods_to_debt_free / 2);
-    est.innerHTML = `📅 A este ritmo estarías <strong>libre de deuda</strong> en aprox.
-      <strong>${plan.periods_to_debt_free} quincenas (~${months} meses)</strong>.
-      Deuda total restante: <strong style="color:#ef4444">${fmt(plan.total_debt)}</strong>`;
+  if (plan.all_cards_free_label) {
+    est.innerHTML = `
+      <div>🎯 <strong>Libre de todas las tarjetas:</strong>
+        <strong style="color:#22c55e;font-size:16px"> ${plan.all_cards_free_label}</strong></div>
+      <div style="margin-top:6px;font-size:11px;color:#64748b">
+        Préstamo Agrícola: ~Jul 2031 &nbsp;·&nbsp; Intrafinanciamientos: ~Mar 2030
+      </div>
+      <div style="margin-top:6px">Deuda total tarjetas:
+        <strong style="color:#ef4444">${fmt(plan.total_debt)}</strong></div>`;
     est.style.display = 'block';
   } else {
     est.style.display = 'none';
@@ -1223,6 +1271,42 @@ async function sendEmail() {
   const json = await res.json();
   if (json.ok) showToast('Email enviado a tu Gmail ✓');
   else showToast(json.error || 'Error al enviar', true);
+}
+
+function renderCalendar(plan) {
+  const cal = plan.payment_calendar;
+  if (!cal) return;
+  const section = document.getElementById('calendar-section');
+
+  function makeItem(item) {
+    const isFocus = item.is_focus;
+    const isLoan = item.type === 'prestamo';
+    const label = item.last4 ? `${item.name} <span style="color:#64748b">···${item.last4}</span>` : item.name;
+    const focusBadge = isFocus ? ' <span class="focus-badge" style="font-size:9px">🎯 FOCO</span>' : '';
+    return `<div class="cal-item${isFocus ? ' focus-item' : ''}">
+      <div class="cal-item-left">
+        <div class="cal-name">${label}${focusBadge}</div>
+        <div class="cal-meta">Vence día <strong>${item.dia}</strong>${isLoan ? ' (cuota mensual)' : ' · mensual'}</div>
+      </div>
+      <div class="cal-item-right">
+        <div class="cal-amt">${fmt(item.amount)}</div>
+        <div class="cal-per">/mes</div>
+      </div>
+    </div>`;
+  }
+
+  const q15 = cal.q15 || [], q30 = cal.q30 || [], unk = cal.unknown || [];
+  if (q15.length || q30.length || unk.length) section.style.display = 'block';
+
+  document.getElementById('cal-q15').innerHTML =
+    q15.length ? q15.map(makeItem).join('') : '<div class="cal-empty">Sin pagos en esta quincena</div>';
+  document.getElementById('cal-q30').innerHTML =
+    q30.length ? q30.map(makeItem).join('') : '<div class="cal-empty">Sin pagos en esta quincena</div>';
+
+  if (unk.length) {
+    document.getElementById('cal-unknown').style.display = 'block';
+    document.getElementById('cal-unknown-list').textContent = unk.map(i => i.name).join(', ');
+  }
 }
 
 function renderFondos(data) {
