@@ -16,7 +16,7 @@
     "run_days": [13, 28],
     "notify_email": "nehe298@gmail.com",
     "cards": [
-      {"name": "AMEX BAC",       "last4": "3328", "balance": 400.00,  "tasa_anual": 30.00, "fecha_pago_dia": 9,  "min_pago": 13.00},
+      {"name": "AMEX BAC",       "last4": "3328", "balance": 400.00,  "tasa_anual": 43.08, "fecha_pago_dia": 9,  "min_pago": 13.00},
       {"name": "VISA BAC",       "last4": "2117", "balance": 300.00,  "tasa_anual": 43.92, "fecha_pago_dia": 15, "min_pago": 13.00},
       {"name": "VISA Cuscatlán", "last4": "2789", "balance": 480.00,  "tasa_anual": 34.99, "fecha_pago_dia": 18, "min_pago": 104.75},
       {"name": "VISA Agrícola",  "last4": "6114", "balance": 220.16,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "min_pago": 60.87}
