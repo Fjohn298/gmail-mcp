@@ -18,7 +18,8 @@
     "cards": [
       {"name": "AMEX BAC", "last4": "3328", "balance": 400.00},
       {"name": "VISA BAC", "last4": "2117", "balance": 300.00},
-      {"name": "VISA Cuscatlán", "last4": "2789", "balance": 480.00}
+      {"name": "VISA Cuscatlán", "last4": "2789", "balance": 480.00},
+      {"name": "VISA Agrícola", "last4": "6114", "balance": 220.16}
     ]
   },
   "intrafinanciamientos": [

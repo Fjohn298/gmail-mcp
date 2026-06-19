@@ -1219,12 +1219,14 @@ function renderFinanciamientos(data) {
       // Default cards
       addCard('AMEX BAC', '3328', 400);
       addCard('VISA BAC', '2117', 300);
-      addCard('VISA Cuscatlán', '2789', 475.50);
+      addCard('VISA Cuscatlán', '2789', 480);
+      addCard('VISA Agrícola', '6114', 220.16);
     }
   } catch {
     addCard('AMEX BAC', '3328', 400);
     addCard('VISA BAC', '2117', 300);
-    addCard('VISA Cuscatlán', '2789', 475.50);
+    addCard('VISA Cuscatlán', '2789', 480);
+    addCard('VISA Agrícola', '6114', 220.16);
   }
 })();
 </script>
