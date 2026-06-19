@@ -35,6 +35,15 @@ def run_financial_extractor():
     except Exception as e:
         logger.error(f"✗ financial_extractor falló: {e}", exc_info=True)
 
+def run_payment_planner():
+    try:
+        from payment_planner import run_planner
+        n = run_planner()
+        if n:
+            logger.info("✓ payment_planner: plan generado y enviado")
+    except Exception as e:
+        logger.error(f"✗ payment_planner falló: {e}", exc_info=True)
+
 def run_dashboard():
     try:
         from dashboard import app
@@ -50,14 +59,18 @@ def setup_schedules():
     labeler_h = settings['schedule']['labeler_interval_hours']
     financial_time = settings['schedule']['financial_extractor_time']
 
+    planner_time = settings['schedule'].get('planner_time', '07:00')
+
     schedule.every(cleanup_h).hours.do(run_cleanup)
     schedule.every(labeler_h).hours.do(run_labeler)
     schedule.every().day.at(financial_time).do(run_financial_extractor)
+    schedule.every().day.at(planner_time).do(run_payment_planner)
 
     logger.info(f"Schedules configurados:")
     logger.info(f"  cleanup     → cada {cleanup_h}h")
     logger.info(f"  labeler     → cada {labeler_h}h")
     logger.info(f"  financiero  → diario a las {financial_time}")
+    logger.info(f"  planner     → diario a las {planner_time} (activo días 13 y 28)")
 
 if __name__ == '__main__':
     logger.info("=" * 50)

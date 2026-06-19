@@ -578,6 +578,67 @@ def emails():
     return render_template_string(EMAILS_HTML)
 
 
+@app.route('/plan')
+def plan():
+    return render_template_string(PLAN_HTML)
+
+
+@app.route('/api/plan', methods=['GET'])
+def api_plan_get():
+    path = 'data/payment_plan.json'
+    if not os.path.exists(path):
+        return jsonify({'error': 'Sin plan generado. Configura tu salario y guarda.'})
+    with open(path, 'r', encoding='utf-8') as f:
+        return jsonify(json.load(f))
+
+
+@app.route('/api/plan/config', methods=['POST'])
+def api_plan_config():
+    try:
+        data = request.get_json()
+        settings = load_settings()
+        planner = settings.setdefault('planner', {})
+
+        salary = float(data.get('salary', 0))
+        savings_pct = float(data.get('savings_pct', 0.10))
+        cards = data.get('cards', [])
+
+        planner['salary_per_period'] = salary
+        planner['savings_percentage'] = savings_pct
+        planner['cards'] = [
+            {'name': c['name'], 'last4': c['last4'], 'balance': float(c['balance'])}
+            for c in cards if float(c.get('balance', 0)) > 0
+        ]
+
+        with open('config/settings.json', 'w', encoding='utf-8') as f:
+            json.dump(settings, f, ensure_ascii=False, indent=2)
+
+        from payment_planner import build_plan, save_plan
+        plan = build_plan(planner)
+        if plan:
+            save_plan(plan)
+            return jsonify({'ok': True, 'plan': plan})
+        return jsonify({'error': 'Salario inválido'}), 400
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/plan/send', methods=['POST'])
+def api_plan_send():
+    try:
+        from payment_planner import send_plan_email, _period_label
+        path = 'data/payment_plan.json'
+        if not os.path.exists(path):
+            return jsonify({'error': 'Sin plan guardado'}), 400
+        with open(path, 'r', encoding='utf-8') as f:
+            plan = json.load(f)
+        label = _period_label(datetime.now(tz=_TZ))
+        send_plan_email(plan, label)
+        return jsonify({'ok': True})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/balances')
 def api_balances():
     settings = load_settings()
@@ -720,7 +781,7 @@ MAIN_MENU_HTML = """<!DOCTYPE html>
   .container { padding: 16px; max-width: 720px; margin: 0 auto; }
   .menu-grid { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 4px; }
   @media(min-width: 480px) { .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; } }
-  @media(min-width: 700px) { .menu-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media(min-width: 700px) { .menu-grid { grid-template-columns: repeat(4, 1fr); } }
   .menu-card { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 14px;
                padding: 16px 18px; text-decoration: none; color: inherit;
                display: flex; align-items: center; gap: 14px;
@@ -764,6 +825,10 @@ MAIN_MENU_HTML = """<!DOCTYPE html>
       <span class="icon">📋</span>
       <div><h2>Logs</h2><p>Logs del orchestrator, cleanup, labeler y financial extractor</p></div>
     </a>
+    <a href="/plan" class="menu-card">
+      <span class="icon">🗓️</span>
+      <div><h2>Plan</h2><p>Plan de pagos y ahorro para cada quincena, con notificación automática</p></div>
+    </a>
   </div>
 </div>
 <script>
@@ -774,6 +839,305 @@ fetch('/api/status').then(r => r.json()).then(s => {
     if (s.next_update) document.getElementById('next-update').textContent = s.next_update;
   }
 }).catch(() => {});
+</script>
+</body>
+</html>"""
+
+PLAN_HTML = """<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗓️ Plan Financiero</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 13px; flex-shrink: 0; }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .container { padding: 14px; max-width: 720px; margin: 0 auto; }
+  .section { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px;
+             padding: 18px; margin-bottom: 12px; }
+  .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
+                letter-spacing: .06em; margin-bottom: 14px; }
+  .field-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+  @media(min-width:500px){ .field-row { flex-direction: row; align-items: center; } }
+  .field-row label { font-size: 13px; color: #94a3b8; min-width: 160px; }
+  .field-row input { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 8px;
+                     color: #e2e8f0; padding: 8px 12px; font-size: 14px; width: 100%;
+                     max-width: 180px; }
+  .field-row input:focus { outline: none; border-color: #6366f1; }
+  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
+  .card-label { font-size: 12px; color: #64748b; margin-bottom: 4px; }
+  .card-name { font-size: 13px; color: #a5b4fc; font-weight: 600; margin-bottom: 6px; }
+  .btn { background: #6366f1; color: white; border: none; border-radius: 8px;
+         padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
+         margin-right: 8px; margin-top: 4px; }
+  .btn:hover { background: #4f52d9; }
+  .btn.secondary { background: #2a2d3e; color: #a5b4fc; }
+  .btn.secondary:hover { background: #363a55; }
+  .result { display: none; }
+  .dist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+  @media(min-width:500px){ .dist-grid { grid-template-columns: repeat(4,1fr); } }
+  .dist-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 12px; }
+  .dist-card .d-label { font-size: 10px; color: #64748b; text-transform: uppercase;
+                        letter-spacing: .05em; margin-bottom: 4px; }
+  .dist-card .d-val { font-size: 20px; font-weight: 700; }
+  .dist-card.savings .d-val { color: #22c55e; }
+  .dist-card.cards .d-val { color: #6366f1; }
+  .dist-card.free .d-val { color: #f59e0b; }
+  .pay-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pay-table th { text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase;
+                  padding: 8px 10px; border-bottom: 1px solid #2a2d3e; }
+  .pay-table td { padding: 10px; border-bottom: 1px solid #1e2130; vertical-align: middle; }
+  .focus-badge { background: rgba(99,102,241,.2); color: #a5b4fc; padding: 2px 7px;
+                 border-radius: 99px; font-size: 10px; font-weight: 600; }
+  .min-badge { background: rgba(100,116,139,.15); color: #64748b; padding: 2px 7px;
+               border-radius: 99px; font-size: 10px; }
+  .pay-amount { font-size: 16px; font-weight: 700; color: #6366f1; }
+  .balance-after { color: #22c55e; font-weight: 600; }
+  .estimate { margin-top: 12px; padding: 12px; background: rgba(99,102,241,.08);
+              border-radius: 8px; font-size: 13px; color: #94a3b8; }
+  .estimate strong { color: #a5b4fc; }
+  .toast { position: fixed; bottom: 20px; right: 20px; background: #22c55e; color: white;
+           padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+           display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+  .toast.error { background: #ef4444; }
+  .bar-wrap { height: 8px; background: #0f1117; border-radius: 99px; margin: 12px 0 4px; overflow: hidden; }
+  .bar-inner { height: 100%; border-radius: 99px;
+               background: linear-gradient(90deg, #22c55e 0%, #6366f1 60%, #f59e0b 100%); }
+  .bar-labels { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; }
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Menú</a>
+  <h1>🗓️ Plan Financiero</h1>
+</div>
+<div class="container">
+
+  <!-- Formulario de configuración -->
+  <div class="section">
+    <h2>⚙️ Configuración</h2>
+    <div class="field-row">
+      <label>Salario por quincena ($)</label>
+      <input type="number" id="inp-salary" step="0.01" min="0" placeholder="0.00">
+    </div>
+    <div class="field-row">
+      <label>Ahorro por quincena (%)</label>
+      <input type="number" id="inp-savings-pct" step="1" min="0" max="50" value="10">
+    </div>
+
+    <h2 style="margin-top:16px">💳 Saldos actuales de tarjetas</h2>
+    <div id="cards-container"></div>
+    <button class="btn" id="btn-add-card" onclick="addCard()">+ Agregar tarjeta</button>
+
+    <div style="margin-top:16px">
+      <button class="btn" onclick="saveAndCalculate()">💾 Guardar y calcular</button>
+      <button class="btn secondary" onclick="sendEmail()">📧 Enviar por email</button>
+    </div>
+  </div>
+
+  <!-- Resultado del plan -->
+  <div class="section result" id="result-section">
+    <h2>📊 Plan para esta quincena</h2>
+
+    <div class="dist-grid">
+      <div class="dist-card">
+        <div class="d-label">💵 Salario</div>
+        <div class="d-val" id="r-salary">-</div>
+      </div>
+      <div class="dist-card savings">
+        <div class="d-label">🏦 Ahorro</div>
+        <div class="d-val" id="r-savings">-</div>
+      </div>
+      <div class="dist-card cards">
+        <div class="d-label">💳 Tarjetas</div>
+        <div class="d-val" id="r-cards">-</div>
+      </div>
+      <div class="dist-card free">
+        <div class="d-label">🛍️ Libre</div>
+        <div class="d-val" id="r-free">-</div>
+      </div>
+    </div>
+
+    <div class="bar-wrap"><div class="bar-inner" id="bar" style="width:100%"></div></div>
+    <div class="bar-labels">
+      <span id="bar-l1">ahorro</span>
+      <span id="bar-l2">tarjetas</span>
+      <span id="bar-l3">libre</span>
+    </div>
+
+    <table class="pay-table" style="margin-top:16px">
+      <thead>
+        <tr>
+          <th>Tarjeta</th>
+          <th style="text-align:right">Saldo</th>
+          <th style="text-align:right">Pagar</th>
+          <th style="text-align:right">Queda</th>
+          <th>Tipo</th>
+        </tr>
+      </thead>
+      <tbody id="pay-tbody"></tbody>
+    </table>
+
+    <div class="estimate" id="estimate" style="display:none"></div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let planConfig = { salary: 0, savings_pct: 10, cards: [] };
+
+function showToast(msg, isError) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (isError ? ' error' : '');
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 3000);
+}
+
+function fmt(n) { return '$' + parseFloat(n).toFixed(2); }
+
+function addCard(name='', last4='', balance='') {
+  const c = document.getElementById('cards-container');
+  const idx = c.children.length;
+  const div = document.createElement('div');
+  div.style.cssText = 'background:#0f1117;border:1px solid #2a2d3e;border-radius:10px;padding:12px;margin-bottom:8px';
+  div.innerHTML = `
+    <div class="card-row">
+      <div>
+        <div class="card-label">Nombre</div>
+        <input class="card-input" data-field="name" data-idx="${idx}" value="${name}"
+          style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
+                 color:#e2e8f0;padding:6px 10px;font-size:13px;width:100%"
+          placeholder="AMEX BAC">
+      </div>
+      <div>
+        <div class="card-label">Últimos 4 dígitos</div>
+        <input class="card-input" data-field="last4" data-idx="${idx}" value="${last4}"
+          style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
+                 color:#e2e8f0;padding:6px 10px;font-size:13px;width:100%"
+          placeholder="3328" maxlength="4">
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <div class="card-label">Saldo actual ($)</div>
+      <input class="card-input" data-field="balance" data-idx="${idx}" value="${balance}"
+        type="number" step="0.01" min="0"
+        style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
+               color:#e2e8f0;padding:6px 10px;font-size:15px;font-weight:600;width:140px"
+        placeholder="0.00">
+      <button onclick="this.parentElement.parentElement.remove()"
+        style="margin-left:10px;background:none;border:none;color:#64748b;font-size:18px;cursor:pointer">✕</button>
+    </div>`;
+  c.appendChild(div);
+}
+
+function getFormData() {
+  const salary = parseFloat(document.getElementById('inp-salary').value) || 0;
+  const savings_pct = (parseFloat(document.getElementById('inp-savings-pct').value) || 10) / 100;
+  const cards = [];
+  const byIdx = {};
+  document.querySelectorAll('.card-input').forEach(inp => {
+    const idx = inp.dataset.idx;
+    if (!byIdx[idx]) byIdx[idx] = {};
+    byIdx[idx][inp.dataset.field] = inp.value;
+  });
+  Object.values(byIdx).forEach(c => {
+    if (c.balance && parseFloat(c.balance) > 0) cards.push(c);
+  });
+  return { salary, savings_pct, cards };
+}
+
+function renderPlan(plan) {
+  document.getElementById('result-section').style.display = 'block';
+  document.getElementById('r-salary').textContent = fmt(plan.salary);
+  document.getElementById('r-savings').textContent = fmt(plan.savings);
+  document.getElementById('r-cards').textContent = fmt(plan.total_payments);
+  document.getElementById('r-free').textContent = fmt(plan.free_to_spend);
+
+  const savPct = Math.round(plan.savings / plan.salary * 100);
+  const cardPct = Math.round(plan.total_payments / plan.salary * 100);
+  const freePct = 100 - savPct - cardPct;
+  document.getElementById('bar-l1').textContent = `ahorro ${savPct}%`;
+  document.getElementById('bar-l2').textContent = `tarjetas ${cardPct}%`;
+  document.getElementById('bar-l3').textContent = `libre ${freePct}%`;
+
+  const tbody = document.getElementById('pay-tbody');
+  tbody.innerHTML = plan.payments.map(p => `
+    <tr>
+      <td><strong>${p.name}</strong><br><span style="font-size:11px;color:#64748b">···${p.last4}</span></td>
+      <td style="text-align:right;color:#ef4444">${fmt(p.balance)}</td>
+      <td style="text-align:right"><span class="pay-amount">${fmt(p.payment)}</span></td>
+      <td style="text-align:right"><span class="balance-after">${fmt(p.balance_after)}</span></td>
+      <td>${p.is_focus
+        ? '<span class="focus-badge">🎯 Foco</span>'
+        : '<span class="min-badge">Mínimo</span>'}</td>
+    </tr>`).join('');
+
+  const est = document.getElementById('estimate');
+  if (plan.periods_to_debt_free) {
+    const months = Math.round(plan.periods_to_debt_free / 2);
+    est.innerHTML = `📅 A este ritmo estarías <strong>libre de deuda</strong> en aprox.
+      <strong>${plan.periods_to_debt_free} quincenas (~${months} meses)</strong>.
+      Deuda total restante: <strong style="color:#ef4444">${fmt(plan.total_debt)}</strong>`;
+    est.style.display = 'block';
+  } else {
+    est.style.display = 'none';
+  }
+}
+
+async function saveAndCalculate() {
+  const data = getFormData();
+  if (!data.salary) { showToast('Ingresa tu salario quincena', true); return; }
+  const res = await fetch('/api/plan/config', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  const json = await res.json();
+  if (json.ok) {
+    renderPlan(json.plan);
+    showToast('Plan calculado y guardado ✓');
+  } else {
+    showToast(json.error || 'Error al guardar', true);
+  }
+}
+
+async function sendEmail() {
+  const res = await fetch('/api/plan/send', { method: 'POST' });
+  const json = await res.json();
+  if (json.ok) showToast('Email enviado a tu Gmail ✓');
+  else showToast(json.error || 'Error al enviar', true);
+}
+
+// Load existing config on start
+(async () => {
+  try {
+    const res = await fetch('/api/plan');
+    const plan = await res.json();
+    if (!plan.error) {
+      // Pre-fill form from saved plan
+      document.getElementById('inp-salary').value = plan.salary;
+      document.getElementById('inp-savings-pct').value = Math.round(plan.savings_pct * 100);
+      const saved = await fetch('/api/plan/current-config').catch(() => null);
+      // Show cards from plan
+      plan.payments.forEach(p => addCard(p.name, p.last4, p.balance));
+      renderPlan(plan);
+    } else {
+      // Default cards
+      addCard('AMEX BAC', '3328', 400);
+      addCard('VISA BAC', '2117', 300);
+    }
+  } catch {
+    addCard('AMEX BAC', '3328', 400);
+    addCard('VISA BAC', '2117', 300);
+  }
+})();
 </script>
 </body>
 </html>"""
