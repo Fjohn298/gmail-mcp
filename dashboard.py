@@ -605,13 +605,14 @@ def api_plan_config():
 
         planner['salary_per_period'] = salary
         planner['savings_percentage'] = savings_pct
-        # Merge incoming balance/name with existing card metadata (tasa, fechas, min_pago)
-        existing_by_last4 = {c['last4']: c for c in planner.get('cards', [])}
-        planner['cards'] = [
-            {**existing_by_last4.get(c['last4'], {}), 'name': c['name'],
-             'last4': c['last4'], 'balance': float(c['balance'])}
-            for c in cards if float(c.get('balance', 0)) > 0
-        ]
+        # Update only the balances sent; preserve all existing cards and their metadata
+        existing = {c['last4']: c for c in planner.get('cards', [])}
+        for c in cards:
+            if float(c.get('balance', 0)) > 0:
+                existing[c['last4']] = {**existing.get(c['last4'], {}),
+                                        'name': c['name'], 'last4': c['last4'],
+                                        'balance': float(c['balance'])}
+        planner['cards'] = list(existing.values())
 
         with open('config/settings.json', 'w', encoding='utf-8') as f:
             json.dump(settings, f, ensure_ascii=False, indent=2)

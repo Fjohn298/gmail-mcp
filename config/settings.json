@@ -120,6 +120,19 @@
       "fecha_corte": "2026-05-27",
       "banco": "BAC",
       "tarjeta_last4": "2117"
+    },
+    {
+      "ref": "CURACAO-001",
+      "descripcion": "Cuota Curacao",
+      "monto_original": 249.00,
+      "cuota_mensual": 20.75,
+      "saldo_actual": 207.50,
+      "cuotas_pagadas": 2,
+      "cuotas_total": 12,
+      "tasa_mensual": 0.0,
+      "fecha_corte": "2026-06-21",
+      "banco": "Curacao",
+      "tarjeta_last4": null
     }
   ],
   "paths": {
