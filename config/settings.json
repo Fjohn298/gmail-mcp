@@ -100,8 +100,8 @@
       "descripcion": "Honda / Extrafinanciamiento",
       "monto_original": 211.08,
       "cuota_mensual": 17.59,
-      "saldo_actual": 35.18,
-      "cuotas_pagadas": 10,
+      "saldo_actual": 17.59,
+      "cuotas_pagadas": 11,
       "cuotas_total": 12,
       "tasa_mensual": 0.0,
       "fecha_corte": "2026-05-27",
@@ -113,8 +113,8 @@
       "descripcion": "Honda / Extrafinanciamiento",
       "monto_original": 145.56,
       "cuota_mensual": 12.13,
-      "saldo_actual": 24.26,
-      "cuotas_pagadas": 10,
+      "saldo_actual": 12.13,
+      "cuotas_pagadas": 11,
       "cuotas_total": 12,
       "tasa_mensual": 0.0,
       "fecha_corte": "2026-05-27",
@@ -132,7 +132,7 @@
       "tasa_mensual": 0.0,
       "fecha_corte": "2026-06-21",
       "banco": "Curacao",
-      "tarjeta_last4": null
+      "tarjeta_last4": "3328"
     }
   ],
   "paths": {
