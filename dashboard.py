@@ -880,6 +880,44 @@ def api_plan_activity():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/plan/snapshot', methods=['GET'])
+def api_plan_snapshot():
+    """Return all debt balances with payoff estimates from settings.json."""
+    try:
+        import math
+        settings = load_settings()
+        today = datetime.now(tz=_TZ).date()
+        cards_cfg = settings.get('planner', {}).get('cards', [])
+        MESES = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
+
+        def payoff_info(balance, tasa_anual, min_pago):
+            if balance <= 0:
+                return {'label': 'Pagado ✓', 'never': False, 'paid': True}
+            r = tasa_anual / 100 / 12
+            if min_pago <= 0:
+                return {'label': '—', 'never': True, 'paid': False}
+            if r > 0 and min_pago <= balance * r:
+                return {'label': f'Interés/mes ${balance*r:.2f} > pago mínimo', 'never': True, 'paid': False}
+            if r == 0:
+                months = math.ceil(balance / min_pago)
+            else:
+                months = math.ceil(-math.log(1 - balance * r / min_pago) / math.log(1 + r))
+            raw = today.month - 1 + months
+            py = today.year + raw // 12
+            pm = raw % 12 + 1
+            return {'label': f'{MESES[pm]} {py} ({months}m)', 'never': False, 'paid': False}
+
+        cards = []
+        for c in cards_cfg:
+            cards.append({**c, 'payoff': payoff_info(c['balance'], c['tasa_anual'], c['min_pago'])})
+
+        total_balance = round(sum(c['balance'] for c in cards_cfg), 2)
+        total_min = round(sum(c['min_pago'] for c in cards_cfg), 2)
+        return jsonify({'cards': cards, 'total_balance': total_balance, 'total_min': total_min})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/plan/activity/confirm', methods=['POST'])
 def api_plan_activity_confirm():
     """Confirm a transaction against a card, adjusting its balance in settings.json.
@@ -1002,7 +1040,7 @@ PLAN_HTML = """<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🗓️ Plan Financiero</title>
+<title>🗓️ Estado de Deuda</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
@@ -1015,53 +1053,18 @@ PLAN_HTML = """<!DOCTYPE html>
              padding: 18px; margin-bottom: 12px; }
   .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
                 letter-spacing: .06em; margin-bottom: 14px; }
-  .field-row { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
-  @media(min-width:500px){ .field-row { flex-direction: row; align-items: center; } }
-  .field-row label { font-size: 13px; color: #94a3b8; min-width: 160px; }
-  .field-row input { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 8px;
-                     color: #e2e8f0; padding: 8px 12px; font-size: 14px; width: 100%;
-                     max-width: 180px; }
-  .field-row input:focus { outline: none; border-color: #6366f1; }
-  .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 8px; }
-  .card-label { font-size: 12px; color: #64748b; margin-bottom: 4px; }
-  .card-name { font-size: 13px; color: #a5b4fc; font-weight: 600; margin-bottom: 6px; }
-  .btn { background: #6366f1; color: white; border: none; border-radius: 8px;
-         padding: 10px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
-         margin-right: 8px; margin-top: 4px; }
-  .btn:hover { background: #4f52d9; }
-  .btn.secondary { background: #2a2d3e; color: #a5b4fc; }
-  .btn.secondary:hover { background: #363a55; }
-  .result { display: none; }
-  .dist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
-  @media(min-width:500px){ .dist-grid { grid-template-columns: repeat(4,1fr); } }
-  .dist-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 12px; }
-  .dist-card .d-label { font-size: 10px; color: #64748b; text-transform: uppercase;
-                        letter-spacing: .05em; margin-bottom: 4px; }
-  .dist-card .d-val { font-size: 20px; font-weight: 700; }
-  .dist-card.savings .d-val { color: #22c55e; }
-  .dist-card.cards .d-val { color: #6366f1; }
-  .dist-card.free .d-val { color: #f59e0b; }
-  .pay-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .pay-table th { text-align: left; color: #64748b; font-size: 11px; text-transform: uppercase;
-                  padding: 8px 10px; border-bottom: 1px solid #2a2d3e; }
-  .pay-table td { padding: 10px; border-bottom: 1px solid #1e2130; vertical-align: middle; }
-  .focus-badge { background: rgba(99,102,241,.2); color: #a5b4fc; padding: 2px 7px;
-                 border-radius: 99px; font-size: 10px; font-weight: 600; }
-  .min-badge { background: rgba(100,116,139,.15); color: #64748b; padding: 2px 7px;
-               border-radius: 99px; font-size: 10px; }
-  .pay-amount { font-size: 16px; font-weight: 700; color: #6366f1; }
-  .balance-after { color: #22c55e; font-weight: 600; }
-  .estimate { margin-top: 12px; padding: 12px; background: rgba(99,102,241,.08);
-              border-radius: 8px; font-size: 13px; color: #94a3b8; }
-  .estimate strong { color: #a5b4fc; }
-  .toast { position: fixed; bottom: 20px; right: 20px; background: #22c55e; color: white;
-           padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
-           display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
-  .toast.error { background: #ef4444; }
-  .bar-wrap { height: 8px; background: #0f1117; border-radius: 99px; margin: 12px 0 4px; overflow: hidden; }
-  .bar-inner { height: 100%; border-radius: 99px;
-               background: linear-gradient(90deg, #22c55e 0%, #6366f1 60%, #f59e0b 100%); }
-  .bar-labels { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; }
+  /* Tarjetas de crédito */
+  .tc-grid { display: grid; gap: 10px; margin-bottom: 12px; }
+  @media(min-width:500px){ .tc-grid { grid-template-columns: repeat(2,1fr); } }
+  .tc-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
+  .tc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .tc-name { font-size: 12px; font-weight: 700; }
+  .tc-last4 { font-size: 11px; color: #64748b; }
+  .tc-balance { font-size: 26px; font-weight: 700; margin: 4px 0 6px; }
+  .tc-meta { font-size: 11px; color: #64748b; margin-bottom: 8px; }
+  .tc-payoff { font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 6px;
+               background: rgba(255,255,255,.04); display: inline-block; }
+  /* Intrafinanciamientos */
   .fi-grid { display: grid; gap: 10px; }
   @media(min-width:540px){ .fi-grid { grid-template-columns: repeat(3,1fr); } }
   .fi-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
@@ -1080,6 +1083,7 @@ PLAN_HTML = """<!DOCTYPE html>
               border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
   .fi-total .fi-total-label { font-size: 12px; color: #64748b; }
   .fi-total .fi-total-val { font-size: 15px; font-weight: 700; color: #0ea5e9; }
+  /* Préstamos */
   .prestamo-row { display: flex; justify-content: space-between; align-items: center;
                   padding: 10px 0; border-bottom: 1px solid #1e2130; }
   .prestamo-row:last-child { border-bottom: none; }
@@ -1088,6 +1092,7 @@ PLAN_HTML = """<!DOCTYPE html>
   .prestamo-cuota { text-align: right; }
   .prestamo-cuota .amount { font-size: 16px; font-weight: 700; color: #f59e0b; }
   .prestamo-cuota .per { font-size: 10px; color: #64748b; }
+  /* Fondo */
   .fondo-card { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
                 border-radius: 10px; padding: 14px; display: flex; justify-content: space-between;
                 align-items: center; }
@@ -1098,148 +1103,53 @@ PLAN_HTML = """<!DOCTYPE html>
   .fondo-tasa { font-size: 20px; font-weight: 700; color: #22c55e; }
   .fondo-intocable { display: inline-block; background: rgba(34,197,94,.15); color: #86efac;
                      font-size: 10px; padding: 2px 7px; border-radius: 99px; margin-top: 6px; }
-  .pri-badge { display:inline-flex;align-items:center;justify-content:center;
-               width:22px;height:22px;border-radius:50%;font-size:11px;font-weight:700; }
-  .pri-1 { background:#6366f1;color:white; }
-  .pri-n { background:#2a2d3e;color:#94a3b8; }
-  .payoff-lbl { font-size:11px;color:#22c55e; }
-  .rate-lbl { font-size:12px;font-weight:700;color:#f59e0b; }
-  .cal-grid { display:grid;gap:10px; }
-  @media(min-width:500px){ .cal-grid { grid-template-columns:1fr 1fr; } }
-  .cal-quincena { background:#0f1117;border:1px solid #2a2d3e;border-radius:10px;padding:14px; }
-  .cal-q-header { font-size:12px;font-weight:700;color:#6366f1;margin-bottom:10px;
-                  padding-bottom:8px;border-bottom:1px solid #2a2d3e; }
-  .cal-item { display:flex;justify-content:space-between;align-items:center;
-              padding:8px 0;border-bottom:1px solid #1a1e2e; }
-  .cal-item:last-child { border-bottom:none;padding-bottom:0; }
-  .cal-item-left .cal-name { font-size:13px;font-weight:600;color:#e2e8f0; }
-  .cal-item-left .cal-meta { font-size:10px;color:#64748b;margin-top:1px; }
-  .cal-item-right .cal-amt { font-size:15px;font-weight:700;color:#6366f1; }
-  .cal-item-right .cal-per { font-size:10px;color:#64748b; }
-  .cal-item.focus-item .cal-amt { color:#a5b4fc; }
-  .cal-empty { font-size:12px;color:#475569;padding:6px 0; }
-  .cal-unknown { margin-top:10px;padding:10px;background:#0f1117;border:1px dashed #2a2d3e;
-                 border-radius:8px;font-size:12px;color:#64748b; }
-  .act-controls { display:flex;align-items:center;gap:8px;margin-bottom:14px; }
-  .act-days { background:#0f1117;border:1px solid #2a2d3e;border-radius:6px;
-              color:#e2e8f0;padding:4px 8px;font-size:12px; }
-  .act-group { margin-bottom:14px; }
-  .act-account { font-size:12px;font-weight:700;color:#a5b4fc;display:flex;
-                 align-items:center;gap:6px;margin-bottom:6px;padding-bottom:4px;
-                 border-bottom:1px solid #2a2d3e; }
-  .act-row { display:flex;align-items:center;gap:8px;padding:8px 10px;
-             background:#0f1117;border-radius:8px;margin-bottom:4px;font-size:12px; }
-  .act-date { color:#64748b;min-width:80px;flex-shrink:0; }
-  .act-desc { flex:1;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
-  .act-monto { font-weight:700;min-width:72px;text-align:right;flex-shrink:0; }
-  .act-monto.gasto { color:#ef4444; }
-  .act-monto.ingreso { color:#22c55e; }
-  .act-badge { padding:1px 6px;border-radius:99px;font-size:9px;font-weight:600;flex-shrink:0; }
-  .conf-alta  { background:rgba(34,197,94,.15);color:#86efac; }
-  .conf-media { background:rgba(245,158,11,.15);color:#fcd34d; }
-  .conf-baja  { background:rgba(239,68,68,.15);color:#fca5a5; }
-  .conf-sin   { background:rgba(100,116,139,.15);color:#94a3b8; }
-  .act-btn { background:#1a1d27;border:1px solid #2a2d3e;color:#a5b4fc;
-             padding:2px 8px;border-radius:6px;font-size:10px;cursor:pointer;
-             flex-shrink:0;white-space:nowrap; }
-  .act-btn:hover { border-color:#6366f1; }
-  .act-btn.confirmed { border-color:#22c55e;color:#22c55e; }
-  .act-empty { color:#475569;font-size:12px;padding:12px 0;text-align:center; }
-  .act-loading { color:#64748b;font-size:12px;padding:16px 0;text-align:center; }
+  /* Totales */
+  .tot-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tot-table td { padding: 8px 4px; border-bottom: 1px solid #1e2130; }
+  .tot-table tr:last-child td { border-bottom: none; font-weight: 700; font-size: 15px; padding-top: 12px; }
+  .tot-table .tot-val { text-align: right; font-weight: 600; color: #ef4444; }
+  .tot-table tr:last-child .tot-val { color: #f59e0b; font-size: 17px; }
+  .tot-section-title { font-size: 11px; color: #64748b; text-transform: uppercase;
+                       letter-spacing: .05em; margin: 14px 0 6px; }
+  .toast { position: fixed; bottom: 20px; right: 20px; background: #22c55e; color: white;
+           padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+           display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+  .toast.error { background: #ef4444; }
+  .loading-msg { color: #64748b; font-size: 12px; padding: 8px 0; }
 </style>
 </head>
 <body>
 <div class="header">
   <a href="/">← Menú</a>
-  <h1>🗓️ Plan Financiero</h1>
+  <h1>🗓️ Estado de Deuda</h1>
 </div>
 <div class="container">
 
-  <!-- Formulario de configuración -->
+  <!-- Tarjetas de crédito -->
   <div class="section">
-    <h2>⚙️ Configuración</h2>
-    <div class="field-row">
-      <label>Salario por quincena ($)</label>
-      <input type="number" id="inp-salary" step="0.01" min="0" placeholder="0.00">
+    <h2>💳 Tarjetas de crédito</h2>
+    <div class="tc-grid" id="tc-grid"><div class="loading-msg">Cargando...</div></div>
+    <div class="fi-total">
+      <span class="fi-total-label">Total saldo tarjetas</span>
+      <span class="fi-total-val" id="tc-total">—</span>
     </div>
-    <div class="field-row">
-      <label>Ahorro por quincena (%)</label>
-      <input type="number" id="inp-savings-pct" step="1" min="0" max="50" value="10">
-    </div>
-
-    <h2 style="margin-top:16px">💳 Saldos actuales de tarjetas</h2>
-    <div id="cards-container"></div>
-    <button class="btn" id="btn-add-card" onclick="addCard()">+ Agregar tarjeta</button>
-
-    <div style="margin-top:16px">
-      <button class="btn" onclick="saveAndCalculate()">💾 Guardar y calcular</button>
-      <button class="btn secondary" onclick="sendEmail()">📧 Enviar por email</button>
+    <div class="fi-total" style="margin-top:6px">
+      <span class="fi-total-label">Pagos mínimos / mes</span>
+      <span class="fi-total-val" id="tc-min-total">—</span>
     </div>
   </div>
 
-  <!-- Resultado del plan -->
-  <div class="section result" id="result-section">
-    <h2>📊 Plan para esta quincena</h2>
-
-    <div class="dist-grid">
-      <div class="dist-card">
-        <div class="d-label">💵 Salario</div>
-        <div class="d-val" id="r-salary">-</div>
-      </div>
-      <div class="dist-card savings">
-        <div class="d-label">🏦 Ahorro</div>
-        <div class="d-val" id="r-savings">-</div>
-      </div>
-      <div class="dist-card cards">
-        <div class="d-label">💳 Tarjetas</div>
-        <div class="d-val" id="r-cards">-</div>
-      </div>
-      <div class="dist-card free">
-        <div class="d-label">🛍️ Libre</div>
-        <div class="d-val" id="r-free">-</div>
-      </div>
+  <!-- Compras a plazos / Extrafinanciamientos -->
+  <div class="section" id="fi-section" style="display:none">
+    <h2>🏦 Compras a plazos <span style="font-size:10px;color:#0ea5e9;background:rgba(14,165,233,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">cuotas activas</span></h2>
+    <div class="fi-grid" id="fi-grid"></div>
+    <div class="fi-total">
+      <span class="fi-total-label">Deuda total financiamientos</span>
+      <span class="fi-total-val" id="fi-total-saldo">—</span>
     </div>
-
-    <div class="bar-wrap"><div class="bar-inner" id="bar" style="width:100%"></div></div>
-    <div class="bar-labels">
-      <span id="bar-l1">ahorro</span>
-      <span id="bar-l2">tarjetas</span>
-      <span id="bar-l3">libre</span>
-    </div>
-
-    <table class="pay-table" style="margin-top:16px">
-      <thead>
-        <tr>
-          <th style="width:30px">#</th>
-          <th>Tarjeta</th>
-          <th style="text-align:right">Saldo</th>
-          <th style="text-align:right">Tasa</th>
-          <th style="text-align:right">Pagar/qna</th>
-          <th style="text-align:right">Queda</th>
-          <th>Libre en</th>
-        </tr>
-      </thead>
-      <tbody id="pay-tbody"></tbody>
-    </table>
-
-    <div class="estimate" id="estimate" style="display:none"></div>
-  </div>
-
-  <!-- Calendario de pagos -->
-  <div class="section" id="calendar-section" style="display:none">
-    <h2>📅 Calendario de pagos por quincena</h2>
-    <div class="cal-grid">
-      <div class="cal-quincena">
-        <div class="cal-q-header">💰 Cobras el 15 — paga antes del:</div>
-        <div id="cal-q15"></div>
-      </div>
-      <div class="cal-quincena">
-        <div class="cal-q-header">💰 Cobras el 30 — paga antes del:</div>
-        <div id="cal-q30"></div>
-      </div>
-    </div>
-    <div class="cal-unknown" id="cal-unknown" style="display:none">
-      ⚠️ <strong>Confirmar fecha de pago:</strong> <span id="cal-unknown-list"></span>
+    <div class="fi-total" style="margin-top:6px">
+      <span class="fi-total-label">Cuota mensual combinada</span>
+      <span class="fi-total-val" id="fi-total-cuota">—</span>
     </div>
   </div>
 
@@ -1255,36 +1165,23 @@ PLAN_HTML = """<!DOCTYPE html>
     <div id="fondo-list"></div>
   </div>
 
-  <!-- Compras a plazos / Extrafinanciamientos -->
-  <div class="section" id="fi-section" style="display:none">
-    <h2>🏦 Compras a plazos <span style="font-size:10px;color:#0ea5e9;background:rgba(14,165,233,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">cuotas activas</span></h2>
-    <div class="fi-grid" id="fi-grid"></div>
-    <div class="fi-total">
-      <span class="fi-total-label">Deuda total financiamientos</span>
-      <span class="fi-total-val" id="fi-total-saldo">-</span>
-    </div>
-    <div class="fi-total" style="margin-top:6px">
-      <span class="fi-total-label">Cuota mensual combinada</span>
-      <span class="fi-total-val" id="fi-total-cuota">-</span>
-    </div>
-  </div>
-
-  <!-- Actividad reciente clasificada -->
-  <div class="section" id="activity-section">
-    <h2 style="display:flex;align-items:center;gap:8px">
-      🔔 Actividad reciente
-      <span style="font-size:10px;color:#6366f1;background:rgba(99,102,241,.1);padding:2px 8px;border-radius:99px" id="act-count"></span>
-    </h2>
-    <div class="act-controls">
-      <select class="act-days" id="act-days" onchange="loadActivity()">
-        <option value="7">7 días</option>
-        <option value="30" selected>30 días</option>
-        <option value="60">60 días</option>
-        <option value="90">90 días</option>
-      </select>
-      <button class="btn secondary" style="padding:5px 12px;font-size:12px" onclick="loadActivity()">↻ Actualizar</button>
-    </div>
-    <div id="activity-grid"><div class="act-loading">Cargando actividad...</div></div>
+  <!-- Resumen total -->
+  <div class="section" id="totals-section">
+    <h2>📊 Resumen total</h2>
+    <div class="tot-section-title">Deuda</div>
+    <table class="tot-table">
+      <tr><td>Tarjetas de crédito</td><td class="tot-val" id="tot-cards">—</td></tr>
+      <tr><td>Compras a plazos</td><td class="tot-val" id="tot-fi">—</td></tr>
+      <tr><td>Préstamos</td><td class="tot-val" id="tot-prestamos">—</td></tr>
+      <tr><td>TOTAL DEUDA</td><td class="tot-val" id="tot-total">—</td></tr>
+    </table>
+    <div class="tot-section-title">Obligaciones mensuales fijas</div>
+    <table class="tot-table">
+      <tr><td>Tarjetas (mínimos)</td><td class="tot-val" id="tot-min">—</td></tr>
+      <tr><td>Compras a plazos</td><td class="tot-val" id="tot-cuota-fi">—</td></tr>
+      <tr><td>Préstamos</td><td class="tot-val" id="tot-cuota-p">—</td></tr>
+      <tr><td>TOTAL MENSUAL</td><td class="tot-val" id="tot-mensual">—</td></tr>
+    </table>
   </div>
 
 </div>
@@ -1292,203 +1189,131 @@ PLAN_HTML = """<!DOCTYPE html>
 <div class="toast" id="toast"></div>
 
 <script>
-let planConfig = { salary: 0, savings_pct: 10, cards: [] };
-
-function showToast(msg, isError) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast' + (isError ? ' error' : '');
-  t.style.display = 'block';
-  setTimeout(() => t.style.display = 'none', 3000);
-}
-
 function fmt(n) { return '$' + parseFloat(n).toFixed(2); }
 
-function addCard(name='', last4='', balance='') {
-  const c = document.getElementById('cards-container');
-  const idx = c.children.length;
-  const div = document.createElement('div');
-  div.style.cssText = 'background:#0f1117;border:1px solid #2a2d3e;border-radius:10px;padding:12px;margin-bottom:8px';
-  div.innerHTML = `
-    <div class="card-row">
-      <div>
-        <div class="card-label">Nombre</div>
-        <input class="card-input" data-field="name" data-idx="${idx}" value="${name}"
-          style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
-                 color:#e2e8f0;padding:6px 10px;font-size:13px;width:100%"
-          placeholder="AMEX BAC">
+let _totCards = 0, _totFi = 0, _totPrestamos = 0;
+let _minCards = 0, _cuotaFi = 0, _cuotaP = 0;
+
+function updateTotals() {
+  const gran = _totCards + _totFi + _totPrestamos;
+  const mensual = _minCards + _cuotaFi + _cuotaP;
+  document.getElementById('tot-cards').textContent = fmt(_totCards);
+  document.getElementById('tot-fi').textContent = fmt(_totFi);
+  document.getElementById('tot-prestamos').textContent = fmt(_totPrestamos);
+  document.getElementById('tot-total').textContent = fmt(gran);
+  document.getElementById('tot-min').textContent = fmt(_minCards);
+  document.getElementById('tot-cuota-fi').textContent = fmt(_cuotaFi);
+  document.getElementById('tot-cuota-p').textContent = fmt(_cuotaP);
+  document.getElementById('tot-mensual').textContent = fmt(mensual);
+}
+
+function renderCards(data) {
+  if (!data || data.error) {
+    document.getElementById('tc-grid').innerHTML = '<div class="loading-msg">Error al cargar tarjetas</div>';
+    return;
+  }
+  _totCards = data.total_balance;
+  _minCards = data.total_min;
+
+  const COLORS = { 'BAC': '#e4002b', 'Agrícola': '#22c55e', 'Cuscatlán': '#0ea5e9' };
+  function cardColor(name) {
+    for (const [k, v] of Object.entries(COLORS)) if (name.includes(k)) return v;
+    return '#64748b';
+  }
+
+  const grid = document.getElementById('tc-grid');
+  grid.innerHTML = data.cards.map(c => {
+    const color = cardColor(c.name);
+    const isPaid = c.balance === 0;
+    const isNever = c.payoff.never;
+    const payoffColor = isPaid ? '#22c55e' : isNever ? '#ef4444' : '#f59e0b';
+    const payoffIcon = isPaid ? '✓' : isNever ? '⚠️' : '→';
+    return `<div class="tc-card" style="border-left:3px solid ${color}">
+      <div class="tc-header">
+        <span class="tc-name" style="color:${color}">${c.name}</span>
+        <span class="tc-last4">····${c.last4}</span>
       </div>
-      <div>
-        <div class="card-label">Últimos 4 dígitos</div>
-        <input class="card-input" data-field="last4" data-idx="${idx}" value="${last4}"
-          style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
-                 color:#e2e8f0;padding:6px 10px;font-size:13px;width:100%"
-          placeholder="3328" maxlength="4">
-      </div>
-    </div>
-    <div style="margin-top:8px">
-      <div class="card-label">Saldo actual ($)</div>
-      <input class="card-input" data-field="balance" data-idx="${idx}" value="${balance}"
-        type="number" step="0.01" min="0"
-        style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
-               color:#e2e8f0;padding:6px 10px;font-size:15px;font-weight:600;width:140px"
-        placeholder="0.00">
-      <button onclick="this.parentElement.parentElement.remove()"
-        style="margin-left:10px;background:none;border:none;color:#64748b;font-size:18px;cursor:pointer">✕</button>
+      <div class="tc-balance" style="color:${isPaid?'#22c55e':'#e2e8f0'}">${fmt(c.balance)}</div>
+      <div class="tc-meta">${c.tasa_anual}% anual · mín ${fmt(c.min_pago)}/mes</div>
+      <div class="tc-payoff" style="color:${payoffColor}">${payoffIcon} ${c.payoff.label}</div>
     </div>`;
-  c.appendChild(div);
+  }).join('');
+
+  document.getElementById('tc-total').textContent = fmt(data.total_balance);
+  document.getElementById('tc-min-total').textContent = fmt(data.total_min) + '/mes';
+  updateTotals();
 }
 
-function getFormData() {
-  const salary = parseFloat(document.getElementById('inp-salary').value) || 0;
-  const savings_pct = (parseFloat(document.getElementById('inp-savings-pct').value) || 10) / 100;
-  const cards = [];
-  const byIdx = {};
-  document.querySelectorAll('.card-input').forEach(inp => {
-    const idx = inp.dataset.idx;
-    if (!byIdx[idx]) byIdx[idx] = {};
-    byIdx[idx][inp.dataset.field] = inp.value;
-  });
-  Object.values(byIdx).forEach(c => {
-    if (c.balance && parseFloat(c.balance) > 0) cards.push(c);
-  });
-  return { salary, savings_pct, cards };
-}
-
-function renderPlan(plan) {
-  document.getElementById('result-section').style.display = 'block';
-  document.getElementById('r-salary').textContent = fmt(plan.salary);
-  document.getElementById('r-savings').textContent = fmt(plan.savings);
-  document.getElementById('r-cards').textContent = fmt(plan.total_payments);
-  document.getElementById('r-free').textContent = fmt(plan.free_to_spend);
-
-  const savPct = Math.round(plan.savings / plan.salary * 100);
-  const loanPct = Math.round((plan.total_prestamos || 0) / plan.salary * 100);
-  const cardPct = Math.round(plan.total_payments / plan.salary * 100);
-  const freePct = 100 - savPct - loanPct - cardPct;
-  document.getElementById('bar-l1').textContent = `ahorro ${savPct}%`;
-  document.getElementById('bar-l2').textContent = `préstamos ${loanPct}% · tarjetas ${cardPct}%`;
-  document.getElementById('bar-l3').textContent = `libre ${freePct}%`;
-
-  const tbody = document.getElementById('pay-tbody');
-  tbody.innerHTML = plan.payments.map(p => `
-    <tr>
-      <td><span class="pri-badge ${p.priority === 1 ? 'pri-1' : 'pri-n'}">${p.priority}</span></td>
-      <td><strong>${p.name}</strong><br><span style="font-size:11px;color:#64748b">···${p.last4}</span></td>
-      <td style="text-align:right;color:#ef4444">${fmt(p.balance)}</td>
-      <td style="text-align:right"><span class="rate-lbl">${(p.tasa_anual||30).toFixed(1)}%</span></td>
-      <td style="text-align:right"><span class="pay-amount">${fmt(p.payment)}</span></td>
-      <td style="text-align:right"><span class="balance-after">${fmt(p.balance_after)}</span></td>
-      <td><span class="payoff-lbl">${p.payoff_label || '—'}</span></td>
-    </tr>`).join('');
-
-  renderCalendar(plan);
-
-  const est = document.getElementById('estimate');
-  if (plan.all_cards_free_label) {
-    est.innerHTML = `
-      <div>🎯 <strong>Libre de todas las tarjetas:</strong>
-        <strong style="color:#22c55e;font-size:16px"> ${plan.all_cards_free_label}</strong></div>
-      <div style="margin-top:6px;font-size:11px;color:#64748b">
-        Préstamo Agrícola: ~Jul 2031 &nbsp;·&nbsp; Intrafinanciamientos: ~Mar 2030
+function renderFinanciamientos(data) {
+  if (!data || !data.items || !data.items.length) return;
+  _totFi = data.total_saldo;
+  _cuotaFi = data.total_cuota;
+  const section = document.getElementById('fi-section');
+  section.style.display = 'block';
+  document.getElementById('fi-total-saldo').textContent = fmt(data.total_saldo);
+  document.getElementById('fi-total-cuota').textContent = fmt(data.total_cuota) + '/mes';
+  const grid = document.getElementById('fi-grid');
+  const bancoColor = { 'BAC': '#e4002b', 'Cuscatlán': '#004b87', 'Agrícola': '#2b7a3c', 'Curacao': '#a855f7' };
+  grid.innerHTML = data.items.map(fi => {
+    const isNear = fi.cuotas_restantes <= 3;
+    const banco = fi.banco || 'Otro';
+    const color = bancoColor[banco] || '#64748b';
+    const cardChip = fi.tarjeta_last4
+      ? `<span style="font-size:10px;color:${color};background:${color}22;padding:1px 6px;border-radius:99px;margin-left:4px">···${fi.tarjeta_last4}</span>`
+      : '';
+    const tasaText = fi.tasa_mensual > 0 ? `· ${fi.tasa_mensual}%/mes` : '· 0% interés';
+    return `<div class="fi-card${isNear?' urgent':''}" style="border-left:3px solid ${color}">
+      <div class="fi-ref" style="display:flex;align-items:center;gap:4px">
+        <span style="font-size:10px;color:${color};font-weight:700">${banco}</span>${cardChip}
+        <span style="margin-left:auto;font-size:10px;color:#64748b">Ref ${fi.ref}</span>
       </div>
-      <div style="margin-top:6px">Deuda total tarjetas:
-        <strong style="color:#ef4444">${fmt(plan.total_debt)}</strong></div>`;
-    est.style.display = 'block';
-  } else {
-    est.style.display = 'none';
-  }
-}
-
-async function saveAndCalculate() {
-  const data = getFormData();
-  if (!data.salary) { showToast('Ingresa tu salario quincena', true); return; }
-  const res = await fetch('/api/plan/config', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  });
-  const json = await res.json();
-  if (json.ok) {
-    renderPlan(json.plan);
-    showToast('Plan calculado y guardado ✓');
-  } else {
-    showToast(json.error || 'Error al guardar', true);
-  }
-}
-
-async function sendEmail() {
-  const res = await fetch('/api/plan/send', { method: 'POST' });
-  const json = await res.json();
-  if (json.ok) showToast('Email enviado a tu Gmail ✓');
-  else showToast(json.error || 'Error al enviar', true);
-}
-
-function renderCalendar(plan) {
-  const cal = plan.payment_calendar;
-  if (!cal) return;
-  const section = document.getElementById('calendar-section');
-
-  function makeItem(item) {
-    const isFocus = item.is_focus;
-    const isLoan = item.type === 'prestamo';
-    const label = item.last4 ? `${item.name} <span style="color:#64748b">···${item.last4}</span>` : item.name;
-    const focusBadge = isFocus ? ' <span class="focus-badge" style="font-size:9px">🎯 FOCO</span>' : '';
-    return `<div class="cal-item${isFocus ? ' focus-item' : ''}">
-      <div class="cal-item-left">
-        <div class="cal-name">${label}${focusBadge}</div>
-        <div class="cal-meta">Vence día <strong>${item.dia}</strong>${isLoan ? ' (cuota mensual)' : ' · mensual'}</div>
+      <div class="fi-desc">${fi.descripcion}</div>
+      <div class="fi-cuota">${fmt(fi.cuota_mensual)} <span>/mes</span></div>
+      <div class="fi-progress">
+        <div class="fi-progress-bar${isNear?' near':''}" style="width:${fi.progress_pct}%"></div>
       </div>
-      <div class="cal-item-right">
-        <div class="cal-amt">${fmt(item.amount)}</div>
-        <div class="cal-per">/mes</div>
+      <div class="fi-meta">
+        <span>${fi.cuotas_pagadas}/${fi.cuotas_total} cuotas</span>
+        <span>${fi.cuotas_restantes} restantes → ${fi.payoff_label}</span>
+      </div>
+      <div class="fi-saldo">Saldo: <strong>${fmt(fi.saldo_actual)}</strong>
+        <span style="color:#64748b;font-size:10px"> ${tasaText}</span>
       </div>
     </div>`;
-  }
-
-  const q15 = cal.q15 || [], q30 = cal.q30 || [], unk = cal.unknown || [];
-  if (q15.length || q30.length || unk.length) section.style.display = 'block';
-
-  document.getElementById('cal-q15').innerHTML =
-    q15.length ? q15.map(makeItem).join('') : '<div class="cal-empty">Sin pagos en esta quincena</div>';
-  document.getElementById('cal-q30').innerHTML =
-    q30.length ? q30.map(makeItem).join('') : '<div class="cal-empty">Sin pagos en esta quincena</div>';
-
-  if (unk.length) {
-    document.getElementById('cal-unknown').style.display = 'block';
-    document.getElementById('cal-unknown-list').textContent = unk.map(i => i.name).join(', ');
-  }
+  }).join('');
+  updateTotals();
 }
 
 function renderFondos(data) {
   if (!data) return;
   const { fondos = [], prestamos = [] } = data;
-
   if (prestamos.length) {
+    _totPrestamos = prestamos.reduce((s, p) => s + p.saldo, 0);
+    _cuotaP = prestamos.reduce((s, p) => s + p.cuota_mensual, 0);
     document.getElementById('prestamos-section').style.display = 'block';
     document.getElementById('prestamos-list').innerHTML = prestamos.map(p => `
       <div class="prestamo-row">
         <div>
           <div class="prestamo-name">${p.nombre}</div>
-          <div class="prestamo-meta">Saldo: $${p.saldo.toFixed(2)} · ${p.tasa_anual}% anual · vence día ${p.fecha_pago_dia}</div>
-          <div class="prestamo-meta">~${p.cuotas_restantes} cuotas restantes (${Math.round(p.cuotas_restantes/12 * 10)/10} años)</div>
+          <div class="prestamo-meta">Saldo: ${fmt(p.saldo)} · ${p.tasa_anual}% anual · vence día ${p.fecha_pago_dia}</div>
+          <div class="prestamo-meta">~${p.cuotas_restantes} cuotas restantes (${Math.round(p.cuotas_restantes/12*10)/10} años)</div>
         </div>
         <div class="prestamo-cuota">
-          <div class="amount">$${p.cuota_quincenal.toFixed(2)}</div>
+          <div class="amount">${fmt(p.cuota_quincenal)}</div>
           <div class="per">/quincena</div>
-          <div class="per" style="color:#94a3b8">$${p.cuota_mensual.toFixed(2)}/mes</div>
+          <div class="per" style="color:#94a3b8">${fmt(p.cuota_mensual)}/mes</div>
         </div>
       </div>`).join('');
+    updateTotals();
   }
-
   if (fondos.length) {
     document.getElementById('fondo-section').style.display = 'block';
     document.getElementById('fondo-list').innerHTML = fondos.map(f => `
       <div class="fondo-card">
         <div>
           <div class="fondo-label">${f.nombre} · ${f.banco}</div>
-          <div class="fondo-balance">$${f.saldo.toFixed(2)}</div>
-          <div class="fondo-meta">+$${f.ganancia_mensual.toFixed(2)}/mes · +$${f.ganancia_anual.toFixed(2)}/año</div>
+          <div class="fondo-balance">${fmt(f.saldo)}</div>
+          <div class="fondo-meta">+${fmt(f.ganancia_mensual)}/mes · +${fmt(f.ganancia_anual)}/año</div>
           ${f.intocable ? '<span class="fondo-intocable">🔒 colchón intocable</span>' : ''}
         </div>
         <div class="fondo-right">
@@ -1499,193 +1324,9 @@ function renderFondos(data) {
   }
 }
 
-function renderFinanciamientos(data) {
-  if (!data || !data.items || !data.items.length) return;
-  const section = document.getElementById('fi-section');
-  section.style.display = 'block';
-  document.getElementById('fi-total-saldo').textContent = '$' + data.total_saldo.toFixed(2);
-  document.getElementById('fi-total-cuota').textContent = '$' + data.total_cuota.toFixed(2) + '/mes';
-  const grid = document.getElementById('fi-grid');
-  const bancoColor = { 'BAC': '#e4002b', 'Cuscatlán': '#004b87', 'Agrícola': '#2b7a3c' };
-  grid.innerHTML = data.items.map(fi => {
-    const isNear = fi.cuotas_restantes <= 12;
-    const banco = fi.banco || 'Otro';
-    const color = bancoColor[banco] || '#64748b';
-    const cardChip = fi.tarjeta_last4
-      ? `<span style="font-size:10px;color:${color};background:${color}22;padding:1px 6px;border-radius:99px;margin-left:4px">···${fi.tarjeta_last4}</span>`
-      : '';
-    const tasaText = fi.tasa_mensual > 0
-      ? `· ${fi.tasa_mensual}%/mes`
-      : '· 0% interés';
-    return `<div class="fi-card${isNear ? ' urgent' : ''}" style="border-left:3px solid ${color}">
-      <div class="fi-ref" style="display:flex;align-items:center;gap:4px">
-        <span style="font-size:10px;color:${color};font-weight:700">${banco}</span>${cardChip}
-        <span style="margin-left:auto;font-size:10px;color:#64748b">Ref ${fi.ref}</span>
-      </div>
-      <div class="fi-desc">${fi.descripcion}</div>
-      <div class="fi-cuota">$${fi.cuota_mensual.toFixed(2)} <span>/mes</span></div>
-      <div class="fi-progress">
-        <div class="fi-progress-bar${isNear ? ' near' : ''}" style="width:${fi.progress_pct}%"></div>
-      </div>
-      <div class="fi-meta">
-        <span>${fi.cuotas_pagadas}/${fi.cuotas_total} cuotas</span>
-        <span>${fi.cuotas_restantes} restantes → ${fi.payoff_label}</span>
-      </div>
-      <div class="fi-saldo">Saldo: <strong>$${fi.saldo_actual.toFixed(2)}</strong>
-        <span style="color:#64748b;font-size:10px"> ${tasaText}</span>
-      </div>
-    </div>`;
-  }).join('');
-}
-
-const _confirmed = new Set();
-
-function _confClass(c) {
-  return {'alta':'conf-alta','media':'conf-media','baja':'conf-baja'}[c] || 'conf-sin';
-}
-
-const _PAGO_TYPES = new Set(['pago_tarjeta','pago_transfer365','pago_prestamo','abono_recibido','credito']);
-const _GASTO_TYPES = new Set(['compra','debito','transfer365','transferencia','pago_servicio','suscripcion']);
-
-function renderActivity(data) {
-  const grid = document.getElementById('activity-grid');
-  if (!data || data.error || !data.length) {
-    grid.innerHTML = `<div class="act-empty">${data && data.error ? 'Error: ' + data.error : 'Sin actividad reciente'}</div>`;
-    return;
-  }
-
-  document.getElementById('act-count').textContent = data.length + ' registros';
-
-  // Group by cuenta_destino
-  const groups = {};
-  const ORDER = [];
-  data.forEach(r => {
-    const key = r.cuenta_destino || 'Sin clasificar';
-    if (!groups[key]) { groups[key] = { last4: r.last4_destino, items: [] }; ORDER.push(key); }
-    groups[key].items.push(r);
-  });
-
-  let html = '';
-  ORDER.forEach(key => {
-    const g = groups[key];
-    const isSin = key === 'Sin clasificar';
-    const chip = g.last4 ? `<span style="font-size:10px;color:#64748b;font-weight:400">····${g.last4}</span>` : '';
-    const gastos = g.items.filter(r => !_PAGO_TYPES.has(r.tipo_clasificado))
-                           .reduce((s,r) => s + (parseFloat(r.monto)||0), 0);
-    const pagos  = g.items.filter(r => _PAGO_TYPES.has(r.tipo_clasificado))
-                           .reduce((s,r) => s + (parseFloat(r.monto)||0), 0);
-    const totHtml = [
-      gastos > 0 ? `<span style="color:#ef4444">▼ $${gastos.toFixed(2)}</span>` : '',
-      pagos  > 0 ? `<span style="color:#22c55e">▲ $${pagos.toFixed(2)}</span>`  : '',
-    ].filter(Boolean).join(' ');
-
-    html += `<div class="act-group">
-      <div class="act-account">
-        <span style="color:${isSin?'#94a3b8':'#a5b4fc'}">${key}</span>${chip}
-        <span style="margin-left:auto;font-size:11px;font-weight:400">${totHtml}</span>
-      </div>`;
-
-    g.items.forEach(r => {
-      const isPago  = _PAGO_TYPES.has(r.tipo_clasificado);
-      const isGasto = !isPago;
-      const monto   = parseFloat(r.monto) || 0;
-      const confCls = _confClass(r.confianza);
-      const desc    = r.comercio || (r.descripcion||'').substring(0,40) || r.tipo || '—';
-      const mid     = r.message_id || '';
-      const done    = _confirmed.has(mid);
-
-      let btnHtml = '';
-      if (!isSin && r.last4_destino && monto > 0) {
-        if (isPago) {
-          btnHtml = done
-            ? `<span class="act-badge conf-alta" style="font-size:9px">✓ confirmado</span>`
-            : `<button class="act-btn" onclick="confirmAct('${mid}','${r.last4_destino}',${-monto},'${key}')">▼ Pago -$${monto.toFixed(2)}</button>`;
-        } else {
-          btnHtml = done
-            ? `<span class="act-badge conf-alta" style="font-size:9px">✓ confirmado</span>`
-            : `<button class="act-btn" onclick="confirmAct('${mid}','${r.last4_destino}',${monto},'${key}')">▲ Cargo +$${monto.toFixed(2)}</button>`;
-        }
-      } else if (isSin) {
-        btnHtml = `<span class="act-badge conf-sin">sin clasificar</span>`;
-      }
-
-      html += `<div class="act-row">
-        <span class="act-date">${r.fecha_iso||'—'}</span>
-        <span class="act-desc" title="${(r.descripcion||'').replace(/"/g,"'")}">${desc}</span>
-        <span class="act-badge ${confCls}">${r.confianza||'?'}</span>
-        <span class="act-monto ${isGasto?'gasto':'ingreso'}">${monto>0?(isGasto?'-':'+')+'$'+monto.toFixed(2):'—'}</span>
-        ${btnHtml}
-      </div>`;
-    });
-    html += '</div>';
-  });
-
-  grid.innerHTML = html;
-}
-
-async function loadActivity() {
-  const days = document.getElementById('act-days').value;
-  document.getElementById('activity-grid').innerHTML = '<div class="act-loading">Cargando...</div>';
-  document.getElementById('act-count').textContent = '';
-  try {
-    const data = await fetch('/api/plan/activity?days=' + days).then(r => r.json());
-    renderActivity(data);
-  } catch(e) {
-    document.getElementById('activity-grid').innerHTML = '<div class="act-empty">Error al cargar actividad</div>';
-  }
-}
-
-async function confirmAct(mid, last4, delta, cardName) {
-  try {
-    const res = await fetch('/api/plan/activity/confirm', {
-      method: 'POST',
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({last4, delta})
-    });
-    const json = await res.json();
-    if (json.ok) {
-      _confirmed.add(mid);
-      showToast(`${json.name}: saldo → $${json.new_balance.toFixed(2)} ✓`);
-      loadActivity();
-    } else {
-      showToast(json.error || 'Error al confirmar', true);
-    }
-  } catch(e) {
-    showToast('Error de red', true);
-  }
-}
-
-// Load existing config on start
-(async () => {
-  // Load financiamientos y fondos
-  fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
-  fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
-  loadActivity();
-
-  try {
-    const res = await fetch('/api/plan');
-    const plan = await res.json();
-    if (!plan.error) {
-      // Pre-fill form from saved plan
-      document.getElementById('inp-salary').value = plan.salary;
-      document.getElementById('inp-savings-pct').value = Math.round(plan.savings_pct * 100);
-      // Show cards from plan
-      plan.payments.forEach(p => addCard(p.name, p.last4, p.balance));
-      renderPlan(plan);
-    } else {
-      // Default cards
-      addCard('AMEX BAC', '3328', 400);
-      addCard('VISA BAC', '2117', 300);
-      addCard('VISA Cuscatlán', '2789', 480);
-      addCard('VISA Agrícola', '6114', 220.16);
-    }
-  } catch {
-    addCard('AMEX BAC', '3328', 400);
-    addCard('VISA BAC', '2117', 300);
-    addCard('VISA Cuscatlán', '2789', 480);
-    addCard('VISA Agrícola', '6114', 220.16);
-  }
-})();
+fetch('/api/plan/snapshot').then(r => r.json()).then(renderCards).catch(() => {});
+fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
+fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
 </script>
 </body>
 </html>"""
