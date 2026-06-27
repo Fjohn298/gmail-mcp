@@ -210,6 +210,21 @@ def parse_anthropic(body: str) -> dict:
         r['tarjeta_ultimos4'] = m2.group(1)
     return r
 
+def parse_payway(body: str, subject: str) -> dict:
+    """Payway — notificaciones de pago de servicios (ej. DELSUR, ANDA)."""
+    r = {'banco': 'Payway', 'tipo': 'pago_servicio', 'moneda': 'USD', 'revisado': 'false'}
+    m = re.search(r'notificaci[oó]n de pago\s*[-–]\s*(.+)', subject, re.IGNORECASE)
+    if m:
+        r['comercio'] = m.group(1).strip()
+    m2 = re.search(r'\$([\d,]+\.?\d*)', body)
+    if m2:
+        r['monto'] = m2.group(1).replace(',', '')
+    m3 = re.search(r'(\d{4}-\d{2}-\d{2})', body)
+    if m3:
+        r['fecha_iso'] = m3.group(1)
+    return r
+
+
 def parse_generic(body: str, from_header: str) -> dict:
     r = {'banco': 'Desconocido', 'revisado': 'false', 'moneda': 'USD'}
     m = re.search(r'\$([\d,]+\.?\d*)', body)
@@ -227,6 +242,8 @@ def detect_and_parse(from_header: str, subject: str, body: str) -> dict:
         return parse_cuscatlan(body, subject)
     if 'bancoagricola' in f or 'notificacionesbancoagricola' in f:
         return parse_agricola(body, subject)
+    if 'payway' in f:
+        return parse_payway(body, subject)
     if 'anthropic' in f:
         return parse_anthropic(body)
     if 'netflix' in f:

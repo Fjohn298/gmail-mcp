@@ -810,6 +810,109 @@ def health():
     return jsonify({'status': 'ok', 'time': datetime.now().isoformat()})
 
 
+@app.route('/api/plan/activity', methods=['GET'])
+def api_plan_activity():
+    """Recent classified transactions queried directly from Gmail (not from ephemeral CSV)."""
+    try:
+        from financial_extractor import detect_and_parse, get_body_and_attachments, FINANCIAL_LABEL_IDS
+        from transaction_classifier import classify
+        from email.utils import parsedate_to_datetime
+        from datetime import date
+
+        service, err = get_gmail_service()
+        if err:
+            return jsonify({'error': err}), 500
+
+        settings = load_settings()
+        days = int(request.args.get('days', 30))
+
+        seen = set()
+        records = []
+
+        for label_id in FINANCIAL_LABEL_IDS:
+            result = api_call_with_retry(
+                service.users().messages().list(
+                    userId='me', labelIds=[label_id],
+                    q=f'newer_than:{days}d', maxResults=50
+                ).execute
+            )
+            for msg in result.get('messages', []):
+                if msg['id'] in seen:
+                    continue
+                seen.add(msg['id'])
+
+                m = api_call_with_retry(
+                    service.users().messages().get(
+                        userId='me', id=msg['id'], format='full'
+                    ).execute
+                )
+                headers = {h['name']: h['value'] for h in m['payload']['headers']}
+                from_header = headers.get('From', '')
+                subject = headers.get('Subject', '')
+                date_header = headers.get('Date', '')
+
+                body, _ = get_body_and_attachments(m['payload'])
+                if not body:
+                    body = m.get('snippet', '')
+
+                parsed = detect_and_parse(from_header, subject, body)
+                if parsed.get('tipo') == 'login':
+                    continue
+
+                parsed['message_id'] = msg['id']
+                parsed['descripcion'] = m.get('snippet', '')[:200]
+
+                if not parsed.get('fecha_iso'):
+                    try:
+                        dt = parsedate_to_datetime(date_header)
+                        parsed['fecha_iso'] = dt.date().isoformat()
+                    except Exception:
+                        parsed['fecha_iso'] = date.today().isoformat()
+
+                classification = classify(parsed, settings)
+                parsed.update(classification)
+                records.append(parsed)
+
+        records.sort(key=lambda r: r.get('fecha_iso', ''), reverse=True)
+        return jsonify(records)
+    except Exception as e:
+        _logger.error(f'Error in activity: {e}', exc_info=True)
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/plan/activity/confirm', methods=['POST'])
+def api_plan_activity_confirm():
+    """Confirm a transaction against a card, adjusting its balance in settings.json.
+
+    POST body: {last4: '3328', delta: -60.87}
+      delta < 0 → payment received (reduces balance)
+      delta > 0 → new purchase (increases balance)
+    """
+    try:
+        data = request.get_json()
+        card_last4 = data.get('last4', '')
+        delta = float(data.get('delta', 0))
+
+        if not card_last4:
+            return jsonify({'error': 'last4 requerido'}), 400
+        if delta == 0:
+            return jsonify({'error': 'delta no puede ser 0'}), 400
+
+        settings = load_settings()
+        cards = settings.get('planner', {}).get('cards', [])
+        card = next((c for c in cards if c.get('last4') == card_last4), None)
+        if not card:
+            return jsonify({'error': 'Tarjeta no encontrada'}), 404
+
+        card['balance'] = max(0, round(card['balance'] + delta, 2))
+        with open('config/settings.json', 'w', encoding='utf-8') as f:
+            json.dump(settings, f, ensure_ascii=False, indent=2)
+
+        return jsonify({'ok': True, 'name': card['name'], 'new_balance': card['balance']})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 MAIN_MENU_HTML = """<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1017,6 +1120,32 @@ PLAN_HTML = """<!DOCTYPE html>
   .cal-empty { font-size:12px;color:#475569;padding:6px 0; }
   .cal-unknown { margin-top:10px;padding:10px;background:#0f1117;border:1px dashed #2a2d3e;
                  border-radius:8px;font-size:12px;color:#64748b; }
+  .act-controls { display:flex;align-items:center;gap:8px;margin-bottom:14px; }
+  .act-days { background:#0f1117;border:1px solid #2a2d3e;border-radius:6px;
+              color:#e2e8f0;padding:4px 8px;font-size:12px; }
+  .act-group { margin-bottom:14px; }
+  .act-account { font-size:12px;font-weight:700;color:#a5b4fc;display:flex;
+                 align-items:center;gap:6px;margin-bottom:6px;padding-bottom:4px;
+                 border-bottom:1px solid #2a2d3e; }
+  .act-row { display:flex;align-items:center;gap:8px;padding:8px 10px;
+             background:#0f1117;border-radius:8px;margin-bottom:4px;font-size:12px; }
+  .act-date { color:#64748b;min-width:80px;flex-shrink:0; }
+  .act-desc { flex:1;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+  .act-monto { font-weight:700;min-width:72px;text-align:right;flex-shrink:0; }
+  .act-monto.gasto { color:#ef4444; }
+  .act-monto.ingreso { color:#22c55e; }
+  .act-badge { padding:1px 6px;border-radius:99px;font-size:9px;font-weight:600;flex-shrink:0; }
+  .conf-alta  { background:rgba(34,197,94,.15);color:#86efac; }
+  .conf-media { background:rgba(245,158,11,.15);color:#fcd34d; }
+  .conf-baja  { background:rgba(239,68,68,.15);color:#fca5a5; }
+  .conf-sin   { background:rgba(100,116,139,.15);color:#94a3b8; }
+  .act-btn { background:#1a1d27;border:1px solid #2a2d3e;color:#a5b4fc;
+             padding:2px 8px;border-radius:6px;font-size:10px;cursor:pointer;
+             flex-shrink:0;white-space:nowrap; }
+  .act-btn:hover { border-color:#6366f1; }
+  .act-btn.confirmed { border-color:#22c55e;color:#22c55e; }
+  .act-empty { color:#475569;font-size:12px;padding:12px 0;text-align:center; }
+  .act-loading { color:#64748b;font-size:12px;padding:16px 0;text-align:center; }
 </style>
 </head>
 <body>
@@ -1138,6 +1267,24 @@ PLAN_HTML = """<!DOCTYPE html>
       <span class="fi-total-label">Cuota mensual combinada</span>
       <span class="fi-total-val" id="fi-total-cuota">-</span>
     </div>
+  </div>
+
+  <!-- Actividad reciente clasificada -->
+  <div class="section" id="activity-section">
+    <h2 style="display:flex;align-items:center;gap:8px">
+      🔔 Actividad reciente
+      <span style="font-size:10px;color:#6366f1;background:rgba(99,102,241,.1);padding:2px 8px;border-radius:99px" id="act-count"></span>
+    </h2>
+    <div class="act-controls">
+      <select class="act-days" id="act-days" onchange="loadActivity()">
+        <option value="7">7 días</option>
+        <option value="30" selected>30 días</option>
+        <option value="60">60 días</option>
+        <option value="90">90 días</option>
+      </select>
+      <button class="btn secondary" style="padding:5px 12px;font-size:12px" onclick="loadActivity()">↻ Actualizar</button>
+    </div>
+    <div id="activity-grid"><div class="act-loading">Cargando actividad...</div></div>
   </div>
 
 </div>
@@ -1391,11 +1538,129 @@ function renderFinanciamientos(data) {
   }).join('');
 }
 
+const _confirmed = new Set();
+
+function _confClass(c) {
+  return {'alta':'conf-alta','media':'conf-media','baja':'conf-baja'}[c] || 'conf-sin';
+}
+
+const _PAGO_TYPES = new Set(['pago_tarjeta','pago_transfer365','pago_prestamo','abono_recibido','credito']);
+const _GASTO_TYPES = new Set(['compra','debito','transfer365','transferencia','pago_servicio','suscripcion']);
+
+function renderActivity(data) {
+  const grid = document.getElementById('activity-grid');
+  if (!data || data.error || !data.length) {
+    grid.innerHTML = `<div class="act-empty">${data && data.error ? 'Error: ' + data.error : 'Sin actividad reciente'}</div>`;
+    return;
+  }
+
+  document.getElementById('act-count').textContent = data.length + ' registros';
+
+  // Group by cuenta_destino
+  const groups = {};
+  const ORDER = [];
+  data.forEach(r => {
+    const key = r.cuenta_destino || 'Sin clasificar';
+    if (!groups[key]) { groups[key] = { last4: r.last4_destino, items: [] }; ORDER.push(key); }
+    groups[key].items.push(r);
+  });
+
+  let html = '';
+  ORDER.forEach(key => {
+    const g = groups[key];
+    const isSin = key === 'Sin clasificar';
+    const chip = g.last4 ? `<span style="font-size:10px;color:#64748b;font-weight:400">····${g.last4}</span>` : '';
+    const gastos = g.items.filter(r => !_PAGO_TYPES.has(r.tipo_clasificado))
+                           .reduce((s,r) => s + (parseFloat(r.monto)||0), 0);
+    const pagos  = g.items.filter(r => _PAGO_TYPES.has(r.tipo_clasificado))
+                           .reduce((s,r) => s + (parseFloat(r.monto)||0), 0);
+    const totHtml = [
+      gastos > 0 ? `<span style="color:#ef4444">▼ $${gastos.toFixed(2)}</span>` : '',
+      pagos  > 0 ? `<span style="color:#22c55e">▲ $${pagos.toFixed(2)}</span>`  : '',
+    ].filter(Boolean).join(' ');
+
+    html += `<div class="act-group">
+      <div class="act-account">
+        <span style="color:${isSin?'#94a3b8':'#a5b4fc'}">${key}</span>${chip}
+        <span style="margin-left:auto;font-size:11px;font-weight:400">${totHtml}</span>
+      </div>`;
+
+    g.items.forEach(r => {
+      const isPago  = _PAGO_TYPES.has(r.tipo_clasificado);
+      const isGasto = !isPago;
+      const monto   = parseFloat(r.monto) || 0;
+      const confCls = _confClass(r.confianza);
+      const desc    = r.comercio || (r.descripcion||'').substring(0,40) || r.tipo || '—';
+      const mid     = r.message_id || '';
+      const done    = _confirmed.has(mid);
+
+      let btnHtml = '';
+      if (!isSin && r.last4_destino && monto > 0) {
+        if (isPago) {
+          btnHtml = done
+            ? `<span class="act-badge conf-alta" style="font-size:9px">✓ confirmado</span>`
+            : `<button class="act-btn" onclick="confirmAct('${mid}','${r.last4_destino}',${-monto},'${key}')">▼ Pago -$${monto.toFixed(2)}</button>`;
+        } else {
+          btnHtml = done
+            ? `<span class="act-badge conf-alta" style="font-size:9px">✓ confirmado</span>`
+            : `<button class="act-btn" onclick="confirmAct('${mid}','${r.last4_destino}',${monto},'${key}')">▲ Cargo +$${monto.toFixed(2)}</button>`;
+        }
+      } else if (isSin) {
+        btnHtml = `<span class="act-badge conf-sin">sin clasificar</span>`;
+      }
+
+      html += `<div class="act-row">
+        <span class="act-date">${r.fecha_iso||'—'}</span>
+        <span class="act-desc" title="${(r.descripcion||'').replace(/"/g,"'")}">${desc}</span>
+        <span class="act-badge ${confCls}">${r.confianza||'?'}</span>
+        <span class="act-monto ${isGasto?'gasto':'ingreso'}">${monto>0?(isGasto?'-':'+')+'$'+monto.toFixed(2):'—'}</span>
+        ${btnHtml}
+      </div>`;
+    });
+    html += '</div>';
+  });
+
+  grid.innerHTML = html;
+}
+
+async function loadActivity() {
+  const days = document.getElementById('act-days').value;
+  document.getElementById('activity-grid').innerHTML = '<div class="act-loading">Cargando...</div>';
+  document.getElementById('act-count').textContent = '';
+  try {
+    const data = await fetch('/api/plan/activity?days=' + days).then(r => r.json());
+    renderActivity(data);
+  } catch(e) {
+    document.getElementById('activity-grid').innerHTML = '<div class="act-empty">Error al cargar actividad</div>';
+  }
+}
+
+async function confirmAct(mid, last4, delta, cardName) {
+  try {
+    const res = await fetch('/api/plan/activity/confirm', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({last4, delta})
+    });
+    const json = await res.json();
+    if (json.ok) {
+      _confirmed.add(mid);
+      showToast(`${json.name}: saldo → $${json.new_balance.toFixed(2)} ✓`);
+      loadActivity();
+    } else {
+      showToast(json.error || 'Error al confirmar', true);
+    }
+  } catch(e) {
+    showToast('Error de red', true);
+  }
+}
+
 // Load existing config on start
 (async () => {
   // Load financiamientos y fondos
   fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
   fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
+  loadActivity();
 
   try {
     const res = await fetch('/api/plan');
