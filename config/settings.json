@@ -17,7 +17,7 @@
     "notify_email": "nehe298@gmail.com",
     "cards": [
       {"name": "AMEX BAC",       "last4": "3328", "balance": 512.32,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "min_pago": 18.00},
-      {"name": "VISA BAC",       "last4": "2117", "balance": 84.76,   "tasa_anual": 43.92, "fecha_pago_dia": 15, "min_pago": 13.00},
+      {"name": "VISA BAC",       "last4": "2117", "balance": 0.00,    "tasa_anual": 43.92, "fecha_pago_dia": 15, "min_pago": 0.00},
       {"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00,    "tasa_anual": 34.99, "fecha_pago_dia": 20, "min_pago": 0.00},
       {"name": "VISA Agrícola",  "last4": "6114", "balance": 220.16,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "min_pago": 60.87}
     ]
@@ -68,32 +68,6 @@
       "fecha_corte": "2026-05-18",
       "banco": "BAC",
       "tarjeta_last4": "3328"
-    },
-    {
-      "ref": "51805702",
-      "descripcion": "Honda / Extrafinanciamiento",
-      "monto_original": 211.08,
-      "cuota_mensual": 17.59,
-      "saldo_actual": 17.59,
-      "cuotas_pagadas": 11,
-      "cuotas_total": 12,
-      "tasa_mensual": 0.0,
-      "fecha_corte": "2026-05-27",
-      "banco": "BAC",
-      "tarjeta_last4": "2117"
-    },
-    {
-      "ref": "51805703",
-      "descripcion": "Honda / Extrafinanciamiento",
-      "monto_original": 145.56,
-      "cuota_mensual": 12.13,
-      "saldo_actual": 12.13,
-      "cuotas_pagadas": 11,
-      "cuotas_total": 12,
-      "tasa_mensual": 0.0,
-      "fecha_corte": "2026-05-27",
-      "banco": "BAC",
-      "tarjeta_last4": "2117"
     },
     {
       "ref": "CURACAO-001",
