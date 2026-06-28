@@ -880,6 +880,35 @@ def api_plan_activity():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/cuenta', methods=['GET'])
+def api_cuenta():
+    """Return cuenta_corriente balance and movements."""
+    try:
+        settings = load_settings()
+        cuenta = settings.get('cuenta_corriente', {})
+        movimientos = cuenta.get('movimientos', [])
+        # Compute running balance from movements (most recent last → reverse for display)
+        saldo = cuenta.get('saldo', 0)
+        # Monthly obligations for projection
+        cards = settings.get('planner', {}).get('cards', [])
+        fi = settings.get('intrafinanciamientos', [])
+        prestamos = settings.get('prestamos', [])
+        obligaciones_mes = (
+            sum(c.get('min_pago', 0) for c in cards) +
+            sum(i.get('cuota_mensual', 0) for i in fi) +
+            sum(p.get('cuota_mensual', 0) for p in prestamos)
+        )
+        return jsonify({
+            'saldo': saldo,
+            'banco': cuenta.get('banco', ''),
+            'movimientos': list(reversed(movimientos)),
+            'obligaciones_mes': round(obligaciones_mes, 2),
+            'proyectado': round(saldo - obligaciones_mes, 2)
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/plan/snapshot', methods=['GET'])
 def api_plan_snapshot():
     """Return all debt balances with payoff estimates from settings.json."""
@@ -1053,6 +1082,20 @@ PLAN_HTML = """<!DOCTYPE html>
              padding: 18px; margin-bottom: 12px; }
   .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
                 letter-spacing: .06em; margin-bottom: 14px; }
+  /* Liquidez */
+  .liq-hero { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .liq-saldo { font-size: 36px; font-weight: 700; color: #e2e8f0; }
+  .liq-banco { font-size: 12px; color: #64748b; }
+  .liq-proyectado { font-size: 13px; color: #94a3b8; margin-bottom: 14px; }
+  .liq-proyectado strong { color: #f59e0b; }
+  .mov-list { display: flex; flex-direction: column; gap: 4px; }
+  .mov-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+             background: #0f1117; border-radius: 8px; font-size: 12px; }
+  .mov-date { color: #64748b; min-width: 80px; flex-shrink: 0; }
+  .mov-desc { flex: 1; color: #e2e8f0; }
+  .mov-monto { font-weight: 700; min-width: 80px; text-align: right; flex-shrink: 0; }
+  .mov-monto.ingreso { color: #22c55e; }
+  .mov-monto.egreso { color: #ef4444; }
   /* Tarjetas de crédito */
   .tc-grid { display: grid; gap: 10px; margin-bottom: 12px; }
   @media(min-width:500px){ .tc-grid { grid-template-columns: repeat(2,1fr); } }
@@ -1124,6 +1167,21 @@ PLAN_HTML = """<!DOCTYPE html>
   <h1>🗓️ Estado de Deuda</h1>
 </div>
 <div class="container">
+
+  <!-- Liquidez -->
+  <div class="section" id="liquidez-section">
+    <h2>💵 Liquidez — Cuenta corriente</h2>
+    <div class="liq-hero">
+      <div class="liq-saldo" id="liq-saldo">—</div>
+      <div class="liq-banco" id="liq-banco"></div>
+    </div>
+    <div class="liq-proyectado">
+      Después de obligaciones fijas del mes:
+      <strong id="liq-proyectado">—</strong>
+      <span style="font-size:11px;color:#64748b" id="liq-oblig"></span>
+    </div>
+    <div class="mov-list" id="mov-list"></div>
+  </div>
 
   <!-- Tarjetas de crédito -->
   <div class="section">
@@ -1324,6 +1382,30 @@ function renderFondos(data) {
   }
 }
 
+function renderCuenta(data) {
+  if (!data || data.error) return;
+  document.getElementById('liq-saldo').textContent = fmt(data.saldo);
+  document.getElementById('liq-banco').textContent = data.banco;
+  const proy = data.proyectado;
+  document.getElementById('liq-proyectado').textContent = fmt(proy);
+  document.getElementById('liq-proyectado').style.color = proy >= 0 ? '#22c55e' : '#ef4444';
+  document.getElementById('liq-oblig').textContent = ` (obligaciones: ${fmt(data.obligaciones_mes)}/mes)`;
+  const movs = data.movimientos || [];
+  if (!movs.length) {
+    document.getElementById('mov-list').innerHTML = '<div style="color:#64748b;font-size:12px;padding:6px 0">Sin movimientos registrados</div>';
+    return;
+  }
+  document.getElementById('mov-list').innerHTML = movs.map(m => {
+    const isIng = m.tipo === 'ingreso';
+    return `<div class="mov-row">
+      <span class="mov-date">${m.fecha}</span>
+      <span class="mov-desc">${m.descripcion}</span>
+      <span class="mov-monto ${m.tipo}">${isIng ? '+' : '−'}${fmt(m.monto)}</span>
+    </div>`;
+  }).join('');
+}
+
+fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
 fetch('/api/plan/snapshot').then(r => r.json()).then(renderCards).catch(() => {});
 fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
 fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});

@@ -97,6 +97,17 @@
     "rate_limit_wait_seconds": 5,
     "protected_labels": ["Label_3", "Label_1834638960901538876"]
   },
+  "cuenta_corriente": {
+    "saldo": 698.44,
+    "banco": "Agrícola",
+    "movimientos": [
+      {"fecha": "2026-06-28", "descripcion": "Salario quincena", "monto": 566.92, "tipo": "ingreso"},
+      {"fecha": "2026-06-28", "descripcion": "Sobrante préstamo Cuscatlán", "monto": 465.00, "tipo": "ingreso"},
+      {"fecha": "2026-06-28", "descripcion": "Cashback VISA BAC 2117", "monto": 22.00, "tipo": "ingreso"},
+      {"fecha": "2026-06-28", "descripcion": "Pago VISA BAC 2117 (revolving)", "monto": 331.32, "tipo": "egreso"},
+      {"fecha": "2026-06-28", "descripcion": "Pago Honda extrafinanciamientos (efectivo)", "monto": 30.00, "tipo": "egreso"}
+    ]
+  },
   "logging": {
     "level": "INFO",
     "max_log_files": 30
