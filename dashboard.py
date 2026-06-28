@@ -965,7 +965,7 @@ def api_calendario_pagos():
                 'monto': c['min_pago'],
                 'tipo': 'pago',
                 'subtipo': 'tarjeta',
-                'passed': today.day > dia,
+                'passed': (nxt - today).days < 0,
                 'next_label': f"{MESES[nxt.month]} {nxt.day}",
                 'days_away': (nxt - today).days,
             })
@@ -981,7 +981,7 @@ def api_calendario_pagos():
                 'monto': i['cuota_mensual'],
                 'tipo': 'pago',
                 'subtipo': 'intrafinanciamiento',
-                'passed': today.day > dia,
+                'passed': (nxt - today).days < 0,
                 'next_label': f"{MESES[nxt.month]} {nxt.day}",
                 'days_away': (nxt - today).days,
             })
@@ -995,7 +995,7 @@ def api_calendario_pagos():
                 'monto': p['cuota_mensual'],
                 'tipo': 'pago',
                 'subtipo': 'prestamo',
-                'passed': today.day > dia,
+                'passed': (nxt - today).days < 0,
                 'next_label': f"{MESES[nxt.month]} {nxt.day}",
                 'days_away': (nxt - today).days,
             })
@@ -1012,7 +1012,7 @@ def api_calendario_pagos():
                 'monto': monto,
                 'tipo': 'pago',
                 'subtipo': 'extra',
-                'passed': today.day > dia,
+                'passed': (nxt - today).days < 0,
                 'next_label': f"{MESES[nxt.month]} {nxt.day}",
                 'days_away': (nxt - today).days,
                 'notas': e.get('notas', ''),
@@ -1027,7 +1027,7 @@ def api_calendario_pagos():
                     'monto': f.get('deposito_quincena', 0),
                     'tipo': 'deposito',
                     'subtipo': 'ahorro',
-                    'passed': today.day > dia,
+                    'passed': (nxt - today).days < 0,
                     'next_label': f"{MESES[nxt.month]} {nxt.day}",
                     'days_away': (nxt - today).days,
                 })
