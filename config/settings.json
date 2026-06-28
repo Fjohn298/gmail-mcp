@@ -62,12 +62,12 @@
   "intrafinanciamientos": [
     {
       "ref": "PENDIENTE",
-      "descripcion": "Consolidación Cuscatlán $2,180 / 48m",
+      "descripcion": "Consolidación Cuscatlán $2,180 / 49m",
       "monto_original": 2180.00,
       "cuota_mensual": 85.00,
       "saldo_actual": 2180.00,
       "cuotas_pagadas": 0,
-      "cuotas_total": 48,
+      "cuotas_total": 49,
       "tasa_mensual": 2.92,
       "fecha_corte": "2026-06-27",
       "fecha_pago_dia": 20,
