@@ -11,7 +11,7 @@
     "planner_time": "07:00"
   },
   "planner": {
-    "salary_per_period": 0,
+    "salary_per_period": 566.92,
     "savings_percentage": 0.10,
     "run_days": [13, 28],
     "notify_email": "nehe298@gmail.com",

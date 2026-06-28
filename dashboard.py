@@ -889,21 +889,25 @@ def api_cuenta():
         movimientos = cuenta.get('movimientos', [])
         # Compute running balance from movements (most recent last → reverse for display)
         saldo = cuenta.get('saldo', 0)
-        # Monthly obligations for projection
-        cards = settings.get('planner', {}).get('cards', [])
+        planner = settings.get('planner', {})
+        cards = planner.get('cards', [])
         fi = settings.get('intrafinanciamientos', [])
         prestamos = settings.get('prestamos', [])
-        obligaciones_mes = (
+        salary_per_period = planner.get('salary_per_period', 0)
+        ingreso_mensual = round(salary_per_period * 2, 2)
+        obligaciones_mes = round(
             sum(c.get('min_pago', 0) for c in cards) +
             sum(i.get('cuota_mensual', 0) for i in fi) +
-            sum(p.get('cuota_mensual', 0) for p in prestamos)
+            sum(p.get('cuota_mensual', 0) for p in prestamos), 2
         )
         return jsonify({
             'saldo': saldo,
             'banco': cuenta.get('banco', ''),
             'movimientos': list(reversed(movimientos)),
-            'obligaciones_mes': round(obligaciones_mes, 2),
-            'proyectado': round(saldo - obligaciones_mes, 2)
+            'salary_per_period': salary_per_period,
+            'ingreso_mensual': ingreso_mensual,
+            'obligaciones_mes': obligaciones_mes,
+            'proyectado': round(saldo + ingreso_mensual - obligaciones_mes, 2)
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -1176,7 +1180,7 @@ PLAN_HTML = """<!DOCTYPE html>
       <div class="liq-banco" id="liq-banco"></div>
     </div>
     <div class="liq-proyectado">
-      Después de obligaciones fijas del mes:
+      Proyectado fin de mes:
       <strong id="liq-proyectado">—</strong>
       <span style="font-size:11px;color:#64748b" id="liq-oblig"></span>
     </div>
@@ -1389,7 +1393,8 @@ function renderCuenta(data) {
   const proy = data.proyectado;
   document.getElementById('liq-proyectado').textContent = fmt(proy);
   document.getElementById('liq-proyectado').style.color = proy >= 0 ? '#22c55e' : '#ef4444';
-  document.getElementById('liq-oblig').textContent = ` (obligaciones: ${fmt(data.obligaciones_mes)}/mes)`;
+  document.getElementById('liq-oblig').textContent =
+    ` (+${fmt(data.ingreso_mensual)} ingresos − ${fmt(data.obligaciones_mes)} obligaciones)`;
   const movs = data.movimientos || [];
   if (!movs.length) {
     document.getElementById('mov-list').innerHTML = '<div style="color:#64748b;font-size:12px;padding:6px 0">Sin movimientos registrados</div>';
