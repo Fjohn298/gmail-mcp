@@ -882,32 +882,165 @@ def api_plan_activity():
 
 @app.route('/api/cuenta', methods=['GET'])
 def api_cuenta():
-    """Return cuenta_corriente balance and movements."""
+    """Return cuenta_corriente balance, movements, and monthly cash flow breakdown."""
     try:
         settings = load_settings()
         cuenta = settings.get('cuenta_corriente', {})
-        movimientos = cuenta.get('movimientos', [])
-        # Compute running balance from movements (most recent last → reverse for display)
         saldo = cuenta.get('saldo', 0)
         planner = settings.get('planner', {})
         cards = planner.get('cards', [])
         fi = settings.get('intrafinanciamientos', [])
         prestamos = settings.get('prestamos', [])
+        extras = planner.get('obligaciones_extra', [])
+        fondos = settings.get('fondos_ahorro', [])
+
         salary_per_period = planner.get('salary_per_period', 0)
         ingreso_mensual = round(salary_per_period * 2, 2)
-        obligaciones_mes = round(
-            sum(c.get('min_pago', 0) for c in cards) +
-            sum(i.get('cuota_mensual', 0) for i in fi) +
-            sum(p.get('cuota_mensual', 0) for p in prestamos), 2
-        )
+
+        oblig_tarjetas = round(sum(c.get('min_pago', 0) for c in cards), 2)
+        oblig_fi = round(sum(i.get('cuota_mensual', 0) for i in fi), 2)
+        oblig_prestamos = round(sum(p.get('cuota_mensual', 0) for p in prestamos), 2)
+        oblig_extra = round(sum(e.get('monto_mensual', 0) for e in extras), 2)
+        obligaciones_mes = round(oblig_tarjetas + oblig_fi + oblig_prestamos + oblig_extra, 2)
+
+        multimoney_mes = round(sum(
+            f.get('deposito_quincena', 0) * 2 for f in fondos if f.get('deposito_quincena')
+        ), 2)
+        remanente_mes = round(ingreso_mensual - obligaciones_mes - multimoney_mes, 2)
+
         return jsonify({
             'saldo': saldo,
             'banco': cuenta.get('banco', ''),
-            'movimientos': list(reversed(movimientos)),
+            'movimientos': list(reversed(cuenta.get('movimientos', []))),
             'salary_per_period': salary_per_period,
             'ingreso_mensual': ingreso_mensual,
             'obligaciones_mes': obligaciones_mes,
+            'oblig_tarjetas': oblig_tarjetas,
+            'oblig_fi': oblig_fi,
+            'oblig_prestamos': oblig_prestamos,
+            'oblig_extra': oblig_extra,
+            'multimoney_mes': multimoney_mes,
+            'remanente_mes': remanente_mes,
             'proyectado': round(saldo + ingreso_mensual - obligaciones_mes, 2)
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/calendario_pagos', methods=['GET'])
+def api_calendario_pagos():
+    """Return all monthly payment obligations sorted by day."""
+    try:
+        from datetime import date as _date
+        settings = load_settings()
+        today = datetime.now(tz=_TZ).date()
+        planner = settings.get('planner', {})
+        cards = planner.get('cards', [])
+        fi_list = settings.get('intrafinanciamientos', [])
+        prestamos = settings.get('prestamos', [])
+        extras = planner.get('obligaciones_extra', [])
+        fondos = settings.get('fondos_ahorro', [])
+        MESES = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
+
+        def next_occurrence(dia):
+            if today.day <= dia:
+                try:
+                    return today.replace(day=dia)
+                except ValueError:
+                    pass
+            m, y = today.month + 1, today.year
+            if m > 12: m, y = 1, y + 1
+            return _date(y, m, dia)
+
+        events = []
+
+        for c in cards:
+            if c.get('min_pago', 0) <= 0:
+                continue
+            dia = c['fecha_pago_dia']
+            nxt = next_occurrence(dia)
+            events.append({
+                'dia': dia,
+                'descripcion': f"{c['name']} ****{c['last4']}",
+                'monto': c['min_pago'],
+                'tipo': 'pago',
+                'subtipo': 'tarjeta',
+                'passed': today.day > dia,
+                'next_label': f"{MESES[nxt.month]} {nxt.day}",
+                'days_away': (nxt - today).days,
+            })
+
+        for i in fi_list:
+            dia = i.get('fecha_pago_dia', 0)
+            if not dia:
+                continue
+            nxt = next_occurrence(dia)
+            events.append({
+                'dia': dia,
+                'descripcion': i['descripcion'],
+                'monto': i['cuota_mensual'],
+                'tipo': 'pago',
+                'subtipo': 'intrafinanciamiento',
+                'passed': today.day > dia,
+                'next_label': f"{MESES[nxt.month]} {nxt.day}",
+                'days_away': (nxt - today).days,
+            })
+
+        for p in prestamos:
+            dia = p.get('fecha_pago_dia', 0)
+            nxt = next_occurrence(dia)
+            events.append({
+                'dia': dia,
+                'descripcion': p['nombre'],
+                'monto': p['cuota_mensual'],
+                'tipo': 'pago',
+                'subtipo': 'prestamo',
+                'passed': today.day > dia,
+                'next_label': f"{MESES[nxt.month]} {nxt.day}",
+                'days_away': (nxt - today).days,
+            })
+
+        for e in extras:
+            dia = e.get('fecha_pago_dia', 1)
+            monto = e.get('monto_matricula', e['monto_mensual']) \
+                if today.month in e.get('meses_matricula', []) \
+                else e['monto_mensual']
+            nxt = next_occurrence(dia)
+            events.append({
+                'dia': dia,
+                'descripcion': e['descripcion'],
+                'monto': monto,
+                'tipo': 'pago',
+                'subtipo': 'extra',
+                'passed': today.day > dia,
+                'next_label': f"{MESES[nxt.month]} {nxt.day}",
+                'days_away': (nxt - today).days,
+                'notas': e.get('notas', ''),
+            })
+
+        for f in fondos:
+            for dia in f.get('dias_deposito', []):
+                nxt = next_occurrence(dia)
+                events.append({
+                    'dia': dia,
+                    'descripcion': f"Depósito {f['nombre']}",
+                    'monto': f.get('deposito_quincena', 0),
+                    'tipo': 'deposito',
+                    'subtipo': 'ahorro',
+                    'passed': today.day > dia,
+                    'next_label': f"{MESES[nxt.month]} {nxt.day}",
+                    'days_away': (nxt - today).days,
+                })
+
+        events.sort(key=lambda x: x['dia'])
+        total_egresos = round(sum(e['monto'] for e in events if e['tipo'] == 'pago'), 2)
+        total_ahorro = round(sum(e['monto'] for e in events if e['tipo'] == 'deposito'), 2)
+
+        return jsonify({
+            'events': events,
+            'today_day': today.day,
+            'total_egresos': total_egresos,
+            'total_ahorro': total_ahorro,
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -1282,6 +1415,28 @@ PLAN_HTML = """<!DOCTYPE html>
            display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
   .toast.error { background: #ef4444; }
   .loading-msg { color: #64748b; font-size: 12px; padding: 8px 0; }
+  /* Flujo mensual */
+  .flujo-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin: 10px 0; }
+  @media(min-width:480px){ .flujo-grid { grid-template-columns: repeat(4,1fr); } }
+  .flujo-item { background: #0f1117; border-radius: 8px; padding: 10px 12px; }
+  .flujo-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing:.04em; }
+  .flujo-val { font-size: 15px; font-weight: 700; margin-top: 3px; }
+  /* Calendario de pagos */
+  .cal-pago-list { display: flex; flex-direction: column; gap: 6px; }
+  .cal-pago-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+                  background: #0f1117; border-radius: 8px; border-left: 3px solid #2a2d3e; }
+  .cal-pago-row.passed { opacity: .45; }
+  .cal-pago-row.today { border-left-color: #f59e0b; }
+  .cal-pago-row.soon { border-left-color: #ef4444; }
+  .cal-pago-row.ahorro { border-left-color: #22c55e; }
+  .cal-dia-badge { min-width: 30px; height: 30px; border-radius: 6px; background: #1a1d27;
+                   display: flex; align-items: center; justify-content: center;
+                   font-size: 13px; font-weight: 700; color: #e2e8f0; flex-shrink: 0; }
+  .cal-pago-row.passed .cal-dia-badge { background: #111318; color: #64748b; }
+  .cal-pago-desc { flex: 1; font-size: 12px; color: #e2e8f0; }
+  .cal-pago-desc .cal-sub { font-size: 10px; color: #64748b; }
+  .cal-pago-monto { font-size: 13px; font-weight: 700; text-align: right; flex-shrink: 0; }
+  .cal-pago-next { font-size: 10px; color: #64748b; text-align: right; margin-top: 1px; }
   /* Recomendaciones */
   .rec-card { background: #0f1117; border: 1px solid #2a2d3e; border-left: 3px solid #64748b;
               border-radius: 10px; padding: 14px; margin-bottom: 8px; }
@@ -1326,13 +1481,42 @@ PLAN_HTML = """<!DOCTYPE html>
       <div class="liq-saldo" id="liq-saldo">—</div>
       <div class="liq-banco" id="liq-banco"></div>
     </div>
-    <div class="liq-proyectado">
-      Proyectado fin de mes:
-      <strong id="liq-proyectado">—</strong>
-      <span style="font-size:11px;color:#64748b" id="liq-oblig"></span>
+    <div class="flujo-grid" id="flujo-grid" style="display:none">
+      <div class="flujo-item">
+        <div class="flujo-label">Ingresos/mes</div>
+        <div class="flujo-val" style="color:#22c55e" id="flujo-ing">—</div>
+      </div>
+      <div class="flujo-item">
+        <div class="flujo-label">Obligaciones</div>
+        <div class="flujo-val" style="color:#ef4444" id="flujo-oblig">—</div>
+      </div>
+      <div class="flujo-item">
+        <div class="flujo-label">MultiMoney</div>
+        <div class="flujo-val" style="color:#0ea5e9" id="flujo-mm">—</div>
+      </div>
+      <div class="flujo-item">
+        <div class="flujo-label">Remanente</div>
+        <div class="flujo-val" id="flujo-rem">—</div>
+      </div>
     </div>
     <div class="mov-list" id="mov-list"></div>
     <div id="otras-cuentas-wrap" style="display:none;margin-top:10px"></div>
+  </div>
+
+  <!-- Calendario de pagos -->
+  <div class="section">
+    <h2>📆 Calendario de pagos mensual</h2>
+    <div class="cal-pago-list" id="cal-pago-list"><div class="loading-msg">Cargando...</div></div>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Total egresos/mes</span>
+        <span class="fi-total-val" style="color:#ef4444" id="cal-total-egresos">—</span>
+      </div>
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Total ahorro/mes</span>
+        <span class="fi-total-val" style="color:#22c55e" id="cal-total-ahorro">—</span>
+      </div>
+    </div>
   </div>
 
   <!-- Tarjetas de crédito -->
@@ -1612,11 +1796,18 @@ function renderCuenta(data) {
   if (!data || data.error) return;
   document.getElementById('liq-saldo').textContent = fmt(data.saldo);
   document.getElementById('liq-banco').textContent = data.banco;
-  const proy = data.proyectado;
-  document.getElementById('liq-proyectado').textContent = fmt(proy);
-  document.getElementById('liq-proyectado').style.color = proy >= 0 ? '#22c55e' : '#ef4444';
-  document.getElementById('liq-oblig').textContent =
-    ` (+${fmt(data.ingreso_mensual)} ingresos − ${fmt(data.obligaciones_mes)} obligaciones)`;
+
+  // Cash flow breakdown
+  const fg = document.getElementById('flujo-grid');
+  fg.style.display = 'grid';
+  document.getElementById('flujo-ing').textContent = fmt(data.ingreso_mensual);
+  document.getElementById('flujo-oblig').textContent = fmt(data.obligaciones_mes);
+  document.getElementById('flujo-mm').textContent = fmt(data.multimoney_mes || 0);
+  const rem = data.remanente_mes || 0;
+  const remEl = document.getElementById('flujo-rem');
+  remEl.textContent = fmt(rem);
+  remEl.style.color = rem >= 0 ? '#22c55e' : '#ef4444';
+
   const movs = data.movimientos || [];
   if (!movs.length) {
     document.getElementById('mov-list').innerHTML = '<div style="color:#64748b;font-size:12px;padding:6px 0">Sin movimientos registrados</div>';
@@ -1630,6 +1821,42 @@ function renderCuenta(data) {
       <span class="mov-monto ${m.tipo}">${isIng ? '+' : '−'}${fmt(m.monto)}</span>
     </div>`;
   }).join('');
+}
+
+function renderCalendarioPagos(data) {
+  if (!data || data.error) {
+    document.getElementById('cal-pago-list').innerHTML = '<div class="loading-msg">Error al cargar.</div>';
+    return;
+  }
+  const today = data.today_day;
+  const SUBTIPO_COLOR = { tarjeta: '#e4002b', intrafinanciamiento: '#0ea5e9', prestamo: '#f59e0b', extra: '#a855f7', ahorro: '#22c55e' };
+  const SUBTIPO_ICON = { tarjeta: '💳', intrafinanciamiento: '🏦', prestamo: '🏛️', extra: '📚', ahorro: '💰' };
+
+  document.getElementById('cal-pago-list').innerHTML = data.events.map(e => {
+    const color = SUBTIPO_COLOR[e.subtipo] || '#64748b';
+    const icon = SUBTIPO_ICON[e.subtipo] || '•';
+    const isAhorro = e.tipo === 'deposito';
+    const isPassed = e.passed;
+    const isToday = e.dia === today;
+    const isSoon = !isPassed && e.days_away <= 3;
+    let rowClass = isPassed ? 'passed' : isAhorro ? 'ahorro' : isToday ? 'today' : isSoon ? 'soon' : '';
+    const montoColor = isAhorro ? '#22c55e' : '#ef4444';
+    const prefix = isAhorro ? '+' : '−';
+    return `<div class="cal-pago-row ${rowClass}">
+      <div class="cal-dia-badge" style="${!isPassed?'background:'+color+'22;color:'+color:''}">${e.dia}</div>
+      <div class="cal-pago-desc">
+        <span>${icon} ${e.descripcion}</span>
+        ${e.notas ? `<div class="cal-sub">${e.notas}</div>` : ''}
+      </div>
+      <div>
+        <div class="cal-pago-monto" style="color:${isPassed?'#64748b':montoColor}">${prefix}${fmt(e.monto)}</div>
+        <div class="cal-pago-next">${isPassed ? '✓ pagado' : e.next_label + ' ('+e.days_away+'d)'}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('cal-total-egresos').textContent = fmt(data.total_egresos) + '/mes';
+  document.getElementById('cal-total-ahorro').textContent = fmt(data.total_ahorro) + '/mes';
 }
 
 fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
@@ -1649,6 +1876,7 @@ fetch('/api/otras_cuentas').then(r => r.json()).then(data => {
       <span style="font-size:16px;font-weight:700;color:#e2e8f0">$${parseFloat(c.saldo).toFixed(2)}</span>
     </div>`).join('');
 }).catch(() => {});
+fetch('/api/calendario_pagos').then(r => r.json()).then(renderCalendarioPagos).catch(() => {});
 fetch('/api/plan/snapshot').then(r => r.json()).then(renderCards).catch(() => {});
 fetch('/api/tarjetas/calendario').then(r => r.json()).then(renderCalendario).catch(() => {});
 fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
