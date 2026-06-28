@@ -1035,6 +1035,31 @@ def api_plan_activity_confirm():
         return jsonify({'error': str(e)}), 500
 
 
+NOTAS_FILE = 'data/notas.txt'
+
+@app.route('/api/notas', methods=['GET'])
+def api_notas_get():
+    try:
+        if os.path.exists(NOTAS_FILE):
+            with open(NOTAS_FILE, 'r', encoding='utf-8') as f:
+                return jsonify({'texto': f.read()})
+        return jsonify({'texto': ''})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/notas', methods=['POST'])
+def api_notas_post():
+    try:
+        data = request.get_json()
+        texto = data.get('texto', '').strip()
+        os.makedirs('data', exist_ok=True)
+        with open(NOTAS_FILE, 'w', encoding='utf-8') as f:
+            f.write(texto)
+        return jsonify({'ok': True})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 MAIN_MENU_HTML = """<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1238,6 +1263,20 @@ PLAN_HTML = """<!DOCTYPE html>
            display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
   .toast.error { background: #ef4444; }
   .loading-msg { color: #64748b; font-size: 12px; padding: 8px 0; }
+  /* Notas para Claude */
+  .notas-area { width: 100%; background: #0f1117; border: 1px solid #2a2d3e; border-radius: 8px;
+                color: #e2e8f0; font-family: -apple-system, sans-serif; font-size: 13px;
+                padding: 10px 12px; resize: vertical; min-height: 90px; line-height: 1.6;
+                outline: none; transition: border-color .15s; }
+  .notas-area:focus { border-color: #6366f1; }
+  .notas-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .notas-hint { font-size: 11px; color: #64748b; }
+  .notas-btn { background: #6366f1; color: white; border: none; border-radius: 7px;
+               padding: 7px 18px; font-size: 13px; font-weight: 600; cursor: pointer;
+               transition: background .15s; }
+  .notas-btn:hover { background: #4f46e5; }
+  .notas-btn:disabled { background: #2a2d3e; color: #64748b; cursor: default; }
+  .notas-saved { font-size: 11px; color: #22c55e; display: none; }
 </style>
 </head>
 <body>
@@ -1306,6 +1345,22 @@ PLAN_HTML = """<!DOCTYPE html>
   <div class="section" id="fondo-section" style="display:none">
     <h2>🛡️ Fondo de emergencia <span style="font-size:10px;color:#22c55e;background:rgba(34,197,94,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">intocable</span></h2>
     <div id="fondo-list"></div>
+  </div>
+
+  <!-- Notas para Claude -->
+  <div class="section">
+    <h2>✏️ Notas para Claude</h2>
+    <p style="font-size:12px;color:#64748b;margin-bottom:10px">
+      Escribe correcciones o movimientos nuevos. Cuando me avises, leo esto y aplico los cambios.
+    </p>
+    <textarea class="notas-area" id="notas-text" placeholder="Ej: Pagué $60.87 a VISA Agrícola hoy&#10;Ej: Nuevo ingreso $200 freelance&#10;Ej: Cuota Curacao subió a $22.00"></textarea>
+    <div class="notas-footer">
+      <span class="notas-hint">Ctrl+Enter para guardar</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="notas-saved" id="notas-saved">✓ Guardado</span>
+        <button class="notas-btn" id="notas-btn" onclick="guardarNotas()">Guardar</button>
+      </div>
+    </div>
   </div>
 
   <!-- Resumen total -->
@@ -1542,6 +1597,35 @@ fetch('/api/plan/snapshot').then(r => r.json()).then(renderCards).catch(() => {}
 fetch('/api/tarjetas/calendario').then(r => r.json()).then(renderCalendario).catch(() => {});
 fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
 fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
+
+// Notas
+fetch('/api/notas').then(r => r.json()).then(d => {
+  if (d.texto) document.getElementById('notas-text').value = d.texto;
+}).catch(() => {});
+
+document.getElementById('notas-text').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) guardarNotas();
+});
+
+async function guardarNotas() {
+  const btn = document.getElementById('notas-btn');
+  const saved = document.getElementById('notas-saved');
+  const texto = document.getElementById('notas-text').value;
+  btn.disabled = true;
+  try {
+    const r = await fetch('/api/notas', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({texto})
+    });
+    const d = await r.json();
+    if (d.ok) {
+      saved.style.display = 'inline';
+      setTimeout(() => { saved.style.display = 'none'; }, 2500);
+    }
+  } catch(e) {}
+  btn.disabled = false;
+}
 </script>
 </body>
 </html>"""
