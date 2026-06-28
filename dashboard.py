@@ -913,6 +913,57 @@ def api_cuenta():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/tarjetas/calendario', methods=['GET'])
+def api_tarjetas_calendario():
+    """Return best card to use based on billing cycle and cut dates."""
+    from datetime import date as _date
+    try:
+        settings = load_settings()
+        today = datetime.now(tz=_TZ).date()
+        cards = settings.get('planner', {}).get('cards', [])
+        MESES = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
+
+        def next_day_on_or_after(ref, day):
+            if ref.day <= day:
+                try:
+                    return ref.replace(day=day)
+                except ValueError:
+                    pass
+            m, y = ref.month + 1, ref.year
+            if m > 12: m, y = 1, y + 1
+            return _date(y, m, day)
+
+        def add_month(d):
+            m, y = d.month + 1, d.year
+            if m > 12: m, y = 1, y + 1
+            return d.replace(year=y, month=m)
+
+        result = []
+        for c in cards:
+            corte_dia = c.get('fecha_corte_dia', c['fecha_pago_dia'] + 5)
+            pago_dia = c['fecha_pago_dia']
+            next_cut = next_day_on_or_after(today, corte_dia)
+            pay_month = add_month(next_cut)
+            next_payment = pay_month.replace(day=pago_dia)
+            days_until_cut = (next_cut - today).days
+            days_until_payment = (next_payment - today).days
+            has_balance = c['balance'] > 0
+            result.append({
+                'name': c['name'], 'last4': c['last4'],
+                'balance': c['balance'], 'has_balance': has_balance,
+                'corte_dia': corte_dia, 'pago_dia': pago_dia,
+                'next_cut_label': f"{MESES[next_cut.month]} {next_cut.day}",
+                'next_payment_label': f"{MESES[next_payment.month]} {next_payment.day}",
+                'days_until_cut': days_until_cut,
+                'days_until_payment': days_until_payment,
+                'safe_to_use': not has_balance,
+            })
+        result.sort(key=lambda x: (x['has_balance'], -x['days_until_payment']))
+        return jsonify({'cards': result, 'today': today.isoformat()})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/plan/snapshot', methods=['GET'])
 def api_plan_snapshot():
     """Return all debt balances with payoff estimates from settings.json."""
@@ -1100,6 +1151,30 @@ PLAN_HTML = """<!DOCTYPE html>
   .mov-monto { font-weight: 700; min-width: 80px; text-align: right; flex-shrink: 0; }
   .mov-monto.ingreso { color: #22c55e; }
   .mov-monto.egreso { color: #ef4444; }
+  /* Calendario de tarjetas */
+  .cal-grid { display: grid; gap: 10px; margin-bottom: 12px; }
+  @media(min-width:500px){ .cal-grid { grid-template-columns: repeat(2,1fr); } }
+  .cal-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px;
+              position: relative; }
+  .cal-card.best { border-color: #22c55e; box-shadow: 0 0 0 1px rgba(34,197,94,.3); }
+  .cal-card.has-balance { border-color: #ef444466; }
+  .cal-best-badge { position: absolute; top: 10px; right: 10px; background: #22c55e;
+                    color: #0f1117; font-size: 10px; font-weight: 700; padding: 2px 7px;
+                    border-radius: 99px; text-transform: uppercase; letter-spacing: .04em; }
+  .cal-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+  .cal-last4 { font-size: 11px; color: #64748b; }
+  .cal-balance { font-size: 18px; font-weight: 700; margin: 6px 0 8px; }
+  .cal-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+  .cal-date-box { background: #1a1d27; border-radius: 7px; padding: 8px 10px; }
+  .cal-date-lbl { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px; }
+  .cal-date-val { font-size: 13px; font-weight: 700; }
+  .cal-days { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .cal-grace-bar { height: 4px; background: #2a2d3e; border-radius: 99px; margin: 8px 0 4px; overflow: hidden; }
+  .cal-grace-fill { height: 100%; border-radius: 99px; }
+  .cal-warning { font-size: 11px; padding: 6px 8px; border-radius: 6px;
+                 background: rgba(239,68,68,.12); color: #fca5a5; margin-top: 6px; }
+  .cal-tip { font-size: 11px; padding: 6px 8px; border-radius: 6px;
+             background: rgba(34,197,94,.1); color: #86efac; margin-top: 6px; }
   /* Tarjetas de crédito */
   .tc-grid { display: grid; gap: 10px; margin-bottom: 12px; }
   @media(min-width:500px){ .tc-grid { grid-template-columns: repeat(2,1fr); } }
@@ -1199,6 +1274,12 @@ PLAN_HTML = """<!DOCTYPE html>
       <span class="fi-total-label">Pagos mínimos / mes</span>
       <span class="fi-total-val" id="tc-min-total">—</span>
     </div>
+  </div>
+
+  <!-- Calendario — mejor tarjeta para usar -->
+  <div class="section" id="cal-section">
+    <h2>📅 Mejor tarjeta para usar hoy</h2>
+    <div class="cal-grid" id="cal-grid"><div class="loading-msg">Cargando...</div></div>
   </div>
 
   <!-- Compras a plazos / Extrafinanciamientos -->
@@ -1386,6 +1467,52 @@ function renderFondos(data) {
   }
 }
 
+function renderCalendario(data) {
+  if (!data || data.error) {
+    document.getElementById('cal-grid').innerHTML = '<div class="loading-msg">Error al cargar</div>';
+    return;
+  }
+  const COLORS = { 'BAC': '#e4002b', 'Agrícola': '#22c55e', 'Cuscatlán': '#0ea5e9' };
+  function cardColor(name) {
+    for (const [k, v] of Object.entries(COLORS)) if (name.includes(k)) return v;
+    return '#64748b';
+  }
+  const cards = data.cards;
+  const maxDays = Math.max(...cards.map(c => c.days_until_payment));
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = cards.map((c, i) => {
+    const color = cardColor(c.name);
+    const isBest = i === 0 && c.safe_to_use;
+    const pct = maxDays > 0 ? Math.round(c.days_until_payment / maxDays * 100) : 0;
+    const barColor = c.has_balance ? '#ef4444' : (c.days_until_payment > 45 ? '#22c55e' : '#f59e0b');
+    return `<div class="cal-card${isBest?' best':''}${c.has_balance?' has-balance':''}" style="border-left:3px solid ${color}">
+      ${isBest ? '<span class="cal-best-badge">✓ Recomendada</span>' : ''}
+      <div class="cal-name" style="color:${color}">${c.name}</div>
+      <div class="cal-last4">····${c.last4}</div>
+      <div class="cal-balance" style="color:${c.has_balance?'#ef4444':'#22c55e'}">${fmt(c.balance)}</div>
+      <div class="cal-dates">
+        <div class="cal-date-box">
+          <div class="cal-date-lbl">Fecha de corte</div>
+          <div class="cal-date-val">${c.next_cut_label}</div>
+          <div class="cal-days">en ${c.days_until_cut}d</div>
+        </div>
+        <div class="cal-date-box">
+          <div class="cal-date-lbl">Fecha de pago</div>
+          <div class="cal-date-val">${c.next_payment_label}</div>
+          <div class="cal-days">en ${c.days_until_payment}d</div>
+        </div>
+      </div>
+      <div class="cal-grace-bar">
+        <div class="cal-grace-fill" style="width:${pct}%;background:${barColor}"></div>
+      </div>
+      ${c.has_balance
+        ? `<div class="cal-warning">⚠️ Saldo pendiente — compras nuevas generan interés de inmediato</div>`
+        : `<div class="cal-tip">✓ Sin saldo — gracia completa hasta ${c.next_payment_label} (${c.days_until_payment} días)</div>`
+      }
+    </div>`;
+  }).join('');
+}
+
 function renderCuenta(data) {
   if (!data || data.error) return;
   document.getElementById('liq-saldo').textContent = fmt(data.saldo);
@@ -1412,6 +1539,7 @@ function renderCuenta(data) {
 
 fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
 fetch('/api/plan/snapshot').then(r => r.json()).then(renderCards).catch(() => {});
+fetch('/api/tarjetas/calendario').then(r => r.json()).then(renderCalendario).catch(() => {});
 fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
 fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
 </script>
