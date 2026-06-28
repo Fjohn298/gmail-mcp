@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "fecha": "2026-06-28",
+    "titulo": "Cancelar VISA BAC ****2117",
+    "tipo": "accion",
+    "prioridad": "alta",
+    "texto": "Saldo en $0 tras cubrir $11.22 de intereses rezagados del ciclo anterior. Solicitar cancelación formal con BAC en sucursal o banca en línea. Guardar comprobante. Así se evitan cargos anuales y la tarjeta no acumula más intereses accidentalmente."
+  },
+  {
+    "id": 2,
+    "fecha": "2026-06-28",
+    "titulo": "Estrategia avalanche: AMEX BAC antes que Agrícola",
+    "tipo": "estrategia",
+    "prioridad": "alta",
+    "texto": "AMEX BAC ****3328 al 43.08% genera $13.67/mes en intereses. VISA Agrícola ****6114 al 35.90% genera $4.96/mes (nuevo saldo $165.88). Cada dólar extra paga más atacando AMEX primero. El diferencial es 7.18% anual — en un año sobre $100 extra son $7.18 ahorrados solo por el orden correcto."
+  },
+  {
+    "id": 3,
+    "fecha": "2026-06-28",
+    "titulo": "VISA Agrícola: mínimo $60.87 es suficiente por ahora",
+    "tipo": "deuda",
+    "prioridad": "media",
+    "texto": "Nuevo saldo $165.88. Al mínimo ~$60/mes → liquidación en ~3 meses (Oct 2026). Si destinas $110/mes → 2 meses (Sep 2026). Sin embargo, por avalanche, el excedente rinde más contra AMEX BAC (43% vs 36%). Verifica el nuevo mínimo en tu próximo estado de cuenta."
+  },
+  {
+    "id": 4,
+    "fecha": "2026-06-28",
+    "titulo": "MultiMoney: meta $1,000 en noviembre",
+    "tipo": "ahorro",
+    "prioridad": "media",
+    "texto": "Saldo hoy: $558.04. Ahorrando $56.69/quincena (10% del salario) → llegas a $1,000 en ~8 quincenas (Nov 2026). Si subes al 15% ($85.04/quincena) llegas en Oct 2026, un mes antes. La tasa del 3.5% anual genera ~$1.63/mes de rendimiento al nivel actual."
+  },
+  {
+    "id": 5,
+    "fecha": "2026-06-28",
+    "titulo": "Consolidación Cuscatlán: actualizar referencia",
+    "tipo": "alerta",
+    "prioridad": "media",
+    "texto": "El intrafinanciamiento Cuscatlán muestra ref 'PENDIENTE'. Con 2.92%/mes (≈35% anual) sobre $2,180 son $63.66 solo en intereses el primer mes. Es importante registrar el número de contrato real y la fecha oficial de primer corte para calcular el saldo real en cada cuota."
+  },
+  {
+    "id": 6,
+    "fecha": "2026-06-28",
+    "titulo": "NIU: reportar gasto de la salida de hoy",
+    "tipo": "recordatorio",
+    "prioridad": "baja",
+    "texto": "Saldo NIU registrado: $30.00 (antes de la salida del 28-Jun). Reportar el gasto real cuando termines para mantener el registro actualizado y saber cuánto queda disponible."
+  }
+]

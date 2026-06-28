@@ -1036,6 +1036,25 @@ def api_plan_activity_confirm():
 
 
 NOTAS_FILE = 'data/notas.txt'
+RECOMENDACIONES_FILE = 'data/recomendaciones.json'
+
+@app.route('/api/recomendaciones', methods=['GET'])
+def api_recomendaciones_get():
+    try:
+        if os.path.exists(RECOMENDACIONES_FILE):
+            with open(RECOMENDACIONES_FILE, 'r', encoding='utf-8') as f:
+                return jsonify(json.load(f))
+        return jsonify([])
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/otras_cuentas', methods=['GET'])
+def api_otras_cuentas():
+    try:
+        settings = load_settings()
+        return jsonify(settings.get('otras_cuentas', []))
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/api/notas', methods=['GET'])
 def api_notas_get():
@@ -1263,6 +1282,20 @@ PLAN_HTML = """<!DOCTYPE html>
            display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
   .toast.error { background: #ef4444; }
   .loading-msg { color: #64748b; font-size: 12px; padding: 8px 0; }
+  /* Recomendaciones */
+  .rec-card { background: #0f1117; border: 1px solid #2a2d3e; border-left: 3px solid #64748b;
+              border-radius: 10px; padding: 14px; margin-bottom: 8px; }
+  .rec-card.alta { border-left-color: #ef4444; }
+  .rec-card.media { border-left-color: #f59e0b; }
+  .rec-card.baja { border-left-color: #22c55e; }
+  .rec-header { display: flex; justify-content: space-between; align-items: flex-start;
+                gap: 8px; margin-bottom: 4px; }
+  .rec-titulo { font-size: 13px; font-weight: 700; color: #e2e8f0; flex: 1; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+  .rec-badge { font-size: 10px; padding: 2px 6px; border-radius: 99px; font-weight: 600;
+               white-space: nowrap; }
+  .rec-fecha { font-size: 10px; color: #64748b; margin-bottom: 6px; }
+  .rec-texto { font-size: 12px; color: #94a3b8; line-height: 1.6; }
   /* Notas para Claude */
   .notas-area { width: 100%; background: #0f1117; border: 1px solid #2a2d3e; border-radius: 8px;
                 color: #e2e8f0; font-family: -apple-system, sans-serif; font-size: 13px;
@@ -1299,6 +1332,7 @@ PLAN_HTML = """<!DOCTYPE html>
       <span style="font-size:11px;color:#64748b" id="liq-oblig"></span>
     </div>
     <div class="mov-list" id="mov-list"></div>
+    <div id="otras-cuentas-wrap" style="display:none;margin-top:10px"></div>
   </div>
 
   <!-- Tarjetas de crédito -->
@@ -1345,6 +1379,12 @@ PLAN_HTML = """<!DOCTYPE html>
   <div class="section" id="fondo-section" style="display:none">
     <h2>🛡️ Fondo de emergencia <span style="font-size:10px;color:#22c55e;background:rgba(34,197,94,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">intocable</span></h2>
     <div id="fondo-list"></div>
+  </div>
+
+  <!-- Recomendaciones financieras -->
+  <div class="section" id="rec-section">
+    <h2>💡 Recomendaciones financieras</h2>
+    <div id="rec-list"><div class="loading-msg">Cargando...</div></div>
   </div>
 
   <!-- Notas para Claude -->
@@ -1593,10 +1633,57 @@ function renderCuenta(data) {
 }
 
 fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
+fetch('/api/otras_cuentas').then(r => r.json()).then(data => {
+  if (!Array.isArray(data) || !data.length) return;
+  const wrap = document.getElementById('otras-cuentas-wrap');
+  wrap.style.display = 'block';
+  wrap.innerHTML = data.map(c => `
+    <div style="display:flex;justify-content:space-between;align-items:center;
+                background:#0f1117;border:1px solid #2a2d3e;border-radius:8px;
+                padding:10px 12px;font-size:12px">
+      <div>
+        <span style="font-weight:700;color:#a5b4fc">${c.nombre}</span>
+        <span style="color:#64748b;margin-left:6px">${c.tipo}</span>
+        ${c.notas ? `<div style="color:#64748b;font-size:10px;margin-top:2px">${c.notas}</div>` : ''}
+      </div>
+      <span style="font-size:16px;font-weight:700;color:#e2e8f0">$${parseFloat(c.saldo).toFixed(2)}</span>
+    </div>`).join('');
+}).catch(() => {});
 fetch('/api/plan/snapshot').then(r => r.json()).then(renderCards).catch(() => {});
 fetch('/api/tarjetas/calendario').then(r => r.json()).then(renderCalendario).catch(() => {});
 fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
 fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
+
+// Recomendaciones
+fetch('/api/recomendaciones').then(r => r.json()).then(data => {
+  if (!Array.isArray(data) || !data.length) {
+    document.getElementById('rec-list').innerHTML = '<div class="loading-msg">Sin recomendaciones registradas.</div>';
+    return;
+  }
+  const TIPO_ICON = { accion: '⚡', estrategia: '📈', ahorro: '💰', deuda: '💳', alerta: '⚠️', recordatorio: '📌' };
+  const TIPO_COLOR = { accion: '#a5b4fc', estrategia: '#34d399', ahorro: '#22c55e', deuda: '#f59e0b', alerta: '#fca5a5', recordatorio: '#94a3b8' };
+  const PRIO_COLOR = { alta: '#ef444433', media: '#f59e0b33', baja: '#22c55e33' };
+  const PRIO_TEXT = { alta: '#fca5a5', media: '#fcd34d', baja: '#86efac' };
+  document.getElementById('rec-list').innerHTML = data.map(r => {
+    const icon = TIPO_ICON[r.tipo] || '•';
+    const tc = TIPO_COLOR[r.tipo] || '#64748b';
+    const pc = PRIO_COLOR[r.prioridad] || '';
+    const pt = PRIO_TEXT[r.prioridad] || '#94a3b8';
+    return `<div class="rec-card ${r.prioridad}">
+      <div class="rec-header">
+        <span class="rec-titulo">${icon} ${r.titulo}</span>
+        <div class="rec-badges">
+          <span class="rec-badge" style="background:${tc}22;color:${tc}">${r.tipo}</span>
+          <span class="rec-badge" style="background:${pc};color:${pt}">${r.prioridad}</span>
+        </div>
+      </div>
+      <div class="rec-fecha">${r.fecha}</div>
+      <div class="rec-texto">${r.texto}</div>
+    </div>`;
+  }).join('');
+}).catch(() => {
+  document.getElementById('rec-list').innerHTML = '<div class="loading-msg">Error al cargar.</div>';
+});
 
 // Notas
 fetch('/api/notas').then(r => r.json()).then(d => {

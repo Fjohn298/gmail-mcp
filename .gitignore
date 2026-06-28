@@ -5,6 +5,9 @@ credentials.json
 # Datos generados localmente
 data/
 logs/
+# Excepciones: archivos de estado persistente del dashboard
+!data/recomendaciones.json
+!data/notas.txt
 
 # Python
 __pycache__/
