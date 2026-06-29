@@ -118,7 +118,7 @@
     "protected_labels": ["Label_3", "Label_1834638960901538876"]
   },
   "cuenta_corriente": {
-    "saldo": 262.59,
+    "saldo": 319.28,
     "banco": "Agrícola",
     "movimientos": [
       {"fecha": "2026-06-28", "descripcion": "Salario quincena", "monto": 566.92, "tipo": "ingreso"},
@@ -130,11 +130,18 @@
       {"fecha": "2026-06-28", "descripcion": "Pago VISA BAC 2117 (intereses rezagados)", "monto": 11.22, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Cuota Préstamo Consumo Agrícola", "monto": 147.11, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Pago mínimo VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
-      {"fecha": "2026-06-28", "descripcion": "Ahorro quincenal MultiMoney", "monto": 56.69, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Transferencia a NIU (top-up salida)", "monto": 28.44, "tipo": "egreso"}
     ]
   },
   "otras_cuentas": [
+    {
+      "nombre": "Débito BAC",
+      "tipo": "debito",
+      "saldo": 276.22,
+      "banco": "BAC",
+      "fecha_registro": "2026-06-29",
+      "notas": "Saldo al 29-Jun. Cargo comida grupo $43, devuelto $31 (net −$12 el 28-Jun)."
+    },
     {
       "nombre": "NIU",
       "tipo": "prepago",
