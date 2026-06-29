@@ -143,6 +143,14 @@
       "notas": "Salida 28-Jun: +$28.44 top-up desde Agrícola. Cajero −$25 (efectivo en mano, sin gastar). Comida grupo: $43 débito BAC, $31 devuelto. Efectivo en mano: $56 ($25 cajero + $31 devuelto). No se gastó de NIU."
     }
   ],
+  "efectivo_en_mano": {
+    "saldo": 55.25,
+    "movimientos": [
+      {"fecha": "2026-06-28", "descripcion": "Cajero NIU (retiro efectivo)", "monto": 25.00, "tipo": "ingreso"},
+      {"fecha": "2026-06-28", "descripcion": "Devuelto comida grupo (BAC)", "monto": 31.00, "tipo": "ingreso"},
+      {"fecha": "2026-06-29", "descripcion": "Jugo", "monto": 0.75, "tipo": "egreso"}
+    ]
+  },
   "logging": {
     "level": "INFO",
     "max_log_files": 30

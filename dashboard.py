@@ -1212,6 +1212,16 @@ def api_notas_post():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/efectivo', methods=['GET'])
+def api_efectivo():
+    settings = load_settings()
+    ef = settings.get('efectivo_en_mano', {})
+    return jsonify({
+        'saldo': ef.get('saldo', 0),
+        'movimientos': list(reversed(ef.get('movimientos', [])))
+    })
+
+
 MAIN_MENU_HTML = """<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1462,6 +1472,15 @@ PLAN_HTML = """<!DOCTYPE html>
                white-space: nowrap; }
   .rec-fecha { font-size: 10px; color: #64748b; margin-bottom: 6px; }
   .rec-texto { font-size: 12px; color: #94a3b8; line-height: 1.6; }
+  /* Efectivo en mano */
+  .efectivo-saldo { font-size: 28px; font-weight: 800; color: #22c55e; margin-bottom: 12px; }
+  .efectivo-mov { display: flex; flex-direction: column; gap: 4px; }
+  .efectivo-row { display: flex; justify-content: space-between; align-items: center;
+                  padding: 6px 10px; background: #0f1117; border-radius: 7px;
+                  font-size: 12px; }
+  .efectivo-row .ef-desc { color: #e2e8f0; flex: 1; }
+  .efectivo-row .ef-fecha { color: #64748b; font-size: 10px; margin: 0 10px; }
+  .efectivo-row .ef-monto { font-weight: 700; flex-shrink: 0; }
   /* Notas para Claude */
   .notas-area { width: 100%; background: #0f1117; border: 1px solid #2a2d3e; border-radius: 8px;
                 color: #e2e8f0; font-family: -apple-system, sans-serif; font-size: 13px;
@@ -1580,6 +1599,14 @@ PLAN_HTML = """<!DOCTYPE html>
   <div class="section" id="rec-section">
     <h2>💡 Recomendaciones financieras</h2>
     <div id="rec-list"><div class="loading-msg">Cargando...</div></div>
+  </div>
+
+  <!-- Efectivo en mano -->
+  <div class="section">
+    <h2>💵 Efectivo en mano</h2>
+    <div id="efectivo-wrap">
+      <div class="loading-msg">Cargando...</div>
+    </div>
   </div>
 
   <!-- Notas para Claude -->
@@ -1953,6 +1980,23 @@ fetch('/api/recomendaciones').then(r => r.json()).then(data => {
 });
 
 // Notas
+fetch('/api/efectivo').then(r => r.json()).then(data => {
+  const wrap = document.getElementById('efectivo-wrap');
+  if (!wrap) return;
+  const saldo = data.saldo || 0;
+  const movs = data.movimientos || [];
+  wrap.innerHTML = `
+    <div class="efectivo-saldo">$${saldo.toFixed(2)}</div>
+    <div class="efectivo-mov">${movs.map(m => {
+      const isIngreso = m.tipo === 'ingreso';
+      return `<div class="efectivo-row">
+        <span class="ef-desc">${isIngreso ? '↑' : '↓'} ${m.descripcion}</span>
+        <span class="ef-fecha">${m.fecha}</span>
+        <span class="ef-monto" style="color:${isIngreso?'#22c55e':'#ef4444'}">${isIngreso?'+':'−'}$${m.monto.toFixed(2)}</span>
+      </div>`;
+    }).join('')}</div>`;
+}).catch(() => {});
+
 fetch('/api/notas').then(r => r.json()).then(d => {
   if (d.texto) document.getElementById('notas-text').value = d.texto;
 }).catch(() => {});
