@@ -118,7 +118,7 @@
     "protected_labels": ["Label_3", "Label_1834638960901538876"]
   },
   "cuenta_corriente": {
-    "saldo": 291.03,
+    "saldo": 262.59,
     "banco": "Agrícola",
     "movimientos": [
       {"fecha": "2026-06-28", "descripcion": "Salario quincena", "monto": 566.92, "tipo": "ingreso"},
@@ -130,16 +130,17 @@
       {"fecha": "2026-06-28", "descripcion": "Pago VISA BAC 2117 (intereses rezagados)", "monto": 11.22, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Cuota Préstamo Consumo Agrícola", "monto": 147.11, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Pago mínimo VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
-      {"fecha": "2026-06-28", "descripcion": "Ahorro quincenal MultiMoney", "monto": 56.69, "tipo": "egreso"}
+      {"fecha": "2026-06-28", "descripcion": "Ahorro quincenal MultiMoney", "monto": 56.69, "tipo": "egreso"},
+      {"fecha": "2026-06-28", "descripcion": "Transferencia a NIU (top-up salida)", "monto": 28.44, "tipo": "egreso"}
     ]
   },
   "otras_cuentas": [
     {
       "nombre": "NIU",
       "tipo": "prepago",
-      "saldo": 30.00,
+      "saldo": 4.11,
       "fecha_registro": "2026-06-28",
-      "notas": "Saldo disponible antes de salida del 28-Jun. Pendiente reportar gasto."
+      "notas": "Salida 28-Jun: +$28.44 top-up desde Agrícola, −$25 cajero (efectivo sin gastar), gasto ~$29.33 durante outing. Efectivo en mano: $56 ($25 cajero + $31 devuelto por comida BAC)."
     }
   ],
   "logging": {
