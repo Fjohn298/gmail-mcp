@@ -1424,11 +1424,16 @@ PLAN_HTML = """<!DOCTYPE html>
   /* Calendario de pagos */
   .cal-pago-list { display: flex; flex-direction: column; gap: 6px; }
   .cal-pago-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px;
-                  background: #0f1117; border-radius: 8px; border-left: 3px solid #2a2d3e; }
+                  background: #0f1117; border-radius: 8px; border-left: 3px solid #2a2d3e;
+                  transition: opacity .2s; }
   .cal-pago-row.passed { opacity: .45; }
+  .cal-pago-row.done { opacity: .4; }
+  .cal-pago-row.done .cal-pago-desc { text-decoration: line-through; color: #64748b; }
+  .cal-pago-row.done .cal-pago-monto { text-decoration: line-through; color: #64748b !important; }
   .cal-pago-row.today { border-left-color: #f59e0b; }
   .cal-pago-row.soon { border-left-color: #ef4444; }
   .cal-pago-row.ahorro { border-left-color: #22c55e; }
+  .cal-pago-row.done { border-left-color: #22c55e !important; }
   .cal-dia-badge { min-width: 30px; height: 30px; border-radius: 6px; background: #1a1d27;
                    display: flex; align-items: center; justify-content: center;
                    font-size: 13px; font-weight: 700; color: #e2e8f0; flex-shrink: 0; }
@@ -1437,6 +1442,12 @@ PLAN_HTML = """<!DOCTYPE html>
   .cal-pago-desc .cal-sub { font-size: 10px; color: #64748b; }
   .cal-pago-monto { font-size: 13px; font-weight: 700; text-align: right; flex-shrink: 0; }
   .cal-pago-next { font-size: 10px; color: #64748b; text-align: right; margin-top: 1px; }
+  .cal-check { width: 18px; height: 18px; border-radius: 5px; border: 2px solid #2a2d3e;
+               background: transparent; cursor: pointer; appearance: none; flex-shrink: 0;
+               transition: background .15s, border-color .15s; }
+  .cal-check:checked { background: #22c55e; border-color: #22c55e; }
+  .cal-check:checked::after { content: '✓'; display: block; text-align: center;
+                               font-size: 11px; line-height: 14px; color: #000; font-weight: 700; }
   /* Recomendaciones */
   .rec-card { background: #0f1117; border: 1px solid #2a2d3e; border-left: 3px solid #64748b;
               border-radius: 10px; padding: 14px; margin-bottom: 8px; }
@@ -1823,12 +1834,37 @@ function renderCuenta(data) {
   }).join('');
 }
 
+function pagoKey(e) {
+  return 'pago_' + e.dia + '_' + e.descripcion.replace(/\s+/g,'_');
+}
+function pagoChecks() {
+  const k = 'pagos_check_' + new Date().toISOString().slice(0,7);
+  try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch { return {}; }
+}
+function savePagoCheck(key, val) {
+  const k = 'pagos_check_' + new Date().toISOString().slice(0,7);
+  const checks = pagoChecks();
+  if (val) checks[key] = true; else delete checks[key];
+  localStorage.setItem(k, JSON.stringify(checks));
+}
+function togglePago(key) {
+  const checks = pagoChecks();
+  const nowDone = !checks[key];
+  savePagoCheck(key, nowDone);
+  const row = document.querySelector(`[data-pago-key="${key}"]`);
+  if (!row) return;
+  const cb = row.querySelector('.cal-check');
+  if (nowDone) { row.classList.add('done'); if(cb) cb.checked = true; }
+  else { row.classList.remove('done'); if(cb) cb.checked = false; }
+}
+
 function renderCalendarioPagos(data) {
   if (!data || data.error) {
     document.getElementById('cal-pago-list').innerHTML = '<div class="loading-msg">Error al cargar.</div>';
     return;
   }
   const today = data.today_day;
+  const checks = pagoChecks();
   const SUBTIPO_COLOR = { tarjeta: '#e4002b', intrafinanciamiento: '#0ea5e9', prestamo: '#f59e0b', extra: '#a855f7', ahorro: '#22c55e' };
   const SUBTIPO_ICON = { tarjeta: '💳', intrafinanciamiento: '🏦', prestamo: '🏛️', extra: '📚', ahorro: '💰' };
 
@@ -1839,18 +1875,21 @@ function renderCalendarioPagos(data) {
     const isPassed = e.passed;
     const isToday = e.dia === today;
     const isSoon = !isPassed && e.days_away <= 3;
-    let rowClass = isPassed ? 'passed' : isAhorro ? 'ahorro' : isToday ? 'today' : isSoon ? 'soon' : '';
+    const key = pagoKey(e);
+    const isDone = !!checks[key];
+    let rowClass = isDone ? 'done' : isPassed ? 'passed' : isAhorro ? 'ahorro' : isToday ? 'today' : isSoon ? 'soon' : '';
     const montoColor = isAhorro ? '#22c55e' : '#ef4444';
     const prefix = isAhorro ? '+' : '−';
-    return `<div class="cal-pago-row ${rowClass}">
-      <div class="cal-dia-badge" style="${!isPassed?'background:'+color+'22;color:'+color:''}">${e.dia}</div>
+    return `<div class="cal-pago-row ${rowClass}" data-pago-key="${key}" onclick="togglePago('${key}')" style="cursor:pointer">
+      <input type="checkbox" class="cal-check" ${isDone?'checked':''} onclick="event.stopPropagation();togglePago('${key}')">
+      <div class="cal-dia-badge" style="${!isPassed&&!isDone?'background:'+color+'22;color:'+color:''}">${e.dia}</div>
       <div class="cal-pago-desc">
         <span>${icon} ${e.descripcion}</span>
         ${e.notas ? `<div class="cal-sub">${e.notas}</div>` : ''}
       </div>
       <div>
-        <div class="cal-pago-monto" style="color:${isPassed?'#64748b':montoColor}">${prefix}${fmt(e.monto)}</div>
-        <div class="cal-pago-next">${isPassed ? '✓ pagado' : e.next_label + ' ('+e.days_away+'d)'}</div>
+        <div class="cal-pago-monto" style="color:${isPassed||isDone?'#64748b':montoColor}">${prefix}${fmt(e.monto)}</div>
+        <div class="cal-pago-next">${isDone ? '✓ hecho' : isPassed ? '✓ pasado' : e.next_label + ' ('+e.days_away+'d)'}</div>
       </div>
     </div>`;
   }).join('');
