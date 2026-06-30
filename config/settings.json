@@ -40,7 +40,7 @@
     {
       "nombre": "Préstamo Consumo Agrícola",
       "numero": "2132201069",
-      "saldo": 6227.54,
+      "saldo": 6299.17,
       "cuota_mensual": 147.11,
       "tasa_anual": 14.38,
       "fecha_pago_dia": 7,
@@ -51,7 +51,7 @@
     {
       "nombre": "Mi Ahorro MultiMoney",
       "banco": "Agrícola",
-      "saldo": 558.04,
+      "saldo": 577.57,
       "saldo_intocable": 501.35,
       "deposito_quincena": 280.00,
       "dias_deposito": [15, 30],
@@ -118,7 +118,7 @@
     "protected_labels": ["Label_3", "Label_1834638960901538876"]
   },
   "cuenta_corriente": {
-    "saldo": 319.28,
+    "saldo": 0.00,
     "banco": "Agrícola",
     "movimientos": [
       {"fecha": "2026-06-28", "descripcion": "Salario quincena", "monto": 566.92, "tipo": "ingreso"},
@@ -128,8 +128,8 @@
       {"fecha": "2026-06-28", "descripcion": "Pago Honda extrafinanciamientos (efectivo)", "monto": 30.00, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Pago AMEX BAC ****3328", "monto": 131.52, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Pago VISA BAC 2117 (intereses rezagados)", "monto": 11.22, "tipo": "egreso"},
-      {"fecha": "2026-06-28", "descripcion": "Cuota Préstamo Consumo Agrícola", "monto": 147.11, "tipo": "egreso"},
-      {"fecha": "2026-06-28", "descripcion": "Pago mínimo VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
+      {"fecha": "2026-06-29", "descripcion": "Cuota Préstamo Consumo Agrícola", "monto": 147.11, "tipo": "egreso"},
+      {"fecha": "2026-06-29", "descripcion": "Pago mínimo VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Transferencia a NIU (top-up salida)", "monto": 28.44, "tipo": "egreso"}
     ]
   },
@@ -137,10 +137,10 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 276.22,
+      "saldo": 200.00,
       "banco": "BAC",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo al 29-Jun. Cargo comida grupo $43, devuelto $31 (net −$12 el 28-Jun)."
+      "notas": "Presupuesto operativo hasta el 13-Jul (~$14/día). Cargo comida grupo $43, devuelto $31 (net −$12 el 28-Jun)."
     },
     {
       "nombre": "NIU",

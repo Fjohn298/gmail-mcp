@@ -1506,9 +1506,14 @@ PLAN_HTML = """<!DOCTYPE html>
 
   <!-- Liquidez -->
   <div class="section" id="liquidez-section">
-    <h2>💵 Liquidez — Cuenta corriente</h2>
+    <h2>💵 Liquidez</h2>
+    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+      <div class="liq-saldo" id="liq-total">—</div>
+      <div style="font-size:11px;color:#64748b">total disponible</div>
+    </div>
+    <div id="liq-breakdown" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"></div>
     <div class="liq-hero">
-      <div class="liq-saldo" id="liq-saldo">—</div>
+      <div class="liq-saldo" id="liq-saldo" style="font-size:20px">—</div>
       <div class="liq-banco" id="liq-banco"></div>
     </div>
     <div class="flujo-grid" id="flujo-grid" style="display:none">
@@ -1830,10 +1835,27 @@ function renderCalendario(data) {
   }).join('');
 }
 
+const _liq = {};
+function _recalcLiqTotal() {
+  const total = Object.values(_liq).reduce((s, v) => s + v.saldo, 0);
+  const el = document.getElementById('liq-total');
+  if (el) el.textContent = fmt(total);
+  const bd = document.getElementById('liq-breakdown');
+  if (bd) bd.innerHTML = Object.values(_liq).map(v =>
+    `<span style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
+                  padding:3px 8px;font-size:11px;color:#94a3b8">
+      <span style="color:#e2e8f0;font-weight:700">${v.label}</span>
+      <span style="color:${v.saldo>0?'#22c55e':'#64748b'};margin-left:4px">$${v.saldo.toFixed(2)}</span>
+    </span>`
+  ).join('');
+}
+
 function renderCuenta(data) {
   if (!data || data.error) return;
+  _liq['cc'] = { label: data.banco, saldo: data.saldo };
+  _recalcLiqTotal();
   document.getElementById('liq-saldo').textContent = fmt(data.saldo);
-  document.getElementById('liq-banco').textContent = data.banco;
+  document.getElementById('liq-banco').textContent = 'Agrícola CC';
 
   // Cash flow breakdown
   const fg = document.getElementById('flujo-grid');
@@ -1928,6 +1950,8 @@ function renderCalendarioPagos(data) {
 fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
 fetch('/api/otras_cuentas').then(r => r.json()).then(data => {
   if (!Array.isArray(data) || !data.length) return;
+  data.forEach(c => { _liq['oc_'+c.nombre] = { label: c.nombre, saldo: parseFloat(c.saldo) }; });
+  _recalcLiqTotal();
   const wrap = document.getElementById('otras-cuentas-wrap');
   wrap.style.display = 'block';
   wrap.innerHTML = data.map(c => `
@@ -1984,6 +2008,8 @@ fetch('/api/efectivo').then(r => r.json()).then(data => {
   const wrap = document.getElementById('efectivo-wrap');
   if (!wrap) return;
   const saldo = data.saldo || 0;
+  _liq['efectivo'] = { label: 'Efectivo', saldo };
+  _recalcLiqTotal();
   const movs = data.movimientos || [];
   wrap.innerHTML = `
     <div class="efectivo-saldo">$${saldo.toFixed(2)}</div>
