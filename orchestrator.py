@@ -44,6 +44,15 @@ def run_payment_planner():
     except Exception as e:
         logger.error(f"✗ payment_planner falló: {e}", exc_info=True)
 
+def run_daily_summary():
+    try:
+        from daily_summary import send_daily_summary
+        logger.info("▶ Ejecutando daily_summary...")
+        send_daily_summary()
+        logger.info("✓ daily_summary: resumen enviado")
+    except Exception as e:
+        logger.error(f"✗ daily_summary falló: {e}", exc_info=True)
+
 def run_dashboard():
     try:
         from dashboard import app
@@ -60,17 +69,20 @@ def setup_schedules():
     financial_time = settings['schedule']['financial_extractor_time']
 
     planner_time = settings['schedule'].get('planner_time', '07:00')
+    summary_time = settings['schedule'].get('daily_summary_time', '14:00')
 
     schedule.every(cleanup_h).hours.do(run_cleanup)
     schedule.every(labeler_h).hours.do(run_labeler)
     schedule.every().day.at(financial_time).do(run_financial_extractor)
     schedule.every().day.at(planner_time).do(run_payment_planner)
+    schedule.every().day.at(summary_time).do(run_daily_summary)
 
     logger.info(f"Schedules configurados:")
-    logger.info(f"  cleanup     → cada {cleanup_h}h")
-    logger.info(f"  labeler     → cada {labeler_h}h")
-    logger.info(f"  financiero  → diario a las {financial_time}")
-    logger.info(f"  planner     → diario a las {planner_time} (activo días 13 y 28)")
+    logger.info(f"  cleanup       → cada {cleanup_h}h")
+    logger.info(f"  labeler       → cada {labeler_h}h")
+    logger.info(f"  financiero    → diario a las {financial_time}")
+    logger.info(f"  planner       → diario a las {planner_time} (activo días 13 y 28)")
+    logger.info(f"  daily_summary → diario a las {summary_time} UTC (08:00 CST)")
 
 if __name__ == '__main__':
     logger.info("=" * 50)
