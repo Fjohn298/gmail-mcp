@@ -1,1 +1,33 @@
+== ESTADO AL 1-JUL-2026 ==
 
+CUENTAS:
+- Agrícola CC: $0.00 (pagos ya ejecutados)
+- Débito BAC (MC 6201): $200.00 — presupuesto operativo hasta 13-Jul
+  Presupuesto: $215.52 / 13 días = $16.58/día. Gasto 30-Jun: $15.52 (N1CO*FCIA). Remanente acumulado: +$1.06 ✅
+- MultiMoney Agrícola: $579.02 (saldo intocable $501.35; libre ~$77.67)
+  Capitalización mensual 3.5% anual. Última cap: $1.45 (30-Jun). Depósito ideal: día 28/13 antes que cierre mes.
+- NIU: $4.11
+- Efectivo en mano: $0.00
+
+PRÓXIMOS PAGOS (julio):
+- 4-Jul: VISA Agrícola ****6114 — mín $60.87
+- 7-Jul: Préstamo Consumo Agrícola — $147.11 (saldo $6,299.17, cuotas restantes 59)
+- 10-Jul: AMEX BAC ****3328 — mín $18.00 (balance $381.80; incluye extrafin laptop $15.42 + Curacao $20.75)
+- 13-Jul: próxima quincena — salario $566.92
+- 20-Jul: Consolidación Cuscatlán 2789 — $85.00 (saldo $2,180, ref PENDIENTE)
+
+INTRAFINANCIAMIENTOS ACTIVOS:
+- Laptop BAC (ref 60667239): saldo $154.16, $15.42/mes, vence May-2027, en AMEX 3328
+- Curacao (ref CURACAO-001): saldo $207.50, $20.75/mes, vence Jun-2027, en AMEX 3328
+- Consolidación Cuscatlán (ref PENDIENTE): saldo $2,180, $85.00/mes, en VISA 2789
+
+ESTRATEGIA MULTIMONEY (acordado 1-Jul-2026):
+- Capitalización es MENSUAL al cierre del mes, no diaria.
+- Estrategia ideal: el día 28 (quincena), meter a MultiMoney el monto de obligaciones de julio.
+  El dinero cierra el mes (30-Jun o 31-Jul) y capitaliza. Luego se hacen los pagos desde MultiMoney.
+- NO tiene sentido meter el dinero el mismo día del pago o el día antes.
+- Mínimo recomendado: que el depósito entre antes del cierre de mes para que sume a la capitalización.
+- Este período no se hizo así (se pagó directo y el remanente $76.22 fue a MultiMoney el 29-Jun).
+
+VISA BAC 2117: saldo $0.00. Pendiente gestionar cancelación formal de la tarjeta.
+VISA Cuscatlán 2789: saldo $0.00 (en uso para intrafinanciamiento de consolidación).
