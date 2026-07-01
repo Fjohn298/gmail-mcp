@@ -2135,19 +2135,38 @@ fetch('/api/efectivo').then(r => r.json()).then(data => {
     }).join('')}</div>`;
 }).catch(() => {});
 
+const _NOTAS_KEY = 'finanzas_notas_v1';
 fetch('/api/notas').then(r => r.json()).then(d => {
-  if (d.texto) document.getElementById('notas-text').value = d.texto;
-}).catch(() => {});
+  const local = localStorage.getItem(_NOTAS_KEY) || '';
+  const server = d.texto || '';
+  const texto = server || local;
+  if (texto) document.getElementById('notas-text').value = texto;
+  if (!server && local) _postNotas(local);
+}).catch(() => {
+  const local = localStorage.getItem(_NOTAS_KEY) || '';
+  if (local) document.getElementById('notas-text').value = local;
+});
 
 document.getElementById('notas-text').addEventListener('keydown', e => {
   if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) guardarNotas();
 });
+
+async function _postNotas(texto) {
+  try {
+    await fetch('/api/notas', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({texto})
+    });
+  } catch(e) {}
+}
 
 async function guardarNotas() {
   const btn = document.getElementById('notas-btn');
   const saved = document.getElementById('notas-saved');
   const texto = document.getElementById('notas-text').value;
   btn.disabled = true;
+  localStorage.setItem(_NOTAS_KEY, texto);
   try {
     const r = await fetch('/api/notas', {
       method: 'POST',
@@ -2159,7 +2178,10 @@ async function guardarNotas() {
       saved.style.display = 'inline';
       setTimeout(() => { saved.style.display = 'none'; }, 2500);
     }
-  } catch(e) {}
+  } catch(e) {
+    saved.style.display = 'inline';
+    setTimeout(() => { saved.style.display = 'none'; }, 2500);
+  }
   btn.disabled = false;
 }
 </script>
