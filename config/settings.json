@@ -8,7 +8,8 @@
     "cleanup_interval_hours": 1,
     "labeler_interval_hours": 1,
     "financial_extractor_time": "08:00",
-    "planner_time": "07:00"
+    "planner_time": "07:00",
+    "daily_summary_time": "14:00"
   },
   "planner": {
     "salary_per_period": 566.92,
