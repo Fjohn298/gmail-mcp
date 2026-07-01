@@ -139,8 +139,19 @@
       "tipo": "debito",
       "saldo": 200.00,
       "banco": "BAC",
+      "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Presupuesto operativo hasta el 13-Jul (~$14/día). Cargo comida grupo $43, devuelto $31 (net −$12 el 28-Jun)."
+      "notas": "Presupuesto operativo hasta el 13-Jul. Pago con MASTERCARD 6201.",
+      "movimientos": [
+        {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso"},
+        {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS", "monto": 15.52, "tipo": "egreso"}
+      ],
+      "presupuesto": {
+        "fecha_inicio": "2026-06-30",
+        "fecha_fin": "2026-07-13",
+        "saldo_inicio": 215.52,
+        "dias_total": 13
+      }
     },
     {
       "nombre": "NIU",
@@ -151,11 +162,12 @@
     }
   ],
   "efectivo_en_mano": {
-    "saldo": 55.25,
+    "saldo": 0.00,
     "movimientos": [
       {"fecha": "2026-06-28", "descripcion": "Cajero NIU (retiro efectivo)", "monto": 25.00, "tipo": "ingreso"},
       {"fecha": "2026-06-28", "descripcion": "Devuelto comida grupo (BAC)", "monto": 31.00, "tipo": "ingreso"},
-      {"fecha": "2026-06-29", "descripcion": "Jugo", "monto": 0.75, "tipo": "egreso"}
+      {"fecha": "2026-06-29", "descripcion": "Jugo", "monto": 0.75, "tipo": "egreso"},
+      {"fecha": "2026-06-29", "descripcion": "Préstamo a esposa", "monto": 55.25, "tipo": "egreso"}
     ]
   },
   "logging": {

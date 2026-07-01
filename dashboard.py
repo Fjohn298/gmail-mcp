@@ -1222,6 +1222,46 @@ def api_efectivo():
     })
 
 
+@app.route('/api/presupuesto_bac', methods=['GET'])
+def api_presupuesto_bac():
+    from datetime import date
+    settings = load_settings()
+    bac = next((c for c in settings.get('otras_cuentas', []) if c.get('nombre') == 'Débito BAC'), None)
+    if not bac or 'presupuesto' not in bac:
+        return jsonify({'error': 'no presupuesto'})
+    p = bac['presupuesto']
+    today = date.today()
+    fecha_inicio = date.fromisoformat(p['fecha_inicio'])
+    fecha_fin = date.fromisoformat(p['fecha_fin'])
+    saldo_inicio = p['saldo_inicio']
+    dias_total = p['dias_total']
+    presupuesto_diario = round(saldo_inicio / dias_total, 2)
+    dias_transcurridos = max(0, (today - fecha_inicio).days)
+    dias_restantes = max(0, (fecha_fin - today).days)
+    movimientos = bac.get('movimientos', [])
+    gasto_periodo = round(sum(m['monto'] for m in movimientos
+                              if m['tipo'] == 'egreso' and m['fecha'] >= p['fecha_inicio']), 2)
+    presupuesto_consumido = round(presupuesto_diario * dias_transcurridos, 2)
+    remanente = round(presupuesto_consumido - gasto_periodo, 2)
+    saldo_actual = bac.get('saldo', 0)
+    proyeccion_diaria = round(saldo_actual / dias_restantes, 2) if dias_restantes > 0 else 0
+    return jsonify({
+        'saldo_inicio': saldo_inicio,
+        'saldo_actual': saldo_actual,
+        'fecha_inicio': p['fecha_inicio'],
+        'fecha_fin': p['fecha_fin'],
+        'dias_total': dias_total,
+        'dias_transcurridos': dias_transcurridos,
+        'dias_restantes': dias_restantes,
+        'presupuesto_diario': presupuesto_diario,
+        'gasto_periodo': gasto_periodo,
+        'presupuesto_consumido': presupuesto_consumido,
+        'remanente': remanente,
+        'proyeccion_diaria': proyeccion_diaria,
+        'movimientos': list(reversed(movimientos))
+    })
+
+
 MAIN_MENU_HTML = """<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1472,6 +1512,19 @@ PLAN_HTML = """<!DOCTYPE html>
                white-space: nowrap; }
   .rec-fecha { font-size: 10px; color: #64748b; margin-bottom: 6px; }
   .rec-texto { font-size: 12px; color: #94a3b8; line-height: 1.6; }
+  /* Presupuesto BAC */
+  .ppto-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 12px; }
+  @media(min-width:480px){ .ppto-grid { grid-template-columns: repeat(4,1fr); } }
+  .ppto-item { background: #0f1117; border-radius: 8px; padding: 10px 12px; }
+  .ppto-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing:.04em; }
+  .ppto-val { font-size: 15px; font-weight: 700; margin-top: 3px; }
+  .ppto-bar-wrap { background: #1a1d27; border-radius: 99px; height: 8px; margin: 10px 0 4px; overflow: hidden; }
+  .ppto-bar { height: 100%; border-radius: 99px; transition: width .4s; }
+  .ppto-bar-label { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; }
+  .ppto-veredicto { padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+                    display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .ppto-veredicto.ok { background: #052e16; color: #22c55e; border: 1px solid #166534; }
+  .ppto-veredicto.over { background: #450a0a; color: #ef4444; border: 1px solid #991b1b; }
   /* Efectivo en mano */
   .efectivo-saldo { font-size: 28px; font-weight: 800; color: #22c55e; margin-bottom: 12px; }
   .efectivo-mov { display: flex; flex-direction: column; gap: 4px; }
@@ -1604,6 +1657,12 @@ PLAN_HTML = """<!DOCTYPE html>
   <div class="section" id="rec-section">
     <h2>💡 Recomendaciones financieras</h2>
     <div id="rec-list"><div class="loading-msg">Cargando...</div></div>
+  </div>
+
+  <!-- Presupuesto BAC diario -->
+  <div class="section">
+    <h2>📊 Presupuesto BAC — hasta el 13-Jul</h2>
+    <div id="presupuesto-wrap"><div class="loading-msg">Cargando...</div></div>
   </div>
 
   <!-- Efectivo en mano -->
@@ -2004,6 +2063,59 @@ fetch('/api/recomendaciones').then(r => r.json()).then(data => {
 });
 
 // Notas
+fetch('/api/presupuesto_bac').then(r => r.json()).then(p => {
+  const wrap = document.getElementById('presupuesto-wrap');
+  if (!wrap || p.error) return;
+  const pct = Math.min(100, Math.round((p.dias_transcurridos / p.dias_total) * 100));
+  const gastoPct = Math.min(100, Math.round((p.gasto_periodo / p.saldo_inicio) * 100));
+  const bajo = p.remanente >= 0;
+  const verdColor = bajo ? '#22c55e' : '#ef4444';
+  const movRows = (p.movimientos || []).map(m => {
+    const isIng = m.tipo === 'ingreso';
+    return `<div class="efectivo-row">
+      <span class="ef-desc">${isIng?'↑':'↓'} ${m.descripcion}</span>
+      <span class="ef-fecha">${m.fecha}</span>
+      <span class="ef-monto" style="color:${isIng?'#22c55e':'#ef4444'}">${isIng?'+':'−'}$${m.monto.toFixed(2)}</span>
+    </div>`;
+  }).join('');
+  wrap.innerHTML = `
+    <div class="ppto-veredicto ${bajo?'ok':'over'}">
+      <span>${bajo?'✓':'⚠'}</span>
+      <span>Ayer: gastaste $${p.gasto_periodo.toFixed(2)} vs presupuesto $${p.presupuesto_diario.toFixed(2)}/día —
+        ${bajo ? 'bajo presupuesto, remanente $'+p.remanente.toFixed(2) : 'excediste $'+Math.abs(p.remanente).toFixed(2)}</span>
+    </div>
+    <div class="ppto-grid">
+      <div class="ppto-item">
+        <div class="ppto-label">Presupuesto/día</div>
+        <div class="ppto-val" style="color:#e2e8f0">$${p.presupuesto_diario.toFixed(2)}</div>
+      </div>
+      <div class="ppto-item">
+        <div class="ppto-label">Saldo actual BAC</div>
+        <div class="ppto-val" style="color:#22c55e">$${p.saldo_actual.toFixed(2)}</div>
+      </div>
+      <div class="ppto-item">
+        <div class="ppto-label">Días restantes</div>
+        <div class="ppto-val" style="color:#a5b4fc">${p.dias_restantes}d</div>
+      </div>
+      <div class="ppto-item">
+        <div class="ppto-label">Proyección/día</div>
+        <div class="ppto-val" style="color:${p.proyeccion_diaria<=p.presupuesto_diario?'#22c55e':'#f59e0b'}">$${p.proyeccion_diaria.toFixed(2)}</div>
+      </div>
+    </div>
+    <div class="ppto-bar-wrap">
+      <div class="ppto-bar" style="width:${gastoPct}%;background:${bajo?'#22c55e':'#ef4444'}"></div>
+    </div>
+    <div class="ppto-bar-label">
+      <span>Gasto: $${p.gasto_periodo.toFixed(2)} de $${p.saldo_inicio.toFixed(2)}</span>
+      <span>Días: ${p.dias_transcurridos}/${p.dias_total}</span>
+    </div>
+    ${movRows ? '<div class="efectivo-mov" style="margin-top:10px">'+movRows+'</div>' : ''}
+    <div style="font-size:10px;color:#64748b;margin-top:8px">
+      Remanente acumulado: <strong style="color:${verdColor}">$${p.remanente.toFixed(2)}</strong>
+      ${bajo ? '→ disponible para ahorros o pago de tarjetas' : '→ reajustar los días restantes'}
+    </div>`;
+}).catch(() => {});
+
 fetch('/api/efectivo').then(r => r.json()).then(data => {
   const wrap = document.getElementById('efectivo-wrap');
   if (!wrap) return;
