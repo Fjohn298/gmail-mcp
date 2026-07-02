@@ -1,20 +1,26 @@
-== ESTADO AL 1-JUL-2026 ==
+== ESTADO AL 2-JUL-2026 ==
 
 CUENTAS:
 - Agrícola CC: $0.00 (pagos ya ejecutados)
-- Débito BAC (MC 6201): $200.00 — presupuesto operativo hasta 13-Jul
-  Presupuesto: $215.52 / 13 días = $16.58/día. Gasto 30-Jun: $15.52 (N1CO*FCIA). Remanente acumulado: +$1.06 ✅
+- Débito BAC (MC 6201): $261.49 — presupuesto operativo hasta 13-Jul
+  Saldo_inicio presupuesto: $261.49 / 11 días = $23.77/día. (+$22.00 TEF MONICA 1-Jul. N1CO -$15.52 procesó el 2-Jul)
 - MultiMoney Agrícola: $579.02 (saldo intocable $501.35; libre ~$77.67)
   Capitalización mensual 3.5% anual. Última cap: $1.45 (30-Jun). Depósito ideal: día 28/13 antes que cierre mes.
-- NIU: $4.11
+- NIU: $0.00 (se usó para pagar préstamo $147.11 + VISA Agrícola $60.87 el 29-Jun vía Transfer365)
 - Efectivo en mano: $0.00
 
 PRÓXIMOS PAGOS (julio):
-- 4-Jul: VISA Agrícola ****6114 — mín $60.87
+- 4-Jul: VISA Agrícola ****6114 — mín $60.87 (URGENTE — en 2 días)
 - 7-Jul: Préstamo Consumo Agrícola — $147.11 (saldo $6,299.17, cuotas restantes 59)
-- 10-Jul: AMEX BAC ****3328 — mín $18.00 (balance $381.80; incluye extrafin laptop $15.42 + Curacao $20.75)
+- 10-Jul: AMEX BAC ****3328 — mín $18.00 (balance $390.75; incluye extrafin laptop $15.42 + Curacao $20.75)
 - 13-Jul: próxima quincena — salario $566.92
 - 20-Jul: Consolidación Cuscatlán 2789 — $85.00 (saldo $2,180, ref PENDIENTE)
+
+TARJETAS:
+- AMEX BAC ****3328: balance $390.75 (subió $8.95 desde última revisión — posible cargo/interés)
+- VISA Agrícola ****6114: balance $165.88, mín $60.87, pago 4-Jul
+- VISA Cuscatlán ****2789: $0.00 (en uso para intrafinanciamiento consolidación)
+- VISA BAC ****2117: CERRADA. Saldo $0.00. Cancelación formal completada.
 
 INTRAFINANCIAMIENTOS ACTIVOS:
 - Laptop BAC (ref 60667239): saldo $154.16, $15.42/mes, vence May-2027, en AMEX 3328
@@ -26,8 +32,10 @@ ESTRATEGIA MULTIMONEY (acordado 1-Jul-2026):
 - Estrategia ideal: el día 28 (quincena), meter a MultiMoney el monto de obligaciones de julio.
   El dinero cierra el mes (30-Jun o 31-Jul) y capitaliza. Luego se hacen los pagos desde MultiMoney.
 - NO tiene sentido meter el dinero el mismo día del pago o el día antes.
-- Mínimo recomendado: que el depósito entre antes del cierre de mes para que sume a la capitalización.
 - Este período no se hizo así (se pagó directo y el remanente $76.22 fue a MultiMoney el 29-Jun).
 
-VISA BAC 2117: saldo $0.00. Pendiente gestionar cancelación formal de la tarjeta.
-VISA Cuscatlán 2789: saldo $0.00 (en uso para intrafinanciamiento de consolidación).
+NIU (movimientos junio visibles):
+- 29-Jun: +$207.98 Transfer365 JONATHAN (fondos para pagos)
+- 29-Jun: -$147.11 PAGO PRESTAMO 2132201069
+- 29-Jun: -$60.87 PAGO TARJETA 4567940009056114 (VISA Agrícola ****6114)
+- Saldo resultante: $0.00

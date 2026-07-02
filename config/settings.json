@@ -19,9 +19,8 @@
     "run_days": [13, 28],
     "notify_email": "nehe298@gmail.com",
     "cards": [
-      {"name": "AMEX BAC",       "last4": "3328", "balance": 381.80,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 15, "min_pago": 18.00},
-      {"name": "VISA BAC",       "last4": "2117", "balance": 0.00,    "tasa_anual": 43.92, "fecha_pago_dia": 15, "fecha_corte_dia": 20, "min_pago": 0.00},
-      {"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00,    "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00},
+      {"name": "AMEX BAC",       "last4": "3328", "balance": 390.75,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 15, "min_pago": 18.00},
+{"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00,    "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00},
       {"name": "VISA Agrícola",  "last4": "6114", "balance": 165.88,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 60.87}
     ],
     "obligaciones_extra": [
@@ -138,26 +137,27 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 200.00,
+      "saldo": 261.49,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
       "notas": "Presupuesto operativo hasta el 13-Jul. Pago con MASTERCARD 6201.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso"},
-        {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS", "monto": 15.52, "tipo": "egreso"}
+        {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS", "monto": 15.52, "tipo": "egreso"},
+        {"fecha": "2026-07-01", "descripcion": "TEF DE:MONICA ALE (esposa)", "monto": 22.00, "tipo": "ingreso"}
       ],
       "presupuesto": {
-        "fecha_inicio": "2026-06-30",
+        "fecha_inicio": "2026-07-02",
         "fecha_fin": "2026-07-13",
-        "saldo_inicio": 215.52,
-        "dias_total": 13
+        "saldo_inicio": 261.49,
+        "dias_total": 11
       }
     },
     {
       "nombre": "NIU",
       "tipo": "prepago",
-      "saldo": 4.11,
+      "saldo": 0.00,
       "fecha_registro": "2026-06-28",
       "notas": "Salida 28-Jun: +$28.44 top-up desde Agrícola. Cajero −$25 (efectivo en mano, sin gastar). Comida grupo: $43 débito BAC, $31 devuelto. Efectivo en mano: $56 ($25 cajero + $31 devuelto). No se gastó de NIU."
     }
