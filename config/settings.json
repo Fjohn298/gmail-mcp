@@ -19,7 +19,7 @@
     "run_days": [13, 28],
     "notify_email": "nehe298@gmail.com",
     "cards": [
-      {"name": "AMEX BAC",       "last4": "3328", "balance": 390.75,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 15, "min_pago": 18.00},
+      {"name": "AMEX BAC",       "last4": "3328", "balance": 390.75,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 15, "min_pago": 125.00},
 {"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00,    "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00},
       {"name": "VISA Agrícola",  "last4": "6114", "balance": 105.01,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 0.00}
     ],
@@ -40,7 +40,7 @@
     {
       "nombre": "Préstamo Consumo Agrícola",
       "numero": "2132201069",
-      "saldo": 6227.55,
+      "saldo": 6171.48,
       "cuota_mensual": 147.11,
       "tasa_anual": 14.38,
       "fecha_pago_dia": 7,
@@ -102,6 +102,35 @@
       "banco": "Curacao",
       "tarjeta_last4": "3328"
     }
+  ],
+  "plan_quincenal": {
+    "activo": true,
+    "fecha_inicio": "2026-07-13",
+    "salario_quincena": 566.92,
+    "distribucion": [
+      {"destino": "Obligaciones deuda → MultiMoney", "quincenal": 215.00, "mensual": 430.00, "tipo": "obligacion"},
+      {"destino": "Pago AMEX (aplanar saldo)", "quincenal": 125.00, "mensual": 250.00, "tipo": "deuda"},
+      {"destino": "Fondos esporádicos → MultiMoney", "quincenal": 40.00, "mensual": 80.00, "tipo": "ahorro"},
+      {"destino": "Variables recurrentes → BAC operativo", "quincenal": 70.00, "mensual": 140.00, "tipo": "operativo"},
+      {"destino": "Colchón/imprevistos", "quincenal": 115.92, "mensual": 231.84, "tipo": "colchon"}
+    ]
+  },
+  "fondos_esporadicos": [
+    {"nombre": "Ropa/Moda", "quincenal": 17.50, "mensual": 35.00, "saldo": 0.00},
+    {"nombre": "Farmacia/Salud", "quincenal": 10.50, "mensual": 21.00, "saldo": 0.00},
+    {"nombre": "Hogar/Ferretería", "quincenal": 6.50, "mensual": 13.00, "saldo": 0.00},
+    {"nombre": "Deporte/Salud", "quincenal": 5.50, "mensual": 11.00, "saldo": 0.00}
+  ],
+  "gastos_fijos_amex": [
+    {"descripcion": "DEL SUR (luz)", "monto_mensual": 70.00, "variable": true, "cancelar": false},
+    {"descripcion": "TELECOM PERSONAL (Claro pospago)", "monto_mensual": 20.00, "variable": false, "cancelar": false},
+    {"descripcion": "Accidentes Personales BAC", "monto_mensual": 8.95, "variable": false, "cancelar": false},
+    {"descripcion": "ANDA (agua)", "monto_mensual": 2.62, "variable": false, "cancelar": false},
+    {"descripcion": "Movistar", "monto_mensual": 1.00, "variable": false, "cancelar": false},
+    {"descripcion": "Laptop BAC cuota", "monto_mensual": 15.42, "variable": false, "cancelar": false},
+    {"descripcion": "Curacao cuota", "monto_mensual": 20.75, "variable": false, "cancelar": false},
+    {"descripcion": "Claude Pro", "monto_mensual": 20.00, "variable": false, "cancelar": false},
+    {"descripcion": "Google Cloud", "monto_mensual": 9.60, "variable": false, "cancelar": true, "notas": "Ya no se usa — pendiente cancelar"}
   ],
   "paths": {
     "logs_dir": "logs",

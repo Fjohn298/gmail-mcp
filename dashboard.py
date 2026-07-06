@@ -1168,6 +1168,50 @@ def api_plan_activity_confirm():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/plan/quincenal', methods=['GET'])
+def api_plan_quincenal():
+    try:
+        settings = load_settings()
+        return jsonify(settings.get('plan_quincenal', {}))
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/plan/fondos_esporadicos', methods=['GET', 'POST'])
+def api_plan_fondos_esporadicos():
+    try:
+        settings = load_settings()
+        if request.method == 'POST':
+            data = request.get_json()
+            fondos = settings.get('fondos_esporadicos', [])
+            for f in fondos:
+                if f['nombre'] == data.get('nombre'):
+                    f['saldo'] = round(float(data.get('saldo', 0)), 2)
+                    break
+            settings['fondos_esporadicos'] = fondos
+            with open('config/settings.json', 'w', encoding='utf-8') as fh:
+                json.dump(settings, fh, ensure_ascii=False, indent=2)
+            return jsonify({'ok': True})
+        fondos = settings.get('fondos_esporadicos', [])
+        total_q = round(sum(f['quincenal'] for f in fondos), 2)
+        total_saldo = round(sum(f['saldo'] for f in fondos), 2)
+        return jsonify({'fondos': fondos, 'total_quincenal': total_q, 'total_saldo': total_saldo})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/plan/gastos_fijos_amex', methods=['GET'])
+def api_plan_gastos_fijos_amex():
+    try:
+        settings = load_settings()
+        gastos = settings.get('gastos_fijos_amex', [])
+        total = round(sum(g['monto_mensual'] for g in gastos if not g.get('cancelar')), 2)
+        total_bruto = round(sum(g['monto_mensual'] for g in gastos), 2)
+        return jsonify({'gastos': gastos, 'total': total, 'total_bruto': total_bruto})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 NOTAS_FILE = 'data/notas.txt'
 RECOMENDACIONES_FILE = 'data/recomendaciones.json'
 
@@ -1548,6 +1592,36 @@ PLAN_HTML = """<!DOCTYPE html>
   .notas-btn:hover { background: #4f46e5; }
   .notas-btn:disabled { background: #2a2d3e; color: #64748b; cursor: default; }
   .notas-saved { font-size: 11px; color: #22c55e; display: none; }
+  /* Plan Quincenal */
+  .pq-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pq-table th { text-align: left; color: #64748b; font-weight: 500; padding: 6px 8px;
+                 border-bottom: 1px solid #2a2d3e; font-size: 11px; text-transform: uppercase; }
+  .pq-table td { padding: 8px 6px; border-bottom: 1px solid #1e2130; font-size: 13px; }
+  .pq-table tr.total-row td { border-bottom: none; font-weight: 700; background: rgba(99,102,241,.06);
+                               border-radius: 6px; padding: 10px 6px; }
+  .pq-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+  /* Fondos Esporádicos */
+  .fe-grid { display: grid; gap: 10px; }
+  @media(min-width:500px){ .fe-grid { grid-template-columns: repeat(2,1fr); } }
+  .fe-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
+  .fe-nombre { font-size: 12px; font-weight: 700; color: #e2e8f0; margin-bottom: 2px; }
+  .fe-saldo { font-size: 26px; font-weight: 700; color: #22c55e; margin: 4px 0; }
+  .fe-bar-wrap { background: #2a2d3e; border-radius: 99px; height: 5px; margin: 8px 0 4px; overflow: hidden; }
+  .fe-bar { height: 100%; border-radius: 99px; background: #22c55e; transition: width .4s; }
+  .fe-meta { font-size: 10px; color: #64748b; }
+  /* Gastos Fijos AMEX */
+  .gf-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+            background: #0f1117; border-radius: 8px; margin-bottom: 4px; }
+  .gf-desc { flex: 1; font-size: 12px; color: #e2e8f0; }
+  .gf-cancelar-badge { font-size: 10px; color: #ef4444; background: rgba(239,68,68,.1);
+                       padding: 1px 6px; border-radius: 99px; white-space: nowrap; }
+  .gf-monto { font-weight: 700; font-size: 13px; color: #ef4444; flex-shrink: 0; }
+  .gf-monto.tachado { text-decoration: line-through; color: #64748b; }
+  /* AMEX payoff */
+  .amex-payoff { background: rgba(228,0,43,.06); border: 1px solid rgba(228,0,43,.2);
+                 border-radius: 10px; padding: 14px; }
+  .amex-payoff-saldo { font-size: 28px; font-weight: 700; color: #e4002b; }
+  .amex-payoff-meta { font-size: 12px; color: #94a3b8; margin-top: 4px; line-height: 1.6; }
 </style>
 </head>
 <body>
@@ -1556,6 +1630,12 @@ PLAN_HTML = """<!DOCTYPE html>
   <h1>🗓️ Estado de Deuda</h1>
 </div>
 <div class="container">
+
+  <!-- Plan Quincenal -->
+  <div class="section" id="pq-section">
+    <h2>📋 Plan quincenal <span style="font-size:10px;color:#22c55e;background:rgba(34,197,94,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">activo desde 13-Jul</span></h2>
+    <div id="pq-wrap"><div class="loading-msg">Cargando...</div></div>
+  </div>
 
   <!-- Liquidez -->
   <div class="section" id="liquidez-section">
@@ -1651,6 +1731,34 @@ PLAN_HTML = """<!DOCTYPE html>
   <div class="section" id="fondo-section" style="display:none">
     <h2>🛡️ Fondo de emergencia <span style="font-size:10px;color:#22c55e;background:rgba(34,197,94,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">intocable</span></h2>
     <div id="fondo-list"></div>
+  </div>
+
+  <!-- Fondos Esporádicos -->
+  <div class="section" id="fe-section">
+    <h2>🎯 Fondos esporádicos <span style="font-size:10px;color:#a5b4fc;background:rgba(99,102,241,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">acumulan en MultiMoney · $40/quincena</span></h2>
+    <div class="fe-grid" id="fe-grid"><div class="loading-msg">Cargando...</div></div>
+    <div class="fi-total" style="margin-top:10px">
+      <span class="fi-total-label">Total fondos acumulados</span>
+      <span class="fi-total-val" style="color:#a5b4fc" id="fe-total-saldo">—</span>
+    </div>
+    <div class="fi-total" style="margin-top:6px">
+      <span class="fi-total-label">Aportación por quincena</span>
+      <span class="fi-total-val" style="color:#64748b;font-size:13px" id="fe-total-q">—</span>
+    </div>
+  </div>
+
+  <!-- Gastos Fijos AMEX -->
+  <div class="section" id="gf-section">
+    <h2>💳 Gastos fijos en AMEX <span style="font-size:10px;color:#e4002b;background:rgba(228,0,43,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">····3328</span></h2>
+    <div id="gf-wrap"><div class="loading-msg">Cargando...</div></div>
+    <div class="amex-payoff" style="margin-top:12px">
+      <div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Objetivo AMEX</div>
+      <div class="amex-payoff-saldo" id="amex-saldo-actual">—</div>
+      <div class="amex-payoff-meta">
+        Pagando <strong style="color:#f59e0b">$125/quincena</strong> ($250/mes) → liquidar saldo revolving en ~5 meses (Nov 2026)<br>
+        Interés mensual: ~$14/mes al 3.59%/mes · A partir de May 2027 baja carga en ~$36/mes (Laptop + Curacao terminan)
+      </div>
+    </div>
   </div>
 
   <!-- Recomendaciones financieras -->
@@ -2006,6 +2114,9 @@ function renderCalendarioPagos(data) {
   document.getElementById('cal-total-ahorro').textContent = fmt(data.total_ahorro) + '/mes';
 }
 
+fetch('/api/plan/quincenal').then(r => r.json()).then(renderPlanQuincenal).catch(() => {});
+fetch('/api/plan/fondos_esporadicos').then(r => r.json()).then(renderFondosEsporadicos).catch(() => {});
+fetch('/api/plan/gastos_fijos_amex').then(r => r.json()).then(renderGastosFijosAmex).catch(() => {});
 fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
 fetch('/api/otras_cuentas').then(r => r.json()).then(data => {
   if (!Array.isArray(data) || !data.length) return;
@@ -2134,6 +2245,87 @@ fetch('/api/efectivo').then(r => r.json()).then(data => {
       </div>`;
     }).join('')}</div>`;
 }).catch(() => {});
+
+// Plan Quincenal
+function renderPlanQuincenal(data) {
+  const wrap = document.getElementById('pq-wrap');
+  if (!wrap || data.error || !data.distribucion) { if(wrap) wrap.innerHTML='<div class="loading-msg">Sin plan configurado</div>'; return; }
+  const TIPO_COLOR = {obligacion:'#ef4444',deuda:'#f59e0b',ahorro:'#22c55e',operativo:'#0ea5e9',colchon:'#a855f7'};
+  const dist = data.distribucion;
+  const totalQ = dist.reduce((s,d)=>s+d.quincenal,0);
+  const totalM = dist.reduce((s,d)=>s+d.mensual,0);
+  wrap.innerHTML = `
+    <div style="font-size:12px;color:#64748b;margin-bottom:10px">
+      Salario quincena: <strong style="color:#22c55e">$${(data.salario_quincena||0).toFixed(2)}</strong>
+      &nbsp;·&nbsp;vigente desde <strong style="color:#a5b4fc">${data.fecha_inicio||'—'}</strong>
+    </div>
+    <table class="pq-table">
+      <thead><tr><th>Destino</th><th style="text-align:right">Quincenal</th><th style="text-align:right">Mensual</th></tr></thead>
+      <tbody>
+        ${dist.map(d=>`<tr>
+          <td><span class="pq-dot" style="background:${TIPO_COLOR[d.tipo]||'#64748b'}"></span>${d.destino}</td>
+          <td style="text-align:right;font-weight:600">$${d.quincenal.toFixed(2)}</td>
+          <td style="text-align:right;color:#64748b">$${d.mensual.toFixed(2)}</td>
+        </tr>`).join('')}
+        <tr class="total-row">
+          <td>TOTAL</td>
+          <td style="text-align:right;color:#a5b4fc">$${totalQ.toFixed(2)}</td>
+          <td style="text-align:right;color:#a5b4fc">$${totalM.toFixed(2)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// Fondos Esporádicos
+function renderFondosEsporadicos(data) {
+  const grid = document.getElementById('fe-grid');
+  const totalSaldoEl = document.getElementById('fe-total-saldo');
+  const totalQEl = document.getElementById('fe-total-q');
+  if (!grid || !data.fondos) return;
+  if (totalSaldoEl) totalSaldoEl.textContent = '$' + (data.total_saldo||0).toFixed(2);
+  if (totalQEl) totalQEl.textContent = '$' + (data.total_quincenal||0).toFixed(2) + '/quincena';
+  grid.innerHTML = data.fondos.map(f => {
+    const pct = f.quincenal > 0 ? Math.min(100, Math.round((f.saldo/f.quincenal)*100)) : 0;
+    return `<div class="fe-card">
+      <div class="fe-nombre">${f.nombre}</div>
+      <div class="fe-saldo">$${f.saldo.toFixed(2)}</div>
+      <div class="fe-bar-wrap"><div class="fe-bar" style="width:${pct}%"></div></div>
+      <div class="fe-meta">Meta quincena: $${f.quincenal.toFixed(2)} · Mensual: $${f.mensual.toFixed(2)}</div>
+    </div>`;
+  }).join('');
+}
+
+// Gastos Fijos AMEX
+function renderGastosFijosAmex(data) {
+  const wrap = document.getElementById('gf-wrap');
+  if (!wrap || !data.gastos) return;
+  wrap.innerHTML = data.gastos.map(g => `
+    <div class="gf-row">
+      <span class="gf-desc">
+        ${g.descripcion}
+        ${g.variable ? '<span style="font-size:10px;color:#64748b"> (variable)</span>' : ''}
+        ${g.cancelar ? '<span class="gf-cancelar-badge">⚠ cancelar</span>' : ''}
+        ${g.notas&&g.cancelar ? '<span style="font-size:10px;color:#64748b"> — '+g.notas+'</span>' : ''}
+      </span>
+      <span class="gf-monto ${g.cancelar?'tachado':''}">$${g.monto_mensual.toFixed(2)}</span>
+    </div>`).join('') +
+    `<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Total activo/mes</span>
+        <span class="fi-total-val" style="color:#e4002b">$${(data.total||0).toFixed(2)}</span>
+      </div>
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Ahorro al cancelar Google</span>
+        <span class="fi-total-val" style="color:#22c55e">$${((data.total_bruto||0)-(data.total||0)).toFixed(2)}/mes</span>
+      </div>
+    </div>`;
+  // Update AMEX saldo display
+  fetch('/api/plan/snapshot').then(r=>r.json()).then(snap => {
+    const amex = (snap.cards||[]).find(c=>c.last4==='3328');
+    const el = document.getElementById('amex-saldo-actual');
+    if (el && amex) el.textContent = '$' + amex.balance.toFixed(2);
+  }).catch(()=>{});
+}
 
 const _NOTAS_KEY = 'finanzas_notas_v1';
 fetch('/api/notas').then(r => r.json()).then(d => {
