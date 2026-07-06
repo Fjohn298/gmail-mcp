@@ -1212,6 +1212,15 @@ def api_plan_gastos_fijos_amex():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/amex/historial')
+def api_amex_historial():
+    s = load_settings()
+    return jsonify({
+        'historial': s.get('amex_historial', []),
+        'estado_actual': s.get('amex_estado_actual', {})
+    })
+
+
 NOTAS_FILE = 'data/notas.txt'
 RECOMENDACIONES_FILE = 'data/recomendaciones.json'
 
@@ -1622,6 +1631,32 @@ PLAN_HTML = """<!DOCTYPE html>
                  border-radius: 10px; padding: 14px; }
   .amex-payoff-saldo { font-size: 28px; font-weight: 700; color: #e4002b; }
   .amex-payoff-meta { font-size: 12px; color: #94a3b8; margin-top: 4px; line-height: 1.6; }
+  /* AMEX History */
+  .amex-hist-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+  .amex-status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:1.5rem;}
+  .amex-stat{background:#1a1d27;border:1px solid #2a2d3e;border-radius:8px;padding:.75rem 1rem;}
+  .amex-stat-label{font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;}
+  .amex-stat-value{font-size:1.25rem;font-weight:700;margin-top:.2rem;}
+  .amex-accordion{display:flex;flex-direction:column;gap:.5rem;}
+  .amex-acc-item{border:1px solid #2a2d3e;border-radius:8px;overflow:hidden;}
+  .amex-acc-trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#1a1d27;cursor:pointer;border:none;color:inherit;font-size:.9rem;text-align:left;}
+  .amex-acc-trigger:hover{background:rgba(255,255,255,.04);}
+  .amex-acc-body{display:none;padding:1rem;border-top:1px solid #2a2d3e;background:#0f1117;}
+  .amex-acc-body.open{display:block;}
+  .amex-acc-meta{display:flex;gap:1.5rem;font-size:.8rem;color:#64748b;margin-bottom:.75rem;}
+  .amex-tx-table{width:100%;border-collapse:collapse;font-size:.82rem;}
+  .amex-tx-table th{text-align:left;padding:.4rem .5rem;border-bottom:1px solid #2a2d3e;color:#64748b;font-weight:600;}
+  .amex-tx-table td{padding:.35rem .5rem;border-bottom:1px solid #2a2d3e;}
+  .amex-tx-fijo{color:#64748b;}
+  .amex-tx-cancelar{color:#e53e3e;font-size:.72rem;margin-left:.25rem;}
+  .amex-cat-badge{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-size:.7rem;background:rgba(99,102,241,.12);color:#6366f1;}
+  .amex-period-totals{display:flex;gap:1rem;margin-top:.75rem;font-size:.82rem;}
+  .amex-proj-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem;}
+  .amex-proj-table th{text-align:left;padding:.5rem;border-bottom:2px solid #2a2d3e;color:#64748b;}
+  .amex-proj-table td{padding:.5rem;border-bottom:1px solid #2a2d3e;}
+  .amex-proj-liquidada{color:#22c55e;font-weight:700;}
+  .amex-proj-bar-wrap{height:6px;background:#2a2d3e;border-radius:3px;overflow:hidden;width:80px;display:inline-block;vertical-align:middle;margin-left:.5rem;}
+  .amex-proj-bar-fill{height:100%;background:#6366f1;border-radius:3px;transition:width .4s;}
 </style>
 </head>
 <body>
@@ -1630,6 +1665,24 @@ PLAN_HTML = """<!DOCTYPE html>
   <h1>🗓️ Estado de Deuda</h1>
 </div>
 <div class="container">
+
+  <!-- AMEX History -->
+  <div class="section" id="amex-hist-section" style="margin-bottom:2rem">
+    <div class="amex-hist-header">
+      <h2 style="margin:0">&#x1F4B3; AMEX BAC ****3328 &mdash; Historial</h2>
+      <span id="amex-saldo-badge" style="font-size:1.1rem;font-weight:700;color:#e53e3e"></span>
+    </div>
+    <div class="amex-status-grid" id="amex-status-grid"></div>
+    <h3 style="margin:.5rem 0 .75rem;font-size:.95rem;color:#64748b">Proyecci&oacute;n de liquidaci&oacute;n ($250/mes)</h3>
+    <div style="overflow-x:auto;margin-bottom:1.5rem">
+      <table class="amex-proj-table" id="amex-proj-table">
+        <thead><tr><th>Mes</th><th>Saldo inicio</th><th>Fijos est.</th><th>Pago</th><th>Saldo fin</th><th>Progreso</th></tr></thead>
+        <tbody id="amex-proj-body"></tbody>
+      </table>
+    </div>
+    <h3 style="margin:.5rem 0 .75rem;font-size:.95rem;color:#64748b">Estados de cuenta</h3>
+    <div class="amex-accordion" id="amex-accordion"></div>
+  </div>
 
   <!-- Plan Quincenal -->
   <div class="section" id="pq-section">
@@ -2117,6 +2170,7 @@ function renderCalendarioPagos(data) {
 fetch('/api/plan/quincenal').then(r => r.json()).then(renderPlanQuincenal).catch(() => {});
 fetch('/api/plan/fondos_esporadicos').then(r => r.json()).then(renderFondosEsporadicos).catch(() => {});
 fetch('/api/plan/gastos_fijos_amex').then(r => r.json()).then(renderGastosFijosAmex).catch(() => {});
+fetch('/api/amex/historial').then(r=>r.json()).then(renderAmexHistorial).catch(console.error);
 fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
 fetch('/api/otras_cuentas').then(r => r.json()).then(data => {
   if (!Array.isArray(data) || !data.length) return;
@@ -2325,6 +2379,88 @@ function renderGastosFijosAmex(data) {
     const el = document.getElementById('amex-saldo-actual');
     if (el && amex) el.textContent = '$' + amex.balance.toFixed(2);
   }).catch(()=>{});
+}
+
+// AMEX Historial
+function renderAmexHistorial(data) {
+  const estado = data.estado_actual || {};
+  const hist = data.historial || [];
+
+  // Status badge
+  const badge = document.getElementById('amex-saldo-badge');
+  if (badge) badge.textContent = '$' + (estado.saldo || 0).toFixed(2);
+
+  // Status grid
+  const grid = document.getElementById('amex-status-grid');
+  if (grid && estado.saldo !== undefined) {
+    const ep = estado.estrategia_pago || {};
+    grid.innerHTML = [
+      {label: 'Saldo actual', value: '$' + estado.saldo.toFixed(2), color: '#e53e3e'},
+      {label: 'Próximo corte', value: estado.fecha_corte_proximo || '—'},
+      {label: 'Próximo pago', value: estado.fecha_pago_proximo || '—'},
+      {label: 'Pago mensual', value: '$' + (ep.pago_mensual || 250).toFixed(2), color: '#22c55e'},
+      {label: 'Fijos estimados', value: '$' + (ep.fijos_estimados_mes || 0).toFixed(2)},
+    ].map(s => `<div class="amex-stat">
+      <div class="amex-stat-label">${s.label}</div>
+      <div class="amex-stat-value" style="${s.color ? 'color:' + s.color : ''}">${s.value}</div>
+    </div>`).join('');
+  }
+
+  // Projection table
+  const tbody = document.getElementById('amex-proj-body');
+  if (tbody && estado.proyeccion_liquidacion) {
+    const maxSaldo = (estado.proyeccion_liquidacion[0] && estado.proyeccion_liquidacion[0].saldo_inicio) || 1;
+    tbody.innerHTML = estado.proyeccion_liquidacion.map(p => {
+      const pct = Math.max(0, Math.min(100, (p.saldo_fin / maxSaldo) * 100));
+      if (p.liquidada) {
+        return `<tr><td>${p.mes}</td><td colspan="4"></td><td class="amex-proj-liquidada">✅ LIQUIDADA</td></tr>`;
+      }
+      return `<tr>
+        <td>${p.mes}</td>
+        <td>$${p.saldo_inicio.toFixed(2)}</td>
+        <td>$${p.fijos_est.toFixed(2)}</td>
+        <td style="color:#22c55e">-$${p.pago.toFixed(2)}</td>
+        <td style="color:${p.saldo_fin < 100 ? '#22c55e' : '#e53e3e'}">$${p.saldo_fin.toFixed(2)}</td>
+        <td><span class="amex-proj-bar-wrap"><span class="amex-proj-bar-fill" style="width:${pct}%"></span></span></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // Accordion
+  const acc = document.getElementById('amex-accordion');
+  if (!acc) return;
+  acc.innerHTML = [...hist].reverse().map((mes) => {
+    const totalFijo = mes.transacciones.filter(t => t.tipo === 'fijo').reduce((s, t) => s + t.monto, 0);
+    const totalVar = mes.transacciones.filter(t => t.tipo === 'variable').reduce((s, t) => s + t.monto, 0);
+    const rows = mes.transacciones.map(t => `<tr class="${t.tipo === 'fijo' ? 'amex-tx-fijo' : ''}">
+      <td>${t.descripcion}${t.cancelar ? '<span class="amex-tx-cancelar">⚠ cancelar</span>' : ''}</td>
+      <td><span class="amex-cat-badge">${t.categoria}</span></td>
+      <td>${t.tipo === 'fijo' ? 'Fijo' : 'Variable'}</td>
+      <td style="text-align:right">$${t.monto.toFixed(2)}</td>
+    </tr>`).join('');
+    return `<div class="amex-acc-item">
+      <button class="amex-acc-trigger" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span><strong>${mes.periodo}</strong> &nbsp; corte: ${mes.fecha_corte}</span>
+        <span>Saldo al corte: <strong>$${mes.saldo_corte.toFixed(2)}</strong> &nbsp; ▾</span>
+      </button>
+      <div class="amex-acc-body">
+        <div class="amex-acc-meta">
+          <span>Saldo anterior: $${mes.saldo_anterior.toFixed(2)}</span>
+          <span>Interés: $${mes.interes.toFixed(2)}</span>
+          <span>Pago: ${mes.fecha_pago}</span>
+        </div>
+        <table class="amex-tx-table">
+          <thead><tr><th>Descripción</th><th>Categoría</th><th>Tipo</th><th style="text-align:right">Monto</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <div class="amex-period-totals">
+          <span>Fijos: <strong>$${totalFijo.toFixed(2)}</strong></span>
+          <span>Variables: <strong>$${totalVar.toFixed(2)}</strong></span>
+          <span>Total: <strong>$${(totalFijo + totalVar + mes.interes).toFixed(2)}</strong></span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 const _NOTAS_KEY = 'finanzas_notas_v1';
