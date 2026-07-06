@@ -152,8 +152,8 @@
         {"fecha": "2026-07-04", "descripcion": "PETLAND (comida para gato)", "monto": 21.77, "tipo": "egreso", "categoria": "Mascotas"},
         {"fecha": "2026-07-04", "descripcion": "ZONA DIGITAL (mantenimiento PC)", "monto": 21.80, "tipo": "egreso", "categoria": "Tecnología"},
         {"fecha": "2026-07-04", "descripcion": "WOMPI*BOOST (licuado de frutas)", "monto": 2.80, "tipo": "egreso", "categoria": "Alimentación"},
-        {"fecha": "2026-07-05", "descripcion": "WWW.ALIEXPRESS.COM", "monto": 15.56, "tipo": "egreso", "categoria": "Tecnología"},
-        {"fecha": "2026-07-06", "descripcion": "WOMPI*TEXACO LA (gasolina)", "monto": 7.01, "tipo": "egreso", "categoria": "Gasolina"}
+        {"fecha": "2026-07-05", "descripcion": "WOMPI*TEXACO LA (gasolina)", "monto": 7.01, "tipo": "egreso", "categoria": "Gasolina"},
+        {"fecha": "2026-07-06", "descripcion": "WWW.ALIEXPRESS.COM (disipador de calor PC)", "monto": 15.56, "tipo": "egreso", "categoria": "Tecnología"}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-07-02",

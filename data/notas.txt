@@ -6,8 +6,8 @@ CUENTAS:
   Saldo_inicio: $261.49. Gastado al 6-Jul: $127.16. Remanente: $134.33 / 7 días = $19.19/día
   3-Jul: TEF $14.90 (mouse esposa) — Tecnología
   4-Jul: BUFFALO $39.62 (restaurante esposa), PETLAND $21.77 (comida gato), ZONA DIGITAL $21.80 (mant. PC), OD $3.70 (marcadores), WOMPI*BOOST $2.80 (licuado)
-  5-Jul: AliExpress $15.56 — Tecnología
-  6-Jul: WOMPI*TEXACO $7.01 (gasolina)
+  5-Jul: WOMPI*TEXACO $7.01 (gasolina)
+  6-Jul: AliExpress $15.56 (disipador de calor PC) — Tecnología
 - Débito Cuscatlán (XXXXXXXXXX5261): -$0.50 parqueo el 4-Jul (cuenta no rastreada aún)
 - MultiMoney Agrícola: $579.02 (saldo intocable $501.35; libre ~$77.67)
   Capitalización mensual 3.5% anual. Última cap: $1.45 (30-Jun). Depósito ideal: día 28/13 antes que cierre mes.
