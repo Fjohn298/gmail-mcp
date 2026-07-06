@@ -132,6 +132,170 @@
     {"descripcion": "Claude Pro", "monto_mensual": 20.00, "variable": false, "cancelar": false},
     {"descripcion": "Google Cloud", "monto_mensual": 9.60, "variable": false, "cancelar": true, "notas": "Ya no se usa — pendiente cancelar"}
   ],
+  "amex_historial": [
+    {
+      "periodo": "Enero 2026",
+      "fecha_corte": "2026-01-18",
+      "fecha_pago": "2026-02-09",
+      "saldo_anterior": 177.79,
+      "interes": 0.94,
+      "saldo_corte": 119.73,
+      "transacciones": [
+        {"descripcion": "ACCIDENTES PERSONALES", "monto": 8.95, "tipo": "fijo", "categoria": "Seguros"},
+        {"descripcion": "TELECOM", "monto": 20.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "ANDA", "monto": 2.83, "tipo": "fijo", "categoria": "Servicios"},
+        {"descripcion": "DEL SUR (luz)", "monto": 62.49, "tipo": "fijo", "categoria": "Luz"},
+        {"descripcion": "DOLLAR CITY", "monto": 13.16, "tipo": "variable", "categoria": "Compras"},
+        {"descripcion": "FARM SAN NICOLAS", "monto": 1.78, "tipo": "variable", "categoria": "Farmacia"},
+        {"descripcion": "FARMACIA CAMILA", "monto": 14.18, "tipo": "variable", "categoria": "Farmacia"},
+        {"descripcion": "TEXACO", "monto": 5.00, "tipo": "variable", "categoria": "Gasolina"},
+        {"descripcion": "SUPER SELECTOS", "monto": 19.92, "tipo": "variable", "categoria": "Supermercado"},
+        {"descripcion": "DOLLAR CITY", "monto": 7.99, "tipo": "variable", "categoria": "Compras"},
+        {"descripcion": "PEDIDOSYA", "monto": 25.18, "tipo": "variable", "categoria": "Delivery"}
+      ]
+    },
+    {
+      "periodo": "Febrero 2026",
+      "fecha_corte": "2026-02-18",
+      "fecha_pago": "2026-03-09",
+      "saldo_anterior": 119.73,
+      "interes": 2.74,
+      "saldo_corte": 84.23,
+      "transacciones": [
+        {"descripcion": "ACCIDENTES PERSONALES", "monto": 8.95, "tipo": "fijo", "categoria": "Seguros"},
+        {"descripcion": "ANDA", "monto": 2.62, "tipo": "fijo", "categoria": "Servicios"},
+        {"descripcion": "DEL SUR (luz)", "monto": 64.89, "tipo": "fijo", "categoria": "Luz"},
+        {"descripcion": "VENCEDOR BEAUTY", "monto": 13.30, "tipo": "variable", "categoria": "Compras"},
+        {"descripcion": "SIMAN", "monto": 28.49, "tipo": "variable", "categoria": "Compras"},
+        {"descripcion": "CINEMARK", "monto": 4.85, "tipo": "variable", "categoria": "Entretenimiento"},
+        {"descripcion": "DON LI", "monto": 40.15, "tipo": "variable", "categoria": "Restaurante"},
+        {"descripcion": "TEXACO", "monto": 15.00, "tipo": "variable", "categoria": "Gasolina"},
+        {"descripcion": "UBER EATS", "monto": 6.16, "tipo": "variable", "categoria": "Delivery"},
+        {"descripcion": "POLLO CAMPERO", "monto": 10.27, "tipo": "variable", "categoria": "Restaurante"},
+        {"descripcion": "DECATHLON", "monto": 60.97, "tipo": "variable", "categoria": "Deporte"},
+        {"descripcion": "MCDONALDS", "monto": 2.89, "tipo": "variable", "categoria": "Restaurante"}
+      ]
+    },
+    {
+      "periodo": "Marzo 2026",
+      "fecha_corte": "2026-03-18",
+      "fecha_pago": "2026-04-09",
+      "saldo_anterior": 84.23,
+      "interes": 4.87,
+      "saldo_corte": 143.57,
+      "transacciones": [
+        {"descripcion": "ACCIDENTES PERSONALES", "monto": 8.95, "tipo": "fijo", "categoria": "Seguros"},
+        {"descripcion": "TELECOM", "monto": 20.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "TELECOM (cargo adicional)", "monto": 20.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "ANDA", "monto": 2.62, "tipo": "fijo", "categoria": "Servicios"},
+        {"descripcion": "MOVISTAR", "monto": 2.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "FARMA VALUE", "monto": 56.41, "tipo": "variable", "categoria": "Farmacia"},
+        {"descripcion": "FARM SAN NICOLAS", "monto": 30.26, "tipo": "variable", "categoria": "Farmacia"},
+        {"descripcion": "DON LI", "monto": 39.05, "tipo": "variable", "categoria": "Restaurante"},
+        {"descripcion": "SUPER SELECTOS", "monto": 64.33, "tipo": "variable", "categoria": "Supermercado"},
+        {"descripcion": "POPEYES", "monto": 17.55, "tipo": "variable", "categoria": "Restaurante"},
+        {"descripcion": "SUBWAY", "monto": 12.75, "tipo": "variable", "categoria": "Restaurante"},
+        {"descripcion": "DON CHICHARRON", "monto": 3.98, "tipo": "variable", "categoria": "Restaurante"},
+        {"descripcion": "TEMU", "monto": 26.25, "tipo": "variable", "categoria": "Compras"}
+      ]
+    },
+    {
+      "periodo": "Abril 2026",
+      "fecha_corte": "2026-04-18",
+      "fecha_pago": "2026-05-11",
+      "saldo_anterior": 143.57,
+      "interes": 7.70,
+      "saldo_corte": 272.83,
+      "transacciones": [
+        {"descripcion": "ACCIDENTES PERSONALES", "monto": 8.95, "tipo": "fijo", "categoria": "Seguros"},
+        {"descripcion": "TELECOM", "monto": 20.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "ANDA", "monto": 2.62, "tipo": "fijo", "categoria": "Servicios"},
+        {"descripcion": "DEL SUR (luz)", "monto": 67.40, "tipo": "fijo", "categoria": "Luz"},
+        {"descripcion": "GOOGLE CLOUD", "monto": 8.40, "tipo": "fijo", "categoria": "Tecnología", "cancelar": true},
+        {"descripcion": "Laptop BAC cuota 1/12", "monto": 15.42, "tipo": "fijo", "categoria": "Intrafinanciamiento"},
+        {"descripcion": "FARM SAN NICOLAS", "monto": 21.80, "tipo": "variable", "categoria": "Farmacia"},
+        {"descripcion": "DOLLAR CITY", "monto": 11.25, "tipo": "variable", "categoria": "Compras"},
+        {"descripcion": "LA DESPENSA", "monto": 48.33, "tipo": "variable", "categoria": "Supermercado"},
+        {"descripcion": "SUPER SELECTOS", "monto": 24.16, "tipo": "variable", "categoria": "Supermercado"},
+        {"descripcion": "UBER EATS", "monto": 8.70, "tipo": "variable", "categoria": "Delivery"},
+        {"descripcion": "PEDIDOSYA", "monto": 25.37, "tipo": "variable", "categoria": "Delivery"},
+        {"descripcion": "UBER TRIP", "monto": 4.98, "tipo": "variable", "categoria": "Transporte"},
+        {"descripcion": "EPA", "monto": 68.25, "tipo": "variable", "categoria": "Hogar"},
+        {"descripcion": "LACALACA", "monto": 38.49, "tipo": "variable", "categoria": "Restaurante"}
+      ]
+    },
+    {
+      "periodo": "Mayo 2026",
+      "fecha_corte": "2026-05-18",
+      "fecha_pago": "2026-06-09",
+      "saldo_anterior": 272.83,
+      "interes": 3.74,
+      "saldo_corte": 219.76,
+      "transacciones": [
+        {"descripcion": "ACCIDENTES PERSONALES", "monto": 8.95, "tipo": "fijo", "categoria": "Seguros"},
+        {"descripcion": "TELECOM", "monto": 20.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "ANDA", "monto": 2.62, "tipo": "fijo", "categoria": "Servicios"},
+        {"descripcion": "DEL SUR (luz)", "monto": 73.45, "tipo": "fijo", "categoria": "Luz"},
+        {"descripcion": "CARGOS SERVICIO", "monto": 7.07, "tipo": "fijo", "categoria": "Cargos"},
+        {"descripcion": "Laptop BAC cuota 2/12", "monto": 15.42, "tipo": "fijo", "categoria": "Intrafinanciamiento"},
+        {"descripcion": "UBER EATS", "monto": 11.04, "tipo": "variable", "categoria": "Delivery"},
+        {"descripcion": "PEDIDOSYA", "monto": 14.55, "tipo": "variable", "categoria": "Delivery"},
+        {"descripcion": "TEXACO", "monto": 8.00, "tipo": "variable", "categoria": "Gasolina"},
+        {"descripcion": "FERRETERIAS FREUND", "monto": 11.75, "tipo": "variable", "categoria": "Hogar"}
+      ]
+    },
+    {
+      "periodo": "Junio 2026",
+      "fecha_corte": "2026-06-18",
+      "fecha_pago": "2026-07-10",
+      "saldo_anterior": 219.76,
+      "interes": 6.96,
+      "saldo_corte": 411.55,
+      "pagos": [
+        {"fecha": "2026-06-28", "monto": 131.52, "nota": "Pago ciclo jun"},
+        {"fecha": "2026-06-30", "monto": 1.00, "nota": "Movistar (cargo separado)"},
+        {"fecha": "2026-07-10", "monto": null, "nota": "Mínimo ciclo jun — YA PAGADO"}
+      ],
+      "transacciones": [
+        {"descripcion": "ACCIDENTES PERSONALES", "monto": 8.95, "tipo": "fijo", "categoria": "Seguros"},
+        {"descripcion": "TELECOM", "monto": 20.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "ANDA", "monto": 2.62, "tipo": "fijo", "categoria": "Servicios"},
+        {"descripcion": "DEL SUR (luz)", "monto": 74.72, "tipo": "fijo", "categoria": "Luz"},
+        {"descripcion": "MOVISTAR", "monto": 1.00, "tipo": "fijo", "categoria": "Telecom"},
+        {"descripcion": "GOOGLE CLOUD", "monto": 9.60, "tipo": "fijo", "categoria": "Tecnología", "cancelar": true},
+        {"descripcion": "CARGOS SERVICIO", "monto": 4.59, "tipo": "fijo", "categoria": "Cargos"},
+        {"descripcion": "Laptop BAC cuota 3/12", "monto": 15.42, "tipo": "fijo", "categoria": "Intrafinanciamiento"},
+        {"descripcion": "Curacao cuota 1/12", "monto": 20.75, "tipo": "fijo", "categoria": "Intrafinanciamiento"},
+        {"descripcion": "UBER TRIP", "monto": 16.13, "tipo": "variable", "categoria": "Transporte"},
+        {"descripcion": "TOTTO", "monto": 34.95, "tipo": "variable", "categoria": "Ropa"},
+        {"descripcion": "DOLLAR CITY", "monto": 8.05, "tipo": "variable", "categoria": "Compras"},
+        {"descripcion": "PRISMA MODA", "monto": 60.75, "tipo": "variable", "categoria": "Ropa"},
+        {"descripcion": "ONE EXPRESSO", "monto": 29.16, "tipo": "variable", "categoria": "Café"},
+        {"descripcion": "STARBUCKS", "monto": 9.70, "tipo": "variable", "categoria": "Café"},
+        {"descripcion": "SUPER SELECTOS", "monto": 35.33, "tipo": "variable", "categoria": "Supermercado"},
+        {"descripcion": "ALASA zapatos", "monto": 84.79, "tipo": "variable", "categoria": "Ropa"}
+      ]
+    }
+  ],
+  "amex_estado_actual": {
+    "saldo": 390.75,
+    "fecha_corte_proximo": "2026-07-15",
+    "fecha_pago_proximo": "2026-08-10",
+    "min_pago_ciclo_jul": 125.00,
+    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Próximo pago $125 el 10-Ago.",
+    "estrategia_pago": {
+      "pago_quincena": 125.00,
+      "pago_mensual": 250.00,
+      "fijos_estimados_mes": 158.00
+    },
+    "proyeccion_liquidacion": [
+      {"mes": "Jul 2026", "saldo_inicio": 390.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 298.75},
+      {"mes": "Ago 2026", "saldo_inicio": 298.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 206.75},
+      {"mes": "Sep 2026", "saldo_inicio": 206.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 114.75},
+      {"mes": "Oct 2026", "saldo_inicio": 114.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 22.75},
+      {"mes": "Nov 2026", "saldo_inicio": 22.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 0.00, "liquidada": true}
+    ]
+  },
   "paths": {
     "logs_dir": "logs",
     "config_dir": "config",
