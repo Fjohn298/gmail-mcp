@@ -3,9 +3,11 @@
 CUENTAS:
 - Agrícola CC: $0.00 (pagos ya ejecutados)
 - Débito BAC (MC 6201): $156.24 — presupuesto operativo hasta 13-Jul
-  Saldo_inicio: $261.49 / 11 días. Gastado Vie-Sáb: $105.25. Remanente: $156.24 / 7 días = $22.32/día
-  Gastos 4-Jul: BUFFALO $39.62, PETLAND $21.77, ZONA DIGITAL $21.80, OD $3.70, WOMPI*BOOST $2.80
-  Gastos 5-Jul: AliExpress $15.56
+  Saldo_inicio: $261.49. Gastado al 6-Jul: $127.16. Remanente: $134.33 / 7 días = $19.19/día
+  3-Jul: TEF $14.90 (mouse esposa) — Tecnología
+  4-Jul: BUFFALO $39.62 (restaurante esposa), PETLAND $21.77 (comida gato), ZONA DIGITAL $21.80 (mant. PC), OD $3.70 (marcadores), WOMPI*BOOST $2.80 (licuado)
+  5-Jul: AliExpress $15.56 — Tecnología
+  6-Jul: WOMPI*TEXACO $7.01 (gasolina)
 - Débito Cuscatlán (XXXXXXXXXX5261): -$0.50 parqueo el 4-Jul (cuenta no rastreada aún)
 - MultiMoney Agrícola: $579.02 (saldo intocable $501.35; libre ~$77.67)
   Capitalización mensual 3.5% anual. Última cap: $1.45 (30-Jun). Depósito ideal: día 28/13 antes que cierre mes.

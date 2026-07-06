@@ -137,21 +137,23 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 156.24,
+      "saldo": 134.33,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
       "notas": "Presupuesto operativo hasta el 13-Jul. Pago con MASTERCARD 6201.",
       "movimientos": [
-        {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso"},
-        {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS", "monto": 15.52, "tipo": "egreso"},
-        {"fecha": "2026-07-01", "descripcion": "TEF DE:MONICA ALE (esposa)", "monto": 22.00, "tipo": "ingreso"},
-        {"fecha": "2026-07-04", "descripcion": "BUFFALO S LA GRAN VIA", "monto": 39.62, "tipo": "egreso"},
-        {"fecha": "2026-07-04", "descripcion": "OD El salvador suc. La", "monto": 3.70, "tipo": "egreso"},
-        {"fecha": "2026-07-04", "descripcion": "PETLAND", "monto": 21.77, "tipo": "egreso"},
-        {"fecha": "2026-07-04", "descripcion": "ZONA DIGITAL", "monto": 21.80, "tipo": "egreso"},
-        {"fecha": "2026-07-04", "descripcion": "WOMPI*BOOST", "monto": 2.80, "tipo": "egreso"},
-        {"fecha": "2026-07-05", "descripcion": "WWW.ALIEXPRESS.COM", "monto": 15.56, "tipo": "egreso"}
+        {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
+        {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
+        {"fecha": "2026-07-01", "descripcion": "TEF DE:MONICA ALE (esposa)", "monto": 22.00, "tipo": "ingreso", "categoria": "Ingreso"},
+        {"fecha": "2026-07-03", "descripcion": "TEF A:129214565 (mouse para esposa)", "monto": 14.90, "tipo": "egreso", "categoria": "Tecnología"},
+        {"fecha": "2026-07-04", "descripcion": "BUFFALO S LA GRAN VIA (salida a comer con esposa)", "monto": 39.62, "tipo": "egreso", "categoria": "Restaurante"},
+        {"fecha": "2026-07-04", "descripcion": "OD El Salvador (marcadores pizarra)", "monto": 3.70, "tipo": "egreso", "categoria": "Oficina"},
+        {"fecha": "2026-07-04", "descripcion": "PETLAND (comida para gato)", "monto": 21.77, "tipo": "egreso", "categoria": "Mascotas"},
+        {"fecha": "2026-07-04", "descripcion": "ZONA DIGITAL (mantenimiento PC)", "monto": 21.80, "tipo": "egreso", "categoria": "Tecnología"},
+        {"fecha": "2026-07-04", "descripcion": "WOMPI*BOOST (licuado de frutas)", "monto": 2.80, "tipo": "egreso", "categoria": "Alimentación"},
+        {"fecha": "2026-07-05", "descripcion": "WWW.ALIEXPRESS.COM", "monto": 15.56, "tipo": "egreso", "categoria": "Tecnología"},
+        {"fecha": "2026-07-06", "descripcion": "WOMPI*TEXACO LA (gasolina)", "monto": 7.01, "tipo": "egreso", "categoria": "Gasolina"}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-07-02",
