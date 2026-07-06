@@ -137,7 +137,7 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 261.49,
+      "saldo": 156.24,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
@@ -145,7 +145,13 @@
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS", "monto": 15.52, "tipo": "egreso"},
-        {"fecha": "2026-07-01", "descripcion": "TEF DE:MONICA ALE (esposa)", "monto": 22.00, "tipo": "ingreso"}
+        {"fecha": "2026-07-01", "descripcion": "TEF DE:MONICA ALE (esposa)", "monto": 22.00, "tipo": "ingreso"},
+        {"fecha": "2026-07-04", "descripcion": "BUFFALO S LA GRAN VIA", "monto": 39.62, "tipo": "egreso"},
+        {"fecha": "2026-07-04", "descripcion": "OD El salvador suc. La", "monto": 3.70, "tipo": "egreso"},
+        {"fecha": "2026-07-04", "descripcion": "PETLAND", "monto": 21.77, "tipo": "egreso"},
+        {"fecha": "2026-07-04", "descripcion": "ZONA DIGITAL", "monto": 21.80, "tipo": "egreso"},
+        {"fecha": "2026-07-04", "descripcion": "WOMPI*BOOST", "monto": 2.80, "tipo": "egreso"},
+        {"fecha": "2026-07-05", "descripcion": "WWW.ALIEXPRESS.COM", "monto": 15.56, "tipo": "egreso"}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-07-02",

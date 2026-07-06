@@ -2,8 +2,10 @@
 
 CUENTAS:
 - Agrícola CC: $0.00 (pagos ya ejecutados)
-- Débito BAC (MC 6201): $261.49 — presupuesto operativo hasta 13-Jul
-  Saldo_inicio presupuesto: $261.49 / 11 días = $23.77/día. (+$22.00 TEF MONICA 1-Jul. N1CO -$15.52 procesó el 2-Jul)
+- Débito BAC (MC 6201): $156.24 — presupuesto operativo hasta 13-Jul
+  Saldo_inicio: $261.49 / 11 días. Gastado Vie-Sáb: $105.25. Remanente: $156.24 / 7 días = $22.32/día
+  Gastos 4-Jul: BUFFALO $39.62, PETLAND $21.77, ZONA DIGITAL $21.80, OD $3.70, WOMPI*BOOST $2.80
+  Gastos 5-Jul: AliExpress $15.56
 - MultiMoney Agrícola: $579.02 (saldo intocable $501.35; libre ~$77.67)
   Capitalización mensual 3.5% anual. Última cap: $1.45 (30-Jun). Depósito ideal: día 28/13 antes que cierre mes.
 - NIU: $0.00 (se usó para pagar préstamo $147.11 + VISA Agrícola $60.87 el 29-Jun vía Transfer365)
