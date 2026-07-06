@@ -16,14 +16,14 @@ CUENTAS:
 
 PRÓXIMOS PAGOS (julio):
 - 4-Jul: VISA Agrícola ****6114 — ✅ PAGADO el 29-Jun ($60.87 vía NIU). Balance restante ~$105.01
-- 7-Jul: Préstamo Consumo Agrícola — ✅ PAGADO el 29-Jun ($147.11 vía NIU). Nuevo saldo $6,227.55, 58 cuotas
-- 10-Jul: AMEX BAC ****3328 — mín $18.00 (balance $390.75; incluye extrafin laptop $15.42 + Curacao $20.75)
+- 7-Jul: Préstamo Consumo Agrícola — ✅ PAGADO el 29-Jun ($147.11 vía NIU). Nuevo saldo $6,171.48, 58 cuotas
+- 10-Jul: AMEX BAC ****3328 — ✅ PAGADO (mínimo del ciclo). Próximo pago: 10-Ago. Nuevo saldo pendiente confirmar.
 - 13-Jul: próxima quincena — salario $566.92
 - 20-Jul: Consolidación Cuscatlán 2789 — $85.00 (saldo $2,180, ref PENDIENTE)
 
 TARJETAS:
-- AMEX BAC ****3328: balance $390.75 (subió $8.95 desde última revisión — posible cargo/interés)
-- VISA Agrícola ****6114: balance $165.88, mín $60.87, pago 4-Jul
+- AMEX BAC ****3328: balance ~$390.75 (mín pagado 10-Jul; nuevo saldo pendiente confirmar)
+- VISA Agrícola ****6114: balance ~$105.01 (pagado $60.87 el 29-Jun)
 - VISA Cuscatlán ****2789: $0.00 (en uso para intrafinanciamiento consolidación)
 - VISA BAC ****2117: CERRADA. Saldo $0.00. Cancelación formal completada.
 
