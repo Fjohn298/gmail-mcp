@@ -62,46 +62,82 @@
   "intrafinanciamientos": [
     {
       "ref": "PENDIENTE",
-      "descripcion": "Consolidación Cuscatlán $2,180 / 49m",
+      "descripcion": "Consolidación Cuscatlán $2,180 / 48 cuotas / jun 2030",
       "monto_original": 2180.00,
       "cuota_mensual": 85.00,
       "saldo_actual": 2180.00,
       "cuotas_pagadas": 0,
-      "cuotas_total": 49,
+      "cuotas_total": 48,
       "tasa_mensual": 2.92,
-      "fecha_corte": "2026-06-27",
+      "fecha_fin": "2030-06-20",
       "fecha_pago_dia": 20,
       "banco": "Cuscatlán",
       "tarjeta_last4": "2789"
     },
     {
       "ref": "60667239",
-      "descripcion": "Laptop / Extrafinanciamiento",
+      "descripcion": "Laptop / Extrafinanciamiento BAC — 0%",
       "monto_original": 185.04,
       "cuota_mensual": 15.42,
       "saldo_actual": 154.16,
       "cuotas_pagadas": 2,
       "cuotas_total": 12,
+      "cuotas_restantes": 10,
       "tasa_mensual": 0.0,
-      "fecha_corte": "2026-05-18",
+      "fecha_fin": "2027-05-18",
       "fecha_pago_dia": 10,
       "banco": "BAC",
       "tarjeta_last4": "3328"
     },
     {
       "ref": "CURACAO-001",
-      "descripcion": "Cuota Curacao",
+      "descripcion": "Cuota Curacao — 0%",
       "monto_original": 249.00,
       "cuota_mensual": 20.75,
       "saldo_actual": 207.50,
       "cuotas_pagadas": 2,
       "cuotas_total": 12,
+      "cuotas_restantes": 10,
       "tasa_mensual": 0.0,
-      "fecha_corte": "2026-06-21",
+      "fecha_fin": "2027-05-21",
       "fecha_pago_dia": 10,
       "banco": "Curacao",
       "tarjeta_last4": "3328"
     }
+  ],
+  "deuda_total": {
+    "fecha": "2026-07-07",
+    "tarjetas": 511.18,
+    "intrafinanciamientos": 2541.66,
+    "prestamo": 6171.48,
+    "total": 9224.32,
+    "detalle": {
+      "AMEX_3328": 406.17,
+      "VISA_Agricola_6114": 105.01,
+      "Consolidacion_Cuscatlan": 2180.00,
+      "Laptop_BAC": 154.16,
+      "Curacao": 207.50,
+      "Prestamo_Consumo_Agricola": 6171.48
+    }
+  },
+  "roadmap_liquidacion": {
+    "descripcion": "Proyección de liquidación de deudas 2026-2027",
+    "hitos": [
+      {"mes": "Sep 2026", "evento": "AMEX BAC ****3328 liquidada", "ahorro_mensual": 45.12},
+      {"mes": "Oct 2026", "evento": "VISA Agrícola ****6114 $0", "ahorro_mensual": 0},
+      {"mes": "Nov 2026", "evento": "Laptop + Curacao $0 (cuotas terminan)", "ahorro_mensual": 36.17},
+      {"mes": "Dic 2026", "evento": "Solo queda Préstamo ~$6,000 + Cuscatlán $2,180"},
+      {"mes": "2027", "evento": "Elegibilidad hipotecaria — deuda estructurada solo en préstamos"}
+    ]
+  },
+  "pendientes": [
+    {"descripcion": "Cancelar VISA BAC ****2117 en sucursal", "prioridad": "alta", "tipo": "banco_presencial"},
+    {"descripcion": "Mover DEL SUR a NIU ••3997 (redirigir débito automático)", "prioridad": "alta", "tipo": "tramite"},
+    {"descripcion": "Mover TELECOM/Claro a NIU ••3997", "prioridad": "alta", "tipo": "tramite"},
+    {"descripcion": "Mover ANDA a NIU ••3997", "prioridad": "media", "tipo": "tramite"},
+    {"descripcion": "Cancelar Google Cloud $9.60/mes", "prioridad": "alta", "tipo": "online"},
+    {"descripcion": "Conseguir número contrato Cuscatlán consolidación (ref PENDIENTE)", "prioridad": "media", "tipo": "banco"},
+    {"descripcion": "Confirmar gastos hormiga $1.75 del 06-jul (flan $1.25 + parqueo $0.50)", "prioridad": "baja", "tipo": "verificar_gmail"}
   ],
   "plan_quincenal": {
     "activo": true,
@@ -378,15 +414,16 @@
       "nombre": "NIU",
       "tipo": "prepago",
       "cuenta": "••3997",
-      "saldo": 61.19,
+      "saldo": 41.19,
       "fecha_registro": "2026-07-07",
-      "notas": "Recibió $57.58 hoy vía Transfer365 desde BAC. Cubre cargos fijos DEL SUR + TELECOM + ANDA + Claude Pro (~$112.62/mes). Recargar $60/quincena.",
+      "notas": "Cubre DEL SUR + TELECOM + ANDA + Claude Pro (~$112.62/mes). Recargar $60/quincena. Próx. cargos: ANDA ~11-jul $2.62, Claude Pro 14-jul $20, DEL SUR ~22-jul $70 (recargar con salario 13-jul antes).",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},
         {"fecha": "2026-06-29", "descripcion": "PAGO PRESTAMO 2132201069", "monto": 147.11, "tipo": "egreso"},
         {"fecha": "2026-06-29", "descripcion": "PAGO TARJETA VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
-        {"fecha": "2026-07-07", "descripcion": "Transfer365 desde BAC 6201 (recarga cargos fijos)", "monto": 57.58, "tipo": "ingreso"}
+        {"fecha": "2026-07-07", "descripcion": "Transfer365 desde BAC 6201 (recarga cargos fijos)", "monto": 57.58, "tipo": "ingreso"},
+        {"fecha": "2026-07-07", "descripcion": "TELECOM PERSONAL (Claro pospago) — pago manual desde NIU", "monto": 20.00, "tipo": "egreso", "categoria": "Telecom", "nota": "Pago manual; cargo automático en AMEX pendiente de redirigir a NIU"}
       ]
     }
   ],
