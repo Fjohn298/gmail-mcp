@@ -122,16 +122,31 @@
     {"nombre": "Deporte/Salud", "quincenal": 5.50, "mensual": 11.00, "saldo": 0.00}
   ],
   "gastos_fijos_amex": [
-    {"descripcion": "DEL SUR (luz)", "monto_mensual": 70.00, "variable": true, "cancelar": false},
-    {"descripcion": "TELECOM PERSONAL (Claro pospago)", "monto_mensual": 20.00, "variable": false, "cancelar": false},
     {"descripcion": "Accidentes Personales BAC", "monto_mensual": 8.95, "variable": false, "cancelar": false},
-    {"descripcion": "ANDA (agua)", "monto_mensual": 2.62, "variable": false, "cancelar": false},
-    {"descripcion": "Movistar", "monto_mensual": 1.00, "variable": false, "cancelar": false},
     {"descripcion": "Laptop BAC cuota", "monto_mensual": 15.42, "variable": false, "cancelar": false},
     {"descripcion": "Curacao cuota", "monto_mensual": 20.75, "variable": false, "cancelar": false},
-    {"descripcion": "Claude Pro", "monto_mensual": 20.00, "variable": false, "cancelar": false},
+    {"descripcion": "DEL SUR (luz)", "monto_mensual": 70.00, "variable": true, "cancelar": false, "movido_a": "NIU 3997", "notas": "Movido a NIU — pendiente redirigir débito automático"},
+    {"descripcion": "TELECOM PERSONAL (Claro pospago)", "monto_mensual": 20.00, "variable": false, "cancelar": false, "movido_a": "NIU 3997", "notas": "Movido a NIU — pendiente redirigir débito automático"},
+    {"descripcion": "ANDA (agua)", "monto_mensual": 2.62, "variable": false, "cancelar": false, "movido_a": "NIU 3997", "notas": "Movido a NIU — pendiente redirigir débito automático"},
+    {"descripcion": "Claude Pro", "monto_mensual": 20.00, "variable": false, "cancelar": false, "movido_a": "NIU 3997", "notas": "Cobro día 14 — usar NIU 3997"},
+    {"descripcion": "Movistar", "monto_mensual": 1.00, "variable": false, "cancelar": false, "notas": "Pago manual — no automático"},
     {"descripcion": "Google Cloud", "monto_mensual": 9.60, "variable": false, "cancelar": true, "notas": "Ya no se usa — pendiente cancelar"}
   ],
+  "gastos_fijos_niu": [
+    {"descripcion": "DEL SUR (luz)", "monto_mensual": 70.00, "variable": true, "activo": false, "notas": "Pendiente redirigir desde AMEX"},
+    {"descripcion": "TELECOM PERSONAL (Claro pospago)", "monto_mensual": 20.00, "variable": false, "activo": false, "notas": "Pendiente redirigir desde AMEX"},
+    {"descripcion": "ANDA (agua)", "monto_mensual": 2.62, "variable": false, "activo": false, "notas": "Pendiente redirigir desde AMEX"},
+    {"descripcion": "Claude Pro", "monto_mensual": 20.00, "variable": false, "activo": true, "notas": "Cobro día 14 de cada mes"}
+  ],
+  "niu_estrategia": {
+    "cuenta": "NIU ••3997",
+    "total_cargos_mes": 112.62,
+    "recarga_quincena": 60.00,
+    "recarga_mes": 120.00,
+    "metodo_recarga": "Transfer365 desde BAC 6201",
+    "superavit_mensual": 7.38,
+    "notas": "DEL SUR + TELECOM + ANDA + Claude Pro. Recarga $60 c/quincena el día 13 y 28."
+  },
   "amex_historial": [
     {
       "periodo": "Enero 2026",
@@ -278,22 +293,21 @@
     }
   ],
   "amex_estado_actual": {
-    "saldo": 390.75,
+    "saldo": 406.17,
     "fecha_corte_proximo": "2026-07-15",
     "fecha_pago_proximo": "2026-08-10",
-    "min_pago_ciclo_jul": 125.00,
-    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Próximo pago $125 el 10-Ago.",
+    "pago_ciclo_jul": 150.00,
+    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Pago $150 el 10-Jul. Laptop cuota 4/12 cargó hoy 07-Jul ($15.42). NUEVA ESTRATEGIA: DEL SUR + TELECOM + ANDA + Claude Pro se mueven a NIU 3997. AMEX queda solo con Accidentes $8.95 + Laptop $15.42 + Curacao $20.75 = $45.12/mes.",
     "estrategia_pago": {
-      "pago_quincena": 125.00,
+      "pago_julio_10": 150.00,
       "pago_mensual": 250.00,
-      "fijos_estimados_mes": 158.00
+      "fijos_estimados_mes": 45.12,
+      "fijos_detalle": "Accidentes Personales $8.95 + Laptop cuota $15.42 + Curacao cuota $20.75"
     },
     "proyeccion_liquidacion": [
-      {"mes": "Jul 2026", "saldo_inicio": 390.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 298.75},
-      {"mes": "Ago 2026", "saldo_inicio": 298.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 206.75},
-      {"mes": "Sep 2026", "saldo_inicio": 206.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 114.75},
-      {"mes": "Oct 2026", "saldo_inicio": 114.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 22.75},
-      {"mes": "Nov 2026", "saldo_inicio": 22.75, "fijos_est": 158.00, "pago": 250.00, "saldo_fin": 0.00, "liquidada": true}
+      {"mes": "Jul 2026", "saldo_inicio": 406.17, "fijos_est": 45.12, "pago": 150.00, "saldo_fin": 301.29, "nota": "Pago $150 el 10-Jul"},
+      {"mes": "Ago 2026", "saldo_inicio": 301.29, "fijos_est": 45.12, "pago": 250.00, "saldo_fin": 96.41},
+      {"mes": "Sep 2026", "saldo_inicio": 96.41, "fijos_est": 45.12, "pago": 141.53, "saldo_fin": 0.00, "liquidada": true, "nota": "Liquidada en septiembre vs noviembre anterior — ahorro 2 meses"}
     ]
   },
   "paths": {
@@ -330,11 +344,11 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 134.33,
+      "saldo": 75.00,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Presupuesto operativo hasta el 13-Jul. Pago con MASTERCARD 6201.",
+      "notas": "Presupuesto operativo hasta el 13-Jul. Saldo $75 al 7-Jul ($12.50/día restante). Pago con MASTERCARD 6201.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -346,21 +360,34 @@
         {"fecha": "2026-07-04", "descripcion": "ZONA DIGITAL (mantenimiento PC)", "monto": 21.80, "tipo": "egreso", "categoria": "Tecnología"},
         {"fecha": "2026-07-04", "descripcion": "WOMPI*BOOST (licuado de frutas)", "monto": 2.80, "tipo": "egreso", "categoria": "Alimentación"},
         {"fecha": "2026-07-05", "descripcion": "WOMPI*TEXACO LA (gasolina)", "monto": 7.01, "tipo": "egreso", "categoria": "Gasolina"},
-        {"fecha": "2026-07-06", "descripcion": "WWW.ALIEXPRESS.COM (disipador de calor PC)", "monto": 15.56, "tipo": "egreso", "categoria": "Tecnología"}
+        {"fecha": "2026-07-06", "descripcion": "WWW.ALIEXPRESS.COM (disipador de calor PC)", "monto": 15.56, "tipo": "egreso", "categoria": "Tecnología"},
+        {"fecha": "2026-07-07", "descripcion": "Transfer365 a NIU ••3997 (recarga cargos fijos)", "monto": 57.58, "tipo": "egreso", "categoria": "Transferencia"},
+        {"fecha": "2026-07-06", "descripcion": "Gastos hormiga (flan $1.25 + parqueo $0.50) — pendiente confirmar Gmail", "monto": 1.75, "tipo": "egreso", "categoria": "Alimentación", "pendiente_confirmar": true}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-07-02",
         "fecha_fin": "2026-07-13",
         "saldo_inicio": 261.49,
-        "dias_total": 11
+        "dias_total": 11,
+        "saldo_actual": 75.00,
+        "dias_restantes": 6,
+        "tasa_diaria_disponible": 12.50
       }
     },
     {
       "nombre": "NIU",
       "tipo": "prepago",
-      "saldo": 0.00,
-      "fecha_registro": "2026-06-28",
-      "notas": "Salida 28-Jun: +$28.44 top-up desde Agrícola. Cajero −$25 (efectivo en mano, sin gastar). Comida grupo: $43 débito BAC, $31 devuelto. Efectivo en mano: $56 ($25 cajero + $31 devuelto). No se gastó de NIU."
+      "cuenta": "••3997",
+      "saldo": 61.19,
+      "fecha_registro": "2026-07-07",
+      "notas": "Recibió $57.58 hoy vía Transfer365 desde BAC. Cubre cargos fijos DEL SUR + TELECOM + ANDA + Claude Pro (~$112.62/mes). Recargar $60/quincena.",
+      "movimientos": [
+        {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
+        {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},
+        {"fecha": "2026-06-29", "descripcion": "PAGO PRESTAMO 2132201069", "monto": 147.11, "tipo": "egreso"},
+        {"fecha": "2026-06-29", "descripcion": "PAGO TARJETA VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
+        {"fecha": "2026-07-07", "descripcion": "Transfer365 desde BAC 6201 (recarga cargos fijos)", "monto": 57.58, "tipo": "ingreso"}
+      ]
     }
   ],
   "efectivo_en_mano": {
