@@ -646,8 +646,6 @@ def api_plan_send():
 
 @app.route('/api/summary/send', methods=['POST', 'GET'])
 def api_summary_send():
-    if not session.get('authenticated'):
-        return jsonify({'error': 'No autenticado'}), 401
     try:
         from daily_summary import send_daily_summary
         send_daily_summary()
