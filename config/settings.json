@@ -427,6 +427,18 @@
       }
     },
     {
+      "nombre": "Agrícola Max Electrónico",
+      "tipo": "debito",
+      "saldo": 54.43,
+      "banco": "Agrícola",
+      "numero_cuenta": "3070555263",
+      "fecha_registro": "2026-07-08",
+      "notas": "Devolución ISR MINHDA $54.43 (8-Jul). Plan: mover a BAC 6201 próximamente.",
+      "movimientos": [
+        {"fecha": "2026-07-08", "descripcion": "Devolución de renta — MINHDA (Transfer365, ID: 1416015803)", "monto": 54.43, "tipo": "ingreso", "nota": "Confirmado: devolución ISR Ministerio de Hacienda."}
+      ]
+    },
+    {
       "nombre": "NIU",
       "tipo": "prepago",
       "cuenta": "••3997",
