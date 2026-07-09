@@ -133,12 +133,11 @@
   "pendientes": [
     {"descripcion": "Cancelar VISA BAC ****2117 en sucursal", "prioridad": "alta", "tipo": "banco_presencial"},
     {"descripcion": "Mover DEL SUR a NIU ••3997 (redirigir débito automático)", "prioridad": "alta", "tipo": "tramite"},
-    {"descripcion": "Configurar débito automático TELECOM a NIU ••3997 (exclusión AMEX ya aprobada — gestión 427181, 8-Jul)", "prioridad": "media", "tipo": "tramite", "nota": "Exclusión de AMEX completada. Ahora pago es manual desde NIU. Verificar si TELECOM permite re-domiciliar a cuenta NIU/Cuscatlán."},
+    {"descripcion": "Configurar débito automático Claro a NIU ••3997 (exclusión AMEX ya aprobada — gestión 427181, 8-Jul)", "prioridad": "media", "tipo": "tramite", "nota": "Exclusión de AMEX completada. Ahora pago es manual desde NIU. Verificar si Claro permite re-domiciliar a cuenta Cuscatlán/NIU."},
     {"descripcion": "Mover ANDA a NIU ••3997", "prioridad": "media", "tipo": "tramite"},
     {"descripcion": "Cancelar Google Cloud $9.60/mes", "prioridad": "alta", "tipo": "online"},
     {"descripcion": "Conseguir número contrato Cuscatlán consolidación (ref PENDIENTE)", "prioridad": "media", "tipo": "banco"},
     {"descripcion": "Confirmar gastos hormiga $1.75 del 06-jul (flan $1.25 + parqueo $0.50)", "prioridad": "baja", "tipo": "verificar_gmail"},
-    {"descripcion": "Identificar tarjeta del Teclado Logitech K250 $25.00 (SIMAN pedido 1644187423688-01, Jul-4, 'Visa')", "prioridad": "media", "tipo": "verificar_gmail", "nota": "Mouse $14.90 ya registrado en BAC 6201 (Jul-3). Teclado $25 cobrado en una Visa sin identificar — ¿VISA Agrícola 6114 o Cuscatlán 2789?"},
     {"descripcion": "Confirmar origen de abono $54.43 MINHDA en Agrícola CC (Transfer365, 8-Jul, ID 1416015803)", "prioridad": "alta", "tipo": "verificar", "nota": "¿Reembolso? ¿Ajuste salarial? ¿Subsidio? Confirmar con estado de cuenta Agrícola."}
   ],
   "plan_quincenal": {
@@ -164,7 +163,7 @@
     {"descripcion": "Laptop BAC cuota", "monto_mensual": 15.42, "variable": false, "cancelar": false},
     {"descripcion": "Curacao cuota", "monto_mensual": 20.75, "variable": false, "cancelar": false},
     {"descripcion": "DEL SUR (luz)", "monto_mensual": 70.00, "variable": true, "cancelar": false, "movido_a": "NIU 3997", "notas": "Movido a NIU — pendiente redirigir débito automático"},
-    {"descripcion": "TELECOM PERSONAL (Claro pospago)", "monto_mensual": 20.00, "variable": false, "cancelar": false, "movido_a": "NIU 3997", "exclusion_amex_aprobada": true, "gestion_exclusion": "427181", "fecha_exclusion": "2026-07-08", "notas": "Exclusión AMEX aprobada 8-Jul (gestión 427181, servicio 61431444). Pago manual desde NIU desde Jul-2026."},
+    {"descripcion": "Claro pospago", "monto_mensual": 20.00, "variable": false, "cancelar": false, "movido_a": "NIU 3997", "exclusion_amex_aprobada": true, "gestion_exclusion": "427181", "fecha_exclusion": "2026-07-08", "notas": "Exclusión AMEX aprobada 8-Jul (gestión 427181, servicio 61431444). Pago manual desde NIU desde Jul-2026."},
     {"descripcion": "ANDA (agua)", "monto_mensual": 2.62, "variable": false, "cancelar": false, "movido_a": "NIU 3997", "notas": "Movido a NIU — pendiente redirigir débito automático"},
     {"descripcion": "Claude Pro", "monto_mensual": 20.00, "variable": false, "cancelar": false, "movido_a": "NIU 3997", "notas": "Cobro día 14 — usar NIU 3997"},
     {"descripcion": "Movistar", "monto_mensual": 1.00, "variable": false, "cancelar": false, "notas": "Pago manual — no automático"},
@@ -172,7 +171,7 @@
   ],
   "gastos_fijos_niu": [
     {"descripcion": "DEL SUR (luz)", "monto_mensual": 70.00, "variable": true, "activo": false, "notas": "Pendiente redirigir desde AMEX"},
-    {"descripcion": "TELECOM PERSONAL (Claro pospago)", "monto_mensual": 20.00, "variable": false, "activo": true, "notas": "Exclusión AMEX aprobada 8-Jul. Pago manual cada mes desde NIU. Pendiente: redirigir débito automático a NIU ••3997 si TELECOM lo permite."},
+    {"descripcion": "Claro pospago", "monto_mensual": 20.00, "variable": false, "activo": true, "notas": "Exclusión AMEX aprobada 8-Jul. Pago manual cada mes desde NIU. Pendiente: redirigir débito automático a NIU ••3997 si Claro lo permite."},
     {"descripcion": "ANDA (agua)", "monto_mensual": 2.62, "variable": false, "activo": false, "notas": "Pendiente redirigir desde AMEX"},
     {"descripcion": "Claude Pro", "monto_mensual": 20.00, "variable": false, "activo": true, "notas": "Cobro día 14 de cada mes"}
   ],
@@ -183,7 +182,7 @@
     "recarga_mes": 120.00,
     "metodo_recarga": "Transfer365 desde BAC 6201",
     "superavit_mensual": 7.38,
-    "notas": "DEL SUR + TELECOM + ANDA + Claude Pro. Recarga $60 c/quincena el día 13 y 28."
+    "notas": "DEL SUR + Claro + ANDA + Claude Pro. Recarga $60 c/quincena el día 13 y 28."
   },
   "amex_historial": [
     {
@@ -335,7 +334,7 @@
     "fecha_corte_proximo": "2026-07-15",
     "fecha_pago_proximo": "2026-08-10",
     "pago_ciclo_jul": 150.00,
-    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Pago $150 el 10-Jul. Laptop cuota 4/12 cargó hoy 07-Jul ($15.42). NUEVA ESTRATEGIA: DEL SUR + TELECOM + ANDA + Claude Pro se mueven a NIU 3997. AMEX queda solo con Accidentes $8.95 + Laptop $15.42 + Curacao $20.75 = $45.12/mes.",
+    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Pago $150 el 10-Jul. Laptop cuota 4/12 cargó hoy 07-Jul ($15.42). NUEVA ESTRATEGIA: DEL SUR + Claro + ANDA + Claude Pro se mueven a NIU 3997. AMEX queda solo con Accidentes $8.95 + Laptop $15.42 + Curacao $20.75 = $45.12/mes.",
     "estrategia_pago": {
       "pago_julio_10": 150.00,
       "pago_mensual": 250.00,
@@ -365,6 +364,8 @@
   "cuenta_corriente": {
     "saldo": 54.43,
     "banco": "Agrícola",
+    "producto": "Tarjeta débito Max Electrónico",
+    "numero_cuenta": "3070555263",
     "movimientos": [
       {"fecha": "2026-06-28", "descripcion": "Salario quincena", "monto": 566.92, "tipo": "ingreso"},
       {"fecha": "2026-06-28", "descripcion": "Sobrante préstamo Cuscatlán", "monto": 465.00, "tipo": "ingreso"},
@@ -419,14 +420,14 @@
       "cuenta": "••3997",
       "saldo": 41.19,
       "fecha_registro": "2026-07-07",
-      "notas": "Cubre DEL SUR + TELECOM + ANDA + Claude Pro (~$112.62/mes). Recargar $60/quincena. Próx. cargos: ANDA ~11-jul $2.62, Claude Pro 14-jul $20, DEL SUR ~22-jul $70 (recargar con salario 13-jul antes).",
+      "notas": "Cubre DEL SUR + Claro + ANDA + Claude Pro (~$112.62/mes). Recargar $60/quincena. Próx. cargos: ANDA ~11-jul $2.62, Claude Pro 14-jul $20, DEL SUR ~22-jul $70 (recargar con salario 13-jul antes).",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},
         {"fecha": "2026-06-29", "descripcion": "PAGO PRESTAMO 2132201069", "monto": 147.11, "tipo": "egreso"},
         {"fecha": "2026-06-29", "descripcion": "PAGO TARJETA VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
         {"fecha": "2026-07-07", "descripcion": "Transfer365 desde BAC 6201 (recarga cargos fijos)", "monto": 57.58, "tipo": "ingreso"},
-        {"fecha": "2026-07-08", "descripcion": "TELECOM PERSONAL (Claro pospago) — pago manual desde NIU", "monto": 20.00, "tipo": "egreso", "categoria": "Telecom", "nota": "Débito bancario confirmado por Cuscatlán el 8-Jul a las 02:14. Exclusión AMEX aprobada (gestión 427181)."}
+        {"fecha": "2026-07-08", "descripcion": "Claro pospago — pago manual desde NIU", "monto": 20.00, "tipo": "egreso", "categoria": "Claro", "nota": "Débito bancario confirmado por Cuscatlán el 8-Jul a las 02:14. Exclusión AMEX aprobada (gestión 427181)."}
       ]
     }
   ],
