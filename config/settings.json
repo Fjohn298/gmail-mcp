@@ -138,7 +138,7 @@
     {"descripcion": "Cancelar Google Cloud $9.60/mes", "prioridad": "alta", "tipo": "online"},
     {"descripcion": "Conseguir número contrato Cuscatlán consolidación (ref PENDIENTE)", "prioridad": "media", "tipo": "banco"},
     {"descripcion": "Confirmar gastos hormiga $1.75 del 06-jul (flan $1.25 + parqueo $0.50)", "prioridad": "baja", "tipo": "verificar_gmail"},
-    {"descripcion": "Confirmar origen de abono $54.43 MINHDA en Agrícola CC (Transfer365, 8-Jul, ID 1416015803)", "prioridad": "alta", "tipo": "verificar", "nota": "¿Reembolso? ¿Ajuste salarial? ¿Subsidio? Confirmar con estado de cuenta Agrícola."}
+    {"descripcion": "Transferir $54.43 devolución de renta (Max Electrónico N° 3070555263) a BAC", "prioridad": "media", "tipo": "tramite", "nota": "Devolución ISR de MINHDA confirmada. Saldo en Max Electrónico — mover a BAC 6201 cuando sea conveniente."}
   ],
   "plan_quincenal": {
     "activo": true,
@@ -364,8 +364,8 @@
   "cuenta_corriente": {
     "saldo": 54.43,
     "banco": "Agrícola",
-    "producto": "Tarjeta débito Max Electrónico",
     "numero_cuenta": "3070555263",
+    "notas_cuenta": "Tarjeta débito Max Electrónico. Uso esporádico — plan mover saldo a BAC próximamente.",
     "movimientos": [
       {"fecha": "2026-06-28", "descripcion": "Salario quincena", "monto": 566.92, "tipo": "ingreso"},
       {"fecha": "2026-06-28", "descripcion": "Sobrante préstamo Cuscatlán", "monto": 465.00, "tipo": "ingreso"},
@@ -377,7 +377,7 @@
       {"fecha": "2026-06-29", "descripcion": "Cuota Préstamo Consumo Agrícola", "monto": 147.11, "tipo": "egreso"},
       {"fecha": "2026-06-29", "descripcion": "Pago mínimo VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
       {"fecha": "2026-06-28", "descripcion": "Transferencia a NIU (top-up salida)", "monto": 28.44, "tipo": "egreso"},
-      {"fecha": "2026-07-08", "descripcion": "Transfer365 abono de MINHDA (ID: 1416015803)", "monto": 54.43, "tipo": "ingreso", "nota": "Origen: Ministerio de Hacienda. Motivo pendiente confirmar (¿reembolso, ajuste salarial, subsidio?)."}
+      {"fecha": "2026-07-08", "descripcion": "Devolución de renta — MINHDA (Transfer365, ID: 1416015803)", "monto": 54.43, "tipo": "ingreso", "nota": "Confirmado: devolución ISR del Ministerio de Hacienda. Plan: mover a BAC próximamente."}
     ]
   },
   "otras_cuentas": [
