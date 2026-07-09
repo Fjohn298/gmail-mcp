@@ -1,4 +1,5 @@
 import base64
+import os
 from datetime import date, datetime, timedelta
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -84,6 +85,13 @@ def build_summary(today: date | None = None) -> dict:
             multimoney_saldo = f.get('saldo', 0)
             break
 
+    # --- Agrícola Max Electrónico ---
+    agricola_saldo = next(
+        (c.get('saldo', 0) for c in settings.get('otras_cuentas', [])
+         if 'Agrícola' in c.get('nombre', '') or 'Agricola' in c.get('nombre', '')),
+        0
+    )
+
     # --- Próximos 7 días ---
     upcoming = []
 
@@ -155,6 +163,7 @@ def build_summary(today: date | None = None) -> dict:
         'proyeccion_diaria': proyeccion_diaria,
         'fecha_fin': fecha_fin_str,
         'multimoney_saldo': multimoney_saldo,
+        'agricola_saldo': agricola_saldo,
         'upcoming': upcoming,
         'bien': remanente >= 0,
     }
@@ -243,6 +252,39 @@ def build_email_html(s: dict) -> str:
 
     now_str = datetime.now(tz=_TZ).strftime('%d/%m/%Y %H:%M')
 
+    # Dashboard URL (Railway env var)
+    railway_domain = os.environ.get('RAILWAY_PUBLIC_DOMAIN', '')
+    dashboard_url = f"https://{railway_domain}" if railway_domain else ''
+
+    # Botón dashboard (precomputado para evitar f-string anidado)
+    if dashboard_url:
+        dashboard_btn = (
+            '<div style="padding:16px 28px;background:white;border:1px solid #e2e8f0;'
+            'border-top:none;text-align:center">'
+            f'<a href="{dashboard_url}" style="display:inline-block;background:#1e293b;'
+            'color:white;text-decoration:none;padding:10px 28px;border-radius:8px;'
+            'font-size:14px;font-weight:700">Ver Dashboard →</a>'
+            '</div>'
+        )
+    else:
+        dashboard_btn = ''
+
+    # Agrícola row (precomputado para evitar f-string anidado)
+    if s.get('agricola_saldo', 0) > 0:
+        agricola_row = (
+            '<tr>'
+            '<td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;color:#64748b">'
+            '\U0001f3e6 Agrícola Max Electrónico'
+            '</td>'
+            '<td style="padding:10px 12px;border-bottom:1px solid #f1f5f9;'
+            'text-align:right;font-weight:700;color:#a855f7">'
+            f'${s["agricola_saldo"]:.2f}'
+            '</td>'
+            '</tr>'
+        )
+    else:
+        agricola_row = ''
+
     return f"""<!DOCTYPE html>
 <html lang="es">
 <body style="margin:0;padding:20px;background:#f8fafc;font-family:Arial,sans-serif">
@@ -288,6 +330,7 @@ def build_email_html(s: dict) -> str:
           ${s['multimoney_saldo']:.2f}
         </td>
       </tr>
+      {agricola_row}
       <tr>
         <td style="padding:14px 12px;font-weight:700">
           📊 Remanente acumulado
@@ -308,6 +351,9 @@ def build_email_html(s: dict) -> str:
       {up_rows}
     </table>
   </div>
+
+  <!-- Dashboard link -->
+  {dashboard_btn}
 
   <!-- Footer -->
   <div style="background:#1e293b;border-radius:0 0 14px 14px;

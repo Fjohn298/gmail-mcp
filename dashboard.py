@@ -644,6 +644,18 @@ def api_plan_send():
         return jsonify({'error': str(e)}), 500
 
 
+@app.route('/api/summary/send', methods=['POST', 'GET'])
+def api_summary_send():
+    if not session.get('authenticated'):
+        return jsonify({'error': 'No autenticado'}), 401
+    try:
+        from daily_summary import send_daily_summary
+        send_daily_summary()
+        return jsonify({'ok': True, 'msg': 'Resumen enviado correctamente'})
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/plan/fondos', methods=['GET'])
 def api_plan_fondos():
     try:
@@ -1385,9 +1397,19 @@ MAIN_MENU_HTML = """<!DOCTYPE html>
       <span class="icon">🗓️</span>
       <div><h2>Plan</h2><p>Plan de pagos y ahorro para cada quincena, con notificación automática</p></div>
     </a>
+    <div class="menu-card" onclick="sendSummary()" style="cursor:pointer">
+      <span class="icon">📨</span>
+      <div><h2>Reenviar resumen</h2><p>Envía el correo de presupuesto del día al instante</p></div>
+    </div>
   </div>
 </div>
 <script>
+function sendSummary() {
+  fetch('/api/summary/send', {method:'POST'})
+    .then(r => r.json())
+    .then(d => alert(d.ok ? '✅ Resumen enviado a tu correo' : '❌ Error: ' + d.error))
+    .catch(() => alert('❌ Error al conectar'));
+}
 fetch('/api/status').then(r => r.json()).then(s => {
   if (s.last_update || s.next_update) {
     document.getElementById('status-bar').style.display = 'flex';
