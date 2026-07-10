@@ -131,14 +131,15 @@
     ]
   },
   "pendientes": [
+    {"descripcion": "PAGAR DEL SUR julio desde BAC antes del 25-Jul (~$70-80)", "prioridad": "urgente", "tipo": "pago_manual", "fecha_limite": "2026-07-25", "nota": "No es débito automático este mes. Canceló débito del BAC; pendiente redirigir a NIU. Pagar manualmente antes del 25-jul."},
+    {"descripcion": "Conseguir número contrato Cuscatlán consolidación — ANTES del 20-Jul", "prioridad": "urgente", "tipo": "banco", "fecha_limite": "2026-07-20", "nota": "PRIMER PAGO el 20-Jul ($85.00 a VISA Cuscatlán ****2789). Sin número de contrato no se puede pagar. Llamar o ir a sucursal."},
     {"descripcion": "Cancelar VISA BAC ****2117 en sucursal", "prioridad": "alta", "tipo": "banco_presencial"},
-    {"descripcion": "Mover DEL SUR a NIU ••3997 (redirigir débito automático)", "prioridad": "alta", "tipo": "tramite"},
-    {"descripcion": "Configurar débito automático Claro a NIU ••3997 (exclusión AMEX ya aprobada — gestión 427181, 8-Jul)", "prioridad": "media", "tipo": "tramite", "nota": "Exclusión de AMEX completada. Ahora pago es manual desde NIU. Verificar si Claro permite re-domiciliar a cuenta Cuscatlán/NIU."},
-    {"descripcion": "Mover ANDA a NIU ••3997", "prioridad": "media", "tipo": "tramite"},
+    {"descripcion": "Configurar DEL SUR como débito automático en NIU ••3997 para agosto", "prioridad": "alta", "tipo": "tramite", "nota": "Julio: pago manual desde BAC (no hay débito automático). Para agosto redirigir a NIU."},
     {"descripcion": "Cancelar Google Cloud $9.60/mes", "prioridad": "alta", "tipo": "online"},
-    {"descripcion": "Conseguir número contrato Cuscatlán consolidación (ref PENDIENTE)", "prioridad": "media", "tipo": "banco"},
-    {"descripcion": "Confirmar gastos hormiga $1.75 del 06-jul (flan $1.25 + parqueo $0.50)", "prioridad": "baja", "tipo": "verificar_gmail"},
-    {"descripcion": "Transferir $54.43 devolución de renta (Max Electrónico N° 3070555263) a BAC", "prioridad": "media", "tipo": "tramite", "nota": "Devolución ISR de MINHDA confirmada. Saldo en Max Electrónico — mover a BAC 6201 cuando sea conveniente."}
+    {"descripcion": "Transferir $54.43 Max Electrónico N°3070555263 → BAC ****6201", "prioridad": "alta", "tipo": "tramite", "nota": "Devolución ISR MINHDA. Pendiente ejecutar Transfer365."},
+    {"descripcion": "Configurar débito automático Claro a NIU ••3997 (exclusión AMEX ya aprobada — gestión 427181, 8-Jul)", "prioridad": "media", "tipo": "tramite"},
+    {"descripcion": "Mover ANDA a NIU ••3997", "prioridad": "media", "tipo": "tramite"},
+    {"descripcion": "Confirmar gastos hormiga $1.75 del 06-jul (flan $1.25 + parqueo $0.50)", "prioridad": "baja", "tipo": "verificar_gmail"}
   ],
   "plan_quincenal": {
     "activo": true,
@@ -334,15 +335,16 @@
     "fecha_corte_proximo": "2026-07-18",
     "fecha_pago_proximo": "2026-08-10",
     "pago_ciclo_jul": 150.00,
-    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Pago $150 el 10-Jul. Laptop cuota 4/12 cargó hoy 07-Jul ($15.42). NUEVA ESTRATEGIA: DEL SUR + Claro + ANDA + Claude Pro se mueven a NIU 3997. AMEX queda solo con Accidentes $8.95 + Laptop $15.42 + Curacao $20.75 = $45.12/mes.",
+    "fecha_pago_adicional": "2026-07-13",
+    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Pago adicional $150 el 13-Jul (desde salario). Laptop cuota 4/12 cargó hoy 07-Jul ($15.42). NUEVA ESTRATEGIA: DEL SUR + Claro + ANDA + Claude Pro se mueven a NIU 3997. AMEX queda solo con Accidentes $8.95 + Laptop $15.42 + Curacao $20.75 = $45.12/mes.",
     "estrategia_pago": {
-      "pago_julio_10": 150.00,
+      "pago_julio_13": 150.00,
       "pago_mensual": 250.00,
       "fijos_estimados_mes": 45.12,
       "fijos_detalle": "Accidentes Personales $8.95 + Laptop cuota $15.42 + Curacao cuota $20.75"
     },
     "proyeccion_liquidacion": [
-      {"mes": "Jul 2026", "saldo_inicio": 406.17, "fijos_est": 45.12, "pago": 150.00, "saldo_fin": 301.29, "nota": "Pago $150 el 10-Jul"},
+      {"mes": "Jul 2026", "saldo_inicio": 406.17, "fijos_est": 45.12, "pago": 150.00, "saldo_fin": 301.29, "nota": "Pago adicional $150 el 13-Jul (desde salario)"},
       {"mes": "Ago 2026", "saldo_inicio": 301.29, "fijos_est": 45.12, "pago": 250.00, "saldo_fin": 96.41},
       {"mes": "Sep 2026", "saldo_inicio": 96.41, "fijos_est": 45.12, "pago": 141.53, "saldo_fin": 0.00, "liquidada": true, "nota": "Liquidada en septiembre vs noviembre anterior — ahorro 2 meses"}
     ]
@@ -467,5 +469,154 @@
   "logging": {
     "level": "INFO",
     "max_log_files": 30
+  },
+  "calendario_jul2026": {
+    "descripcion": "Eventos financieros proyectados 10-25 Jul 2026. Saldos proyectados calculados desde saldos reales confirmados al 09-Jul. NUNCA sobreescribir saldo real con proyectado — solo actualizar saldo real cuando el usuario lo confirme explícitamente.",
+    "saldos_reales_base_09jul": {
+      "BAC_6201": 75.00,
+      "NIU_3997": 41.19,
+      "MultiMoney": 579.02,
+      "Max_Electronico": 54.43,
+      "AMEX_3328": 406.17,
+      "VISA_Agricola_6114": 105.01,
+      "Agricola_CC": 0.00
+    },
+    "eventos": [
+      {
+        "fecha": "2026-07-10",
+        "emoji": "🎓",
+        "descripcion": "Matrícula hermano — cargo a VISA Agrícola ****6114",
+        "monto": 186.00,
+        "tipo": "gasto",
+        "cuenta": "VISA_Agricola_6114",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": { "VISA_Agricola_6114": 291.01 },
+        "nota": "Matrícula universitaria Jul 2026. Cargo a VISA Agrícola ****6114 (saldo real: $105.01 → proyectado: $291.01)."
+      },
+      {
+        "fecha": "2026-07-10",
+        "emoji": "💸",
+        "descripcion": "Transferencia Max Electrónico → BAC ****6201",
+        "monto": 54.43,
+        "tipo": "transferencia",
+        "cuenta_origen": "Max_Electronico",
+        "cuenta_destino": "BAC_6201",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": {
+          "Max_Electronico": 0.00,
+          "BAC_6201": 129.43
+        },
+        "nota": "Devolución ISR MINHDA. Ejecutar vía Transfer365 desde cuenta 3070555263. Max queda en $0, BAC sube de $75 → $129.43."
+      },
+      {
+        "fecha": "2026-07-11",
+        "emoji": "💧",
+        "descripcion": "ANDA agua — débito automático NIU ••3997",
+        "monto": 2.62,
+        "tipo": "gasto_fijo",
+        "cuenta": "NIU_3997",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": { "NIU_3997": 38.57 },
+        "nota": "Cobro automático ANDA. Pendiente redirigir débito desde AMEX a NIU. NIU: $41.19 → $38.57."
+      },
+      {
+        "fecha": "2026-07-11",
+        "emoji": "🎂",
+        "descripcion": "Cumpleaños papá + gastos varios",
+        "monto_estimado": { "min": 60.00, "max": 90.00, "referencia": 75.00 },
+        "tipo": "gasto_variable",
+        "cuenta": "BAC_6201",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": { "BAC_6201": "~$39-54 (depende del gasto real)" },
+        "nota": "Cumpleaños papá ~$40-50 + gastos varios $20-40 (rango total $60-90). Cargo desde BAC ****6201."
+      },
+      {
+        "fecha": "2026-07-13",
+        "emoji": "💰",
+        "descripcion": "SALARIO — $566.92 + distribución quincenal",
+        "monto": 566.92,
+        "tipo": "ingreso",
+        "cuenta_destino": "BAC_6201",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "distribucion_proyectada": {
+          "AMEX_3328_pago_adicional": 150.00,
+          "NIU_3997_recarga": 60.00,
+          "MultiMoney_deposito": 255.00,
+          "BAC_6201_operativo": 70.00,
+          "colchon_BAC": 115.92
+        },
+        "saldo_proyectado": {
+          "BAC_6201": "~$70 operativo (colchón $115.92 queda en BAC)",
+          "NIU_3997": "~$98.57 (antes de Claude Pro 14-jul)",
+          "MultiMoney": 834.02,
+          "AMEX_3328": 256.17
+        },
+        "nota": "Distribución: $150 pago adicional AMEX, $60 recarga NIU, $255 depósito MultiMoney, $70 BAC operativo, $115.92 colchón/imprevistos."
+      },
+      {
+        "fecha": "2026-07-14",
+        "emoji": "🤖",
+        "descripcion": "Claude Pro — débito NIU ••3997",
+        "monto": 20.00,
+        "tipo": "gasto_fijo",
+        "cuenta": "NIU_3997",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": { "NIU_3997": "~$78.57 (post-recarga 13-jul menos Claude Pro)" },
+        "nota": "Cobro mensual Claude Pro $20. NIU post-recarga ~$98.57 → ~$78.57. Usuario estima ~$81.95."
+      },
+      {
+        "fecha": "2026-07-18",
+        "emoji": "📋",
+        "descripcion": "Corte AMEX ****3328 — recordatorio",
+        "tipo": "recordatorio",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": null,
+        "nota": "Fecha de corte ciclo julio. Revisar estado de cuenta. Fijos del ciclo: Accidentes $8.95 + Laptop cuota 4/12 $15.42 + Curacao cuota 2/12 $20.75 = $45.12. Pago mínimo vence 10-Ago."
+      },
+      {
+        "fecha": "2026-07-20",
+        "emoji": "🏦",
+        "descripcion": "Consolidación Cuscatlán — PRIMER PAGO $85",
+        "monto": 85.00,
+        "tipo": "pago",
+        "cuenta": "VISA_Cuscatlan_2789",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": {
+          "VISA_Cuscatlan_2789_deuda": 85.00,
+          "intrafinanciamiento_saldo_restante": 2095.00
+        },
+        "nota": "PRIMER PAGO crédito consolidado Cuscatlán. REQUIERE número de contrato ANTES del 20-Jul (pendiente urgente). Cuota 1/48."
+      },
+      {
+        "fecha": "2026-07-22",
+        "emoji": "💡",
+        "descripcion": "Recordatorio — verificar factura DEL SUR julio",
+        "tipo": "recordatorio",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": null,
+        "nota": "Consultar monto factura DEL SUR julio antes del 25-Jul. Pago manual desde BAC ****6201 (no débito automático este mes). Para agosto: redirigir a NIU ••3997."
+      },
+      {
+        "fecha": "2026-07-25",
+        "emoji": "⚡",
+        "descripcion": "Pago DEL SUR (luz) — LÍMITE — desde BAC ****6201",
+        "monto_estimado": { "min": 70.00, "max": 80.00, "referencia": 75.00 },
+        "tipo": "pago",
+        "cuenta": "BAC_6201",
+        "estado": "pendiente",
+        "saldo_real": null,
+        "saldo_proyectado": { "BAC_6201": "depende del monto real DEL SUR y gastos previos" },
+        "nota": "PAGO MANUAL — no hay débito automático configurado este mes (canceló débito BAC; NIU no configurada aún). Monto estimado $70-80. Fecha límite 25-Jul."
+      }
+    ]
   }
 }
