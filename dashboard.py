@@ -583,6 +583,16 @@ def plan():
     return render_template_string(PLAN_HTML)
 
 
+@app.route('/deudas')
+def deudas():
+    return render_template_string(DEUDAS_HTML)
+
+
+@app.route('/fugas')
+def fugas():
+    return render_template_string(FUGAS_HTML)
+
+
 @app.route('/api/plan', methods=['GET'])
 def api_plan_get():
     path = 'data/payment_plan.json'
@@ -1252,6 +1262,233 @@ def api_otras_cuentas():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/deudas/estrategias', methods=['GET'])
+def api_deudas_estrategias():
+    import math, copy
+    try:
+        settings = load_settings()
+        today = datetime.now(tz=_TZ).date()
+        MESES = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
+        planner = settings.get('planner', {})
+        salary_per_period = planner.get('salary_per_period', 0)
+        ingreso_mensual = salary_per_period * 2
+
+        debts = []
+        for c in planner.get('cards', []):
+            if c['balance'] > 0:
+                tasa_m = c['tasa_anual'] / 100 / 12
+                debts.append({
+                    'id': f"card_{c['last4']}",
+                    'nombre': f"{c['name']} ····{c['last4']}",
+                    'tipo': 'tarjeta',
+                    'saldo': c['balance'],
+                    'tasa_mensual': round(tasa_m, 6),
+                    'tasa_anual': c['tasa_anual'],
+                    'pago_minimo': max(c.get('min_pago', 0), round(c['balance'] * tasa_m + 1, 2)),
+                })
+        for p in settings.get('prestamos', []):
+            if p.get('saldo', 0) > 0:
+                debts.append({
+                    'id': f"prestamo_{p.get('numero', p['nombre'])}",
+                    'nombre': p['nombre'],
+                    'tipo': 'prestamo',
+                    'saldo': p['saldo'],
+                    'tasa_mensual': round(p['tasa_anual'] / 100 / 12, 6),
+                    'tasa_anual': p['tasa_anual'],
+                    'pago_minimo': p['cuota_mensual'],
+                })
+        for fi in settings.get('intrafinanciamientos', []):
+            if fi.get('saldo_actual', 0) > 0 and fi.get('tasa_mensual', 0) > 0:
+                debts.append({
+                    'id': f"fi_{fi['ref']}",
+                    'nombre': fi['descripcion'][:40],
+                    'tipo': 'financiamiento',
+                    'saldo': fi['saldo_actual'],
+                    'tasa_mensual': fi['tasa_mensual'] / 100,
+                    'tasa_anual': round(fi['tasa_mensual'] * 12, 2),
+                    'pago_minimo': fi['cuota_mensual'],
+                })
+
+        total_min = round(sum(d['pago_minimo'] for d in debts), 2)
+        fondos = settings.get('fondos_ahorro', [])
+        multimoney_mes = round(sum(f.get('deposito_quincena', 0) * 2 for f in fondos
+                                   if f.get('deposito_quincena')), 2)
+        extras = planner.get('obligaciones_extra', [])
+        oblig_extra = round(sum(e.get('monto_mensual', 0) for e in extras), 2)
+        fi_zero = round(sum(fi.get('cuota_mensual', 0)
+                            for fi in settings.get('intrafinanciamientos', [])
+                            if fi.get('saldo_actual', 0) > 0 and fi.get('tasa_mensual', 0) == 0), 2)
+        remanente = round(ingreso_mensual - total_min - multimoney_mes - oblig_extra - fi_zero, 2)
+        extra_budget = max(0, remanente)
+        budget_total = round(total_min + extra_budget, 2)
+
+        def simulate(debts_ordered, budget):
+            ds = copy.deepcopy(debts_ordered)
+            month = 0
+            total_interest = 0.0
+            payoff_months = {}
+            while any(d['saldo'] > 0.01 for d in ds) and month < 360:
+                month += 1
+                for d in ds:
+                    if d['saldo'] > 0.01:
+                        interest = d['saldo'] * d['tasa_mensual']
+                        d['saldo'] = round(d['saldo'] + interest, 4)
+                        total_interest += interest
+                remaining = budget
+                for d in ds:
+                    if d['saldo'] > 0.01:
+                        pay = min(d['pago_minimo'], d['saldo'], remaining)
+                        d['saldo'] = max(0, round(d['saldo'] - pay, 4))
+                        remaining = round(remaining - pay, 4)
+                        if d['saldo'] <= 0.01:
+                            d['saldo'] = 0
+                            payoff_months.setdefault(d['id'], month)
+                for d in ds:
+                    if d['saldo'] > 0.01 and remaining > 0.01:
+                        pay = min(remaining, d['saldo'])
+                        d['saldo'] = max(0, round(d['saldo'] - pay, 4))
+                        if d['saldo'] <= 0.01:
+                            d['saldo'] = 0
+                            payoff_months.setdefault(d['id'], month)
+                        break
+            return month, round(total_interest, 2), payoff_months
+
+        def month_label(m):
+            raw = today.month - 1 + m
+            return f"{MESES[raw % 12 + 1]} {today.year + raw // 12}"
+
+        def strategy_obj(label, ordered, meses, interes, poffs):
+            return {
+                'label': label,
+                'orden': [{
+                    'id': d['id'], 'nombre': d['nombre'],
+                    'saldo': d['saldo'], 'tasa_anual': d['tasa_anual'],
+                    'liquidacion_label': month_label(poffs.get(d['id'], meses)),
+                    'mes': poffs.get(d['id'], meses),
+                } for d in ordered],
+                'meses': meses,
+                'liquidacion_label': month_label(meses),
+                'interes_total': interes,
+            }
+
+        avalancha = sorted(debts, key=lambda d: -d['tasa_anual'])
+        bola_nieve = sorted(debts, key=lambda d: d['saldo'])
+        small = sorted([d for d in debts if d['saldo'] < 500], key=lambda d: d['saldo'])
+        large = sorted([d for d in debts if d['saldo'] >= 500], key=lambda d: -d['tasa_anual'])
+        hibrida = small + large
+
+        ma, ia, pa = simulate(avalancha, budget_total)
+        mb, ib, pb = simulate(bola_nieve, budget_total)
+        mh, ih, ph = simulate(hibrida, budget_total)
+
+        recomendada = min([('avalancha', ia), ('bola_de_nieve', ib), ('hibrida', ih)],
+                          key=lambda x: x[1])[0]
+
+        return jsonify({
+            'debts': debts,
+            'budget_total': budget_total,
+            'total_min': total_min,
+            'extra_budget': extra_budget,
+            'ingreso_mensual': ingreso_mensual,
+            'recomendada': recomendada,
+            'estrategias': {
+                'avalancha': strategy_obj('Avalancha', avalancha, ma, ia, pa),
+                'bola_de_nieve': strategy_obj('Bola de nieve', bola_nieve, mb, ib, pb),
+                'hibrida': strategy_obj('Híbrida', hibrida, mh, ih, ph),
+            },
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/api/fugas', methods=['GET'])
+def api_fugas():
+    try:
+        settings = load_settings()
+        historial = settings.get('amex_historial', [])
+        all_periods = [m['periodo'] for m in historial]
+
+        monthly_cats = {}
+        for mes in historial:
+            cats = {}
+            for tx in mes.get('transacciones', []):
+                cat = tx.get('categoria', 'Otros')
+                cats[cat] = round(cats.get(cat, 0) + tx['monto'], 2)
+            monthly_cats[mes['periodo']] = cats
+
+        all_cats = set()
+        for cats in monthly_cats.values():
+            all_cats.update(cats.keys())
+
+        n = len(all_periods)
+
+        trends = []
+        if n >= 3:
+            recent = all_periods[max(0, n-3):]
+            earlier = all_periods[:max(1, n-3)]
+            for cat in all_cats:
+                r_avg = sum(monthly_cats[p].get(cat, 0) for p in recent) / len(recent)
+                e_avg = sum(monthly_cats[p].get(cat, 0) for p in earlier) / len(earlier) if earlier else 0
+                if e_avg > 0 and r_avg > 10:
+                    var = round((r_avg - e_avg) / e_avg * 100, 1)
+                    if var > 25:
+                        trends.append({
+                            'categoria': cat,
+                            'promedio_anterior': round(e_avg, 2),
+                            'promedio_reciente': round(r_avg, 2),
+                            'variacion_pct': var,
+                        })
+        trends.sort(key=lambda x: -x['variacion_pct'])
+
+        recent_periods = all_periods[-3:] if n >= 3 else all_periods
+        subs = {}
+        for mes in historial:
+            if mes['periodo'] in recent_periods:
+                for tx in mes.get('transacciones', []):
+                    if tx.get('tipo') == 'fijo':
+                        desc = tx['descripcion']
+                        if desc not in subs:
+                            subs[desc] = {
+                                'descripcion': desc,
+                                'meses_activos': 0,
+                                'ultimo_monto': 0,
+                                'cancelar': False,
+                                'categoria': tx.get('categoria', 'Otros'),
+                            }
+                        subs[desc]['meses_activos'] += 1
+                        subs[desc]['ultimo_monto'] = tx['monto']
+                        if tx.get('cancelar'):
+                            subs[desc]['cancelar'] = True
+        subs_list = sorted(subs.values(), key=lambda x: (-int(x['cancelar']), -x['ultimo_monto']))
+
+        over_avg = []
+        if n >= 2:
+            last_p = all_periods[-1]
+            last = monthly_cats[last_p]
+            for cat, amt in last.items():
+                hist_avg = (sum(monthly_cats[p].get(cat, 0) for p in all_periods[:-1])
+                            / (n - 1))
+                if amt > hist_avg * 1.3 and amt > 15 and hist_avg > 0:
+                    over_avg.append({
+                        'categoria': cat,
+                        'mes_actual': amt,
+                        'mes_actual_label': last_p,
+                        'promedio_historico': round(hist_avg, 2),
+                        'variacion_pct': round((amt - hist_avg) / hist_avg * 100, 1),
+                    })
+            over_avg.sort(key=lambda x: -x['variacion_pct'])
+
+        return jsonify({
+            'periodos': all_periods,
+            'suscripciones': subs_list,
+            'tendencias_al_alza': trends,
+            'sobre_historico': over_avg,
+            'monthly_cats': monthly_cats,
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 @app.route('/api/notas', methods=['GET'])
 def api_notas_get():
     try:
@@ -1394,6 +1631,14 @@ MAIN_MENU_HTML = """<!DOCTYPE html>
     <a href="/plan" class="menu-card">
       <span class="icon">🗓️</span>
       <div><h2>Plan</h2><p>Plan de pagos y ahorro para cada quincena, con notificación automática</p></div>
+    </a>
+    <a href="/deudas" class="menu-card">
+      <span class="icon">🎯</span>
+      <div><h2>Destructor de deudas</h2><p>Avalancha, bola de nieve e híbrida con fechas y total de interés por estrategia</p></div>
+    </a>
+    <a href="/fugas" class="menu-card">
+      <span class="icon">🔍</span>
+      <div><h2>Detector de fugas</h2><p>Gastos sobre el promedio, suscripciones activas y categorías en alza</p></div>
     </a>
     <div class="menu-card" onclick="sendSummary()" style="cursor:pointer">
       <span class="icon">📨</span>
@@ -2725,6 +2970,413 @@ loadTab('recientes');
 </script>
 </body>
 </html>"""
+
+DEUDAS_HTML = """<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 Destructor de deudas</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 13px; flex-shrink: 0; }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .container { padding: 14px; max-width: 760px; margin: 0 auto; }
+  .section { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px;
+             padding: 18px; margin-bottom: 12px; }
+  .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
+                letter-spacing: .06em; margin-bottom: 14px; }
+  .loading { color: #64748b; font-size: 12px; }
+  /* Budget summary */
+  .budget-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 4px; }
+  @media(min-width:480px) { .budget-grid { grid-template-columns: repeat(4, 1fr); } }
+  .budget-item { background: #0f1117; border-radius: 8px; padding: 10px 12px; }
+  .budget-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing:.04em; }
+  .budget-val { font-size: 16px; font-weight: 700; margin-top: 3px; }
+  /* Strategy cards */
+  .strategy-grid { display: grid; gap: 10px; }
+  @media(min-width:520px) { .strategy-grid { grid-template-columns: repeat(3, 1fr); } }
+  .strategy-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px;
+                   padding: 14px; position: relative; transition: border-color .15s; }
+  .strategy-card.recommended { border-color: #22c55e; box-shadow: 0 0 0 1px rgba(34,197,94,.25); }
+  .strategy-badge { position: absolute; top: 10px; right: 10px; font-size: 10px; font-weight: 700;
+                    padding: 2px 8px; border-radius: 99px; background: #22c55e; color: #0f1117;
+                    text-transform: uppercase; letter-spacing: .04em; }
+  .strategy-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .strategy-desc { font-size: 10px; color: #64748b; margin-bottom: 10px; }
+  .strategy-fecha { font-size: 20px; font-weight: 700; color: #e2e8f0; margin-bottom: 2px; }
+  .strategy-meses { font-size: 11px; color: #64748b; margin-bottom: 8px; }
+  .strategy-interes { font-size: 13px; font-weight: 700; }
+  .strategy-interes span { font-size: 10px; color: #64748b; font-weight: 400; }
+  /* Debt order list */
+  .order-list { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; }
+  .order-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+                background: #1a1d27; border-radius: 7px; font-size: 11px; }
+  .order-num { width: 20px; height: 20px; border-radius: 50%; background: #2a2d3e;
+               display: flex; align-items: center; justify-content: center; font-size: 10px;
+               font-weight: 700; flex-shrink: 0; }
+  .order-nombre { flex: 1; color: #e2e8f0; }
+  .order-saldo { color: #ef4444; font-weight: 700; flex-shrink: 0; }
+  .order-tasa { color: #64748b; flex-shrink: 0; }
+  .order-liq { color: #f59e0b; font-size: 10px; flex-shrink: 0; text-align: right; }
+  /* Detailed recommended */
+  .debt-row { display: grid; grid-template-columns: 1fr auto auto auto;
+              gap: 8px; align-items: center; padding: 10px 0;
+              border-bottom: 1px solid #1e2130; font-size: 12px; }
+  .debt-row:last-child { border-bottom: none; }
+  .debt-nombre { font-weight: 600; }
+  .debt-tipo { font-size: 10px; color: #64748b; margin-top: 1px; }
+  .debt-saldo { font-weight: 700; color: #ef4444; text-align: right; }
+  .debt-tasa { color: #f59e0b; font-size: 11px; text-align: right; }
+  .debt-liq { font-size: 10px; color: #94a3b8; text-align: right; }
+  /* Savings banner */
+  .savings-banner { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+                    border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+  .savings-val { font-size: 22px; font-weight: 800; color: #22c55e; }
+  .savings-text { font-size: 12px; color: #86efac; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Inicio</a>
+  <h1>🎯 Motor de destrucción de deudas</h1>
+</div>
+<div class="container">
+
+  <div class="section">
+    <h2>💰 Presupuesto mensual de pago</h2>
+    <div class="budget-grid" id="budget-grid"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section">
+    <h2>📊 Comparación de estrategias</h2>
+    <div class="strategy-grid" id="strategy-grid"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="rec-section" style="display:none">
+    <h2 id="rec-title">✅ Estrategia recomendada — detalle por deuda</h2>
+    <div id="rec-detail"></div>
+  </div>
+
+  <div class="section" id="savings-section" style="display:none">
+    <h2>💡 Ahorro vs. pago mínimo</h2>
+    <div id="savings-content"></div>
+  </div>
+
+</div>
+<script>
+function fmt(n) { return '$' + parseFloat(n||0).toFixed(2); }
+
+const NOMBRES = {
+  avalancha: 'Avalancha',
+  bola_de_nieve: 'Bola de nieve',
+  hibrida: 'Híbrida',
+};
+const DESCS = {
+  avalancha: 'Mayor tasa de interés primero — minimiza el costo total',
+  bola_de_nieve: 'Menor saldo primero — victorias rápidas y motivación',
+  hibrida: 'Saldos pequeños primero, luego por tasa — balance práctico',
+};
+const COLORS = { avalancha: '#6366f1', bola_de_nieve: '#0ea5e9', hibrida: '#f59e0b' };
+
+fetch('/api/deudas/estrategias').then(r => r.json()).then(d => {
+  if (d.error) {
+    document.getElementById('budget-grid').innerHTML = '<div class="loading">Error: ' + d.error + '</div>';
+    return;
+  }
+
+  // Budget
+  const totalDeuda = d.debts.reduce((s, x) => s + x.saldo, 0);
+  document.getElementById('budget-grid').innerHTML = [
+    ['Deuda total', fmt(totalDeuda), '#ef4444'],
+    ['Ingreso mensual', fmt(d.ingreso_mensual), '#22c55e'],
+    ['Pagos mínimos', fmt(d.total_min), '#f59e0b'],
+    ['Presupuesto total', fmt(d.budget_total), '#6366f1'],
+  ].map(([label, val, color]) =>
+    '<div class="budget-item">' +
+    '<div class="budget-label">' + label + '</div>' +
+    '<div class="budget-val" style="color:' + color + '">' + val + '</div>' +
+    '</div>'
+  ).join('');
+
+  // Strategy cards
+  const keys = ['avalancha', 'bola_de_nieve', 'hibrida'];
+  const interests = keys.map(k => d.estrategias[k].interes_total);
+  const minInt = Math.min(...interests);
+
+  document.getElementById('strategy-grid').innerHTML = keys.map(k => {
+    const s = d.estrategias[k];
+    const isRec = k === d.recomendada;
+    const color = COLORS[k];
+    const isCheapest = s.interes_total === minInt;
+    const interestColor = isCheapest ? '#22c55e' : '#ef4444';
+    const orderHtml = s.orden.map((item, i) =>
+      '<div class="order-item">' +
+      '<div class="order-num" style="background:' + color + '22;color:' + color + '">' + (i+1) + '</div>' +
+      '<div class="order-nombre">' + item.nombre + '</div>' +
+      '<div class="order-liq">' + item.liquidacion_label + '</div>' +
+      '</div>'
+    ).join('');
+    return '<div class="strategy-card' + (isRec ? ' recommended' : '') + '">' +
+      (isRec ? '<span class="strategy-badge">Recomendada</span>' : '') +
+      '<div class="strategy-name" style="color:' + color + '">' + NOMBRES[k] + '</div>' +
+      '<div class="strategy-desc">' + DESCS[k] + '</div>' +
+      '<div class="strategy-fecha">' + s.liquidacion_label + '</div>' +
+      '<div class="strategy-meses">' + s.meses + ' meses</div>' +
+      '<div class="strategy-interes" style="color:' + interestColor + '">' + fmt(s.interes_total) +
+        ' <span>en intereses</span></div>' +
+      '<div class="order-list">' + orderHtml + '</div>' +
+      '</div>';
+  }).join('');
+
+  // Recommended detail
+  const rec = d.estrategias[d.recomendada];
+  document.getElementById('rec-title').textContent =
+    '✅ ' + NOMBRES[d.recomendada] + ' — orden de liquidación';
+  document.getElementById('rec-section').style.display = 'block';
+  document.getElementById('rec-detail').innerHTML = rec.orden.map((item, i) =>
+    '<div class="debt-row">' +
+    '<div><div class="debt-nombre">' + (i+1) + '. ' + item.nombre + '</div>' +
+    '<div class="debt-tipo">Tasa: ' + item.tasa_anual + '% anual</div></div>' +
+    '<div class="debt-saldo">' + fmt(item.saldo) + '</div>' +
+    '<div class="debt-liq">Liquidación<br>' + item.liquidacion_label + '</div>' +
+    '</div>'
+  ).join('');
+
+  // Savings vs min only (estimate: budget = total_min only)
+  const maxInt = Math.max(...interests);
+  const minInt2 = Math.min(...interests);
+  const saving = round2(maxInt - minInt2);
+  document.getElementById('savings-section').style.display = 'block';
+  document.getElementById('savings-content').innerHTML =
+    '<div class="savings-banner">' +
+    '<div class="savings-val">' + fmt(saving) + '</div>' +
+    '<div class="savings-text">Diferencia en intereses entre la peor y la mejor estrategia.<br>' +
+    'Elige bien y ahorras ese dinero extra.</div>' +
+    '</div>';
+}).catch(e => {
+  document.getElementById('budget-grid').innerHTML = '<div class="loading">Error de conexión</div>';
+});
+
+function round2(n) { return Math.round(n * 100) / 100; }
+</script>
+</body>
+</html>"""
+
+
+FUGAS_HTML = """<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 Detector de fugas</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 13px; flex-shrink: 0; }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .container { padding: 14px; max-width: 760px; margin: 0 auto; }
+  .section { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px;
+             padding: 18px; margin-bottom: 12px; }
+  .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
+                letter-spacing: .06em; margin-bottom: 14px; }
+  .loading { color: #64748b; font-size: 12px; }
+  /* Alert cards */
+  .alert-card { background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.3);
+                border-radius: 10px; padding: 12px 14px; margin-bottom: 8px;
+                display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .alert-icon { font-size: 20px; flex-shrink: 0; }
+  .alert-info { flex: 1; }
+  .alert-desc { font-size: 13px; font-weight: 700; color: #fca5a5; }
+  .alert-meta { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .alert-monto { font-size: 18px; font-weight: 800; color: #ef4444; flex-shrink: 0; }
+  .alert-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 99px;
+                 background: #ef4444; color: white; text-transform: uppercase; letter-spacing: .04em; }
+  /* Trend rows */
+  .trend-row { display: flex; align-items: center; gap: 10px; padding: 10px 0;
+               border-bottom: 1px solid #1e2130; }
+  .trend-row:last-child { border-bottom: none; }
+  .trend-cat { flex: 1; font-size: 13px; font-weight: 600; }
+  .trend-prev { font-size: 11px; color: #64748b; flex-shrink: 0; }
+  .trend-arrow { font-size: 11px; color: #64748b; flex-shrink: 0; }
+  .trend-now { font-size: 13px; font-weight: 700; color: #f59e0b; flex-shrink: 0; }
+  .trend-pct { font-size: 12px; font-weight: 700; color: #ef4444; flex-shrink: 0; min-width: 50px; text-align: right; }
+  /* Bar chart */
+  .bar-wrap { margin-top: 4px; }
+  .bar-bg { background: #2a2d3e; border-radius: 99px; height: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; background: #f59e0b; }
+  /* Subscriptions table */
+  .sub-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+             border-radius: 8px; margin-bottom: 4px; background: #0f1117; }
+  .sub-row.cancelar { background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.2); }
+  .sub-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sub-desc { flex: 1; font-size: 12px; font-weight: 600; }
+  .sub-cat { font-size: 10px; color: #64748b; }
+  .sub-meses { font-size: 10px; color: #64748b; flex-shrink: 0; }
+  .sub-monto { font-size: 13px; font-weight: 700; color: #e2e8f0; flex-shrink: 0; }
+  .sub-badge { font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 99px;
+               background: #ef4444; color: white; flex-shrink: 0; }
+  /* Category heatmap */
+  .cat-table { width: 100%; border-collapse: collapse; font-size: 11px; overflow-x: auto; display: block; }
+  .cat-table th { text-align: right; color: #64748b; padding: 4px 6px; white-space: nowrap;
+                  border-bottom: 1px solid #2a2d3e; }
+  .cat-table th:first-child { text-align: left; }
+  .cat-table td { padding: 5px 6px; border-bottom: 1px solid #1a1d27; text-align: right; white-space: nowrap; }
+  .cat-table td:first-child { text-align: left; color: #e2e8f0; font-weight: 500; min-width: 120px; }
+  .cell-val { display: inline-block; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .empty { color: #2a2d3e; }
+  .no-alerts { color: #64748b; font-size: 12px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Inicio</a>
+  <h1>🔍 Detector de fugas de gastos</h1>
+</div>
+<div class="container">
+
+  <div class="section" id="alertas-section">
+    <h2>🚨 Alertas — suscripciones a cancelar</h2>
+    <div id="alertas-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="tendencias-section">
+    <h2>📈 Categorías en alza (últimos 3 meses vs anteriores)</h2>
+    <div id="tendencias-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="sobre-section">
+    <h2>⚠️ Gasto sobre el promedio histórico (último mes)</h2>
+    <div id="sobre-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="subs-section">
+    <h2>🔄 Suscripciones activas (últimos 3 meses)</h2>
+    <div id="subs-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="heatmap-section">
+    <h2>📅 Gasto por categoría y mes (AMEX)</h2>
+    <div id="heatmap-wrap" style="overflow-x:auto"><div class="loading">Cargando...</div></div>
+  </div>
+
+</div>
+<script>
+function fmt(n) { return '$' + parseFloat(n||0).toFixed(2); }
+
+function heatColor(val, max) {
+  if (!val || val === 0) return 'transparent';
+  const pct = Math.min(val / max, 1);
+  const r = Math.round(239 * pct);
+  const g = Math.round(68 * pct);
+  const b = Math.round(68 * pct);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + (0.12 + pct * 0.5) + ')';
+}
+
+fetch('/api/fugas').then(r => r.json()).then(d => {
+  if (d.error) {
+    document.getElementById('alertas-wrap').innerHTML = 'Error: ' + d.error;
+    return;
+  }
+
+  // Alertas: suscripciones con cancelar:true
+  const alertas = d.suscripciones.filter(s => s.cancelar);
+  const alertasHtml = alertas.length
+    ? alertas.map(s =>
+        '<div class="alert-card">' +
+        '<div class="alert-icon">⛔</div>' +
+        '<div class="alert-info">' +
+        '<div class="alert-desc">' + s.descripcion + '</div>' +
+        '<div class="alert-meta">' + s.categoria + ' · activo ' + s.meses_activos + ' mes(es) recientes</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">' +
+        '<div class="alert-monto">' + fmt(s.ultimo_monto) + '/mes</div>' +
+        '<span class="alert-badge">CANCELAR</span>' +
+        '</div>' +
+        '</div>'
+      ).join('')
+    : '<div class="no-alerts">✅ No hay suscripciones marcadas para cancelar</div>';
+  document.getElementById('alertas-wrap').innerHTML = alertasHtml;
+
+  // Tendencias al alza
+  const tendHtml = d.tendencias_al_alza.length
+    ? d.tendencias_al_alza.map(t => {
+        const maxAvg = Math.max(t.promedio_reciente, t.promedio_anterior);
+        const fillPct = Math.round(t.promedio_reciente / maxAvg * 100);
+        return '<div class="trend-row">' +
+          '<div><div class="trend-cat">' + t.categoria + '</div>' +
+          '<div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:' + fillPct + '%"></div></div></div></div>' +
+          '<div class="trend-prev">' + fmt(t.promedio_anterior) + '</div>' +
+          '<div class="trend-arrow">→</div>' +
+          '<div class="trend-now">' + fmt(t.promedio_reciente) + '</div>' +
+          '<div class="trend-pct">+' + t.variacion_pct + '%</div>' +
+          '</div>';
+      }).join('')
+    : '<div class="no-alerts">✅ Sin categorías con alza significativa</div>';
+  document.getElementById('tendencias-wrap').innerHTML = tendHtml;
+
+  // Sobre histórico
+  const sobreHtml = d.sobre_historico.length
+    ? d.sobre_historico.map(s =>
+        '<div class="trend-row">' +
+        '<div><div class="trend-cat">' + s.categoria + '</div>' +
+        '<div style="font-size:10px;color:#64748b">Promedio histórico: ' + fmt(s.promedio_historico) + ' · ' + s.mes_actual_label + '</div></div>' +
+        '<div class="trend-now">' + fmt(s.mes_actual) + '</div>' +
+        '<div class="trend-pct">+' + s.variacion_pct + '%</div>' +
+        '</div>'
+      ).join('')
+    : '<div class="no-alerts">✅ El último mes estuvo dentro del rango normal</div>';
+  document.getElementById('sobre-wrap').innerHTML = sobreHtml;
+
+  // Suscripciones activas
+  const subsHtml = d.suscripciones.length
+    ? d.suscripciones.map(s => {
+        const dot = s.cancelar ? '#ef4444' : '#22c55e';
+        return '<div class="sub-row' + (s.cancelar ? ' cancelar' : '') + '">' +
+          '<div class="sub-dot" style="background:' + dot + '"></div>' +
+          '<div><div class="sub-desc">' + s.descripcion + '</div>' +
+          '<div class="sub-cat">' + s.categoria + '</div></div>' +
+          '<div class="sub-meses">' + s.meses_activos + '/3 meses</div>' +
+          '<div class="sub-monto">' + fmt(s.ultimo_monto) + '</div>' +
+          (s.cancelar ? '<span class="sub-badge">CANCELAR</span>' : '') +
+          '</div>';
+      }).join('')
+    : '<div class="no-alerts">Sin suscripciones detectadas</div>';
+  document.getElementById('subs-wrap').innerHTML = subsHtml;
+
+  // Heatmap by category and month
+  const periodos = d.periodos;
+  const monthly = d.monthly_cats;
+  const allCats = [...new Set(periodos.flatMap(p => Object.keys(monthly[p] || {})))].sort();
+  const maxVal = Math.max(...periodos.flatMap(p => Object.values(monthly[p] || {})));
+
+  const headerRow = '<tr><th>Categoría</th>' + periodos.map(p => '<th>' + p.split(' ')[0].substring(0,3) + ' ' + p.split(' ')[1].slice(-2) + '</th>').join('') + '</tr>';
+  const bodyRows = allCats.map(cat => {
+    const cells = periodos.map(p => {
+      const val = (monthly[p] || {})[cat] || 0;
+      const bg = heatColor(val, maxVal);
+      return val > 0
+        ? '<td><span class="cell-val" style="background:' + bg + '">' + fmt(val) + '</span></td>'
+        : '<td class="empty">—</td>';
+    }).join('');
+    return '<tr><td>' + cat + '</td>' + cells + '</tr>';
+  }).join('');
+
+  document.getElementById('heatmap-wrap').innerHTML =
+    '<table class="cat-table"><thead>' + headerRow + '</thead><tbody>' + bodyRows + '</tbody></table>';
+
+}).catch(() => {
+  document.getElementById('alertas-wrap').innerHTML = '<div class="loading">Error de conexión</div>';
+});
+</script>
+</body>
+</html>"""
+
 
 LOGS_HTML = """<!DOCTYPE html>
 <html lang="es">
