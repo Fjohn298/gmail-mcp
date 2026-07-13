@@ -136,7 +136,7 @@
     {"descripcion": "Cancelar VISA BAC ****2117 en sucursal", "prioridad": "alta", "tipo": "banco_presencial"},
     {"descripcion": "Configurar DEL SUR como débito automático en NIU ••3997 para agosto", "prioridad": "alta", "tipo": "tramite", "nota": "Julio: pago manual desde BAC (no hay débito automático). Para agosto redirigir a NIU."},
     {"descripcion": "Cancelar Google Cloud $9.60/mes", "prioridad": "alta", "tipo": "online"},
-    {"descripcion": "Transferir Max Electrónico N°3070555263 → BAC ****6201", "prioridad": "completado", "tipo": "tramite", "nota": "✅ Ejecutado 11-Jul vía Transfer365. Monto real: $119.43 (vs $54.43 estimado). Confirmar saldo restante en Agrícola.", "fecha_completado": "2026-07-11"},
+    {"descripcion": "Transferir Max Electrónico N°3070555263 → BAC ****6201", "prioridad": "completado", "tipo": "tramite", "nota": "✅ Ejecutado 11-Jul vía Transfer365 (ID a631eea4). Monto $119.43 = $54.43 ISR Hacienda + $65 suegra (pass-through). Max Electrónico $0. BAC neto $58.92 (post-retiro $65 efectivo para suegra).", "fecha_completado": "2026-07-11"},
     {"descripcion": "Configurar débito automático Claro a NIU ••3997 (exclusión AMEX ya aprobada — gestión 427181, 8-Jul)", "prioridad": "media", "tipo": "tramite"},
     {"descripcion": "Mover ANDA a NIU ••3997", "prioridad": "media", "tipo": "tramite"},
     {"descripcion": "Confirmar gastos hormiga $1.75 del 06-jul (flan $1.25 + parqueo $0.50)", "prioridad": "baja", "tipo": "verificar_gmail"}
@@ -402,12 +402,12 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 123.92,
+      "saldo": 58.92,
       "saldo_fecha": "2026-07-12",
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo $123.92 al 12-Jul (confirmado por correos Gmail). Hoy 13-Jul llega salario $566.92. Saldo disponible pre-salario.",
+      "notas": "Saldo $58.92 al 12-Jul (confirmado por correos Gmail). Detalle: $75.00 base + $119.43 Transfer365 ISR+suegra + $2.95 ajuste − $3.20 − $0.80 gasolinera − $35.07 − $5.10 − $2.00 cumpleaños − $65.00 retiro suegra − $17.29 super − $10.00 Movistar = $58.92. Hoy 13-Jul llega salario $566.92.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -427,8 +427,9 @@
         {"fecha": "2026-07-11", "descripcion": "BUFFALO S LA GRAN VIA (cumpleaños papá)", "monto": 35.07, "tipo": "egreso", "categoria": "Restaurante", "fuente": "Gmail_BAC_alerta"},
         {"fecha": "2026-07-11", "descripcion": "CREPE LOVERS LGVKIOSCO (postre cumpleaños)", "monto": 5.10, "tipo": "egreso", "categoria": "Restaurante", "fuente": "Gmail_BAC_alerta"},
         {"fecha": "2026-07-11", "descripcion": "CAFE SIMAN LGV", "monto": 2.00, "tipo": "egreso", "categoria": "Café", "fuente": "Gmail_BAC_alerta"},
-        {"fecha": "2026-07-11", "descripcion": "Transfer365 desde Agrícola 3070555263", "monto": 119.43, "tipo": "ingreso", "categoria": "Transferencia", "fuente": "Gmail_Transfer365_ID_a631eea4", "nota": "⚠️ Monto real $119.43 vs $54.43 estimado. Agrícola tenía fondos adicionales no registrados."},
-        {"fecha": "2026-07-11", "descripcion": "Transfer365 desde Agrícola (monto pequeño)", "monto": 2.95, "tipo": "ingreso", "categoria": "Transferencia", "fuente": "Gmail_Transfer365_ID_c0573f23", "nota": "Origen no identificado — puede ser cashback o ajuste."},
+        {"fecha": "2026-07-11", "descripcion": "Transfer365 desde Agrícola → BAC (ISR Hacienda $54.43 + préstamo suegra $65)", "monto": 119.43, "tipo": "ingreso", "categoria": "Transferencia", "fuente": "Gmail_Transfer365_ID_a631eea4", "nota": "Desglose: $54.43 ISR Hacienda (devolución renta) + $65 de suegra (paso temporal). Agrícola Max Electrónico queda en $0."},
+        {"fecha": "2026-07-11", "descripcion": "Transfer365 desde Agrícola (monto pequeño)", "monto": 2.95, "tipo": "ingreso", "categoria": "Transferencia", "fuente": "Gmail_Transfer365_ID_c0573f23", "nota": "Origen pendiente aclarar — posible cashback o ajuste."},
+        {"fecha": "2026-07-11", "descripcion": "Retiro cajero BAC — efectivo para suegra", "monto": 65.00, "tipo": "egreso", "categoria": "Transferencia", "fuente": "Gmail_BAC_retiro", "nota": "Retiro para devolver efectivo a suegra. Cuenta BAC *****1386 = misma ****6201 (número cuenta vs tarjeta). Operación neutral: +$65 de suegra, -$65 retiro."},
         {"fecha": "2026-07-11", "descripcion": "LA DESP DE DON JUAN HO (supermercado)", "monto": 17.29, "tipo": "egreso", "categoria": "Supermercado", "fuente": "Gmail_BAC_alerta"},
         {"fecha": "2026-07-12", "descripcion": "PAQUETES MOVISTAR -BEL (recarga Movistar)", "monto": 10.00, "tipo": "egreso", "categoria": "Telecom", "fuente": "Gmail_BAC_alerta"}
       ],
@@ -437,7 +438,7 @@
         "fecha_fin": "2026-07-13",
         "saldo_inicio": 261.49,
         "dias_total": 11,
-        "saldo_actual": 123.92,
+        "saldo_actual": 58.92,
         "dias_restantes": 0,
         "nota": "Quincena completa. Salario llega 13-Jul."
       }
@@ -445,15 +446,16 @@
     {
       "nombre": "Agrícola Max Electrónico",
       "tipo": "debito",
-      "saldo": null,
-      "saldo_fecha": null,
+      "saldo": 0.00,
+      "saldo_fecha": "2026-07-11",
       "banco": "Agrícola",
       "numero_cuenta": "3070555263",
       "fecha_registro": "2026-07-08",
-      "notas": "⚠️ Saldo a confirmar. El 11-Jul se transfirió $119.43 a BAC ****6201 (vs $54.43 estimado). Indica que la cuenta tenía $65 adicionales no rastreados. Confirmar saldo real.",
+      "notas": "✅ Saldo $0 confirmado al 11-Jul. Desglose: +$54.43 ISR Hacienda (MINHDA) + $65.00 suegra = $119.43 total → transferido a BAC ****6201 vía Transfer365. La suegra transfirió $65 a esta cuenta; usuario retiró el efectivo en cajero BAC para devolvérselo. Cuenta vacía.",
       "movimientos": [
         {"fecha": "2026-07-08", "descripcion": "Devolución de renta — MINHDA (Transfer365, ID: 1416015803)", "monto": 54.43, "tipo": "ingreso", "nota": "Confirmado: devolución ISR Ministerio de Hacienda."},
-        {"fecha": "2026-07-11", "descripcion": "Transfer365 a BAC ****6201 (ID: a631eea4)", "monto": 119.43, "tipo": "egreso", "fuente": "Gmail_Agricola_banca_movil", "nota": "Monto real transferido: $119.43. El saldo resultante de esta cuenta queda sin confirmar ($54.43 registrado - $119.43 = imposible → había fondos adicionales)."}
+        {"fecha": "2026-07-11", "descripcion": "Transfer365 desde suegra → Agrícola Max", "monto": 65.00, "tipo": "ingreso", "nota": "Suegra transfirió $65 a esta cuenta para que usuario le devolviera efectivo."},
+        {"fecha": "2026-07-11", "descripcion": "Transfer365 a BAC ****6201 (ID: a631eea4) — saldo completo", "monto": 119.43, "tipo": "egreso", "fuente": "Gmail_Agricola_banca_movil", "nota": "Transferencia total: $54.43 ISR + $65 suegra = $119.43. Cuenta queda en $0."}
       ]
     },
     {
@@ -522,9 +524,9 @@
         "cuenta_origen": "Max_Electronico",
         "cuenta_destino": "BAC_6201",
         "estado": "completado",
-        "saldo_real": { "BAC_6201": 123.92 },
+        "saldo_real": { "BAC_6201": 58.92, "Max_Electronico": 0.00 },
         "saldo_proyectado": null,
-        "nota": "✅ Ejecutado 11-Jul vía Transfer365 (ID a631eea4). Monto real $119.43 vs $54.43 estimado — la cuenta Agrícola tenía $65 adicionales no rastreados. Saldo Max Electrónico post-transferencia: pendiente confirmar.",
+        "nota": "✅ Ejecutado 11-Jul vía Transfer365 (ID a631eea4). Desglose: $54.43 ISR Hacienda + $65 suegra (pass-through) = $119.43. BAC neto post-retiro suegra: $58.92. Max Electrónico: $0.",
         "fecha_real": "2026-07-11"
       },
       {
