@@ -21,7 +21,7 @@
     "cards": [
       {"name": "AMEX BAC",       "last4": "3328", "balance": 406.17,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 125.00},
 {"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00,    "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00},
-      {"name": "VISA Agrícola",  "last4": "6114", "balance": 105.01,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 0.00}
+      {"name": "VISA Agrícola",  "last4": "6114", "balance": 168.47,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 11.84, "balance_fecha_corte": "2026-07-09", "pago_contado_corte": 168.47, "pago_minimo_corte": 11.84, "fecha_limite_pago": "2026-08-03", "nota_balance": "Estado de cuenta corte 09-Jul: pago de contado $168.47 (vs $105.01 registrado previo al corte — diferencia $63.46 pendiente aclarar). Post-corte: cargo matrícula UTEC $186 el 10-Jul."}
     ],
     "obligaciones_extra": [
       {
@@ -136,7 +136,7 @@
     {"descripcion": "Cancelar VISA BAC ****2117 en sucursal", "prioridad": "alta", "tipo": "banco_presencial"},
     {"descripcion": "Configurar DEL SUR como débito automático en NIU ••3997 para agosto", "prioridad": "alta", "tipo": "tramite", "nota": "Julio: pago manual desde BAC (no hay débito automático). Para agosto redirigir a NIU."},
     {"descripcion": "Cancelar Google Cloud $9.60/mes", "prioridad": "alta", "tipo": "online"},
-    {"descripcion": "Transferir $54.43 Max Electrónico N°3070555263 → BAC ****6201", "prioridad": "alta", "tipo": "tramite", "nota": "Devolución ISR MINHDA. Pendiente ejecutar Transfer365."},
+    {"descripcion": "Transferir Max Electrónico N°3070555263 → BAC ****6201", "prioridad": "completado", "tipo": "tramite", "nota": "✅ Ejecutado 11-Jul vía Transfer365. Monto real: $119.43 (vs $54.43 estimado). Confirmar saldo restante en Agrícola.", "fecha_completado": "2026-07-11"},
     {"descripcion": "Configurar débito automático Claro a NIU ••3997 (exclusión AMEX ya aprobada — gestión 427181, 8-Jul)", "prioridad": "media", "tipo": "tramite"},
     {"descripcion": "Mover ANDA a NIU ••3997", "prioridad": "media", "tipo": "tramite"},
     {"descripcion": "Confirmar gastos hormiga $1.75 del 06-jul (flan $1.25 + parqueo $0.50)", "prioridad": "baja", "tipo": "verificar_gmail"}
@@ -336,7 +336,11 @@
     "fecha_pago_proximo": "2026-08-10",
     "pago_ciclo_jul": 150.00,
     "fecha_pago_adicional": "2026-07-13",
-    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Pago adicional $150 el 13-Jul (desde salario). Laptop cuota 4/12 cargó hoy 07-Jul ($15.42). NUEVA ESTRATEGIA: DEL SUR + Claro + ANDA + Claude Pro se mueven a NIU 3997. AMEX queda solo con Accidentes $8.95 + Laptop $15.42 + Curacao $20.75 = $45.12/mes.",
+    "cargos_ciclo_jul_confirmados": [
+      {"fecha": "2026-07-10", "descripcion": "ANDA -C- (cargo automático)", "monto": 2.83, "nota": "Monto $2.83 vs $2.62 habitual — diferencia $0.21 posiblemente cargo de servicio. Pendiente migrar a NIU."},
+      {"fecha": "2026-07-07", "descripcion": "Laptop BAC cuota 4/12", "monto": 15.42}
+    ],
+    "notas": "Mínimo ciclo jun (10-Jul) ya pagado. Pago adicional $150 el 13-Jul (desde salario). Laptop cuota 4/12 cargó 07-Jul ($15.42). ANDA cobrado 10-Jul ($2.83 — cargo sigue en AMEX mientras no se migre a NIU). NUEVA ESTRATEGIA: DEL SUR + Claro + ANDA + Claude Pro se mueven a NIU 3997. AMEX queda solo con Accidentes $8.95 + Laptop $15.42 + Curacao $20.75 = $45.12/mes.",
     "estrategia_pago": {
       "pago_julio_13": 150.00,
       "pago_mensual": 250.00,
@@ -398,11 +402,12 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 75.00,
+      "saldo": 123.92,
+      "saldo_fecha": "2026-07-12",
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Presupuesto operativo hasta el 13-Jul. Saldo $75 al 7-Jul ($12.50/día restante). Pago con MASTERCARD 6201.",
+      "notas": "Saldo $123.92 al 12-Jul (confirmado por correos Gmail). Hoy 13-Jul llega salario $566.92. Saldo disponible pre-salario.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -416,28 +421,39 @@
         {"fecha": "2026-07-05", "descripcion": "WOMPI*TEXACO LA (gasolina)", "monto": 7.01, "tipo": "egreso", "categoria": "Gasolina"},
         {"fecha": "2026-07-06", "descripcion": "WWW.ALIEXPRESS.COM (disipador de calor PC)", "monto": 15.56, "tipo": "egreso", "categoria": "Tecnología"},
         {"fecha": "2026-07-07", "descripcion": "Transfer365 a NIU ••3997 (recarga cargos fijos)", "monto": 57.58, "tipo": "egreso", "categoria": "Transferencia"},
-        {"fecha": "2026-07-06", "descripcion": "Gastos hormiga (flan $1.25 + parqueo $0.50) — pendiente confirmar Gmail", "monto": 1.75, "tipo": "egreso", "categoria": "Alimentación", "pendiente_confirmar": true}
+        {"fecha": "2026-07-06", "descripcion": "Gastos hormiga (flan $1.25 + parqueo $0.50) — pendiente confirmar Gmail", "monto": 1.75, "tipo": "egreso", "categoria": "Alimentación", "pendiente_confirmar": true},
+        {"fecha": "2026-07-10", "descripcion": "FOODMART TEXACO LA GLO (gasolinera)", "monto": 3.20, "tipo": "egreso", "categoria": "Alimentación", "fuente": "Gmail_BAC_alerta"},
+        {"fecha": "2026-07-10", "descripcion": "FOODMART TEXACO LA GLO (ajuste/propina gasolinera)", "monto": 0.80, "tipo": "egreso", "categoria": "Alimentación", "fuente": "Gmail_BAC_alerta"},
+        {"fecha": "2026-07-11", "descripcion": "BUFFALO S LA GRAN VIA (cumpleaños papá)", "monto": 35.07, "tipo": "egreso", "categoria": "Restaurante", "fuente": "Gmail_BAC_alerta"},
+        {"fecha": "2026-07-11", "descripcion": "CREPE LOVERS LGVKIOSCO (postre cumpleaños)", "monto": 5.10, "tipo": "egreso", "categoria": "Restaurante", "fuente": "Gmail_BAC_alerta"},
+        {"fecha": "2026-07-11", "descripcion": "CAFE SIMAN LGV", "monto": 2.00, "tipo": "egreso", "categoria": "Café", "fuente": "Gmail_BAC_alerta"},
+        {"fecha": "2026-07-11", "descripcion": "Transfer365 desde Agrícola 3070555263", "monto": 119.43, "tipo": "ingreso", "categoria": "Transferencia", "fuente": "Gmail_Transfer365_ID_a631eea4", "nota": "⚠️ Monto real $119.43 vs $54.43 estimado. Agrícola tenía fondos adicionales no registrados."},
+        {"fecha": "2026-07-11", "descripcion": "Transfer365 desde Agrícola (monto pequeño)", "monto": 2.95, "tipo": "ingreso", "categoria": "Transferencia", "fuente": "Gmail_Transfer365_ID_c0573f23", "nota": "Origen no identificado — puede ser cashback o ajuste."},
+        {"fecha": "2026-07-11", "descripcion": "LA DESP DE DON JUAN HO (supermercado)", "monto": 17.29, "tipo": "egreso", "categoria": "Supermercado", "fuente": "Gmail_BAC_alerta"},
+        {"fecha": "2026-07-12", "descripcion": "PAQUETES MOVISTAR -BEL (recarga Movistar)", "monto": 10.00, "tipo": "egreso", "categoria": "Telecom", "fuente": "Gmail_BAC_alerta"}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-07-02",
         "fecha_fin": "2026-07-13",
         "saldo_inicio": 261.49,
         "dias_total": 11,
-        "saldo_actual": 75.00,
-        "dias_restantes": 6,
-        "tasa_diaria_disponible": 12.50
+        "saldo_actual": 123.92,
+        "dias_restantes": 0,
+        "nota": "Quincena completa. Salario llega 13-Jul."
       }
     },
     {
       "nombre": "Agrícola Max Electrónico",
       "tipo": "debito",
-      "saldo": 54.43,
+      "saldo": null,
+      "saldo_fecha": null,
       "banco": "Agrícola",
       "numero_cuenta": "3070555263",
       "fecha_registro": "2026-07-08",
-      "notas": "Devolución ISR MINHDA $54.43 (8-Jul). Plan: mover a BAC 6201 próximamente.",
+      "notas": "⚠️ Saldo a confirmar. El 11-Jul se transfirió $119.43 a BAC ****6201 (vs $54.43 estimado). Indica que la cuenta tenía $65 adicionales no rastreados. Confirmar saldo real.",
       "movimientos": [
-        {"fecha": "2026-07-08", "descripcion": "Devolución de renta — MINHDA (Transfer365, ID: 1416015803)", "monto": 54.43, "tipo": "ingreso", "nota": "Confirmado: devolución ISR Ministerio de Hacienda."}
+        {"fecha": "2026-07-08", "descripcion": "Devolución de renta — MINHDA (Transfer365, ID: 1416015803)", "monto": 54.43, "tipo": "ingreso", "nota": "Confirmado: devolución ISR Ministerio de Hacienda."},
+        {"fecha": "2026-07-11", "descripcion": "Transfer365 a BAC ****6201 (ID: a631eea4)", "monto": 119.43, "tipo": "egreso", "fuente": "Gmail_Agricola_banca_movil", "nota": "Monto real transferido: $119.43. El saldo resultante de esta cuenta queda sin confirmar ($54.43 registrado - $119.43 = imposible → había fondos adicionales)."}
       ]
     },
     {
@@ -489,50 +505,53 @@
         "monto": 186.00,
         "tipo": "gasto",
         "cuenta": "VISA_Agricola_6114",
-        "estado": "pendiente",
+        "estado": "completado",
         "saldo_real": null,
         "saldo_proyectado": { "VISA_Agricola_6114": 291.01 },
-        "nota": "Matrícula universitaria Jul 2026. Cargo a VISA Agrícola ****6114 (saldo real: $105.01 → proyectado: $291.01)."
+        "nota": "✅ Pagado 10-Jul desde Agrícola banca móvil: $105.00 matrícula + $81.00 mensualidad = $186.00 total. IDs: b2208ef5 y 7ea765c0.",
+        "monto_real": 186.00,
+        "detalle_real": "UTEC matrícula $105 (ID b2208ef5) + UTEC mensualidad $81 (ID 7ea765c0). Pagado desde cuenta Agrícola."
       },
       {
         "fecha": "2026-07-10",
         "emoji": "💸",
-        "descripcion": "Transferencia Max Electrónico → BAC ****6201",
-        "monto": 54.43,
+        "descripcion": "Transferencia Agrícola → BAC ****6201",
+        "monto_estimado": 54.43,
+        "monto_real": 119.43,
         "tipo": "transferencia",
         "cuenta_origen": "Max_Electronico",
         "cuenta_destino": "BAC_6201",
-        "estado": "pendiente",
-        "saldo_real": null,
-        "saldo_proyectado": {
-          "Max_Electronico": 0.00,
-          "BAC_6201": 129.43
-        },
-        "nota": "Devolución ISR MINHDA. Ejecutar vía Transfer365 desde cuenta 3070555263. Max queda en $0, BAC sube de $75 → $129.43."
+        "estado": "completado",
+        "saldo_real": { "BAC_6201": 123.92 },
+        "saldo_proyectado": null,
+        "nota": "✅ Ejecutado 11-Jul vía Transfer365 (ID a631eea4). Monto real $119.43 vs $54.43 estimado — la cuenta Agrícola tenía $65 adicionales no rastreados. Saldo Max Electrónico post-transferencia: pendiente confirmar.",
+        "fecha_real": "2026-07-11"
       },
       {
         "fecha": "2026-07-11",
         "emoji": "💧",
-        "descripcion": "ANDA agua — débito automático NIU ••3997",
-        "monto": 2.62,
+        "descripcion": "ANDA agua — cobro",
+        "monto": 2.83,
         "tipo": "gasto_fijo",
-        "cuenta": "NIU_3997",
-        "estado": "pendiente",
+        "cuenta": "AMEX_3328",
+        "estado": "completado",
         "saldo_real": null,
-        "saldo_proyectado": { "NIU_3997": 38.57 },
-        "nota": "Cobro automático ANDA. Pendiente redirigir débito desde AMEX a NIU. NIU: $41.19 → $38.57."
+        "saldo_proyectado": null,
+        "nota": "⚠️ ANDA cobró a AMEX ****3328 (no a NIU) el 10-Jul — $2.83 (vs $2.62 habitual). El débito automático sigue sin migrar a NIU. Pendiente: redirigir.",
+        "fecha_real": "2026-07-10"
       },
       {
         "fecha": "2026-07-11",
         "emoji": "🎂",
-        "descripcion": "Cumpleaños papá + gastos varios",
-        "monto_estimado": { "min": 60.00, "max": 90.00, "referencia": 75.00 },
+        "descripcion": "Cumpleaños papá + salida La Gran Vía",
         "tipo": "gasto_variable",
         "cuenta": "BAC_6201",
-        "estado": "pendiente",
+        "estado": "completado",
         "saldo_real": null,
-        "saldo_proyectado": { "BAC_6201": "~$39-54 (depende del gasto real)" },
-        "nota": "Cumpleaños papá ~$40-50 + gastos varios $20-40 (rango total $60-90). Cargo desde BAC ****6201."
+        "monto_real": 42.17,
+        "detalle_real": "BUFFALO S LA GRAN VIA $35.07 + CREPE LOVERS $5.10 + CAFE SIMAN $2.00 = $42.17",
+        "saldo_proyectado": null,
+        "nota": "✅ Gasto real cumpleaños papá: $42.17 (dentro del rango estimado $40-50). Cargado a BAC ****6201."
       },
       {
         "fecha": "2026-07-13",
