@@ -1,0 +1,42 @@
+Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
+2026-06-29,BAC,Ingreso - Préstamo,Transfer365 esposa (pago préstamo efectivo),Ingreso,55.25,No,Confirmado historial BAC ****6201
+2026-06-29,BAC,Farmacia,N1CO*FCIA SAN NICOLAS,Gasto,-15.52,No,Confirmado historial BAC ****6201
+2026-07-01,BAC,Ingreso - Préstamo,TEF DE:MONICA ALE (esposa),Ingreso,22.00,No,Confirmado historial BAC ****6201
+2026-07-01,BAC,Educación,Colegiatura hermano - universidad (proyección),Gasto,-81.00,Sí,Proyección — pagado 10-Jul vía VISA Agrícola ****6114
+2026-07-01,NIU ••3997,Servicios - Cargos automáticos,Cargos automáticos de servicios vía NIU,Gasto,-42.62,Sí,Promedio mensual
+2026-07-01,AMEX,Deuda - Tarjeta crédito,Pago mensual AMEX,Gasto,,Sí,Proyección liquidación sep-2026 — MONTO PENDIENTE
+2026-07-03,BAC,Tecnología,TEF A:129214565 (mouse para esposa),Gasto,-14.90,No,Confirmado historial BAC ****6201
+2026-07-04,BAC,Restaurante,BUFFALO S LA GRAN VIA (salida con esposa),Gasto,-39.62,No,Confirmado historial BAC ****6201
+2026-07-04,BAC,Oficina,OD El Salvador (marcadores pizarra),Gasto,-3.70,No,Confirmado historial BAC ****6201
+2026-07-04,BAC,Mascotas,PETLAND (comida para gato),Gasto,-21.77,No,Confirmado historial BAC ****6201
+2026-07-04,BAC,Tecnología,ZONA DIGITAL (mantenimiento PC),Gasto,-21.80,No,Confirmado historial BAC ****6201
+2026-07-04,BAC,Alimentación,WOMPI*BOOST (licuado de frutas),Gasto,-2.80,No,Confirmado historial BAC ****6201
+2026-07-05,BAC,Gasolina,WOMPI*TEXACO LA (gasolina),Gasto,-7.01,No,Confirmado historial BAC ****6201
+2026-07-05,NIU ••3997,Servicios - Recarga,Recarga Transfer365 desde BAC,Gasto,-60.00,Sí,"Biquincenal, fondea cargos automáticos NIU"
+2026-07-06,BAC,Tecnología,WWW.ALIEXPRESS.COM (disipador de calor PC),Gasto,-15.56,No,Confirmado historial BAC ****6201
+2026-07-07,BAC,Transferencia,Transfer365 a NIU ••3997 (recarga cargos fijos),Gasto,-57.58,No,Confirmado historial BAC ****6201
+2026-07-07,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (recarga),Ingreso,57.58,No,Par con egreso BAC 07-Jul
+2026-07-08,NIU ••3997,Servicios - Telecom,Claro pospago pago manual,Gasto,-20.00,No,Exclusión AMEX aprobada gestión 427181
+2026-07-08,Max Electrónico,Ingreso - Devolución,Devolución ISR MINHDA (Transfer365 ID:1416015803),Ingreso,54.43,No,Devolución renta fiscal 2025 — ISR Hacienda
+2026-07-10,BAC,Suscripciones,Google Cloud,Gasto,-9.60,Sí,Pendiente cancelar
+2026-07-10,BAC,Alimentación,FOODMART TEXACO LA GLO (gasolinera),Gasto,-3.20,No,Confirmado Gmail BAC alerta
+2026-07-10,BAC,Alimentación,FOODMART TEXACO LA GLO (ajuste/propina gasolinera),Gasto,-0.80,No,Confirmado Gmail BAC alerta
+2026-07-10,VISA Agrícola,Educación,UTEC mensualidad hermano (Pago de servici),Gasto,-81.00,Sí,Confirmado app Agrícola — cargo post-corte VISA ****6114
+2026-07-10,VISA Agrícola,Educación,UTEC matrícula hermano (Pago de servici),Gasto,-105.00,No,Confirmado app Agrícola — cargo post-corte VISA ****6114
+2026-07-10,AMEX,Servicios - Agua,ANDA cargo automático,Gasto,-2.83,Sí,⚠️ Pendiente migrar débito automático a NIU ••3997
+2026-07-11,BAC,Restaurante,BUFFALO S LA GRAN VIA (cumpleaños papá),Gasto,-35.07,No,Confirmado Gmail BAC alerta
+2026-07-11,BAC,Restaurante,CREPE LOVERS LGVKIOSCO (postre cumpleaños),Gasto,-5.10,No,Confirmado Gmail BAC alerta
+2026-07-11,BAC,Alimentación,CAFE SIMAN LGV,Gasto,-2.00,No,Confirmado Gmail BAC alerta
+2026-07-11,BAC,Transferencia,Transfer365 Agrícola a BAC (ISR+suegra ID:a631eea4),Ingreso,119.43,No,"$54.43 ISR Hacienda + $65 suegra pass-through"
+2026-07-11,BAC,Transferencia,Transfer365 desde Agrícola (ajuste ID:c0573f23),Ingreso,2.95,No,Origen por confirmar — posible cashback o ajuste
+2026-07-11,BAC,Transferencia,Retiro cajero BAC efectivo para suegra,Gasto,-65.00,No,Pass-through neutro: +$65 suegra - $65 retiro cajero
+2026-07-11,Max Electrónico,Transferencia,Préstamo temporal suegra (Transfer365),Ingreso,65.00,No,Pass-through: suegra transfirió para devolver efectivo
+2026-07-11,Max Electrónico,Transferencia,Transfer365 a BAC saldo completo (ID:a631eea4),Gasto,-119.43,No,Cierra Max Electrónico. Saldo $0 confirmado.
+2026-07-11,BAC,Supermercado,LA DESP DE DON JUAN HO,Gasto,-17.29,No,Confirmado Gmail BAC alerta
+2026-07-12,BAC,Servicios - Telecom,PAQUETES MOVISTAR -BEL (recarga Movistar),Gasto,-10.00,No,Confirmado Gmail BAC alerta
+2026-07-13,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 13-Jul),Ingreso,566.92,Sí,PENDIENTE confirmar llegada via Gmail — esperado hoy
+2026-07-13,AMEX,Deuda - Tarjeta crédito,Pago adicional AMEX ****3328 plan liquidación,Gasto,-150.00,No,PENDIENTE confirmar via Gmail — pago desde salario quincena
+2026-07-15,Agrícola,Deuda - Préstamo consumo,Cuota préstamo de consumo,Gasto,-147.11,Sí,"Saldo aprox. $6,171 / 14.38% anual"
+2026-07-20,Cuscatlán,Deuda - Préstamo consolidación,Cuota préstamo consolidación (1 de 48),Gasto,-85.00,Sí,"Total $2,180 / iniciado jul-2026"
+2026-07-25,DEL SUR,Servicios - Energía,Pago manual factura DEL SUR,Gasto,,Sí,Pago manual hasta redirigir a NIU — MONTO PENDIENTE confirmar
+2026-07-30,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 30-Jul),Ingreso,566.92,Sí,Quincena 30

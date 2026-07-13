@@ -23,7 +23,13 @@
 **Descripción:** Crear CSV para registrar todos los movimientos de todas las cuentas (BAC, AMEX, NIU, efectivo) desde ene-2026 en adelante. Alimentarlo automáticamente desde Gmail y con entrada manual. Usar para análisis de patrones de gasto diario, semanal y quincenal.
 **Requiere:** Definir estructura CSV, integrar con Gmail MCP, crear vista en dashboard.
 **Prioridad:** Alta
-**Estado:** 💡 Pendiente
+**Estado:** 🔄 En progreso
+**Notas de ejecución:**
+- Inicio real: 13-Jul-2026
+- CSV en Drive: `Finanzas/movimientos.csv` (ID Drive: `1DK9UXzkyt6i36kh-Lwy0AQwTXsaTe3-V` → migrado a carpeta Finanzas `1LXw_WHHybVhFZtSqlhmU3-yLhPCuIehl`)
+- Movimientos reales Jul 10-12 extraídos de Gmail BAC/Agrícola/NIU
+- Dashboard: `finanzas/dashboard.py` (pandas + matplotlib)
+- Pendiente: automatización completa + DEL SUR monto + salario Jul 13 + AMEX pago
 
 ---
 
