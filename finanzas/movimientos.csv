@@ -42,6 +42,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-11,Max Electrónico,Transferencia,Transfer365 a BAC saldo completo (ID:a631eea4),Gasto,-119.43,No,Cierra Max Electrónico. Saldo $0 confirmado.
 2026-07-11,BAC,Supermercado,LA DESP DE DON JUAN HO,Gasto,-17.29,No,Confirmado Gmail BAC alerta
 2026-07-12,BAC,Servicios - Telecom,PAQUETES MOVISTAR -BEL (recarga Movistar),Gasto,-10.00,No,Confirmado Gmail BAC alerta
+2026-07-13,BAC,Alimentación,FOODMART TEXACO LA GLO (comida/snack),Gasto,-2.80,No,Confirmado Gmail BAC alerta — 13:06:58 Tarjeta Presente
+2026-07-13,BAC,Restaurante,WENDYSCOM CYBS (Wendy's online),Gasto,-8.45,No,Confirmado Gmail BAC alerta — 17:38:50 Internet
 2026-07-13,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 13-Jul),Ingreso,566.92,Sí,PENDIENTE confirmar llegada via Gmail — esperado hoy (11:46 AM no llega aún)
 2026-07-15,Agrícola,Deuda - Préstamo consumo,Cuota préstamo de consumo,Gasto,-147.11,Sí,"Saldo aprox. $6,171 / 14.38% anual"
 2026-07-20,Cuscatlán,Deuda - Préstamo consolidación,Cuota préstamo consolidación (1 de 48),Gasto,-85.00,Sí,"Total $2,180 / iniciado jul-2026"

@@ -402,13 +402,13 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 100.97,
+      "saldo": 89.72,
       "saldo_fecha": "2026-07-13",
       "saldo_retenido": 32.39,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo $100.97 al 13-Jul (confirmado app BAC). Saldo retenido: $32.39. Desglose vs $58.92 anterior: +$35 TEF esposa (10-Jul) +$10 TEF esposa (11-Jul) −$2.95 T365 egreso (11-Jul, inconsistencia app) = $100.97. Salario $566.92 pendiente hoy. Pago AMEX $150 pendiente.",
+      "notas": "Saldo $89.72 al 13-Jul tarde (estimado: $100.97 − $2.80 FOODMART − $8.45 Wendy's = $89.72). Saldo retenido: $32.39. Salario $566.92 aún PENDIENTE de confirmar.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -435,16 +435,18 @@
         {"fecha": "2026-07-11", "descripcion": "T365 A:JONATHAN (egreso) — $2.95", "monto": 2.95, "tipo": "egreso", "categoria": "Transferencia", "fuente": "App_BAC_procesados", "nota": "App procesados muestra egreso -$2.95 (T365 A:JONATHAN). App recientes muestra ingreso +$2.95 (T365 DE:JONATHAN). Inconsistencia de app — efecto neto confirmado por saldo $100.97 = egreso. Pendiente confirmar destino."},
         {"fecha": "2026-07-11", "descripcion": "Retiro cajero BAC — efectivo para suegra", "monto": 65.00, "tipo": "egreso", "categoria": "Transferencia", "fuente": "App_BAC_RETIRO ATM RED CR", "nota": "Retiro para devolver efectivo a suegra. Cuenta BAC *****1386 = misma ****6201."},
         {"fecha": "2026-07-11", "descripcion": "LA DESP DE DON JUAN HO (supermercado)", "monto": 17.29, "tipo": "egreso", "categoria": "Supermercado", "fuente": "Gmail_BAC_alerta"},
-        {"fecha": "2026-07-12", "descripcion": "PAQUETES MOVISTAR -BEL (recarga Movistar)", "monto": 10.00, "tipo": "egreso", "categoria": "Telecom", "fuente": "Gmail_BAC_alerta"}
+        {"fecha": "2026-07-12", "descripcion": "PAQUETES MOVISTAR -BEL (recarga Movistar)", "monto": 10.00, "tipo": "egreso", "categoria": "Telecom", "fuente": "Gmail_BAC_alerta"},
+        {"fecha": "2026-07-13", "descripcion": "FOODMART TEXACO LA GLO (comida/snack)", "monto": 2.80, "tipo": "egreso", "categoria": "Alimentación", "fuente": "Gmail_BAC_alerta", "hora": "13:06:58", "tipo_compra": "Tarjeta Presente"},
+        {"fecha": "2026-07-13", "descripcion": "WENDYSCOM CYBS (Wendy's online)", "monto": 8.45, "tipo": "egreso", "categoria": "Restaurante", "fuente": "Gmail_BAC_alerta", "hora": "17:38:50", "tipo_compra": "Internet"}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-07-02",
         "fecha_fin": "2026-07-13",
         "saldo_inicio": 261.49,
         "dias_total": 11,
-        "saldo_actual": 100.97,
+        "saldo_actual": 89.72,
         "dias_restantes": 0,
-        "nota": "Quincena completa. Salario llega 13-Jul."
+        "nota": "Quincena completa. Salario llega 13-Jul (PENDIENTE confirmar). Saldo estimado post-gastos Jul 13 tarde."
       }
     },
     {
