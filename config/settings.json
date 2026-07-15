@@ -468,16 +468,18 @@
       "nombre": "NIU",
       "tipo": "prepago",
       "cuenta": "••3997",
-      "saldo": 41.19,
+      "saldo": 21.19,
+      "saldo_fecha": "2026-07-14",
       "fecha_registro": "2026-07-07",
-      "notas": "Cubre DEL SUR + Claro + ANDA + Claude Pro (~$112.62/mes). Recargar $60/quincena. Próx. cargos: ANDA ~11-jul $2.62, Claude Pro 14-jul $20, DEL SUR ~22-jul $70 (recargar con salario 13-jul antes).",
+      "notas": "Saldo $21.19 al 14-Jul (estimado: $41.19 − $20 Claude Pro = $21.19). Cubre DEL SUR + Claro + ANDA + Claude Pro. Pendiente recarga desde salario para fondear DEL SUR julio (~$70).",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},
         {"fecha": "2026-06-29", "descripcion": "PAGO PRESTAMO 2132201069", "monto": 147.11, "tipo": "egreso"},
         {"fecha": "2026-06-29", "descripcion": "PAGO TARJETA VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
         {"fecha": "2026-07-07", "descripcion": "Transfer365 desde BAC 6201 (recarga cargos fijos)", "monto": 57.58, "tipo": "ingreso"},
-        {"fecha": "2026-07-08", "descripcion": "Claro pospago — pago manual desde NIU", "monto": 20.00, "tipo": "egreso", "categoria": "Claro", "nota": "Débito bancario confirmado por Cuscatlán el 8-Jul a las 02:14. Exclusión AMEX aprobada (gestión 427181)."}
+        {"fecha": "2026-07-08", "descripcion": "Claro pospago — pago manual desde NIU", "monto": 20.00, "tipo": "egreso", "categoria": "Claro", "nota": "Débito bancario confirmado por Cuscatlán el 8-Jul a las 02:14. Exclusión AMEX aprobada (gestión 427181)."},
+        {"fecha": "2026-07-14", "descripcion": "Claude Pro — ciclo Jul 14–Ago 14", "monto": 20.00, "tipo": "egreso", "categoria": "Suscripciones", "fuente": "Recibo_Anthropic_#2891-4106-9461", "nota": "Confirmado recibo Anthropic. Payment method: ••3997. Stripe invoice BDHJWHCX-0002."}
       ]
     }
   ],
@@ -568,8 +570,8 @@
         "monto": 566.92,
         "tipo": "ingreso",
         "cuenta_destino": "BAC_6201",
-        "estado": "pendiente",
-        "saldo_real": null,
+        "estado": "confirmado",
+        "saldo_real": {"salario_llegada": "2026-07-13 tarde", "monto_confirmado": 566.92, "fuente": "usuario_confirmó_15-Jul"},
         "distribucion_proyectada": {
           "AMEX_3328_pago_adicional": 150.00,
           "NIU_3997_recarga": 60.00,
@@ -592,10 +594,10 @@
         "monto": 20.00,
         "tipo": "gasto_fijo",
         "cuenta": "NIU_3997",
-        "estado": "pendiente",
-        "saldo_real": null,
-        "saldo_proyectado": { "NIU_3997": "~$78.57 (post-recarga 13-jul menos Claude Pro)" },
-        "nota": "Cobro mensual Claude Pro $20. NIU post-recarga ~$98.57 → ~$78.57. Usuario estima ~$81.95."
+        "estado": "completado",
+        "saldo_real": {"NIU_3997_post": 21.19, "fuente": "Recibo_Anthropic_#2891-4106-9461", "fecha_cobro": "2026-07-14", "ciclo": "Jul14–Ago14"},
+        "saldo_proyectado": null,
+        "nota": "✅ Confirmado recibo Anthropic 15-Jul 03:29. Ciclo Jul 14–Ago 14 2026. Payment method ••3997 (NIU). Saldo NIU: $41.19 − $20 = $21.19."
       },
       {
         "fecha": "2026-07-18",

@@ -44,7 +44,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-12,BAC,Servicios - Telecom,PAQUETES MOVISTAR -BEL (recarga Movistar),Gasto,-10.00,No,Confirmado Gmail BAC alerta
 2026-07-13,BAC,Alimentación,FOODMART TEXACO LA GLO (comida/snack),Gasto,-2.80,No,Confirmado Gmail BAC alerta — 13:06:58 Tarjeta Presente
 2026-07-13,BAC,Restaurante,WENDYSCOM CYBS (Wendy's online),Gasto,-8.45,No,Confirmado Gmail BAC alerta — 17:38:50 Internet
-2026-07-13,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 13-Jul),Ingreso,566.92,Sí,PENDIENTE confirmar llegada via Gmail — esperado hoy (11:46 AM no llega aún)
+2026-07-13,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 13-Jul),Ingreso,566.92,Sí,✅ Confirmado — llegó tarde 13-Jul (usuario confirmó 15-Jul)
+2026-07-14,NIU ••3997,Suscripciones,Claude Pro Jul14–Ago14 (Anthropic),Gasto,-20.00,Sí,Confirmado recibo Anthropic #2891-4106-9461 — cobrado 14-Jul a NIU ••3997
 2026-07-15,Agrícola,Deuda - Préstamo consumo,Cuota préstamo de consumo,Gasto,-147.11,Sí,"Saldo aprox. $6,171 / 14.38% anual"
 2026-07-20,Cuscatlán,Deuda - Préstamo consolidación,Cuota préstamo consolidación (1 de 48),Gasto,-85.00,Sí,"Total $2,180 / iniciado jul-2026"
 2026-07-25,DEL SUR,Servicios - Energía,Pago manual factura DEL SUR julio,Gasto,,Sí,Pago manual hasta redirigir a NIU — MONTO PENDIENTE confirmar (jun fue $80.02 en AMEX)
