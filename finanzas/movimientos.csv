@@ -45,14 +45,14 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-13,BAC,Alimentación,FOODMART TEXACO LA GLO (comida/snack),Gasto,-2.80,No,Confirmado Gmail BAC alerta — 13:06:58 Tarjeta Presente
 2026-07-13,BAC,Restaurante,WENDYSCOM CYBS (Wendy's online),Gasto,-8.45,No,Confirmado Gmail BAC alerta — 17:38:50 Internet
 2026-07-13,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 13-Jul),Ingreso,566.92,Sí,✅ Confirmado — llegó tarde 13-Jul (usuario confirmó 15-Jul)
-2026-07-14,NIU ••3997,Servicios - Cargos automáticos,Cargo débito Cuscatlán ****3997 (descripción pendiente),Gasto,-10.00,No,Confirmado alerta Cuscatlán 14-Jul 12:52 — cargo sin descripción. ⚠️ Pendiente confirmar qué es.
+2026-07-14,NIU ••3997,Entretenimiento,Apuesta personal (Cuscatlán ****3997 Google Pay),Gasto,-10.00,No,Confirmado alerta Cuscatlán 14-Jul 12:52. Identificado por usuario 16-Jul.
 2026-07-14,NIU ••3997,Suscripciones,Claude Pro Jul14–Ago14 (Anthropic),Gasto,-20.00,Sí,Confirmado recibo Anthropic #2891-4106-9461 — cargo 14-Jul 21:28 vía Cuscatlán ****3997 (Google Pay)
 2026-07-15,BAC,Transferencia,Transfer365 a NIU ••3997 / Cuscatlán X5261,Gasto,-66.64,No,"Confirmado alerta Cuscatlán — ref BAMCSVSS20260715B034084464, 15-Jul 12:55 AM. Par con ingreso NIU."
 2026-07-15,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (recarga),Ingreso,66.64,No,"Confirmado alerta Cuscatlán — ref BAMCSVSS20260715B034084464. Banco origen: BAC, producto X1386."
 2026-07-15,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-4.55,No,Confirmado alerta BAC — 15-Jul 15:12 Internet. Alerta recibida 16-Jul.
 2026-07-16,BAC,Deuda - Tarjeta crédito,Pago AMEX ****3328 desde BAC,Gasto,-159.00,No,"Confirmado comprobante BAC 16-Jul 05:34 (ref 4896). Tarjeta 3740-78**-****-3321. AMEX: $409 → $250"
 2026-07-16,AMEX,Deuda - Tarjeta crédito,Pago recibido desde BAC ****6201,Ingreso,159.00,No,Par del egreso BAC 16-Jul. Balance AMEX post-pago: $250.00
-2026-07-15,Agrícola,Deuda - Préstamo consumo,Cuota préstamo de consumo,Gasto,-147.11,Sí,"Saldo aprox. $6,171 / 14.38% anual"
+2026-06-29,NIU ••3997,Deuda - Préstamo consumo,Cuota préstamo consumo Agrícola #2132201069 (adelantada),Gasto,-147.11,Sí,"✅ Pagada 29-Jun anticipadamente desde NIU. Vence día 7 cada mes. Próxima cuota: 07-Ago-2026. Saldo ~$6,024"
 2026-07-20,Cuscatlán,Deuda - Préstamo consolidación,Cuota préstamo consolidación (1 de 48),Gasto,-85.00,Sí,"Total $2,180 / iniciado jul-2026"
 2026-07-25,DEL SUR,Servicios - Energía,Pago manual factura DEL SUR julio,Gasto,,Sí,Pago manual hasta redirigir a NIU — MONTO PENDIENTE confirmar (jun fue $80.02 en AMEX)
 2026-07-30,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 30-Jul),Ingreso,566.92,Sí,Quincena 30

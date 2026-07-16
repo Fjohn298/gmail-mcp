@@ -482,7 +482,7 @@
         {"fecha": "2026-06-29", "descripcion": "PAGO TARJETA VISA Agrícola ****6114", "monto": 60.87, "tipo": "egreso"},
         {"fecha": "2026-07-07", "descripcion": "Transfer365 desde BAC 6201 (recarga cargos fijos)", "monto": 57.58, "tipo": "ingreso"},
         {"fecha": "2026-07-08", "descripcion": "Claro pospago — pago manual desde NIU", "monto": 20.00, "tipo": "egreso", "categoria": "Claro", "nota": "Débito bancario confirmado por Cuscatlán el 8-Jul a las 02:14. Exclusión AMEX aprobada (gestión 427181)."},
-        {"fecha": "2026-07-14", "descripcion": "Cargo débito Cuscatlán ****3997 — descripción no disponible", "monto": 10.00, "tipo": "egreso", "fuente": "Alerta_Cuscatlan_14Jul_12:52", "nota": "⚠️ Pendiente identificar. Alerta dice 'consumo con tarjeta de débito $10.00 el 2026-07-14 12:52'."},
+        {"fecha": "2026-07-14", "descripcion": "Apuesta personal (Cuscatlán ****3997 Google Pay)", "monto": 10.00, "tipo": "egreso", "categoria": "Entretenimiento", "fuente": "Alerta_Cuscatlan_14Jul_12:52 + usuario_confirmó_16Jul", "nota": "Cargo 14-Jul 12:52. Identificado por usuario como apuesta personal."},
         {"fecha": "2026-07-14", "descripcion": "Claude Pro — ciclo Jul 14–Ago 14", "monto": 20.00, "tipo": "egreso", "categoria": "Suscripciones", "fuente": "Recibo_Anthropic_#2891-4106-9461", "nota": "Confirmado recibo Anthropic. Cobrado 14-Jul 21:28 vía Cuscatlán ****3997 (Google Pay). Stripe invoice BDHJWHCX-0002."},
         {"fecha": "2026-07-15", "descripcion": "Transfer365 desde BAC ****6201 (recarga salario)", "monto": 66.64, "tipo": "ingreso", "fuente": "Alerta_Cuscatlan_Transfer365_BAMCSVSS20260715B034084464", "nota": "Banco origen BAC, producto X1386. 15-Jul 12:55 AM."}
       ]
