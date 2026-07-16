@@ -19,7 +19,7 @@
     "run_days": [13, 28],
     "notify_email": "nehe298@gmail.com",
     "cards": [
-      {"name": "AMEX BAC",       "last4": "3328", "balance": 409.00,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 125.00, "balance_fecha": "2026-07-13", "disponible_compras": 1260.18, "pagado_minimo_jul10": true, "cargos_recientes_amex": [{"fecha": "2026-06-22", "descripcion": "DEL SUR -C- cargo automático", "monto": 80.02, "nota": "DEL SUR cargaba a AMEX en jun. Pendiente migrar."}, {"fecha": "2026-06-30", "descripcion": "PAQUETES MOVISTAR -BEL- PPDUMY49", "monto": 1.00}, {"fecha": "2026-07-07", "descripcion": "Laptop cuota 04/12 VACUOTA:04/12", "monto": 15.42}, {"fecha": "2026-07-10", "descripcion": "ANDA -C- cargo automático", "monto": 2.83}], "nota_balance": "✅ Confirmado app BAC 13-Jul. $409 = $406.17 prev + $2.83 ANDA 10-Jul. Min pago jul (vencía 10-Jul) ya pagado ($131.52 recibido 28-Jun). Pago adicional $150 pendiente (esperando salario). Disponible: $1,260.18."},
+      {"name": "AMEX BAC",       "last4": "3328", "balance": 250.00,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 125.00, "balance_fecha": "2026-07-16", "disponible_compras": 1260.18, "pagado_minimo_jul10": true, "pago_jul16": 159.00, "cargos_recientes_amex": [{"fecha": "2026-06-22", "descripcion": "DEL SUR -C- cargo automático", "monto": 80.02, "nota": "DEL SUR cargaba a AMEX en jun. Pendiente migrar."}, {"fecha": "2026-06-30", "descripcion": "PAQUETES MOVISTAR -BEL- PPDUMY49", "monto": 1.00}, {"fecha": "2026-07-07", "descripcion": "Laptop cuota 04/12 VACUOTA:04/12", "monto": 15.42}, {"fecha": "2026-07-10", "descripcion": "ANDA -C- cargo automático", "monto": 2.83}], "nota_balance": "✅ Pago $159 confirmado comprobante BAC 16-Jul 05:34 (ref 4896). Tarjeta BAC muestra 3740-78**-****-3321. $409 − $159 = $250 balance. ⚠️ Próx. ciclo corte 18-Jul — vendrán cargos fijos: Accidentes $8.95 + Laptop cuota 05/12 $15.42 + Curacao cuota $20.75 + ANDA $2.83 = ~$47.95 aprox."},
 {"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00,    "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00},
       {"name": "VISA Agrícola",  "last4": "6114", "balance": 354.47,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 11.84, "saldo_disponible": 1645.53, "limite_credito": 2000.00, "balance_fecha_corte": "2026-07-09", "pago_contado_corte": 168.47, "pago_minimo_corte": 11.84, "fecha_limite_pago": "2026-08-03", "balance_actual_13jul": 354.47, "balance_actual_fecha": "2026-07-13", "nota_balance": "✅ Confirmado app Agrícola 13-Jul. Pago de contado (corte 09-Jul): $168.47. Post-corte UTEC 10-Jul: $81 mensualidad + $105 matrícula = $186. Saldo total actual (incl. plazo): $354.47. Saldo disponible: $1,645.53. Fecha pago: 03/08/2026."}
     ],
@@ -402,13 +402,13 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 585.45,
-      "saldo_fecha": "2026-07-15",
+      "saldo": 426.45,
+      "saldo_fecha": "2026-07-16",
       "saldo_retenido": null,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo estimado $585.45 al 15-Jul ($89.72 + $566.92 salario − $66.64 T365 NIU − $4.55 Uber = $585.45). Solo distribuciones confirmadas por correo. PENDIENTE confirmar en app si hubo pago AMEX u otras distribuciones.",
+      "notas": "Saldo estimado $426.45 al 16-Jul ($89.72 + $566.92 − $66.64 T365 NIU − $4.55 Uber − $159 pago AMEX = $426.45). Confirmado por correos. Verificar saldo real en app.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
