@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 21-Jul-2026
+# CLAUDE MEMORY — Última actualización: 21-Jul-2026 (rev2 — préstamo Cuscatlán + AMEX corte)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -13,6 +13,7 @@
 | Saldo real ≠ proyectado | Solo actualizar saldo real con confirmación de app / Gmail / usuario explícito |
 | Fuente de verdad | Claude Chat (correcciones del usuario) > Gmail confirmado > Proyección |
 | Préstamo Agrícola | Vence **día 7** de cada mes (NO día 15) |
+| Préstamo Cuscatlán | Vence **día 23** de cada mes — desde NIU ••3997 — $79.79/mes — primer pago 23-Jul-2026 |
 | Salario | Llega días 13 y 28/30 del mes (quincenas BAC Nómina) |
 | BAC depósitos | BAC **no envía alertas de correo** para depósitos/salario — verificar en app |
 | NIU = Cuscatlán | NIU ••3997 = Banco Cuscatlán cuenta ahorro X5261, tarjeta ****3997 |
@@ -25,7 +26,7 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| AMEX ****3328 | $250.00 | Comprobante BAC pago $159 | 16-Jul-2026 |
+| AMEX ****3328 | $260.77 | Estado de cuenta BAC (pago de contado corte 18-Jul) | 18-Jul-2026 |
 | VISA Agrícola ****6114 | $354.47 | App Agrícola | 13-Jul-2026 |
 | MultiMoney (ahorro Agrícola) | $579.02 | Sistema / usuario | 09-Jul-2026 |
 | Max Electrónico (Agrícola) | $0.00 | App Agrícola | 11-Jul-2026 |
@@ -49,10 +50,10 @@
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
 | Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Ago-2026** | ✅ Jul pagada 29-Jun ant. |
-| Consolidación Cuscatlán (48 cuotas) | $2,180.00 | $85.00/mes | **20-Jul-2026** | ⚠️ VENCIDA — confirmar si se pagó |
-| AMEX BAC ****3328 | $250.00 | mín $125 | 10-Ago-2026 | Pago $159 realizado 16-Jul |
+| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Jul-2026** | ⚠️ PRIMER PAGO HOY (23-Jul). Tomado 16-Jul. Cancela anterior $2,225. Último pago: 23-Jun-2030. |
+| AMEX BAC ****3328 | $260.77 | mín $17 / contado $260.77 | **10-Ago-2026** | ✅ Confirmado estado de cuenta corte 18-Jul |
 | VISA Agrícola ****6114 | $354.47 | mín $11.84 | 03-Ago-2026 | Pendiente |
-| Laptop AMEX cuota 05/12 | — | $15.42/mes | cargo automático AMEX | Activo |
+| Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago | Activo |
 
 ---
 
@@ -75,16 +76,15 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| 🔴 | Confirmar si se pagó consolidación Cuscatlán $85 (Jul 20) | **VENCIDA ayer** | Si no se pagó, resolver cuanto antes. Si sí, actualizar estado. |
-| 🔴 | Identificar depósito NIU $264.02 del 18-Jul (10:02) | Urgente | Origen desconocido. Podría ser relacionado a préstamo o transfer. |
-| 🔴 | Identificar consumo NIU $182.38 del 18-Jul (15:23) | Urgente | Monto muy alto — merchant desconocido. |
-| 🟡 | DEL SUR julio — pagar antes del 25-Jul | **25-Jul-2026** | Junio fue $80.02. Pago manual. BAC est. solo $47.25 — ¿alcanza? |
-| 🟡 | Confirmar saldo BAC real en app | Hoy | Estimado ~$47.25 — MUY BAJO |
+| 🔴 | PAGAR cuota Cuscatlán $79.79 (1/48) — vence 23-Jul-2026 (HOY) | **23-Jul-2026 HOY** | Desde NIU ••3997. ¿Ya se hizo el débito automático o es pago manual? Verificar app NIU. |
+| 🔴 | DEL SUR julio — pagar antes del 25-Jul | **25-Jul-2026** | Junio fue $80.02. Pago manual. BAC est. solo $47.25 — ¿alcanza? |
+| 🔴 | Pagar AMEX $260.77 (contado) o mínimo $17 | **10-Ago-2026** | Confirmado estado de cuenta corte 18-Jul. Pagar contado evita intereses del ciclo Ago. |
+| 🟡 | Confirmar saldo BAC real en app | Hoy | Estimado ~$47.25 — MUY BAJO. Próximo salario 28/30-Jul. |
 | 🟡 | Confirmar saldo NIU real en app | Hoy | Estimado ~$93.76 |
 | 🟡 | Identificar Transfer365 BAC→Agrícola $226.45 (16-Jul) | Pendiente | Sub-cuenta destino desconocida (¿MultiMoney o corriente?) |
-| 🟡 | Identificar consumos NIU Jul17 $5 y Jul18 $34.97 / $25.74 | Pendiente | Merchant no incluido en alertas Cuscatlán |
+| 🟡 | Identificar consumos NIU Jul17 $5.00 y Jul18 $34.97 / $25.74 | Pendiente | Merchant no incluido en alertas Cuscatlán. ¿También gastos óptica? |
 | 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | Usar BAC ****6201 para cancelar online |
-| 🟢 | Migrar ANDA de AMEX a NIU | Pendiente | AMEX cobró $2.83 en Jul |
+| 🟢 | Migrar ANDA de AMEX a NIU | Pendiente | AMEX cobró $2.83 en ciclo Jul |
 
 ---
 
@@ -92,6 +92,10 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Jul-2026 ($79.79). Cancela préstamo anterior $2,225. |
+| 21-Jul-2026 | NIU $264.02 dep. 18-Jul = desembolso sobrante nuevo préstamo Cuscatlán ($2,490 − $2,225). |
+| 21-Jul-2026 | NIU $182.38 consumo 18-Jul = Lentes esposa — Óptica JDR (DTE-01-S007P001-000000000008827). |
+| 21-Jul-2026 | AMEX balance corte 18-Jul = $260.77 (pago de contado) / mínimo $17.00 / vence 10-Ago. |
 | 16-Jul-2026 | Préstamo Agrícola vence día 7 (no día 15). Jul pagada 29-Jun anticipadamente. |
 | 16-Jul-2026 | Cargo NIU $10 del 14-Jul 12:52 = apuesta personal (Entretenimiento). |
 | 16-Jul-2026 | MultiMoney saldo $579.02 al 09-Jul. Sin movimientos confirmados post-salario. |
@@ -106,13 +110,14 @@
 
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
+| 23-Jul | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — **VENCE HOY** | −$79.79 |
 | 20-Jul | BAC | N1CO*LA NEVERIA CA AL (helados) | −$4.40 |
 | 19-Jul | BAC | SMARTBOX MERLIOT | −$69.00 |
 | 19-Jul | BAC | FERRETERIAS FREUND MER | −$9.99 |
-| 18-Jul | NIU | Consumo X5261 15:23 (**PENDIENTE ID**) | −$182.38 |
+| 18-Jul | NIU | **Lentes esposa — Óptica JDR** (DTE confirmado) | −$182.38 |
 | 18-Jul | NIU | Consumo X5261 14:15 (pendiente ID) | −$25.74 |
 | 18-Jul | NIU | Consumo X5261 12:54 (pendiente ID) | −$34.97 |
-| 18-Jul | NIU | **DEPÓSITO** crédito X5261 10:02 (**PENDIENTE ID**) | +$264.02 |
+| 18-Jul | NIU | **Desembolso préstamo Cuscatlán** ($2,490 − $2,225 = sobrante) | +$264.02 |
 | 18-Jul | BAC | DLC UBER RIDES | −$5.18 |
 | 18-Jul | BAC | FERRETER FREUND PLAZA | −$2.75 |
 | 18-Jul | BAC | SMARTBOX MERLIOT | −$15.00 |

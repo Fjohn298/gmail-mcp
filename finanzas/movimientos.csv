@@ -61,17 +61,17 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-17,BAC,Alimentación,FOODMART TEXACO LA GLO (snack),Gasto,-1.25,No,Confirmado alerta BAC — 17-Jul 19:12
 2026-07-17,BAC,Gasolina,TEXACO LA GLORIA (gasolina),Gasto,-8.00,No,Confirmado alerta BAC — 17-Jul noche
 2026-07-17,BAC,Transferencia,Retiro cajero BAC *****1386,Gasto,-25.00,No,Confirmado alerta BAC — 17-Jul 13:02 local
-2026-07-18,NIU ••3997,Pendiente identificar,Depósito crédito Cuscatlán X5261 (10:02),Ingreso,264.02,No,Confirmado correo Cuscatlán — origen desconocido. Pendiente identificar fuente.
+2026-07-18,NIU ••3997,Ingreso - Préstamo,Desembolso préstamo Cuscatlán ($2490 / 22.99% / 48 meses) — saldo sobrante tras pago préstamo anterior ($2225),Ingreso,264.02,No,"✅ Identificado. Nuevo préstamo Cuscatlán tomado 16-Jul-2026. Banco aplicó $2,225 al préstamo anterior (Cuscatlán). Saldo sobrante ~$265 depositado a NIU X5261 el 18-Jul-2026."
 2026-07-18,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-5.18,No,"Confirmado recibo Uber — 18-Jul. $4.99 tarifa + $0.19 solicitud. Mastercard BAC."
 2026-07-18,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 12:54,Gasto,-34.97,No,Confirmado alerta Cuscatlán — merchant desconocido. Pendiente identificar.
 2026-07-18,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 14:15,Gasto,-25.74,No,Confirmado alerta Cuscatlán — merchant desconocido. Pendiente identificar.
-2026-07-18,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 15:23,Gasto,-182.38,No,⚠️ Confirmado alerta Cuscatlán — merchant desconocido. MONTO ALTO. Pendiente identificar.
+2026-07-18,NIU ••3997,Salud - Óptica,Lentes esposa — Óptica JDR (DTE-01-S007P001-000000000008827),Gasto,-182.38,No,"✅ Identificado. DTE de GRUPO JDR SA (opticajdr.com). Compra lentes Monica Alejandra Guirola Vargas. DTE reenviado por esposa 21-Jul-2026."
 2026-07-18,BAC,Hogar,FERRETER FREUND PLAZA (ferretería),Gasto,-2.75,No,Confirmado alerta BAC — 18-Jul 21:31
 2026-07-18,BAC,Entretenimiento,SMARTBOX MERLIOT,Gasto,-15.00,No,Confirmado alerta BAC — 18-Jul 21:41
 2026-07-19,BAC,Entretenimiento,SMARTBOX MERLIOT,Gasto,-69.00,No,Confirmado alerta BAC — 19-Jul 17:43
 2026-07-19,BAC,Hogar,FERRETERIAS FREUND MER (ferretería),Gasto,-9.99,No,Confirmado alerta BAC — 19-Jul 18:02
 2026-07-20,BAC,Alimentación,N1CO*LA NEVERIA CA AL (nevería/helados),Gasto,-4.40,No,Confirmado alerta BAC — 20-Jul 19:02
 2026-06-29,NIU ••3997,Deuda - Préstamo consumo,Cuota préstamo consumo Agrícola #2132201069 (adelantada),Gasto,-147.11,Sí,"✅ Pagada 29-Jun anticipadamente desde NIU. Vence día 7 cada mes. Próxima cuota: 07-Ago-2026. Saldo ~$6,024"
-2026-07-20,Cuscatlán,Deuda - Préstamo consolidación,Cuota préstamo consolidación (1 de 48),Gasto,-85.00,Sí,"Total $2,180 / iniciado jul-2026"
+2026-07-23,NIU ••3997,Deuda - Préstamo Cuscatlán,Cuota préstamo Cuscatlán $2490 (1 de 48) — proyección,Gasto,-79.79,Sí,"Confirmado tabla amortización Cuscatlán (PDF 14-Jul-2026). Préstamo $2,490 / 22.99% anual / 48 meses. Primer pago 23-Jul-2026. Cancela préstamo anterior ($2,225). Último pago: 23-Jun-2030."
 2026-07-25,DEL SUR,Servicios - Energía,Pago manual factura DEL SUR julio,Gasto,,Sí,Pago manual hasta redirigir a NIU — MONTO PENDIENTE confirmar (jun fue $80.02 en AMEX)
 2026-07-30,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 30-Jul),Ingreso,566.92,Sí,Quincena 30
