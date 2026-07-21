@@ -1562,6 +1562,23 @@ def api_presupuesto_bac():
     })
 
 
+@app.route('/memory', methods=['GET'])
+def memory():
+    import os
+    from flask import Response
+    base = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(base, 'claude_memory.md')
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except FileNotFoundError:
+        content = '# claude_memory.md no encontrado'
+    resp = Response(content, mimetype='text/plain; charset=utf-8')
+    resp.headers['Cache-Control'] = 'no-store, no-cache, must-revalidate'
+    resp.headers['Pragma'] = 'no-cache'
+    return resp
+
+
 MAIN_MENU_HTML = """<!DOCTYPE html>
 <html lang="es">
 <head>
