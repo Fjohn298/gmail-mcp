@@ -52,6 +52,25 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-15,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-4.55,No,Confirmado alerta BAC — 15-Jul 15:12 Internet. Alerta recibida 16-Jul.
 2026-07-16,BAC,Deuda - Tarjeta crédito,Pago AMEX ****3328 desde BAC,Gasto,-159.00,No,"Confirmado comprobante BAC 16-Jul 05:34 (ref 4896). Tarjeta 3740-78**-****-3321. AMEX: $409 → $250"
 2026-07-16,AMEX,Deuda - Tarjeta crédito,Pago recibido desde BAC ****6201,Ingreso,159.00,No,Par del egreso BAC 16-Jul. Balance AMEX post-pago: $250.00
+2026-07-16,BAC,Transferencia,Transfer365 BAC→Agrícola (ID:1416001415),Gasto,-226.45,No,Confirmado correo Agrícola 16-Jul 06:57. Origen: BAC. Destino sub-cuenta pendiente confirmar (¿MultiMoney o corriente?).
+2026-07-16,Agrícola,Transferencia,Transfer365 recibido desde BAC (ID:1416001415),Ingreso,226.45,No,Confirmado correo Agrícola — abono a cuenta. Sub-cuenta destino pendiente confirmar.
+2026-07-16,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-3.57,No,Confirmado alerta BAC — 16-Jul Internet
+2026-07-16,BAC,Transferencia,Transferencia local a esposa MONICA GUIROLA *****4565,Gasto,-5.00,No,"Confirmado alerta BAC — 16-Jul 18:44 local. Ref 205463245."
+2026-07-17,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 (06:06),Gasto,-5.00,No,Confirmado alerta Cuscatlán — merchant desconocido. Pendiente identificar.
+2026-07-17,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-3.61,No,Confirmado alerta BAC — 17-Jul Internet
+2026-07-17,BAC,Alimentación,FOODMART TEXACO LA GLO (snack),Gasto,-1.25,No,Confirmado alerta BAC — 17-Jul 19:12
+2026-07-17,BAC,Gasolina,TEXACO LA GLORIA (gasolina),Gasto,-8.00,No,Confirmado alerta BAC — 17-Jul noche
+2026-07-17,BAC,Transferencia,Retiro cajero BAC *****1386,Gasto,-25.00,No,Confirmado alerta BAC — 17-Jul 13:02 local
+2026-07-18,NIU ••3997,Pendiente identificar,Depósito crédito Cuscatlán X5261 (10:02),Ingreso,264.02,No,Confirmado correo Cuscatlán — origen desconocido. Pendiente identificar fuente.
+2026-07-18,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-5.18,No,"Confirmado recibo Uber — 18-Jul. $4.99 tarifa + $0.19 solicitud. Mastercard BAC."
+2026-07-18,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 12:54,Gasto,-34.97,No,Confirmado alerta Cuscatlán — merchant desconocido. Pendiente identificar.
+2026-07-18,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 14:15,Gasto,-25.74,No,Confirmado alerta Cuscatlán — merchant desconocido. Pendiente identificar.
+2026-07-18,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 15:23,Gasto,-182.38,No,⚠️ Confirmado alerta Cuscatlán — merchant desconocido. MONTO ALTO. Pendiente identificar.
+2026-07-18,BAC,Hogar,FERRETER FREUND PLAZA (ferretería),Gasto,-2.75,No,Confirmado alerta BAC — 18-Jul 21:31
+2026-07-18,BAC,Entretenimiento,SMARTBOX MERLIOT,Gasto,-15.00,No,Confirmado alerta BAC — 18-Jul 21:41
+2026-07-19,BAC,Entretenimiento,SMARTBOX MERLIOT,Gasto,-69.00,No,Confirmado alerta BAC — 19-Jul 17:43
+2026-07-19,BAC,Hogar,FERRETERIAS FREUND MER (ferretería),Gasto,-9.99,No,Confirmado alerta BAC — 19-Jul 18:02
+2026-07-20,BAC,Alimentación,N1CO*LA NEVERIA CA AL (nevería/helados),Gasto,-4.40,No,Confirmado alerta BAC — 20-Jul 19:02
 2026-06-29,NIU ••3997,Deuda - Préstamo consumo,Cuota préstamo consumo Agrícola #2132201069 (adelantada),Gasto,-147.11,Sí,"✅ Pagada 29-Jun anticipadamente desde NIU. Vence día 7 cada mes. Próxima cuota: 07-Ago-2026. Saldo ~$6,024"
 2026-07-20,Cuscatlán,Deuda - Préstamo consolidación,Cuota préstamo consolidación (1 de 48),Gasto,-85.00,Sí,"Total $2,180 / iniciado jul-2026"
 2026-07-25,DEL SUR,Servicios - Energía,Pago manual factura DEL SUR julio,Gasto,,Sí,Pago manual hasta redirigir a NIU — MONTO PENDIENTE confirmar (jun fue $80.02 en AMEX)
