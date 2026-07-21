@@ -28,7 +28,7 @@
 |--------|-------|--------|--------------------|
 | AMEX ****3328 | $260.77 | Estado de cuenta BAC (pago de contado corte 18-Jul) | 18-Jul-2026 |
 | VISA Agrícola ****6114 | $354.47 | App Agrícola | 13-Jul-2026 |
-| MultiMoney (ahorro Agrícola) | $579.02 | Sistema / usuario | 09-Jul-2026 |
+| MultiMoney (ahorro Agrícola) | $805.47 | Transfer365 ID:1416758738 (correo Agrícola) | 21-Jul-2026 |
 | Max Electrónico (Agrícola) | $0.00 | App Agrícola | 11-Jul-2026 |
 
 ---
@@ -81,7 +81,7 @@
 | 🔴 | Pagar AMEX $260.77 (contado) o mínimo $17 | **10-Ago-2026** | Confirmado estado de cuenta corte 18-Jul. Pagar contado evita intereses del ciclo Ago. |
 | 🟡 | Confirmar saldo BAC real en app | Hoy | Estimado ~$47.25 — MUY BAJO. Próximo salario 28/30-Jul. |
 | 🔴 | NIU ••3997 saldo ~$14.49 — MUY BAJO | Urgente | Después de DEL SUR $79.27. Recargar con próximo salario (28/30-Jul). |
-| 🟡 | Identificar Transfer365 BAC→Agrícola $226.45 (16-Jul) | Pendiente | Sub-cuenta destino desconocida (¿MultiMoney o corriente?) |
+| ✅ | Transfer365 BAC→Agrícola→MultiMoney $226.45 identificado | 21-Jul-2026 | Paso intermedio: Agrícola corriente 16-Jul → MultiMoney 21-Jul (ID:1416758738) |
 | 🟡 | Identificar consumos NIU Jul17 $5.00 y Jul18 $34.97 / $25.74 | Pendiente | Merchant no incluido en alertas Cuscatlán. ¿También gastos óptica? |
 | 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | Usar BAC ****6201 para cancelar online |
 | 🟢 | Migrar ANDA de AMEX a NIU | Pendiente | AMEX cobró $2.83 en ciclo Jul |
@@ -92,7 +92,9 @@
 
 | Fecha | Corrección |
 |-------|-----------|
-| 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Ago-2026 ($79.79). Julio sin cobro (Balcón Cuotas). Cancela préstamo anterior $2,225. VISA Cuscatlán $0 confirmado. |
+| 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Ago-2026 ($79.79). Julio sin cobro (Balcón Cuotas). Cancela anterior $2,225. VISA Cuscatlán $0. |
+| 21-Jul-2026 | Transfer365 Agrícola→MultiMoney $226.45 (ID:1416758738). MultiMoney: $579.02+$226.45 = $805.47. Resuelve misterio BAC→Agrícola $226.45 del 16-Jul. |
+| 21-Jul-2026 | DEL SUR julio pagado $79.27 desde NIU. NIU post-pago: ~$14.49 (crítico). |
 | 21-Jul-2026 | NIU $264.02 dep. 18-Jul = desembolso sobrante nuevo préstamo Cuscatlán ($2,490 − $2,225). |
 | 21-Jul-2026 | NIU $182.38 consumo 18-Jul = Lentes esposa — Óptica JDR (DTE-01-S007P001-000000000008827). |
 | 21-Jul-2026 | AMEX balance corte 18-Jul = $260.77 (pago de contado) / mínimo $17.00 / vence 10-Ago. |
@@ -114,6 +116,7 @@
 | 20-Jul | BAC | N1CO*LA NEVERIA CA AL (helados) | −$4.40 |
 | 19-Jul | BAC | SMARTBOX MERLIOT | −$69.00 |
 | 19-Jul | BAC | FERRETERIAS FREUND MER | −$9.99 |
+| 21-Jul | MultiMoney | Depósito reserva quincena (desde Agrícola corriente) | +$226.45 |
 | 21-Jul | NIU | DEL SUR factura julio (pago manual) | −$79.27 |
 | 18-Jul | NIU | **Lentes esposa — Óptica JDR** (DTE confirmado) | −$182.38 |
 | 18-Jul | NIU | Consumo X5261 14:15 (pendiente ID) | −$25.74 |

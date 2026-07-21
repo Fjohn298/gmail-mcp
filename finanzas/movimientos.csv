@@ -52,8 +52,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-15,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-4.55,No,Confirmado alerta BAC — 15-Jul 15:12 Internet. Alerta recibida 16-Jul.
 2026-07-16,BAC,Deuda - Tarjeta crédito,Pago AMEX ****3328 desde BAC,Gasto,-159.00,No,"Confirmado comprobante BAC 16-Jul 05:34 (ref 4896). Tarjeta 3740-78**-****-3321. AMEX: $409 → $250"
 2026-07-16,AMEX,Deuda - Tarjeta crédito,Pago recibido desde BAC ****6201,Ingreso,159.00,No,Par del egreso BAC 16-Jul. Balance AMEX post-pago: $250.00
-2026-07-16,BAC,Transferencia,Transfer365 BAC→Agrícola (ID:1416001415),Gasto,-226.45,No,Confirmado correo Agrícola 16-Jul 06:57. Origen: BAC. Destino sub-cuenta pendiente confirmar (¿MultiMoney o corriente?).
-2026-07-16,Agrícola,Transferencia,Transfer365 recibido desde BAC (ID:1416001415),Ingreso,226.45,No,Confirmado correo Agrícola — abono a cuenta. Sub-cuenta destino pendiente confirmar.
+2026-07-16,BAC,Transferencia,Transfer365 BAC→Agrícola corriente (ID:1416001415) — reserva MultiMoney,Gasto,-226.45,No,"✅ Confirmado. Destino: Agrícola corriente (paso intermedio). Fondos transferidos a MultiMoney el 21-Jul-2026 (ID:1416758738)."
+2026-07-16,Agrícola,Transferencia,Transfer365 recibido desde BAC (ID:1416001415) — paso intermedio a MultiMoney,Ingreso,226.45,No,"✅ Confirmado. Abono a Agrícola corriente. Fondos retenidos 16→21-Jul para depósito a MultiMoney."
 2026-07-16,BAC,Transporte,DLC UBER RIDES -I- (Uber online),Gasto,-3.57,No,Confirmado alerta BAC — 16-Jul Internet
 2026-07-16,BAC,Transferencia,Transferencia local a esposa MONICA GUIROLA *****4565,Gasto,-5.00,No,"Confirmado alerta BAC — 16-Jul 18:44 local. Ref 205463245."
 2026-07-17,NIU ••3997,Pendiente identificar,Consumo Cuscatlán X5261 (06:06),Gasto,-5.00,No,Confirmado alerta Cuscatlán — merchant desconocido. Pendiente identificar.
@@ -73,5 +73,7 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-20,BAC,Alimentación,N1CO*LA NEVERIA CA AL (nevería/helados),Gasto,-4.40,No,Confirmado alerta BAC — 20-Jul 19:02
 2026-06-29,NIU ••3997,Deuda - Préstamo consumo,Cuota préstamo consumo Agrícola #2132201069 (adelantada),Gasto,-147.11,Sí,"✅ Pagada 29-Jun anticipadamente desde NIU. Vence día 7 cada mes. Próxima cuota: 07-Ago-2026. Saldo ~$6,024"
 2026-08-23,NIU ••3997,Deuda - Préstamo Cuscatlán,Cuota préstamo Cuscatlán $2490 (1 de 48) — proyección,Gasto,-79.79,Sí,"Confirmado tabla amortización Cuscatlán (PDF 14-Jul-2026). Préstamo $2,490 / 22.99% anual / 48 meses. Primer pago 23-Ago-2026 (Balcón Cuotas — primer mes sin cobro). Cancela préstamo anterior ($2,225). Último pago proyectado: 23-Jul-2030."
+2026-07-21,Agrícola,Ahorro,Transfer365 Agrícola → MultiMoney (ID:1416758738) — reserva quincena 30-Jul,Gasto,-226.45,No,"✅ Confirmado correo Agrícola 21-Jul 03:38. Destino: SAC MULTIMONEY S.A. Reserva para pagos fin de mes."
+2026-07-21,MultiMoney,Ahorro,Depósito Transfer365 desde Agrícola (ID:1416758738),Ingreso,226.45,No,"✅ Confirmado. Saldo MultiMoney: $579.02 + $226.45 = $805.47 al 21-Jul-2026."
 2026-07-21,NIU ••3997,Servicios - Energía,DEL SUR factura julio — pago manual desde NIU,Gasto,-79.27,No,"✅ Pagado 21-Jul-2026. Comprobante enviado por usuario. Monto $79.27 (jun fue $80.02 en AMEX). Primer mes desde NIU."
 2026-07-30,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 30-Jul),Ingreso,566.92,Sí,Quincena 30

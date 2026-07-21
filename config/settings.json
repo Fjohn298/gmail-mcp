@@ -51,7 +51,9 @@
     {
       "nombre": "Mi Ahorro MultiMoney",
       "banco": "Agrícola",
-      "saldo": 579.02,
+      "saldo": 805.47,
+      "saldo_fecha": "2026-07-21",
+      "saldo_fuente": "Transfer365 ID:1416758738 confirmado correo Agrícola 21-Jul-2026",
       "saldo_intocable": 501.35,
       "deposito_quincena": 280.00,
       "dias_deposito": [15, 30],
