@@ -72,6 +72,6 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-19,BAC,Hogar,FERRETERIAS FREUND MER (ferretería),Gasto,-9.99,No,Confirmado alerta BAC — 19-Jul 18:02
 2026-07-20,BAC,Alimentación,N1CO*LA NEVERIA CA AL (nevería/helados),Gasto,-4.40,No,Confirmado alerta BAC — 20-Jul 19:02
 2026-06-29,NIU ••3997,Deuda - Préstamo consumo,Cuota préstamo consumo Agrícola #2132201069 (adelantada),Gasto,-147.11,Sí,"✅ Pagada 29-Jun anticipadamente desde NIU. Vence día 7 cada mes. Próxima cuota: 07-Ago-2026. Saldo ~$6,024"
-2026-07-23,NIU ••3997,Deuda - Préstamo Cuscatlán,Cuota préstamo Cuscatlán $2490 (1 de 48) — proyección,Gasto,-79.79,Sí,"Confirmado tabla amortización Cuscatlán (PDF 14-Jul-2026). Préstamo $2,490 / 22.99% anual / 48 meses. Primer pago 23-Jul-2026. Cancela préstamo anterior ($2,225). Último pago: 23-Jun-2030."
+2026-08-23,NIU ••3997,Deuda - Préstamo Cuscatlán,Cuota préstamo Cuscatlán $2490 (1 de 48) — proyección,Gasto,-79.79,Sí,"Confirmado tabla amortización Cuscatlán (PDF 14-Jul-2026). Préstamo $2,490 / 22.99% anual / 48 meses. Primer pago 23-Ago-2026 (Balcón Cuotas — primer mes sin cobro). Cancela préstamo anterior ($2,225). Último pago proyectado: 23-Jul-2030."
 2026-07-25,DEL SUR,Servicios - Energía,Pago manual factura DEL SUR julio,Gasto,,Sí,Pago manual hasta redirigir a NIU — MONTO PENDIENTE confirmar (jun fue $80.02 en AMEX)
 2026-07-30,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 30-Jul),Ingreso,566.92,Sí,Quincena 30

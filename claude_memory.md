@@ -13,7 +13,7 @@
 | Saldo real ≠ proyectado | Solo actualizar saldo real con confirmación de app / Gmail / usuario explícito |
 | Fuente de verdad | Claude Chat (correcciones del usuario) > Gmail confirmado > Proyección |
 | Préstamo Agrícola | Vence **día 7** de cada mes (NO día 15) |
-| Préstamo Cuscatlán | Vence **día 23** de cada mes — desde NIU ••3997 — $79.79/mes — primer pago 23-Jul-2026 |
+| Préstamo Cuscatlán | Vence **día 23** de cada mes — desde NIU ••3997 — $79.79/mes — primer pago 23-Ago-2026 (Balcón Cuotas: Jul sin cobro) |
 | Salario | Llega días 13 y 28/30 del mes (quincenas BAC Nómina) |
 | BAC depósitos | BAC **no envía alertas de correo** para depósitos/salario — verificar en app |
 | NIU = Cuscatlán | NIU ••3997 = Banco Cuscatlán cuenta ahorro X5261, tarjeta ****3997 |
@@ -50,7 +50,7 @@
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
 | Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Ago-2026** | ✅ Jul pagada 29-Jun ant. |
-| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Jul-2026** | ⚠️ PRIMER PAGO HOY (23-Jul). Tomado 16-Jul. Cancela anterior $2,225. Último pago: 23-Jun-2030. |
+| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Balcón Cuotas — Jul sin cobro. Cancela anterior $2,225. VISA Cuscatlán $0. |
 | AMEX BAC ****3328 | $260.77 | mín $17 / contado $260.77 | **10-Ago-2026** | ✅ Confirmado estado de cuenta corte 18-Jul |
 | VISA Agrícola ****6114 | $354.47 | mín $11.84 | 03-Ago-2026 | Pendiente |
 | Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago | Activo |
@@ -76,7 +76,7 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| 🔴 | PAGAR cuota Cuscatlán $79.79 (1/48) — vence 23-Jul-2026 (HOY) | **23-Jul-2026 HOY** | Desde NIU ••3997. ¿Ya se hizo el débito automático o es pago manual? Verificar app NIU. |
+| 🟡 | Cuota Cuscatlán $79.79 — PRIMER PAGO 23-Ago-2026 | **23-Ago-2026** | Balcón Cuotas: julio sin cobro confirmado. Verificar si débito automático NIU o pago manual. |
 | 🔴 | DEL SUR julio — pagar antes del 25-Jul | **25-Jul-2026** | Junio fue $80.02. Pago manual. BAC est. solo $47.25 — ¿alcanza? |
 | 🔴 | Pagar AMEX $260.77 (contado) o mínimo $17 | **10-Ago-2026** | Confirmado estado de cuenta corte 18-Jul. Pagar contado evita intereses del ciclo Ago. |
 | 🟡 | Confirmar saldo BAC real en app | Hoy | Estimado ~$47.25 — MUY BAJO. Próximo salario 28/30-Jul. |
@@ -92,7 +92,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
-| 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Jul-2026 ($79.79). Cancela préstamo anterior $2,225. |
+| 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Ago-2026 ($79.79). Julio sin cobro (Balcón Cuotas). Cancela préstamo anterior $2,225. VISA Cuscatlán $0 confirmado. |
 | 21-Jul-2026 | NIU $264.02 dep. 18-Jul = desembolso sobrante nuevo préstamo Cuscatlán ($2,490 − $2,225). |
 | 21-Jul-2026 | NIU $182.38 consumo 18-Jul = Lentes esposa — Óptica JDR (DTE-01-S007P001-000000000008827). |
 | 21-Jul-2026 | AMEX balance corte 18-Jul = $260.77 (pago de contado) / mínimo $17.00 / vence 10-Ago. |
@@ -110,7 +110,7 @@
 
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
-| 23-Jul | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — **VENCE HOY** | −$79.79 |
+| 23-Ago | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — próxima | −$79.79 |
 | 20-Jul | BAC | N1CO*LA NEVERIA CA AL (helados) | −$4.40 |
 | 19-Jul | BAC | SMARTBOX MERLIOT | −$69.00 |
 | 19-Jul | BAC | FERRETERIAS FREUND MER | −$9.99 |

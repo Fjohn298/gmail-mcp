@@ -20,7 +20,7 @@
     "notify_email": "nehe298@gmail.com",
     "cards": [
       {"name": "AMEX BAC",       "last4": "3328", "balance": 260.77,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 17.00, "balance_fecha": "2026-07-18", "pago_contado_corte": 260.77, "pago_minimo_corte": 17.00, "fecha_limite_pago": "2026-08-10", "cargos_ciclo_jul18": [{"fecha": "ciclo_jul18", "descripcion": "ACCIDENTES PERSONALES BAC", "monto": 8.95, "tipo": "fijo"}, {"fecha": "ciclo_jul18", "descripcion": "Laptop cuota 05/12", "monto": 15.42, "tipo": "fijo"}, {"fecha": "ciclo_jul18", "descripcion": "Curacao cuota 2/12", "monto": 20.75, "tipo": "fijo"}, {"fecha": "2026-07-10", "descripcion": "ANDA -C- cargo automático", "monto": 2.83, "tipo": "fijo", "nota": "Pendiente migrar a NIU"}], "nota_balance": "✅ CONFIRMADO estado de cuenta BAC (corte 18-Jul-2026). Pago de contado: $260.77. Pago mínimo: $17.00. Vencimiento: 10-Ago-2026. Pre-corte: $250 (post-pago $159) + cargos fijos ciclo ~$47.95 + intereses ~$12.82 = $260.77."},
-{"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00,    "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00},
+{"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00, "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00, "nota": "✅ Saldo $0 confirmado 21-Jul-2026 por usuario. Préstamo consolidación anterior ($2,225) cancelado 16-Jul con nuevo préstamo Cuscatlán $2,490."},
       {"name": "VISA Agrícola",  "last4": "6114", "balance": 354.47,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 11.84, "saldo_disponible": 1645.53, "limite_credito": 2000.00, "balance_fecha_corte": "2026-07-09", "pago_contado_corte": 168.47, "pago_minimo_corte": 11.84, "fecha_limite_pago": "2026-08-03", "balance_actual_13jul": 354.47, "balance_actual_fecha": "2026-07-13", "nota_balance": "✅ Confirmado app Agrícola 13-Jul. Pago de contado (corte 09-Jul): $168.47. Post-corte UTEC 10-Jul: $81 mensualidad + $105 matrícula = $186. Saldo total actual (incl. plazo): $354.47. Saldo disponible: $1,645.53. Fecha pago: 03/08/2026."}
     ],
     "obligaciones_extra": [
@@ -72,8 +72,8 @@
       "tasa_anual": 22.99,
       "tasa_mensual": 1.9158,
       "fecha_inicio": "2026-07-16",
-      "fecha_primer_pago": "2026-07-23",
-      "fecha_fin": "2030-06-23",
+      "fecha_primer_pago": "2026-08-23",
+      "fecha_fin": "2030-07-23",
       "fecha_pago_dia": 23,
       "banco": "Cuscatlán",
       "cuenta_debito": "NIU ••3997",
