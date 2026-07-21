@@ -497,10 +497,10 @@
       "nombre": "NIU",
       "tipo": "prepago",
       "cuenta": "••3997",
-      "saldo": 93.76,
-      "saldo_fecha": "2026-07-18",
+      "saldo": 14.49,
+      "saldo_fecha": "2026-07-21",
       "fecha_registro": "2026-07-07",
-      "notas": "Saldo estimado ~$93.76 al 18-Jul ($77.83 − $5 Jul17 + $264.02 depósito Jul18 − $34.97 − $25.74 − $182.38 Jul18 = $93.76). ✅ $264.02 = desembolso préstamo Cuscatlán. ✅ $182.38 = Lentes esposa Óptica JDR. ⚠️ Jul17 $5 + Jul18 $34.97 + $25.74 pendiente identificar.",
+      "notas": "Saldo estimado ~$14.49 al 21-Jul ($93.76 − $79.27 DEL SUR 21-Jul = $14.49). ⚠️ MUY BAJO — próxima recarga depende del salario 28/30-Jul. Jul17 $5 + Jul18 $34.97 + $25.74 pendiente identificar.",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},

@@ -38,7 +38,7 @@
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
 | BAC ****6201 | ~$47.25 | $426.45 − $226.45 T365 Agr − $3.57 Uber − $5 esposa − $37.86 Jul17 − $22.93 Jul18 − $78.99 Jul19 − $4.40 Jul20 | 20-Jul-2026 |
-| NIU ••3997 | ~$93.76 | $77.83 − $5 Jul17 + $264.02 depósito Jul18 − $243.09 consumos Jul18 | 18-Jul-2026 |
+| NIU ••3997 | ~$14.49 | $93.76 − $79.27 DEL SUR 21-Jul | 21-Jul-2026 |
 
 > ⚠️ NO sobreescribir saldos reales con estos estimados. Pedir confirmación al usuario.
 > ⚠️ BAC MUY BAJO — verificar urgente. Próximo salario: 28/30-Jul.
@@ -77,10 +77,10 @@
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
 | 🟡 | Cuota Cuscatlán $79.79 — PRIMER PAGO 23-Ago-2026 | **23-Ago-2026** | Balcón Cuotas: julio sin cobro confirmado. Verificar si débito automático NIU o pago manual. |
-| 🔴 | DEL SUR julio — pagar antes del 25-Jul | **25-Jul-2026** | Junio fue $80.02. Pago manual. BAC est. solo $47.25 — ¿alcanza? |
+| ✅ | DEL SUR julio pagado $79.27 desde NIU | 21-Jul-2026 | Confirmado comprobante. NIU post-pago: ~$14.49 ⚠️ MUY BAJO |
 | 🔴 | Pagar AMEX $260.77 (contado) o mínimo $17 | **10-Ago-2026** | Confirmado estado de cuenta corte 18-Jul. Pagar contado evita intereses del ciclo Ago. |
 | 🟡 | Confirmar saldo BAC real en app | Hoy | Estimado ~$47.25 — MUY BAJO. Próximo salario 28/30-Jul. |
-| 🟡 | Confirmar saldo NIU real en app | Hoy | Estimado ~$93.76 |
+| 🔴 | NIU ••3997 saldo ~$14.49 — MUY BAJO | Urgente | Después de DEL SUR $79.27. Recargar con próximo salario (28/30-Jul). |
 | 🟡 | Identificar Transfer365 BAC→Agrícola $226.45 (16-Jul) | Pendiente | Sub-cuenta destino desconocida (¿MultiMoney o corriente?) |
 | 🟡 | Identificar consumos NIU Jul17 $5.00 y Jul18 $34.97 / $25.74 | Pendiente | Merchant no incluido en alertas Cuscatlán. ¿También gastos óptica? |
 | 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | Usar BAC ****6201 para cancelar online |
@@ -114,6 +114,7 @@
 | 20-Jul | BAC | N1CO*LA NEVERIA CA AL (helados) | −$4.40 |
 | 19-Jul | BAC | SMARTBOX MERLIOT | −$69.00 |
 | 19-Jul | BAC | FERRETERIAS FREUND MER | −$9.99 |
+| 21-Jul | NIU | DEL SUR factura julio (pago manual) | −$79.27 |
 | 18-Jul | NIU | **Lentes esposa — Óptica JDR** (DTE confirmado) | −$182.38 |
 | 18-Jul | NIU | Consumo X5261 14:15 (pendiente ID) | −$25.74 |
 | 18-Jul | NIU | Consumo X5261 12:54 (pendiente ID) | −$34.97 |
