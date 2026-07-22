@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 21-Jul-2026 (rev2 — préstamo Cuscatlán + AMEX corte)
+# CLAUDE MEMORY — Última actualización: 22-Jul-2026 (rev3 — laptop MR LAPTOPS $945 VISA Agrícola)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -27,7 +27,7 @@
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
 | AMEX ****3328 | $260.77 | Estado de cuenta BAC (pago de contado corte 18-Jul) | 18-Jul-2026 |
-| VISA Agrícola ****6114 | $354.47 | App Agrícola | 13-Jul-2026 |
+| VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
 | MultiMoney (ahorro Agrícola) | $805.47 | Transfer365 ID:1416758738 (correo Agrícola) | 21-Jul-2026 |
 | Max Electrónico (Agrícola) | $0.00 | App Agrícola | 11-Jul-2026 |
 
@@ -54,6 +54,7 @@
 | AMEX BAC ****3328 | $260.77 | mín $17 / contado $260.77 | **10-Ago-2026** | ✅ Confirmado estado de cuenta corte 18-Jul |
 | VISA Agrícola ****6114 | $354.47 | mín $11.84 | 03-Ago-2026 | Pendiente |
 | Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago | Activo |
+| Laptop Agrícola cuota 01/12 | $945.00 | $78.75/mes | VISA Agrícola ****6114 — desde Sep-2026 | Nuevo 21-Jul. Tasa 0% / 12 meses. |
 
 ---
 
@@ -66,7 +67,8 @@
 | DEL SUR (energía) | Manual (julio). NIU desde agosto | ~$70-80 | Mensual (~día 22) ⚠️ PENDIENTE PAGAR |
 | Google Cloud | BAC ****6201 | $9.60 | Mensual — **PENDIENTE CANCELAR** |
 | Claro pospago | NIU ••3997 | $20.00 | Mensual (exclusión AMEX: gestión 427181) |
-| Laptop cuota | AMEX ****3328 | $15.42 | Mensual (cuota 05/12, ciclo AMEX) |
+| Laptop cuota (AMEX) | AMEX ****3328 | $15.42 | Mensual (cuota 05/12, ciclo AMEX) |
+| Laptop MR LAPTOPS (Agrícola) | VISA Agrícola ****6114 | $78.75 | Mensual (cuota 1/12, desde Sep-2026) — tasa 0% |
 | Cuscatlán Accidentes | AMEX ****3328 | $8.95 | Mensual (ciclo AMEX) |
 | Curacao cuota 2/12 | AMEX ****3328 | $20.75 | Mensual (ciclo AMEX) |
 
@@ -76,6 +78,7 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
+| 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app Agrícola. |
 | 🟡 | Cuota Cuscatlán $79.79 — PRIMER PAGO 23-Ago-2026 | **23-Ago-2026** | Balcón Cuotas: julio sin cobro confirmado. Verificar si débito automático NIU o pago manual. |
 | ✅ | DEL SUR julio pagado $79.27 desde NIU | 21-Jul-2026 | Confirmado comprobante. NIU post-pago: ~$14.49 ⚠️ MUY BAJO |
 | 🔴 | Pagar AMEX $260.77 (contado) o mínimo $17 | **10-Ago-2026** | Confirmado estado de cuenta corte 18-Jul. Pagar contado evita intereses del ciclo Ago. |
@@ -92,6 +95,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 22-Jul-2026 | Laptop MR LAPTOPS $945 — VISA Agrícola ****6114 tasa 0% / 12 meses / $78.75/mes. Compra 21-Jul 17:12 vía WOMPI. Confirmado alerta Banco Agrícola. Saldo VISA estimado ~$1,299.47. Primera cuota sep-2026. |
 | 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Ago-2026 ($79.79). Julio sin cobro (Balcón Cuotas). Cancela anterior $2,225. VISA Cuscatlán $0. |
 | 21-Jul-2026 | Transfer365 Agrícola→MultiMoney $226.45 (ID:1416758738). MultiMoney: $579.02+$226.45 = $805.47. Resuelve misterio BAC→Agrícola $226.45 del 16-Jul. |
 | 21-Jul-2026 | DEL SUR julio pagado $79.27 desde NIU. NIU post-pago: ~$14.49 (crítico). |
@@ -116,6 +120,7 @@
 | 20-Jul | BAC | N1CO*LA NEVERIA CA AL (helados) | −$4.40 |
 | 19-Jul | BAC | SMARTBOX MERLIOT | −$69.00 |
 | 19-Jul | BAC | FERRETERIAS FREUND MER | −$9.99 |
+| 21-Jul | VISA Agrícola ****6114 | **Laptop MR LAPTOPS** (WOMPI) — tasa 0 / 12 meses / $78.75×12 | −$945.00 |
 | 21-Jul | MultiMoney | Depósito reserva quincena (desde Agrícola corriente) | +$226.45 |
 | 21-Jul | NIU | DEL SUR factura julio (pago manual) | −$79.27 |
 | 18-Jul | NIU | **Lentes esposa — Óptica JDR** (DTE confirmado) | −$182.38 |

@@ -21,7 +21,7 @@
     "cards": [
       {"name": "AMEX BAC",       "last4": "3328", "balance": 260.77,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 17.00, "balance_fecha": "2026-07-18", "pago_contado_corte": 260.77, "pago_minimo_corte": 17.00, "fecha_limite_pago": "2026-08-10", "cargos_ciclo_jul18": [{"fecha": "ciclo_jul18", "descripcion": "ACCIDENTES PERSONALES BAC", "monto": 8.95, "tipo": "fijo"}, {"fecha": "ciclo_jul18", "descripcion": "Laptop cuota 05/12", "monto": 15.42, "tipo": "fijo"}, {"fecha": "ciclo_jul18", "descripcion": "Curacao cuota 2/12", "monto": 20.75, "tipo": "fijo"}, {"fecha": "2026-07-10", "descripcion": "ANDA -C- cargo automático", "monto": 2.83, "tipo": "fijo", "nota": "Pendiente migrar a NIU"}], "nota_balance": "✅ CONFIRMADO estado de cuenta BAC (corte 18-Jul-2026). Pago de contado: $260.77. Pago mínimo: $17.00. Vencimiento: 10-Ago-2026. Pre-corte: $250 (post-pago $159) + cargos fijos ciclo ~$47.95 + intereses ~$12.82 = $260.77."},
 {"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00, "tasa_anual": 34.99, "fecha_pago_dia": 20, "fecha_corte_dia": 25, "min_pago": 0.00, "nota": "✅ Saldo $0 confirmado 21-Jul-2026 por usuario. Préstamo consolidación anterior ($2,225) cancelado 16-Jul con nuevo préstamo Cuscatlán $2,490."},
-      {"name": "VISA Agrícola",  "last4": "6114", "balance": 354.47,  "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 11.84, "saldo_disponible": 1645.53, "limite_credito": 2000.00, "balance_fecha_corte": "2026-07-09", "pago_contado_corte": 168.47, "pago_minimo_corte": 11.84, "fecha_limite_pago": "2026-08-03", "balance_actual_13jul": 354.47, "balance_actual_fecha": "2026-07-13", "nota_balance": "✅ Confirmado app Agrícola 13-Jul. Pago de contado (corte 09-Jul): $168.47. Post-corte UTEC 10-Jul: $81 mensualidad + $105 matrícula = $186. Saldo total actual (incl. plazo): $354.47. Saldo disponible: $1,645.53. Fecha pago: 03/08/2026."}
+      {"name": "VISA Agrícola",  "last4": "6114", "balance": 1299.47, "balance_estimado": true, "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 11.84, "saldo_disponible": 700.53, "limite_credito": 2000.00, "balance_fecha_corte": "2026-07-09", "pago_contado_corte": 168.47, "pago_minimo_corte": 11.84, "fecha_limite_pago": "2026-08-03", "balance_actual_13jul": 354.47, "balance_actual_fecha": "2026-07-13", "nota_balance": "⚠️ Estimado: $354.47 (app 13-Jul) + $945 laptop MR LAPTOPS 21-Jul = ~$1,299.47. Pendiente confirmar en app. Primera cuota laptop ($78.75) aparece en corte Ago-9. Saldo disponible estimado: ~$700.53."}
     ],
     "obligaciones_extra": [
       {
@@ -101,6 +101,23 @@
       "tarjeta_last4": "3328"
     },
     {
+      "ref": "AGRICOLA-LAPTOP-001",
+      "descripcion": "Laptop MR LAPTOPS — VISA Agrícola ****6114 / tasa 0% / 12 cuotas",
+      "monto_original": 945.00,
+      "cuota_mensual": 78.75,
+      "saldo_actual": 945.00,
+      "cuotas_pagadas": 0,
+      "cuotas_total": 12,
+      "cuotas_restantes": 12,
+      "tasa_mensual": 0.0,
+      "fecha_compra": "2026-07-21",
+      "fecha_primer_cuota_estimada": "2026-09-04",
+      "fecha_pago_dia": 4,
+      "banco": "Agrícola",
+      "tarjeta_last4": "6114",
+      "nota": "Incluido en saldo VISA Agrícola ****6114 (no contar doble en deuda_total). Primera cuota estimada corte Ago-9 / pago Sep-4."
+    },
+    {
       "ref": "CURACAO-001",
       "descripcion": "Cuota Curacao — 0%",
       "monto_original": 249.00,
@@ -117,20 +134,20 @@
     }
   ],
   "deuda_total": {
-    "fecha": "2026-07-21",
-    "tarjetas": 615.24,
+    "fecha": "2026-07-22",
+    "tarjetas": 1560.24,
     "intrafinanciamientos": 2851.66,
     "prestamo": 6171.48,
-    "total": 9638.38,
+    "total": 10583.38,
     "detalle": {
       "AMEX_3328": 260.77,
-      "VISA_Agricola_6114": 354.47,
+      "VISA_Agricola_6114": 1299.47,
       "Prestamo_Nuevo_Cuscatlan": 2490.00,
       "Laptop_BAC": 154.16,
       "Curacao": 207.50,
       "Prestamo_Consumo_Agricola": 6171.48
     },
-    "nota": "AMEX $260.77 = pago de contado corte 18-Jul-2026. VISA Agrícola $354.47 confirmada app 13-Jul. Préstamo Cuscatlán nuevo $2,490 / 22.99% / 48 meses / $79.79/mes — tomado 16-Jul, primer pago 23-Jul-2026."
+    "nota": "AMEX $260.77 confirmado corte 18-Jul. VISA Agrícola ~$1,299.47 estimado (app 13-Jul + laptop $945 WOMPI 21-Jul). Laptop Agrícola 0%/12 = $78.75/mes desde Sep-2026, incluido en saldo VISA. Préstamo Cuscatlán $2,490 / primer pago 23-Ago-2026."
   },
   "roadmap_liquidacion": {
     "descripcion": "Proyección de liquidación de deudas 2026-2027",
