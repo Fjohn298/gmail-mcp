@@ -434,13 +434,13 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 47.25,
-      "saldo_fecha": "2026-07-20",
+      "saldo": 26.24,
+      "saldo_fecha": "2026-07-23",
       "saldo_retenido": null,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo estimado ~$47.25 al 20-Jul ($426.45 − $226.45 T365 Agrícola − $3.57 Uber − $5 esposa − $37.86 Jul17 − $22.93 Jul18 − $78.99 Jul19 − $4.40 Jul20 = $47.25). ⚠️ Verificar saldo real en app — puede haber diferencias.",
+      "notas": "Saldo estimado ~$26.24 al 23-Jul ($47.25 − $5.24 FCIA SAN NICOLAS − $1.82 FCIA SAN NICOLAS (22-Jul) − $13.95 LA TAQUEADA (23-Jul) = $26.24). ⚠️ MUY BAJO — verificar saldo real en app. Próximo salario 28/30-Jul.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -485,7 +485,10 @@
         {"fecha": "2026-07-18", "descripcion": "SMARTBOX MERLIOT", "monto": 15.00, "tipo": "egreso", "categoria": "Entretenimiento", "fuente": "Gmail_BAC_alerta", "hora": "21:41"},
         {"fecha": "2026-07-19", "descripcion": "SMARTBOX MERLIOT", "monto": 69.00, "tipo": "egreso", "categoria": "Entretenimiento", "fuente": "Gmail_BAC_alerta", "hora": "17:43"},
         {"fecha": "2026-07-19", "descripcion": "FERRETERIAS FREUND MER (ferretería)", "monto": 9.99, "tipo": "egreso", "categoria": "Hogar", "fuente": "Gmail_BAC_alerta", "hora": "18:02"},
-        {"fecha": "2026-07-20", "descripcion": "N1CO*LA NEVERIA CA AL (nevería/helados)", "monto": 4.40, "tipo": "egreso", "categoria": "Alimentación", "fuente": "Gmail_BAC_alerta", "hora": "19:02"}
+        {"fecha": "2026-07-20", "descripcion": "N1CO*LA NEVERIA CA AL (nevería/helados)", "monto": 4.40, "tipo": "egreso", "categoria": "Alimentación", "fuente": "Gmail_BAC_alerta", "hora": "19:02"},
+        {"fecha": "2026-07-22", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 5.24, "tipo": "egreso", "categoria": "Farmacia", "fuente": "Gmail_BAC_alerta", "hora": "20:38"},
+        {"fecha": "2026-07-22", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 1.82, "tipo": "egreso", "categoria": "Farmacia", "fuente": "Gmail_BAC_alerta", "hora": "20:44"},
+        {"fecha": "2026-07-23", "descripcion": "LA TAQUEADA (restaurante)", "monto": 13.95, "tipo": "egreso", "categoria": "Restaurante", "fuente": "Gmail_BAC_alerta", "hora": "20:16:32", "tipo_compra": "Tarjeta Presente"}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-07-02",
@@ -516,10 +519,10 @@
       "nombre": "NIU",
       "tipo": "prepago",
       "cuenta": "••3997",
-      "saldo": 14.49,
-      "saldo_fecha": "2026-07-21",
+      "saldo": 2.00,
+      "saldo_fecha": "2026-07-22",
       "fecha_registro": "2026-07-07",
-      "notas": "Saldo estimado ~$14.49 al 21-Jul ($93.76 − $79.27 DEL SUR 21-Jul = $14.49). ⚠️ MUY BAJO — próxima recarga depende del salario 28/30-Jul. Jul17 $5 + Jul18 $34.97 + $25.74 pendiente identificar.",
+      "notas": "Saldo estimado ~$2.00 al 22-Jul ($14.49 − $0.99 − $11.50 consumos débito X5261 22-Jul = $2.00). 🔴 CRÍTICO — prácticamente en $0. Recarga urgente antes de próximos cargos (Claude Pro 14-Ago, Cuscatlán cuota 23-Ago). Jul17 $5 + Jul18 $34.97 + $25.74 + Jul22 $0.99 + $11.50 pendiente identificar merchant.",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},
@@ -534,7 +537,9 @@
         {"fecha": "2026-07-18", "descripcion": "Desembolso préstamo Cuscatlán ($2,490) — sobrante tras pago préstamo anterior ($2,225)", "monto": 264.02, "tipo": "ingreso", "fuente": "Alerta_Cuscatlan", "categoria": "Ingreso - Préstamo", "nota": "✅ Identificado. Nuevo préstamo $2,490 / 22.99% / 48 meses tomado 16-Jul. Banco aplicó $2,225 al préstamo anterior y depositó saldo ~$265 a NIU X5261 el 18-Jul-2026."},
         {"fecha": "2026-07-18", "descripcion": "Consumo tarjeta débito X5261 (12:54)", "monto": 34.97, "tipo": "egreso", "fuente": "Alerta_Cuscatlan", "nota": "Merchant desconocido. Pendiente identificar."},
         {"fecha": "2026-07-18", "descripcion": "Consumo tarjeta débito X5261 (14:15)", "monto": 25.74, "tipo": "egreso", "fuente": "Alerta_Cuscatlan", "nota": "Merchant desconocido. Pendiente identificar."},
-        {"fecha": "2026-07-18", "descripcion": "Lentes esposa — Óptica JDR (DTE-01-S007P001-000000000008827)", "monto": 182.38, "tipo": "egreso", "fuente": "DTE_GRUPO_JDR_SA + Alerta_Cuscatlan", "categoria": "Salud - Óptica", "nota": "✅ Identificado. DTE de GRUPO JDR SA (opticajdr.com). Compra lentes Monica Alejandra Guirola Vargas. DTE reenviado por esposa 21-Jul-2026."}
+        {"fecha": "2026-07-18", "descripcion": "Lentes esposa — Óptica JDR (DTE-01-S007P001-000000000008827)", "monto": 182.38, "tipo": "egreso", "fuente": "DTE_GRUPO_JDR_SA + Alerta_Cuscatlan", "categoria": "Salud - Óptica", "nota": "✅ Identificado. DTE de GRUPO JDR SA (opticajdr.com). Compra lentes Monica Alejandra Guirola Vargas. DTE reenviado por esposa 21-Jul-2026."},
+        {"fecha": "2026-07-22", "descripcion": "Consumo tarjeta débito X5261 (13:11)", "monto": 0.99, "tipo": "egreso", "fuente": "Alerta_Cuscatlan", "nota": "Merchant desconocido. Pendiente identificar."},
+        {"fecha": "2026-07-22", "descripcion": "Consumo tarjeta débito X5261 (20:27)", "monto": 11.50, "tipo": "egreso", "fuente": "Alerta_Cuscatlan", "nota": "Merchant desconocido. Pendiente identificar."}
       ]
     }
   ],

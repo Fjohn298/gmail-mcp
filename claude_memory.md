@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 22-Jul-2026 (rev3 — laptop MR LAPTOPS $945 VISA Agrícola)
+# CLAUDE MEMORY — Última actualización: 23-Jul-2026 (rev4 — NIU crítico ~$2.00, BAC ~$26.24)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -37,11 +37,11 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| BAC ****6201 | ~$47.25 | $426.45 − $226.45 T365 Agr − $3.57 Uber − $5 esposa − $37.86 Jul17 − $22.93 Jul18 − $78.99 Jul19 − $4.40 Jul20 | 20-Jul-2026 |
-| NIU ••3997 | ~$14.49 | $93.76 − $79.27 DEL SUR 21-Jul | 21-Jul-2026 |
+| BAC ****6201 | ~$26.24 | $47.25 − $5.24 FCIA SAN NICOLAS − $1.82 FCIA SAN NICOLAS (22-Jul) − $13.95 LA TAQUEADA (23-Jul) | 23-Jul-2026 |
+| NIU ••3997 | ~$2.00 | $14.49 − $0.99 − $11.50 consumos débito X5261 (22-Jul, merchant sin identificar) | 22-Jul-2026 |
 
 > ⚠️ NO sobreescribir saldos reales con estos estimados. Pedir confirmación al usuario.
-> ⚠️ BAC MUY BAJO — verificar urgente. Próximo salario: 28/30-Jul.
+> 🔴 NIU prácticamente en $0 — recarga urgente. BAC también muy bajo. Próximo salario: 28/30-Jul.
 
 ---
 
@@ -78,6 +78,9 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
+| 🔴 | NIU ••3997 saldo ~$2.00 — CRÍTICO, prácticamente $0 | Urgente | Tras 2 consumos débito X5261 sin identificar ($0.99 + $11.50, 22-Jul). Recargar antes del próximo salario 28/30-Jul. |
+| 🔴 | BAC ****6201 saldo ~$26.24 — MUY BAJO | Urgente | Tras FCIA SAN NICOLAS $5.24+$1.82 (22-Jul) y LA TAQUEADA $13.95 (23-Jul). Verificar saldo real en app. |
+| 🟡 | Identificar consumos NIU Jul22 $0.99 (13:11) y $11.50 (20:27) | Pendiente | Merchant no incluido en alertas Cuscatlán. |
 | 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app Agrícola. |
 | 🟡 | Cuota Cuscatlán $79.79 — PRIMER PAGO 23-Ago-2026 | **23-Ago-2026** | Balcón Cuotas: julio sin cobro confirmado. Verificar si débito automático NIU o pago manual. |
 | ✅ | DEL SUR julio pagado $79.27 desde NIU | 21-Jul-2026 | Confirmado comprobante. NIU post-pago: ~$14.49 ⚠️ MUY BAJO |
@@ -95,6 +98,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 23-Jul-2026 | Revisión de correos 22–23 Jul: 2 consumos débito NIU X5261 sin identificar ($0.99 + $11.50, 22-Jul) → NIU ~$2.00 (crítico). BAC ****6201: FCIA SAN NICOLAS $5.24+$1.82 (22-Jul) + LA TAQUEADA $13.95 (23-Jul) → BAC ~$26.24. |
 | 22-Jul-2026 | Laptop MR LAPTOPS $945 — VISA Agrícola ****6114 tasa 0% / 12 meses / $78.75/mes. Compra 21-Jul 17:12 vía WOMPI. Confirmado alerta Banco Agrícola. Saldo VISA estimado ~$1,299.47. Primera cuota sep-2026. |
 | 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Ago-2026 ($79.79). Julio sin cobro (Balcón Cuotas). Cancela anterior $2,225. VISA Cuscatlán $0. |
 | 21-Jul-2026 | Transfer365 Agrícola→MultiMoney $226.45 (ID:1416758738). MultiMoney: $579.02+$226.45 = $805.47. Resuelve misterio BAC→Agrícola $226.45 del 16-Jul. |
@@ -117,6 +121,11 @@
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
 | 23-Ago | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — próxima | −$79.79 |
+| 23-Jul | BAC | LA TAQUEADA (restaurante) — 20:16:32 Tarjeta Presente | −$13.95 |
+| 22-Jul | BAC | N1CO*FCIA SAN NICOLAS (farmacia) — 20:44 | −$1.82 |
+| 22-Jul | BAC | N1CO*FCIA SAN NICOLAS (farmacia) — 20:38 | −$5.24 |
+| 22-Jul | NIU | Consumo débito X5261 (20:27) — merchant sin identificar | −$11.50 |
+| 22-Jul | NIU | Consumo débito X5261 (13:11) — merchant sin identificar | −$0.99 |
 | 20-Jul | BAC | N1CO*LA NEVERIA CA AL (helados) | −$4.40 |
 | 19-Jul | BAC | SMARTBOX MERLIOT | −$69.00 |
 | 19-Jul | BAC | FERRETERIAS FREUND MER | −$9.99 |

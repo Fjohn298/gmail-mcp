@@ -78,3 +78,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-21,MultiMoney,Ahorro,Depósito Transfer365 desde Agrícola (ID:1416758738),Ingreso,226.45,No,"✅ Confirmado. Saldo MultiMoney: $579.02 + $226.45 = $805.47 al 21-Jul-2026."
 2026-07-21,NIU ••3997,Servicios - Energía,DEL SUR factura julio — pago manual desde NIU,Gasto,-79.27,No,"✅ Pagado 21-Jul-2026. Comprobante enviado por usuario. Monto $79.27 (jun fue $80.02 en AMEX). Primer mes desde NIU."
 2026-07-30,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 30-Jul),Ingreso,566.92,Sí,Quincena 30
+2026-07-22,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (13:11),Gasto,-0.99,No,Confirmado alerta Cuscatlán 22-Jul. Merchant desconocido — pendiente identificar.
+2026-07-22,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (20:27),Gasto,-11.50,No,Confirmado alerta Cuscatlán 22-Jul. Merchant desconocido — pendiente identificar.
+2026-07-22,BAC,Farmacia,N1CO*FCIA SAN NICOLAS,Gasto,-5.24,No,Confirmado alerta BAC — 22-Jul ~20:38 local
+2026-07-22,BAC,Farmacia,N1CO*FCIA SAN NICOLAS,Gasto,-1.82,No,Confirmado alerta BAC — 22-Jul ~20:44 local
+2026-07-23,BAC,Restaurante,LA TAQUEADA,Gasto,-13.95,No,Confirmado alerta BAC — 23-Jul 20:16:32 local. Tarjeta Presente.
