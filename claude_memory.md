@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 30-Jul-2026 (rev5 — VISA Cuscatlán $78.48 + movimientos Jul 24-30)
+# CLAUDE MEMORY — Última actualización: 30-Jul-2026 (rev6 — salario Jul16-31 confirmado $1,114.75 planilla vacaciones)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -38,11 +38,11 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| BAC ****6201 | ~$552.59 | $26.24 − $13.39 (Jul24) − $5.80 (Jul28) − $21.38 (Jul29) + $566.92 salario 30-Jul ⚠️ pend confirmar app | 30-Jul-2026 |
+| BAC ****6201 | ~$1,100.42 | $26.24 − $13.39 (Jul24) − $5.80 (Jul28) − $21.38 (Jul29) + $1,114.75 salario vacaciones 29-Jul ✅ | 29-Jul-2026 |
 | NIU ••3997 | ~$22.56 | $2.00 + $5.56 T365 24-Jul − $3.00 cancha 24-Jul + $18.00 T365 29-Jul | 29-Jul-2026 |
 
 > ⚠️ NO sobreescribir saldos reales con estos estimados. Pedir confirmación al usuario.
-> ⚠️ BAC: salario 30-Jul no confirmado por email (BAC no envía alertas depósito). Verificar en app.
+> ✅ BAC: salario Jul16-31 confirmado por recibo de pago Super Repuestos ($1,114.75 neto, 29-Jul). Incluye vacaciones.
 
 ---
 
@@ -85,7 +85,7 @@
 | 🔴 | Cuota préstamo Agrícola $147.11 | **07-Ago-2026** | ⚠️ Verificar — Jul pagada 29-Jun pero próxima sí vence 07-Ago. |
 | 🟡 | Cuota Cuscatlán $79.79 — PRIMER PAGO 23-Ago-2026 | **23-Ago-2026** | Balcón Cuotas: julio sin cobro confirmado. NIU: ~$22.56 — recargar antes del 23-Ago. |
 | 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app Agrícola. |
-| 🟡 | Confirmar saldo BAC en app | Urgente | Estimado ~$552.59 con salario 30-Jul. BAC no envía alertas de depósito. |
+| ✅ | Salario Jul16-31 confirmado $1,114.75 neto | 29-Jul-2026 | Recibo Super Repuestos. Planilla vacaciones: $700 salario + $210 recargo + $490 gratificación. BAC estimado ~$1,100.42. |
 | 🟡 | Identificar consumos NIU Jul17 $5.00 y Jul18 $34.97 / $25.74 y Jul22 $0.99/$11.50 | Pendiente | Merchants no incluidos en alertas Cuscatlán. |
 | ✅ | DEL SUR julio pagado $79.27 desde NIU | 21-Jul-2026 | Confirmado comprobante. |
 | ✅ | NIU recargado — Jul24 +$5.56 / Jul29 +$18.00 | 29-Jul-2026 | NIU estimado ~$22.56. Suficiente para próximos cargos. |
@@ -99,7 +99,8 @@
 
 | Fecha | Corrección |
 |-------|-----------|
-| 30-Jul-2026 | VISA Cuscatlán $78.48 corte 23-Jul = primera cuota intrafinanciamiento (usuario confirma). NIU estimado ~$22.56 (+$5.56 T365 24-Jul, −$3.00 cancha, +$18.00 T365 29-Jul). BAC estimado ~$552.59 con salario 30-Jul (pend confirmar app). 12 nuevos movimientos Jul 23-29 registrados. |
+| 30-Jul-2026 | Salario Jul16-31 confirmado recibo Super Repuestos: $1,114.75 neto (planilla vacaciones: salario $700 + recargo vacaciones $210 + gratificación $490 − deducciones $285.25). BAC estimado ~$1,100.42. VISA Cuscatlán $78.48 = primera cuota intrafinanciamiento corte 23-Jul. |
+| 30-Jul-2026 | VISA Cuscatlán $78.48 corte 23-Jul = primera cuota intrafinanciamiento (usuario confirma). NIU estimado ~$22.56. 12 nuevos movimientos Jul 23-29 registrados. |
 | 23-Jul-2026 | Revisión de correos 22–23 Jul: 2 consumos débito NIU X5261 sin identificar ($0.99 + $11.50, 22-Jul) → NIU ~$2.00 (crítico). BAC ****6201: FCIA SAN NICOLAS $5.24+$1.82 (22-Jul) + LA TAQUEADA $13.95 (23-Jul) → BAC ~$26.24. |
 | 22-Jul-2026 | Laptop MR LAPTOPS $945 — VISA Agrícola ****6114 tasa 0% / 12 meses / $78.75/mes. Compra 21-Jul 17:12 vía WOMPI. Confirmado alerta Banco Agrícola. Saldo VISA estimado ~$1,299.47. Primera cuota sep-2026. |
 | 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Ago-2026 ($79.79). Julio sin cobro (Balcón Cuotas). Cancela anterior $2,225. VISA Cuscatlán $0. |
@@ -123,7 +124,7 @@
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
 | 23-Ago | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — próxima | −$79.79 |
-| 30-Jul | BAC | Salario quincenal (esperado — ⚠️ pend confirmar en app) | +$566.92 |
+| 29-Jul | BAC | **Planilla vacaciones Jul16-31** (salario $700 + recargo $210 + gratif $490) | +$1,114.75 |
 | 29-Jul | BAC | UBER * PENDING | −$3.38 |
 | 29-Jul | BAC | Transfer365 → NIU (recarga quincena) | −$18.00 |
 | 29-Jul | NIU | Transfer365 desde BAC (recarga quincena) | +$18.00 |

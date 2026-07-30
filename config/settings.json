@@ -435,13 +435,13 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 552.59,
-      "saldo_fecha": "2026-07-30",
+      "saldo": 1100.42,
+      "saldo_fecha": "2026-07-29",
       "saldo_retenido": null,
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo estimado ~$552.59 al 30-Jul ($26.24 − $1.25 − $5.56 − $6.58 − $3.00 − $2.80 − $18.00 − $3.38 + $566.92 salario 30-Jul). ⚠️ Salario no confirmado por email (BAC no envía alertas depósito). Verificar en app.",
+      "notas": "Saldo estimado ~$1,100.42 al 29-Jul ($26.24 base − $13.39 Jul24 − $5.80 Jul28 − $21.38 Jul29 + $1,114.75 planilla vacaciones Jul16-31). ✅ Salario confirmado recibo Super Repuestos Recibo No.1 (29-Jul-2026 5:11PM). Planilla especial: bruto $1,400 (salario $700 + recargo vacaciones $210 + gratificación $490) − deducciones $285.25 = $1,114.75 neto.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},

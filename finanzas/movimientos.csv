@@ -77,7 +77,10 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas
 2026-07-21,Agrícola,Ahorro,Transfer365 Agrícola → MultiMoney (ID:1416758738) — reserva quincena 30-Jul,Gasto,-226.45,No,"✅ Confirmado correo Agrícola 21-Jul 03:38. Destino: SAC MULTIMONEY S.A. Reserva para pagos fin de mes."
 2026-07-21,MultiMoney,Ahorro,Depósito Transfer365 desde Agrícola (ID:1416758738),Ingreso,226.45,No,"✅ Confirmado. Saldo MultiMoney: $579.02 + $226.45 = $805.47 al 21-Jul-2026."
 2026-07-21,NIU ••3997,Servicios - Energía,DEL SUR factura julio — pago manual desde NIU,Gasto,-79.27,No,"✅ Pagado 21-Jul-2026. Comprobante enviado por usuario. Monto $79.27 (jun fue $80.02 en AMEX). Primer mes desde NIU."
-2026-07-30,BAC Nómina,Ingreso - Salario,Pago quincenal salario (quincena 30-Jul),Ingreso,566.92,Sí,Esperado 28/30-Jul — ⚠️ pend confirmar en app (BAC no envía alerta email depósito)
+2026-07-29,BAC Nómina,Ingreso - Salario,"Planilla vacaciones Jul16-31 (Recibo No.1): Salario $700 + Recargo Vacaciones $210 + Gratificación $490",Ingreso,1114.75,No,"✅ Confirmado recibo de pago Super Repuestos 29-Jul-2026 5:11PM. Bruto $1,400 − ISSS $15 − ISR $204.28 − AFP $65.97 = $1,114.75 neto. Planilla especial (vacaciones)."
+2026-07-29,BAC Nómina,Detalle - Deducciones planilla Jul16-31,Retención ISR planilla vacaciones Jul,Gasto,-204.28,No,Deducido en nómina — referencia recibo No.1 Super Repuestos 29-Jul-2026
+2026-07-29,BAC Nómina,Detalle - Deducciones planilla Jul16-31,AFP planilla vacaciones Jul,Gasto,-65.97,Sí,Deducido en nómina — referencia recibo No.1
+2026-07-29,BAC Nómina,Detalle - Deducciones planilla Jul16-31,Seguro Social (ISSS) planilla Jul,Gasto,-15.00,Sí,Deducido en nómina — referencia recibo No.1
 2026-07-22,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (13:11),Gasto,-0.99,No,Confirmado alerta Cuscatlán 22-Jul. Merchant desconocido — pendiente identificar.
 2026-07-22,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (20:27),Gasto,-11.50,No,Confirmado alerta Cuscatlán 22-Jul. Merchant desconocido — pendiente identificar.
 2026-07-22,BAC,Farmacia,N1CO*FCIA SAN NICOLAS,Gasto,-5.24,No,Confirmado alerta BAC — 22-Jul ~20:38 local
