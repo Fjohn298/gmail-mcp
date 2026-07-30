@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 30-Jul-2026 (rev6 — salario Jul16-31 confirmado $1,114.75 planilla vacaciones)
+# CLAUDE MEMORY — Última actualización: 30-Jul-2026 (rev7 — metodología contable quincenal implementada)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -92,6 +92,69 @@
 | ✅ | Transfer365 BAC→Agrícola→MultiMoney $226.45 identificado | 21-Jul-2026 | Paso intermedio: Agrícola corriente 16-Jul → MultiMoney 21-Jul (ID:1416758738) |
 | 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | Usar BAC ****6201 para cancelar online |
 | 🟢 | Migrar ANDA de AMEX a NIU | Pendiente | AMEX cobró $2.83 en ciclo Jul |
+
+---
+
+## METODOLOGÍA CONTABLE QUINCENAL
+
+> Esta es la **fuente de verdad aprobada** para el seguimiento quincenal.
+> Cada quincena produce una tabla Contable / Real que se actualiza al avanzar los pagos.
+
+### Principios
+
+| Principio | Detalle |
+|-----------|---------|
+| Período Q1 | Día 13 del mes → día 28/30 |
+| Período Q2 | Día 28/30 → día 13 del mes siguiente |
+| Tipo `Real` | Ejecutado o comprometido — siempre aparece en la tabla |
+| Tipo `📒 Contable` | Planificado; se ejecuta solo si el salario no cubre sin el fondo |
+| MultiMoney Q1 | Entrada +$225 desde salario (ahorro) |
+| MultiMoney Q2 | Salida +$225 (fondo cubre pagos) + Entrada −$225 (reposición) |
+| BAC mínimo operativo | $200 siempre disponible al cierre de cada quincena |
+| Piso intocable MultiMoney | $501.35 — nunca bajar de este nivel |
+| Símbolos columna Real | `✅` confirmado · `⏳` pendiente · `—` no ejecutado (salario cubrió) |
+
+---
+
+### QUINCENA Q2 — Jul 29 → Aug 13, 2026 *(en ejecución)*
+
+| Movimiento | Tipo | Contable Esperado | Real |
+|------------|------|:-----------------:|:----:|
+| Salario quincena | Real | +$566.92 | +$1,114.75 ✅ |
+| Salida MultiMoney reserva (Q2) | 📒 Contable | +$225.00 | — (salario cubre) |
+| **Total disponible** | | **$791.92** | **$1,114.75** |
+| NIU recarga agosto (Claude+Claro+Cuscatlán 23-Ago) | Real | −$172.00 | −$18.00 ✅ ⚠️ pendiente ~$154 |
+| Cuota Préstamo Agrícola #2132201069 | Real | −$147.11 | ⏳ vence 07-Ago |
+| VISA Agrícola ****6114 (contado) | Real | −$168.47 | ⏳ vence ~03-Ago |
+| AMEX ****3328 | Real | −$17.00 mín | ⏳ pagar contado $260.77 (vence 10-Ago) |
+| Variables / gastos diarios | 📒 Contable | −$80.00 | ~−$56.71 ✅ |
+| Entrada MultiMoney reposición (Q2) | 📒 Contable | −$225.00 | — (no ejecutado) |
+| **Saldo BAC estimado al cierre** | | **~$279.34** | **~$352.07** |
+| MultiMoney saldo proyectado | | $805.47 | $805.47 |
+
+**Verificación Q2**: Contable $279.34 > $200 mínimo ✅ · MultiMoney $805.47 > $501.35 ✅
+
+> 💡 Salario vacacional excepcional ($1,114.75 vs $566.92 normal). Aprovechar para pagar AMEX contado $260.77 en esta quincena.
+
+---
+
+### QUINCENA Q1 — Aug 13 → Aug 28, 2026 *(proyección)*
+
+| Movimiento | Tipo | Contable Esperado | Real |
+|------------|------|:-----------------:|:----:|
+| Salario quincena | Real | +$566.92 | ⏳ |
+| Salida MultiMoney reserva (Q1) | 📒 Contable | +$225.00 | ⏳ |
+| **Total disponible** | | **$791.92** | ⏳ |
+| VISA Cuscatlán ****2789 (cuota intrafinanc.) | Real | −$78.48 | ⏳ vence ~17-Ago |
+| Cuota Préstamo Cuscatlán $2,490 (1/48) | Real | −$79.79 | ⏳ vence 23-Ago (sale de NIU) |
+| Variables / gastos diarios | 📒 Contable | −$70.00 | ⏳ |
+| Entrada MultiMoney ahorro (Q1) | 📒 Contable | −$225.00 | ⏳ |
+| **Saldo BAC estimado al cierre** | | **~$338.65** | ⏳ |
+| MultiMoney saldo proyectado | | $805.47 | ⏳ |
+
+> ⚠️ Supuesto: AMEX $260.77 pagado contado en Q2 (Jul 29–Aug 13). NIU agosto fondeado desde Q2 ($172 total: $18 ya enviado + $154 pendiente). Cuota Cuscatlán $79.79 sale de NIU ••3997 el 23-Ago.
+
+**Verificación Q1**: Contable ~$338.65 > $200 mínimo ✅ · MultiMoney $805.47 > $501.35 ✅
 
 ---
 
