@@ -97,3 +97,11 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-07-29,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (recarga quincena),Gasto,-18.00,No,Confirmado alerta Cuscatlán — 29-Jul
 2026-07-29,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (recarga quincena),Ingreso,18.00,No,Par con egreso BAC 29-Jul
 2026-07-29,BAC,Transporte,UBER * PENDING (Uber ride),Gasto,-3.38,No,Confirmado alerta BAC — 29-Jul (pendiente de procesarse)
+2026-07-31,NIU ••3997,Deporte,Cancha deportiva (transfer interno Cuscatlán → Emerson Amaya ****5973),Gasto,-3.00,Sí,"Confirmado alerta Cuscatlán 31-Jul 19:37. Ref 715917680, 31/07/2026 12:53:44. Concepto: Cancha."
+2026-07-31,Agrícola,Deuda - Pago,Factura electrónica Banco Agrícola DTE-01-M001P010-000000010006522,Gasto,,No,"⚠️ DTE recibido 31-Jul-2026. Probablemente cuota Préstamo #2132201069 (vence 07-Ago). Monto pendiente confirmar en app Agrícola."
+2026-08-01,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (23:23),Gasto,-7.00,No,Confirmado alerta Cuscatlán 02-Ago. Merchant desconocido — pendiente identificar.
+2026-08-03,Agrícola,Deuda - Pago,Factura electrónica Banco Agrícola DTE-01-M001P014-000000010280884,Gasto,,No,"⚠️ DTE recibido 03-Ago-2026. Probablemente pago VISA Agrícola ****6114 (vence ~03-Ago). Monto pendiente confirmar en app Agrícola."
+2026-08-05,NIU ••3997,Ingreso - Transferencia,Depósito en cuenta NIU X5261 (17:34) — fuente pendiente,Ingreso,35.00,No,Confirmado alerta Cuscatlán 05-Ago. Fuente pendiente identificar (¿recarga desde BAC? ¿esposa?).
+2026-08-05,NIU ••3997,Ingreso - Transferencia,Depósito en cuenta NIU X5261 (17:37) — fuente pendiente,Ingreso,21.59,No,Confirmado alerta Cuscatlán 05-Ago. Fuente pendiente identificar.
+2026-08-06,NIU ••3997,Ingreso - Transferencia,Depósito en cuenta NIU X5261 (10:40) — fuente pendiente,Ingreso,25.00,No,Confirmado alerta Cuscatlán 06-Ago. Fuente pendiente identificar.
+2026-08-07,NIU ••3997,Deporte,Cancha deportiva (transfer interno Cuscatlán → Emerson Amaya ****5973),Gasto,-3.00,Sí,"Confirmado alerta Cuscatlán 07-Ago 14:12. Ref 732095191, 07/08/2026 08:12:30. Concepto: Para la cancha."
