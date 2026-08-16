@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 16-Ago-2026 (rev9 — movimientos Ago8–15 registrados desde Gmail)
+# CLAUDE MEMORY — Última actualización: 16-Ago-2026 (rev10 — saldos reales confirmados app BAC + AMEX)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -26,9 +26,10 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| AMEX ****3328 | $260.77 | Estado de cuenta BAC (pago de contado corte 18-Jul) | 18-Jul-2026 |
+| BAC ****6201 | $476.92 (+$140 retenido Computienda) | ✅ App BAC — "QuincenalAGOSTO +$566.92" confirmado | 16-Ago-2026 |
+| AMEX ****3328 | $18.25 | ✅ App BAC — "Pago de tarjeta al día". Saldo corte Jul18 fue $263.67 (no $260.77). Pagada $342.65 el 30-Jul. | 16-Ago-2026 |
 | VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
-| VISA Cuscatlán ****2789 | ~$0 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158). Era $78.48 + $4.50 cargos adicionales. | 13-Ago-2026 |
+| VISA Cuscatlán ****2789 | ~$0 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158) | 13-Ago-2026 |
 | MultiMoney (ahorro Agrícola) | $805.47 | Transfer365 ID:1416758738 (correo Agrícola) | 21-Jul-2026 |
 | Max Electrónico (Agrícola) | $0.00 | App Agrícola | 11-Jul-2026 |
 
@@ -38,12 +39,10 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| BAC ****6201 | ~$791 (sin salario) / ~$1,358 (con salario Ago13) | $1,100.42 − $69.11 (Ago8–10 BAC consumos) − $100.01 (T365 a NIU Ago13) − $140 (Computienda Ago15) = $791.30. Si salario $566.92 llegó Ago13: +$566.92 = ~$1,358 | 16-Ago-2026 |
-| NIU ••3997 | ~$48.92 | $91.15 − $19.55 (Ago8 desconocido) + $100.01 (T365 Ago13) − $82.98 (VISA Cuscatlán) − $3.00 (cancha Ago13) − $12.66 (William Rivas Ago14) − $2.80 (desconocido Ago14) − $1.25 (desconocido Ago14) − $20.00 (Claude Pro Ago14) | 14-Ago-2026 |
+| NIU ••3997 | ~$48.92 | $91.15 − $19.55 (Ago8) + $100.01 (T365 Ago13) − $82.98 (VISA Cuscatlán) − $3.00 (cancha Ago13) − $12.66 (William Rivas Ago14) − $2.80 − $1.25 (desconocidos Ago14) − $20.00 (Claude Pro Ago14) | 14-Ago-2026 |
 
 > ⚠️ NO sobreescribir saldos reales con estos estimados. Pedir confirmación al usuario.
-> ⚠️ BAC: salario Ago13 ($566.92) NO confirmado por app — BAC no envía alertas de depósito por correo.
-> 🚨 NIU ~$48.92 necesita ~$31 adicionales antes del 23-Ago para cubrir cuota Cuscatlán $79.79.
+> 🚨 NIU ~$48.92 — necesita ~$31 adicionales antes del 23-Ago para cubrir cuota Cuscatlán $79.79.
 
 ---
 
@@ -51,12 +50,12 @@
 
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
-| Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Sep-2026** | ⚠️ Ago: DTE M001P010 recibido 31-Jul — confirmar pago en app |
+| Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Sep-2026** | ⚠️ Ago: DTE M001P010 recibido 31-Jul — confirmar pago en app Agrícola |
 | Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Primer pago 23-Ago. NIU ~$48.92 — faltan ~$31. |
-| AMEX BAC ****3328 | $260.77+ | mín $17 / contado $260.77 | 🔴 **VENCIDA — 10-Ago-2026** | 🔴 6 DÍAS VENCIDA (hoy 16-Ago). Interés 43.08%/año acumulando (~$0.31/día). Pagar HOY. |
+| AMEX BAC ****3328 | $18.25 | — | **10-Sep-2026** | ✅ AL DÍA. Corte 18-Ago en 2 días → proyección cierre corte ~$66 (fijos: Accid $8.95 + Laptop 06/12 $15.42 + Curacao 04/12 $20.75 + ANDA $2.83) |
 | VISA Agrícola ****6114 | ~$1,299.47 | mín $11.84 | ⚠️ 03-Ago ya pasó | ⚠️ DTE Agrícola recibido 03-Ago (M001P014) — probablemente pagada. Confirmar en app. |
-| VISA Cuscatlán ****2789 | ~$0 | — | ✅ PAGADA | ✅ Pagada 13-Ago $82.98 desde NIU (Ref 761118158). |
-| Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago | Activo — incluido en saldo AMEX |
+| VISA Cuscatlán ****2789 | ~$0 | — | ✅ PAGADA | ✅ Pagada 13-Ago $82.98 desde NIU (Ref 761118158) |
+| Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago18 | Activo — incluido en saldo AMEX |
 | Laptop Agrícola cuota 01/12 | $945.00 | $78.75/mes | VISA Agrícola ****6114 — desde Sep-2026 | Nuevo 21-Jul. Tasa 0% / 12 meses. |
 
 ---
@@ -67,13 +66,13 @@
 |-------|--------|-------|------------|
 | Claude Pro (Anthropic) | NIU ••3997 / Cuscatlán ****3997 | $20.00 | Mensual — ✅ cobrado Ago14 (ciclo Ago14–Sep14) |
 | ANDA (agua) | AMEX ****3328 | ~$2.83 | Mensual (~día 10) — ⚠️ cobró Ago9 en AMEX — PENDIENTE migrar a NIU |
-| DEL SUR (energía) | NIU ••3997 (desde ago) | ~$70-80 | Mensual (~día 22) ⚠️ PENDIENTE — confirmar si llegó factura Ago |
+| DEL SUR (energía) | NIU ••3997 (desde ago) | ~$70-80 | Mensual (~día 22) ⚠️ PENDIENTE — confirmar factura Ago |
 | Google Cloud | BAC ****6201 | $9.60 | Mensual — **PENDIENTE CANCELAR** |
 | Claro pospago | NIU ••3997 | $20.00 | Mensual (exclusión AMEX: gestión 427181) |
-| Laptop cuota (AMEX) | AMEX ****3328 | $15.42 | Mensual (cuota 06/12, ciclo AMEX Ago) |
+| Laptop cuota (AMEX) | AMEX ****3328 | $15.42 | Mensual (cuota 06/12, ciclo AMEX Ago18) |
 | Laptop MR LAPTOPS (Agrícola) | VISA Agrícola ****6114 | $78.75 | Mensual (cuota 1/12, desde Sep-2026) — tasa 0% |
 | Cuscatlán Accidentes | AMEX ****3328 | $8.95 | Mensual (ciclo AMEX) |
-| Curacao cuota 3/12 | AMEX ****3328 | $20.75 | Mensual (ciclo AMEX) |
+| Curacao cuota 4/12 | AMEX ****3328 | $20.75 | Mensual (ciclo AMEX Ago18) |
 
 ---
 
@@ -81,18 +80,21 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| 🔴 | **PAGAR AMEX $260.77 DE INMEDIATO** (VENCIDA 6 días) | VENCIDO (debía Ago10) | Interés 43.08%/año acumulando. Corte Ago18 en 2 días — si no pagas antes del corte, se acumula más interés. Pagar HOY desde BAC ****6201. |
-| 🔴 | Fondear NIU antes del 23-Ago para cuota Cuscatlán $79.79 | **23-Ago-2026** | NIU ~$48.92. Necesita ~$31 adicionales. Transferir desde BAC vía T365 antes del 23-Ago. |
-| 🟡 | Confirmar llegada salario Ago13 en BAC ****6201 | Pendiente | BAC no envía alertas por correo. Verificar en app. ($566.92 quincena regular) |
+| 🔴 | Fondear NIU antes del 23-Ago para cuota Cuscatlán $79.79 | **23-Ago-2026** | NIU ~$48.92. Faltan ~$31. BAC $476.92 — transferir fácilmente desde BAC vía T365. |
 | 🟡 | Confirmar pagos Agrícola: DTE M001P010 (31-Jul, prob. préstamo $147.11) y DTE M001P014 (03-Ago, prob. VISA) | Pendiente | Ver PDFs en correo e.factura@bancoagricola.com |
-| 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app Agrícola. |
-| 🟡 | Identificar depósitos NIU: +$35 y +$21.59 (05-Ago) y +$25 (06-Ago) — ¿recarga desde BAC? ¿esposa? | Pendiente | Total depósitos $81.59. |
-| 🟡 | Identificar NIU −$7.00 (01-Ago 23:23), −$19.55 (08-Ago 18:57), −$2.80 (14-Ago 07:57), −$1.25 (14-Ago 13:14) | Pendiente | 4 merchants desconocidos en NIU. Total sin identificar: $30.60 |
-| 🟡 | Confirmar compra COMPUTIENDA $140 (Ago15, BAC) — ¿qué artículo? | Pendiente | Alerta BAC confirma cargo Ago15 10:22 Tarjeta Presente. |
-| 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | Usar BAC ****6201 para cancelar online |
+| 🟡 | AMEX corte Ago18 en 2 días — proyección saldo ~$66 | **18-Ago-2026** | Solo fijos del ciclo. Pago mínimo vence Sep10. No urgente pero vigilar. |
+| 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app. |
+| 🟡 | Identificar depósitos NIU: +$35 y +$21.59 (05-Ago) y +$25 (06-Ago) — ¿esposa? | Pendiente | Total $81.59. |
+| 🟡 | Identificar NIU −$7.00 (01-Ago 23:23), −$19.55 (08-Ago 18:57), −$2.80 (14-Ago 07:57), −$1.25 (14-Ago 13:14) | Pendiente | 4 merchants desconocidos. Total: $30.60 |
+| 🟡 | Confirmar compra COMPUTIENDA $140 (Ago15, BAC) — retenido — ¿qué artículo? | Pendiente | Retenido en BAC. Pendiente procesar. |
+| 🟡 | Confirmar TEF DE:MONICA ALE +$50 (Ago15) — ¿por qué pagó esposa? | Pendiente | Ingreso BAC 15-Ago. |
+| 🟡 | DLC UBER RIDES -$9.xx (08-Ago app BAC) — monto no visible en screenshot | Pendiente | No aparece en alertas Gmail. Verificar en app. |
+| 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | BAC ****6201 |
 | 🟢 | Migrar ANDA de AMEX a NIU | Pendiente | AMEX cobró $2.83 Ago9 — sigue sin migrar |
-| ✅ | VISA Cuscatlán $78.48 pagada | 13-Ago-2026 | Pagado $82.98 (Ref 761118158). |
-| ✅ | NIU recargado $100.01 desde BAC vía T365 | 13-Ago-2026 | Ref BAMCSVSS20260813B035391535. |
+| ✅ | AMEX pagada $342.65 | 30-Jul-2026 | Cubre corte $263.67 + Curacao 03/12 $20.75 + Accidentes $8.95 + VITTORIOS $49.28. AMEX al día. |
+| ✅ | VISA Cuscatlán pagada $82.98 | 13-Ago-2026 | Ref 761118158. |
+| ✅ | Salario $566.92 confirmado Aug 13 | 13-Ago-2026 | QuincenalAGOSTO — confirmado app BAC. |
+| ✅ | NIU recargado $100.01 desde BAC | 13-Ago-2026 | Ref BAMCSVSS20260813B035391535. |
 
 ---
 
@@ -125,17 +127,16 @@
 | Salida MultiMoney reserva (Q2) | 📒 Contable | +$225.00 | — (salario cubrió) |
 | **Total disponible** | | **$791.92** | **$1,114.75** |
 | NIU recarga agosto (T365 Ago13) | Real | −$172.00 | −$100.01 ✅ (faltan ~$31 para cuota 23-Ago) |
-| Cuota Préstamo Agrícola #2132201069 | Real | −$147.11 | ⚠️ DTE recibido 07-Ago — confirmar en app |
-| VISA Agrícola ****6114 (contado) | Real | −$168.47 | ⚠️ DTE recibido 03-Ago — confirmar en app |
+| Cuota Préstamo Agrícola #2132201069 | Real | −$147.11 | ⚠️ DTE recibido 07-Ago — confirmar en app Agrícola |
+| VISA Agrícola ****6114 | Real | −$168.47 | ⚠️ DTE recibido 03-Ago — confirmar en app Agrícola |
 | VISA Cuscatlán ****2789 | Real | −$78.48 | −$82.98 ✅ (pagada 13-Ago, Ref 761118158) |
-| AMEX ****3328 | Real | −$260.77 contado | 🔴 NO PAGADA — VENCIDA DESDE AGO10 |
-| Variables / gastos diarios BAC | 📒 Contable | −$80.00 | −$69.11 ✅ (LittleCaesar+Wendy's+Estac+Uber×3+UberEats+Steam+Foodmart Ago8–10) |
+| **AMEX ****3328** | Real | −$260.77 contado | **−$342.65 ✅ pagada 30-Jul** (cubre corte+post-corte: Curacao+Accid+VITTORIOS) |
+| Variables / gastos diarios BAC | 📒 Contable | −$80.00 | ~−$85 ✅ (LittleCaesar+Wendy's+UNO+Estac+Uber×3+UberEats+Steam+Foodmart Ago8–12) |
 | Entrada MultiMoney reposición (Q2) | 📒 Contable | −$225.00 | — (no ejecutado) |
-| **Saldo BAC estimado cierre Q2** | | **~$279** | **~$791 sin salario / ~$1,358 con salario** |
 | MultiMoney | | $805.47 | $805.47 |
 
-> 🔴 AMEX $260.77 no fue pagada — venció Ago10, hoy Ago16 = **6 días vencida**. Corte Ago18 en 2 días.
-> ⚠️ NIU recarga incompleta: $100.01 enviados Ago13, necesita $79.79 para cuota 23-Ago (NIU ~$48.92, faltan ~$31).
+> ✅ Q2 cerrada positivamente. AMEX pagada $342.65 el 30-Jul (más de lo planeado). BAC saldo real confirmado: $476.92.
+> ⚠️ NIU recarga incompleta: $100.01 enviados, pero cuota 23-Ago requiere $79.79 → NIU ~$48.92, faltan ~$31.
 
 ---
 
@@ -143,19 +144,19 @@
 
 | Movimiento | Tipo | Contable Esperado | Real |
 |------------|------|:-----------------:|:----:|
-| Salario quincena | Real | +$566.92 | ⏳ esperado Ago13 — confirmar en app |
-| Salida MultiMoney reserva (Q1) | 📒 Contable | +$225.00 | ⏳ |
-| **Total disponible** | | **$791.92** | ⏳ |
-| **AMEX ****3328 (VENCIDA — pagar YA)** | Real | −$260.77 | 🔴 PENDIENTE URGENTE |
+| Salario quincena | Real | +$566.92 | +$566.92 ✅ (QuincenalAGOSTO — confirmado app BAC 13-Ago) |
+| TEF DE:MONICA ALE (esposa) | Real | — | +$50.00 ✅ (15-Ago — motivo pendiente) |
+| Salida MultiMoney reserva (Q1) | 📒 Contable | +$225.00 | — (salario cubrió) |
+| **Total disponible** | | **$791.92** | **~$616.92** (BAC $476.92 real + $140 retenido) |
 | Cuota Préstamo Cuscatlán $2,490 (1/48) | Real | −$79.79 | ⏳ vence 23-Ago (desde NIU — NIU ~$48.92, faltan ~$31) |
 | DEL SUR agosto | Real | ~−$75.00 | ⏳ confirmar factura |
-| Variables / gastos diarios | 📒 Contable | −$70.00 | −$159.71 ⚠️ (COMPUTIENDA $140 + cancha $3 + William Rivas $12.66 + NIU consumos $4.05) |
+| Variables / gastos diarios | 📒 Contable | −$70.00 | −$162 ⚠️ (COMPUTIENDA $140 + cancha $3 + William Rivas $12.66 + NIU consumos $4.05 + UNO $6) |
 | Entrada MultiMoney ahorro (Q1) | 📒 Contable | −$225.00 | ⏳ |
-| **Saldo BAC estimado al cierre** | | **~$338** | ⏳ |
-| MultiMoney saldo proyectado | | $805.47 | ⏳ |
+| **Saldo BAC al cierre proyectado** | | **~$338** | **$476.92 real** (+ DEL SUR + NIU funding pendientes) |
+| MultiMoney saldo | | $805.47 | ⏳ |
 
-> 🔴 AMEX debe pagarse de inmediato — ya vencida, y el corte Ago18 es en 2 días.
-> ⚠️ COMPUTIENDA $140 (Ago15) supera el presupuesto de variables de esta quincena — vigilar el resto del período.
+> ⚠️ COMPUTIENDA $140 (retenido) + DEL SUR agosto pendiente — vigilar saldo BAC durante el resto de la quincena.
+> 💡 Con BAC $476.92, hay margen cómodo. Transferir ~$31 a NIU antes del 23-Ago y pagar DEL SUR cuando llegue.
 
 ---
 
@@ -163,18 +164,16 @@
 
 | Fecha | Corrección |
 |-------|-----------|
-| 16-Ago-2026 | Movimientos Ago8–15 registrados desde alertas Gmail/Cuscatlán/BAC. VISA Cuscatlán pagada Ago13 ($82.98, Ref 761118158). AMEX $260.77 VENCIDA desde Ago10 (6 días). NIU estimado ~$48.92. COMPUTIENDA $140 Ago15 BAC. Claude Pro cobrado Ago14 $20 NIU. |
-| 07-Ago-2026 | Movimientos Jul31–Ago7 registrados desde Gmail. NIU estimado ~$91.15 (incluyendo 3 depósitos Ago5-6: $35+$21.59+$25). |
-| 30-Jul-2026 | Salario Jul16-31 confirmado recibo Super Repuestos: $1,114.75 neto (planilla vacaciones: salario $700 + recargo vacaciones $210 + gratificación $490 − deducciones $285.25). BAC estimado ~$1,100.42. VISA Cuscatlán $78.48 = primera cuota intrafinanciamiento corte 23-Jul. |
-| 30-Jul-2026 | VISA Cuscatlán $78.48 corte 23-Jul = primera cuota intrafinanciamiento (usuario confirma). NIU estimado ~$22.56. 12 nuevos movimientos Jul 23-29 registrados. |
-| 23-Jul-2026 | Revisión de correos 22–23 Jul: 2 consumos débito NIU X5261 sin identificar ($0.99 + $11.50, 22-Jul) → NIU ~$2.00 (crítico). BAC ****6201: FCIA SAN NICOLAS $5.24+$1.82 (22-Jul) + LA TAQUEADA $13.95 (23-Jul) → BAC ~$26.24. |
-| 22-Jul-2026 | Laptop MR LAPTOPS $945 — VISA Agrícola ****6114 tasa 0% / 12 meses / $78.75/mes. Compra 21-Jul 17:12 vía WOMPI. Confirmado alerta Banco Agrícola. Saldo VISA estimado ~$1,299.47. Primera cuota sep-2026. |
-| 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses tomado 16-Jul. Primer pago 23-Ago-2026 ($79.79). Julio sin cobro (Balcón Cuotas). Cancela anterior $2,225. VISA Cuscatlán $0. |
-| 21-Jul-2026 | Transfer365 Agrícola→MultiMoney $226.45 (ID:1416758738). MultiMoney: $579.02+$226.45 = $805.47. |
-| 21-Jul-2026 | DEL SUR julio pagado $79.27 desde NIU. NIU $182.38 consumo 18-Jul = Lentes esposa — Óptica JDR. NIU $264.02 dep. 18-Jul = desembolso sobrante nuevo préstamo Cuscatlán. |
-| 21-Jul-2026 | AMEX balance corte 18-Jul = $260.77 / mínimo $17.00 / vence 10-Ago-2026. |
-| 16-Jul-2026 | Préstamo Agrícola vence día 7. Pago AMEX $159 confirmado 16-Jul. Cargo NIU $10 del 14-Jul = apuesta personal. |
-| 13-Jul-2026 | NIU ••3997 = Banco Cuscatlán cuenta X5261 / tarjeta ****3997. BAC no envía alertas de correo para depósitos/salario. |
+| 16-Ago-2026 | **BAC saldo real $476.92** (+ $140 retenido Computienda) confirmado app. **Salario $566.92 ✅** confirmado (QuincenalAGOSTO 13-Ago). TEF MONICA ALE +$50 Ago15. UNO MONUMENTAL -$6 Ago10. Uber $9.xx Ago8 (monto desconocido). |
+| 16-Ago-2026 | **AMEX saldo $18.25 ✅** confirmado app — "Pago de tarjeta al día". Corte Jul18 fue $263.67 (no $260.77 como tenía). Pago $342.65 recibido Jul30 (cubre corte + Curacao 03/12 + Accidentes + VITTORIOS $49.28). AMEX NO estaba vencida. |
+| 16-Ago-2026 | Movimientos Ago8–15 registrados desde alertas Gmail/Cuscatlán/BAC. VISA Cuscatlán pagada Ago13 ($82.98). NIU estimado ~$48.92. COMPUTIENDA $140 Ago15. Claude Pro cobrado Ago14 $20 NIU. |
+| 07-Ago-2026 | Movimientos Jul31–Ago7 registrados desde Gmail. NIU estimado ~$91.15. |
+| 30-Jul-2026 | Salario Jul16-31 $1,114.75 neto (planilla vacacional). BAC estimado ~$1,100.42. VISA Cuscatlán $78.48 = primera cuota intrafinanciamiento. |
+| 22-Jul-2026 | Laptop MR LAPTOPS $945 — VISA Agrícola ****6114 tasa 0% / 12 meses / $78.75/mes. Primera cuota sep-2026. |
+| 21-Jul-2026 | Nuevo préstamo Cuscatlán $2,490 / 22.99% / 48 meses. Transfer365 Agrícola→MultiMoney $226.45. MultiMoney: $805.47. DEL SUR julio pagado $79.27. |
+| 21-Jul-2026 | AMEX corte 18-Jul = $260.77 (corrección 16-Ago: fue $263.67 en app). |
+| 16-Jul-2026 | Préstamo Agrícola vence día 7. Pago AMEX $159 confirmado 16-Jul. |
+| 13-Jul-2026 | NIU ••3997 = Banco Cuscatlán X5261 / ****3997. BAC no envía alertas de correo para depósitos. |
 
 ---
 
@@ -183,33 +182,32 @@
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
 | 23-Ago | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — PRÓXIMA | −$79.79 |
-| 15-Ago | BAC | **COMPUTIENDA** (compra tecnología — Tarjeta Presente 10:22) | −$140.00 |
-| 14-Ago | NIU | **Claude Pro** Ago14–Sep14 (Anthropic — cargo mensual) | −$20.00 |
+| 15-Ago | BAC | **COMPUTIENDA** (retenido — pendiente procesar) | −$140.00 |
+| 15-Ago | BAC | **TEF DE:MONICA ALE** (esposa — depósito) | +$50.00 |
+| 14-Ago | NIU | **Claude Pro** Ago14–Sep14 (Anthropic) | −$20.00 |
 | 14-Ago | NIU | Transfer365 → BAC William Rivas XXXXX7451 (Doa Burger) | −$12.66 |
 | 14-Ago | NIU | Consumo débito X5261 (13:14) — merchant desconocido | −$1.25 |
 | 14-Ago | NIU | Consumo débito X5261 (07:57) — merchant desconocido | −$2.80 |
+| 13-Ago | BAC | **QuincenalAGOSTO** — salario $566.92 ✅ | +$566.92 |
 | 13-Ago | NIU | Cancha deportiva → Emerson Amaya ****5973 (Ref 766422812) | −$3.00 |
-| 13-Ago | VISA Cuscatlán ****2789 | ✅ Pago recibido desde NIU X5261 — saldo ~$0 | +$82.98 |
+| 13-Ago | VISA Cuscatlán ****2789 | ✅ Pago recibido — saldo ~$0 | +$82.98 |
 | 13-Ago | NIU | ✅ **Pago VISA Cuscatlán ****2789** contado (Ref 761118158) | −$82.98 |
-| 13-Ago | NIU | Transfer365 desde BAC ****6201 (Ref BAMCSVSS20260813B035391535) | +$100.01 |
-| 13-Ago | BAC | Transfer365 BAC→NIU ••3997 (recarga ago) | −$100.01 |
-| 10-Ago | BAC | FOODMART TEXACO LA GLO (snack) | −$2.05 |
+| 13-Ago | NIU | Transfer365 desde BAC ****6201 (Ref BAMCSVSS…B035391535) | +$100.01 |
+| 13-Ago | BAC | Transfer365 BAC→NIU ••3997 | −$100.01 |
+| 12-Ago | BAC | FOODMART TEXACO LA GLO (snack) — procesado app | −$2.05 |
+| 12-Ago | BAC | **STEAMGAMES.COM** (videojuego Steam) — procesado app | −$21.13 |
+| 11-Ago | BAC | DLC UBER RIDES -I- (Uber) — procesado app | −$5.55 |
+| 11-Ago | BAC | DLC UBER RIDES -I- (Uber) — procesado app | −$5.30 |
+| 10-Ago | BAC | WOMPI*WENDYS PLAZA MER — procesado app | −$7.95 |
+| 10-Ago | BAC | **UNO MONUMENTAL** (cine) — procesado app | −$6.00 |
+| 10-Ago | BAC | LITTLE CAESAR PLAZA ME — procesado app | −$5.00 |
+| 10-Ago | BAC | ESTACIONAMIENTO CCPM — procesado app | −$0.50 |
 | 09-Ago | AMEX ****3328 | ANDA -C- cargo automático (ciclo ago) — pendiente migrar a NIU | −$2.83 |
-| 09-Ago | BAC | **STEAMGAMES.COM** (videojuego Steam) | −$21.13 |
-| 09-Ago | BAC | DLC UBER EATS -I- (Uber Eats) | −$18.18 |
-| 09-Ago | BAC | DLC UBER RIDES -I- (Uber) | −$5.55 |
-| 09-Ago | BAC | DLC UBER RIDES -I- (Uber) | −$5.30 |
-| 09-Ago | BAC | DLC UBER RIDES -I- (Uber) | −$3.45 |
+| 08-Ago | BAC | DLC UBER RIDES -I- (procesado app 08-Ago — monto ~$9.xx sin identificar) | ~−$9.xx |
 | 08-Ago | NIU | Consumo débito X5261 (18:57) — merchant desconocido | −$19.55 |
-| 08-Ago | BAC | ESTACIONAMIENTO CCPM | −$0.50 |
-| 08-Ago | BAC | WOMPI*WENDYS PLAZA MER | −$7.95 |
-| 08-Ago | BAC | LITTLE CAESAR PLAZA ME | −$5.00 |
+| 07-Ago | AMEX ****3328 | Laptop BAC cuota 05/12 (LAPTOS VACUOTA) | −$15.42 |
 | 07-Ago | NIU | Cancha deportiva → Emerson Amaya (Ref 732095191) | −$3.00 |
-| 06-Ago | NIU | Depósito fuente pendiente (10:40) | +$25.00 |
-| 05-Ago | NIU | Depósito fuente pendiente (17:37) | +$21.59 |
-| 05-Ago | NIU | Depósito fuente pendiente (17:34) | +$35.00 |
-| 03-Ago | Agrícola | Factura DTE-01-M001P014 (prob. pago VISA Agrícola) | ⚠️ monto pendiente |
-| 01-Ago | NIU | Consumo débito X5261 23:23 (merchant desconocido) | −$7.00 |
-| 31-Jul | Agrícola | Factura DTE-01-M001P010 (prob. cuota Préstamo Agrícola) | ⚠️ monto pendiente |
-| 31-Jul | NIU | Cancha deportiva → Emerson Amaya (Ref 715917680) | −$3.00 |
-| 29-Jul | BAC | **Planilla vacaciones Jul16-31** (salario $700 + recargo $210 + gratif $490) | +$1,114.75 |
+| 30-Jul | AMEX ****3328 | ✅ **Pago recibido** (running balance) — AMEX al día | +$342.65 |
+| 30-Jul | BAC | **Pago AMEX ****3328** (running balance contado) | −$342.65 |
+| 27-Jul | AMEX ****3328 | VITTORIOS (restaurante — ciclo Jul18) | −$49.28 |
+| 29-Jul | BAC | **Planilla vacaciones Jul16-31** ($700+$210+$490 − ded $285.25) | +$1,114.75 |
