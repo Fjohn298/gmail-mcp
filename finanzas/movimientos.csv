@@ -101,14 +101,15 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-07-31,Agrícola,Deuda - Pago,Factura electrónica Banco Agrícola DTE-01-M001P010-000000010006522,Gasto,,No,"⚠️ DTE recibido 31-Jul-2026. Probablemente cuota Préstamo #2132201069 (vence 07-Ago). Monto pendiente confirmar en app Agrícola."
 2026-08-01,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (23:23),Gasto,-7.00,No,Confirmado alerta Cuscatlán 02-Ago. Merchant desconocido — pendiente identificar.
 2026-08-03,Agrícola,Deuda - Pago,Factura electrónica Banco Agrícola DTE-01-M001P014-000000010280884,Gasto,,No,"⚠️ DTE recibido 03-Ago-2026. Probablemente pago VISA Agrícola ****6114 (vence ~03-Ago). Monto pendiente confirmar en app Agrícola."
-2026-08-05,NIU ••3997,Ingreso - Transferencia,Depósito en cuenta NIU X5261 (17:34) — fuente pendiente,Ingreso,35.00,No,Confirmado alerta Cuscatlán 05-Ago. Fuente pendiente identificar (¿recarga desde BAC? ¿esposa?).
-2026-08-05,NIU ••3997,Ingreso - Transferencia,Depósito en cuenta NIU X5261 (17:37) — fuente pendiente,Ingreso,21.59,No,Confirmado alerta Cuscatlán 05-Ago. Fuente pendiente identificar.
-2026-08-06,NIU ••3997,Ingreso - Transferencia,Depósito en cuenta NIU X5261 (10:40) — fuente pendiente,Ingreso,25.00,No,Confirmado alerta Cuscatlán 06-Ago. Fuente pendiente identificar.
+2026-08-05,NIU ••3997,Ingreso - Transferencia,APP CUSCATLAN — Monica Guirola (esposa),Ingreso,35.00,No,"✅ Identificado app NIU 16-Ago: APP CUSCATLAN / Monica Guirola (contacto frecuente NIU)."
+2026-08-05,NIU ••3997,Ingreso - Transferencia,APP CUSCATLAN — Monica Guirola (esposa),Ingreso,21.59,No,"✅ Identificado app NIU 16-Ago: APP CUSCATLAN / Monica Guirola (esposa). Total recibido Aug5-6: $81.59."
+2026-08-06,NIU ••3997,Ingreso - Transferencia,APP CUSCATLAN — Monica Guirola (esposa),Ingreso,25.00,No,"✅ Identificado app NIU 16-Ago: APP CUSCATLAN / Monica Guirola (esposa)."
+2026-08-07,NIU ••3997,Servicios - Telefonía,Pago de Servicio: Claro (recarga o plan mensual),Gasto,-20.00,Sí,"✅ Confirmado app NIU 16-Ago: Pago de Servicio: Claro — 07-Ago 12:58pm. Fijo mensual NIU."
 2026-08-07,NIU ••3997,Deporte,Cancha deportiva (transfer interno Cuscatlán → Emerson Amaya ****5973),Gasto,-3.00,Sí,"Confirmado alerta Cuscatlán 07-Ago 14:12. Ref 732095191, 07/08/2026 08:12:30. Concepto: Para la cancha."
 2026-08-08,BAC,Restaurante,LITTLE CAESAR PLAZA ME,Gasto,-5.00,No,Confirmado alerta BAC — 08-Ago,
 2026-08-08,BAC,Restaurante,WOMPI*WENDYS PLAZA MER,Gasto,-7.95,No,Confirmado alerta BAC — 08-Ago,
 2026-08-08,BAC,Transporte,ESTACIONAMIENTO CCPM,Gasto,-0.50,No,Confirmado alerta BAC — 08-Ago,
-2026-08-08,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (18:57),Gasto,-19.55,No,Confirmado alerta Cuscatlán 09-Ago. Merchant desconocido — pendiente identificar.,
+2026-08-10,NIU ••3997,Entretenimiento,CINEPOLIS I (cine — app NIU 10-Ago),Gasto,-19.55,No,"✅ Identificado app NIU 16-Ago: CINEPOLIS I. Gmail alert fue 09-Ago pero fecha real app 10-Ago.",
 2026-08-09,BAC,Transporte,DLC UBER RIDES -I- (Uber),Gasto,-5.55,No,Confirmado alerta BAC — 09-Ago,
 2026-08-09,BAC,Transporte,DLC UBER RIDES -I- (Uber),Gasto,-5.30,No,Confirmado alerta BAC — 09-Ago,
 2026-08-09,BAC,Alimentación,DLC UBER EATS -I- (Uber Eats),Gasto,-18.18,No,Confirmado alerta BAC — 09-Ago,
@@ -122,8 +123,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 "2026-08-13","VISA Cuscatlán ****2789","Deuda - Tarjeta crédito","Pago recibido desde NIU X5261 (contado corte Jul23)","Ingreso",82.98,"No","✅ Par del egreso NIU 13-Ago. Ref 761118158. Balance VISA ****2789 ~$0.",
 "2026-08-13","NIU ••3997","Deporte","Cancha deportiva (transfer Cuscatlán → Emerson Amaya ****5973)","Gasto",-3.00,"Sí","Confirmado alerta Cuscatlán 14-Ago. Ref 766422812, 13/08/2026 20:47:11. Concepto: Cancha.",
 "2026-08-14","NIU ••3997","Alimentación","Transfer365 NIU→BAC William Rivas (Doa Burger — compartir gasto)","Gasto",-12.66,"No","Confirmado alerta Cuscatlán — 14-Ago 04:11:12 PM. Destino: BAC AHORRO XXXXX7451 (William Rivas). Concepto: Doa Burger Jonathan Flores.",
-2026-08-14,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (07:57),Gasto,-2.80,No,Confirmado alerta Cuscatlán 14-Ago. Merchant desconocido.,
-2026-08-14,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (13:14),Gasto,-1.25,No,Confirmado alerta Cuscatlán 14-Ago. Merchant desconocido.,
+2026-08-14,NIU ••3997,Alimentación,FOODMART TEXACO LA GLORIA (tienda gasolinera — NIU 14-Ago 11:13am),Gasto,-2.80,No,"✅ Identificado app NIU 16-Ago: FOODMART TEXACO LA GLORIA.",
+2026-08-14,NIU ••3997,Alimentación,FOODMART TEXACO LA GLORIA (tienda gasolinera — NIU 14-Ago 11:13am),Gasto,-1.25,No,"✅ Identificado app NIU 16-Ago: FOODMART TEXACO LA GLORIA.",
 "2026-08-14","NIU ••3997","Suscripciones","Claude Pro Ago14–Sep14 (Anthropic — cargo mensual)","Gasto",-20.00,"Sí","✅ Confirmado alerta Cuscatlán 15-Ago (cargo 21:28 14-Ago). Ciclo mensual Claude Pro. Tarjeta NIU ••3997 / Cuscatlán ****3997.",
 "2026-08-15","BAC","Tecnología","COMPUTIENDA (compra tecnología)","Gasto",-140.00,"No","Confirmado alerta BAC Credomatic — 15-Ago 10:22:34 Tarjeta Presente.",
 2026-07-20,AMEX ****3328,Deuda - Intrafinanciamiento,Curacao cuota 03/12 (CURACACUOTA:03/12),Gasto,-20.75,Sí,Confirmado app BAC AMEX 16-Ago. Ciclo Jul18–Ago18.,
@@ -133,6 +134,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-07-30,BAC,Deuda - Tarjeta crédito,Pago AMEX ****3328 (running balance contado Jul30),Gasto,-342.65,No,"✅ Confirmado app BAC AMEX 16-Ago. Cubre corte Jul18 $263.67 + post-corte $78.98 = $342.65. AMEX al día.",
 2026-08-07,AMEX ****3328,Deuda - Intrafinanciamiento,Laptop BAC cuota 05/12 (LAPTOS VACUOTA:05/12),Gasto,-15.42,Sí,Confirmado app BAC AMEX 16-Ago. Ciclo Ago18–Sep18.,
 2026-08-08,BAC,Transporte,DLC UBER RIDES -I- (Uber — app BAC 08-Ago),Gasto,-9.00,No,"⚠️ Confirmado app BAC 16-Ago (fecha procesado 08-Ago). Monto exacto no legible (~$9.xx). No aparece en alertas Gmail. Pendiente confirmar monto exacto.",
-2026-08-10,BAC,Entretenimiento,UNO MONUMENTAL (cine — app BAC 10-Ago),Gasto,-6.00,No,"Confirmado app BAC 16-Ago. No apareció en alertas Gmail (probable fecha real 08-Ago, procesado 10-Ago).",
+2026-08-10,BAC,Transporte/Combustible,UNO MONUMENTAL (gasolinera UNO — app BAC 10-Ago),Gasto,-6.00,No,"Confirmado app BAC 16-Ago. UNO = cadena de gasolineras (confirmado promo NIU). No apareció en alertas Gmail.",
 2026-08-13,BAC,Ingreso - Salario,QuincenalAGOSTO 2... — salario quincenal Ago1-13,Ingreso,566.92,No,"✅ Confirmado app BAC 16-Ago. Salario regular $566.92. Quincena Ago1–13.",
 2026-08-15,BAC,Ingreso - Transferencia,TEF DE:MONICA ALE (esposa — depósito),Ingreso,50.00,No,"✅ Confirmado app BAC 16-Ago. Origen: Monica Alejandra (esposa). Motivo pendiente confirmar.",
+2026-08-16,NIU ••3997,Alimentación,FOODMART TEXACO LA GLORIA (tienda gasolinera — NIU 16-Ago 11:13am),Gasto,-2.80,No,"✅ Confirmado app NIU 16-Ago. Dos compras misma hora (separadas)."
+2026-08-16,NIU ••3997,Alimentación,FOODMART TEXACO LA GLORIA (tienda gasolinera — NIU 16-Ago 11:13am),Gasto,-1.25,No,"✅ Confirmado app NIU 16-Ago."
