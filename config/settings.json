@@ -20,7 +20,7 @@
     "notify_email": "nehe298@gmail.com",
     "cards": [
       {"name": "AMEX BAC",       "last4": "3328", "balance": 260.77,  "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 17.00, "balance_fecha": "2026-07-18", "pago_contado_corte": 260.77, "pago_minimo_corte": 17.00, "fecha_limite_pago": "2026-08-10", "cargos_ciclo_jul18": [{"fecha": "ciclo_jul18", "descripcion": "ACCIDENTES PERSONALES BAC", "monto": 8.95, "tipo": "fijo"}, {"fecha": "ciclo_jul18", "descripcion": "Laptop cuota 05/12", "monto": 15.42, "tipo": "fijo"}, {"fecha": "ciclo_jul18", "descripcion": "Curacao cuota 2/12", "monto": 20.75, "tipo": "fijo"}, {"fecha": "2026-07-10", "descripcion": "ANDA -C- cargo automático", "monto": 2.83, "tipo": "fijo", "nota": "Pendiente migrar a NIU"}], "nota_balance": "✅ CONFIRMADO estado de cuenta BAC (corte 18-Jul-2026). Pago de contado: $260.77. Pago mínimo: $17.00. Vencimiento: 10-Ago-2026. Pre-corte: $250 (post-pago $159) + cargos fijos ciclo ~$47.95 + intereses ~$12.82 = $260.77."},
-{"name": "VISA Cuscatlán", "last4": "2789", "balance": 78.48, "tasa_anual": 34.99, "fecha_pago_dia": 17, "fecha_corte_dia": 23, "min_pago": 78.48, "balance_fecha": "2026-07-23", "nota": "⚠️ $78.48 confirmado estado de cuenta corte 23-Jul-2026. Usuario confirma: primera cuota del intrafinanciamiento. Pagar contado ~17-Ago-2026 para evitar intereses."},
+{"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00, "tasa_anual": 34.99, "fecha_pago_dia": 17, "fecha_corte_dia": 23, "min_pago": 0.00, "balance_fecha": "2026-08-13", "nota": "✅ PAGADA 13-Ago-2026 — $82.98 desde NIU X5261 (Ref 761118158). Saldo ~$0. Era $78.48 corte 23-Jul + $4.50 cargos adicionales. Próximo corte: 23-Ago-2026."},
       {"name": "VISA Agrícola",  "last4": "6114", "balance": 1299.47, "balance_estimado": true, "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 11.84, "saldo_disponible": 700.53, "limite_credito": 2000.00, "balance_fecha_corte": "2026-07-09", "pago_contado_corte": 168.47, "pago_minimo_corte": 11.84, "fecha_limite_pago": "2026-08-03", "balance_actual_13jul": 354.47, "balance_actual_fecha": "2026-07-13", "nota_balance": "⚠️ Estimado: $354.47 (app 13-Jul) + $945 laptop MR LAPTOPS 21-Jul = ~$1,299.47. Pendiente confirmar en app. Primera cuota laptop ($78.75) aparece en corte Ago-9. Saldo disponible estimado: ~$700.53."}
     ],
     "obligaciones_extra": [
@@ -134,21 +134,21 @@
     }
   ],
   "deuda_total": {
-    "fecha": "2026-07-30",
-    "tarjetas": 1638.72,
+    "fecha": "2026-08-16",
+    "tarjetas": 1560.24,
     "intrafinanciamientos": 2851.66,
     "prestamo": 6171.48,
-    "total": 10661.86,
+    "total": 10583.38,
     "detalle": {
       "AMEX_3328": 260.77,
       "VISA_Agricola_6114": 1299.47,
-      "VISA_Cuscatlan_2789": 78.48,
+      "VISA_Cuscatlan_2789": 0.00,
       "Prestamo_Nuevo_Cuscatlan": 2490.00,
       "Laptop_BAC": 154.16,
       "Curacao": 207.50,
       "Prestamo_Consumo_Agricola": 6171.48
     },
-    "nota": "AMEX $260.77 confirmado corte 18-Jul. VISA Agrícola ~$1,299.47 estimado. VISA Cuscatlán $78.48 confirmado corte 23-Jul (primera cuota intrafinanciamiento). Préstamo Cuscatlán $2,490 / primer pago 23-Ago-2026."
+    "nota": "AMEX $260.77 VENCIDA desde 10-Ago — pagar de inmediato. VISA Agrícola ~$1,299.47 estimado. VISA Cuscatlán $0 (pagada 13-Ago $82.98). Préstamo Cuscatlán $2,490 — primer pago 23-Ago-2026."
   },
   "roadmap_liquidacion": {
     "descripcion": "Proyección de liquidación de deudas 2026-2027",
@@ -374,7 +374,7 @@
       {"descripcion": "Accidentes Personales BAC", "monto": 8.95},
       {"descripcion": "Curacao cuota 2/12", "monto": 20.75}
     ],
-    "notas": "✅ Corte 18-Jul-2026 confirmado. Pago de contado $260.77 / mínimo $17.00 / vence 10-Ago-2026. Pre-corte $250 + fijos ~$47.95 + interés ~$12.82 = $260.77. Fijos próx. ciclo: Accidentes $8.95 + Laptop cuota 06/12 $15.42 + Curacao cuota 3/12 $20.75 + ANDA $2.83 = $47.95.",
+    "notas": "🔴 VENCIDA 10-Ago-2026 (hoy 16-Ago = 6 días vencida). Interés 43.08%/año acumulando (~$0.31/día). Corte próximo 18-Ago-2026 — pagar ANTES del corte. Pago de contado $260.77 / mínimo $17.00. Fijos ciclo Ago: Accidentes $8.95 + Laptop cuota 06/12 $15.42 + Curacao cuota 3/12 $20.75 + ANDA $2.83 (cobrado Ago9) = $47.95.",
     "estrategia_pago": {
       "pago_agosto_10_minimo": 17.00,
       "pago_agosto_10_contado": 260.77,
