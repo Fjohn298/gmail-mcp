@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 16-Ago-2026 (rev11 — saldo real NIU $68.92 confirmado app + merchants identificados)
+# CLAUDE MEMORY — Última actualización: 17-Ago-2026 (rev12 — movimientos Ago16 tarde: Uber $5.96 + LE ROSE $30.25 BAC)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -27,7 +27,7 @@
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
 | NIU ••3997 | $68.92 | ✅ App NIU — Cuenta de Ahorro. Saldo actual 16-Ago-2026 | 16-Ago-2026 |
-| BAC ****6201 | $476.92 (+$140 retenido Computienda) | ✅ App BAC — "QuincenalAGOSTO +$566.92" confirmado | 16-Ago-2026 |
+| BAC ****6201 | ~$440.71 (+$140 retenido Computienda) | ✅ App $476.92 (16-Ago 2:50pm) − Uber $5.96 − LE ROSE $30.25 (ambos Ago16 tarde) | 16-Ago-2026 |
 | AMEX ****3328 | $18.25 | ✅ App BAC — "Pago de tarjeta al día". Saldo corte Jul18 fue $263.67 (no $260.77). Pagada $342.65 el 30-Jul. | 16-Ago-2026 |
 | VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
 | VISA Cuscatlán ****2789 | ~$0 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158) | 13-Ago-2026 |
@@ -163,6 +163,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 17-Ago-2026 | Alertas BAC Ago16 tarde: DLC UBER RIDES -$5.96 (14:46 Internet) y LE ROSE -$30.25 (16:22 Tarjeta Presente). BAC estimado ~$440.71. Sin nuevas alertas Cuscatlán/NIU. |
 | 16-Ago-2026 | **NIU saldo real $68.92 ✅** confirmado app NIU. Merchants identificados: CINEPOLIS I (Ago10 $19.55), FOODMART TEXACO LA GLORIA ($2.80+$1.25 Ago14 y Ago16). Depósitos Aug5-6 = Monica Guirola (esposa) vía App Cuscatlán. Claro -$20 Ago7 registrado. UNO MONUMENTAL = gasolinera (no cine). Nuevos cargos hoy: FOODMART -$2.80 y -$1.25 Ago16. |
 | 16-Ago-2026 | **BAC saldo real $476.92** (+ $140 retenido Computienda) confirmado app. **Salario $566.92 ✅** confirmado (QuincenalAGOSTO 13-Ago). TEF MONICA ALE +$50 Ago15. UNO MONUMENTAL -$6 Ago10. Uber $9.xx Ago8 (monto desconocido). Monica Guirola = nombre completo esposa. |
 | 16-Ago-2026 | **AMEX saldo $18.25 ✅** confirmado app — "Pago de tarjeta al día". Corte Jul18 fue $263.67 (no $260.77 como tenía). Pago $342.65 recibido Jul30 (cubre corte + Curacao 03/12 + Accidentes + VITTORIOS $49.28). AMEX NO estaba vencida. |
@@ -182,8 +183,10 @@
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
 | 23-Ago | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — PRÓXIMA | −$79.79 |
-| 16-Ago | NIU | **FOODMART TEXACO LA GLORIA** (hoy — app NIU) | −$2.80 |
-| 16-Ago | NIU | **FOODMART TEXACO LA GLORIA** (hoy — app NIU) | −$1.25 |
+| 16-Ago | BAC | **LE ROSE** (restaurante — Tarjeta Presente 16:22) | −$30.25 |
+| 16-Ago | BAC | **DLC UBER RIDES** (Internet 14:46) | −$5.96 |
+| 16-Ago | NIU | **FOODMART TEXACO LA GLORIA** (11:13am — ya incluido en saldo $68.92) | −$2.80 |
+| 16-Ago | NIU | **FOODMART TEXACO LA GLORIA** (11:13am — ya incluido en saldo $68.92) | −$1.25 |
 | 15-Ago | BAC | **COMPUTIENDA** (retenido — pendiente procesar) | −$140.00 |
 | 15-Ago | BAC | **TEF DE:MONICA ALE** (esposa — depósito) | +$50.00 |
 | 14-Ago | NIU | **Claude Pro** Ago14–Sep14 (Anthropic) | −$20.00 |

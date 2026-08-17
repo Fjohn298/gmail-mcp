@@ -139,3 +139,5 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-08-15,BAC,Ingreso - Transferencia,TEF DE:MONICA ALE (esposa — depósito),Ingreso,50.00,No,"✅ Confirmado app BAC 16-Ago. Origen: Monica Alejandra (esposa). Motivo pendiente confirmar.",
 2026-08-16,NIU ••3997,Alimentación,FOODMART TEXACO LA GLORIA (tienda gasolinera — NIU 16-Ago 11:13am),Gasto,-2.80,No,"✅ Confirmado app NIU 16-Ago. Dos compras misma hora (separadas)."
 2026-08-16,NIU ••3997,Alimentación,FOODMART TEXACO LA GLORIA (tienda gasolinera — NIU 16-Ago 11:13am),Gasto,-1.25,No,"✅ Confirmado app NIU 16-Ago."
+2026-08-16,BAC,Transporte,DLC UBER RIDES -I- (Uber — Internet),Gasto,-5.96,No,Confirmado alerta BAC — 16-Ago 14:46 Internet. BAC ****6201.
+2026-08-16,BAC,Restaurante,LE ROSE (restaurante — tarjeta presente),Gasto,-30.25,No,Confirmado alerta BAC — 16-Ago 16:22 Tarjeta Presente. BAC ****6201.
