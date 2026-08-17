@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 17-Ago-2026 (rev13 — T365 BAC→NIU $20.96 confirmado; MultiMoney transferencia pendiente monto)
+# CLAUDE MEMORY — Última actualización: 17-Ago-2026 (rev14 — MultiMoney $200 confirmado → saldo $1,005.47)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -27,11 +27,11 @@
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
 | NIU ••3997 | $68.92 | ✅ App NIU — Cuenta de Ahorro. Saldo actual 16-Ago-2026 | 16-Ago-2026 |
-| BAC ****6201 | ~$419.75 (+$140 retenido Computienda) | App $476.92 − Uber $5.96 − LE ROSE $30.25 − T365→NIU $20.96 − T365→MultiMoney (monto pendiente) | 16-Ago-2026 |
+| BAC ****6201 | ~$219.75 (+$140 retenido Computienda) | App $476.92 − Uber $5.96 − LE ROSE $30.25 − T365→NIU $20.96 − T365→MultiMoney $200 | 16-Ago-2026 |
 | AMEX ****3328 | $18.25 | ✅ App BAC — "Pago de tarjeta al día". Saldo corte Jul18 fue $263.67 (no $260.77). Pagada $342.65 el 30-Jul. | 16-Ago-2026 |
 | VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
 | VISA Cuscatlán ****2789 | ~$0 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158) | 13-Ago-2026 |
-| MultiMoney (ahorro Agrícola) | $805.47 | Transfer365 ID:1416758738 (correo Agrícola) | 21-Jul-2026 |
+| MultiMoney (ahorro Agrícola) | $1,005.47 | $805.47 + $200 depósito Ago16 (confirmado usuario) | 16-Ago-2026 |
 | Max Electrónico (Agrícola) | $0.00 | App Agrícola | 11-Jul-2026 |
 
 ---
@@ -41,10 +41,9 @@
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
 | NIU ••3997 | ~$89.88 | $68.92 (real 2:51pm) + $20.96 (T365 3:00pm) | 16-Ago-2026 |
-| MultiMoney (ahorro Agrícola) | pendiente | $805.47 + transferencia Ago16 (monto pendiente confirmar) | — |
 
-> ✅ NIU ~$89.88 — cuota Cuscatlán $79.79 (23-Ago) ya está cubierta. No necesita fondeo adicional.
-> ⚠️ MultiMoney: usuario transfirió Ago16 pero sin alerta Gmail. Confirmar monto en app Agrícola.
+> ✅ NIU ~$89.88 — cuota Cuscatlán $79.79 (23-Ago) cubierta.
+> ✅ MultiMoney $1,005.47 — ahorro Q1 ejecutado ($200, confirmado usuario 17-Ago).
 
 ---
 
@@ -82,8 +81,8 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| ✅ | NIU fondeado para cuota Cuscatlán $79.79 | — | NIU ~$89.88 ✅. T365 $20.96 Ago16 confirma. Cuota 23-Ago cubierta. |
-| 🟡 | Confirmar monto transferencia BAC→MultiMoney (Ago16) | Pendiente | Sin alerta Gmail. Ver app Agrícola/BAC para monto exacto. |
+| ✅ | NIU fondeado para cuota Cuscatlán $79.79 | — | NIU ~$89.88 ✅. T365 $20.96 Ago16. Cuota 23-Ago cubierta. |
+| ✅ | Ahorro Q1 MultiMoney ejecutado | 16-Ago-2026 | $200 transferidos. MultiMoney $805.47 → $1,005.47. |
 | 🟡 | Confirmar pagos Agrícola: DTE M001P010 (31-Jul, prob. préstamo $147.11) y DTE M001P014 (03-Ago, prob. VISA) | Pendiente | Ver PDFs en correo e.factura@bancoagricola.com |
 | 🟡 | AMEX corte Ago18 en 2 días — proyección saldo ~$66 | **18-Ago-2026** | Solo fijos del ciclo. Pago mínimo vence Sep10. No urgente pero vigilar. |
 | 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app. |
@@ -155,12 +154,12 @@
 | Cuota Préstamo Cuscatlán $2,490 (1/48) | Real | −$79.79 | ⏳ vence 23-Ago (desde NIU — NIU ~$89.88 ✅ cubierta) |
 | DEL SUR agosto | Real | ~−$75.00 | ⏳ confirmar factura |
 | Variables / gastos diarios | 📒 Contable | −$70.00 | −$168 ⚠️ (COMPUTIENDA $140 + cancha $3 + William Rivas $12.66 + NIU consumos $4.05 + UNO gasolinera $6 + FOODMART Ago16 $4.05) |
-| Entrada MultiMoney ahorro (Q1) | 📒 Contable | −$225.00 | ⏳ |
-| **Saldo BAC al cierre proyectado** | | **~$338** | **$476.92 real** (+ DEL SUR + NIU funding pendientes) |
-| MultiMoney saldo | | $805.47 | ⏳ |
+| Ahorro MultiMoney (Q1) | 📒 Contable | −$225.00 | −$200 ✅ (Ago16 — usuario confirmó; $25 menos que plan) |
+| **Saldo BAC al cierre proyectado** | | **~$338** | **~$219.75** (+ $140 retenido Computienda pendiente) |
+| MultiMoney saldo | | $805.47 | $1,005.47 ✅ |
 
-> ⚠️ COMPUTIENDA $140 (retenido) + DEL SUR agosto pendiente — vigilar saldo BAC durante el resto de la quincena.
-> 💡 Con BAC $476.92 y NIU $68.92, situación cómoda. Transferir ~$11 a NIU antes del 23-Ago para cuota Cuscatlán.
+> ⚠️ COMPUTIENDA $140 (retenido) + DEL SUR agosto pendiente — vigilar BAC ~$219.75.
+> ✅ NIU cuota 23-Ago cubierta. ✅ MultiMoney fondeado. DEL SUR pendiente (~$75).
 
 ---
 
@@ -168,7 +167,8 @@
 
 | Fecha | Corrección |
 |-------|-----------|
-| 17-Ago-2026 | T365 BAC→NIU $20.96 confirmado (alerta Cuscatlán 15:00 Ago16, Ref BAMCSVSS…B035622581). NIU ~$89.88 — cuota Cuscatlán 23-Ago cubierta ✅. BAC estimado ~$419.75 (incluye T365 NIU; MultiMoney transfer pendiente monto). |
+| 17-Ago-2026 | MultiMoney $200 transferidos Ago16 (confirmado usuario). MultiMoney $805.47 → $1,005.47 ✅. BAC estimado ~$219.75 (app $476.92 − Uber $5.96 − LE ROSE $30.25 − T365→NIU $20.96 − T365→MultiMoney $200). |
+| 17-Ago-2026 | T365 BAC→NIU $20.96 confirmado (alerta Cuscatlán 15:00 Ago16). NIU ~$89.88 — cuota Cuscatlán 23-Ago cubierta ✅. |
 | 17-Ago-2026 | Alertas BAC Ago16 tarde: DLC UBER RIDES -$5.96 (14:46 Internet) y LE ROSE -$30.25 (16:22 restaurante). BAC estimado ~$440.71 antes del T365 NIU. |
 | 16-Ago-2026 | **NIU saldo real $68.92 ✅** confirmado app NIU. Merchants identificados: CINEPOLIS I (Ago10 $19.55), FOODMART TEXACO LA GLORIA ($2.80+$1.25 Ago14 y Ago16). Depósitos Aug5-6 = Monica Guirola (esposa) vía App Cuscatlán. Claro -$20 Ago7 registrado. UNO MONUMENTAL = gasolinera (no cine). Nuevos cargos hoy: FOODMART -$2.80 y -$1.25 Ago16. |
 | 16-Ago-2026 | **BAC saldo real $476.92** (+ $140 retenido Computienda) confirmado app. **Salario $566.92 ✅** confirmado (QuincenalAGOSTO 13-Ago). TEF MONICA ALE +$50 Ago15. UNO MONUMENTAL -$6 Ago10. Uber $9.xx Ago8 (monto desconocido). Monica Guirola = nombre completo esposa. |
