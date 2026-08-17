@@ -141,3 +141,5 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-08-16,NIU ••3997,Alimentación,FOODMART TEXACO LA GLORIA (tienda gasolinera — NIU 16-Ago 11:13am),Gasto,-1.25,No,"✅ Confirmado app NIU 16-Ago."
 2026-08-16,BAC,Transporte,DLC UBER RIDES -I- (Uber — Internet),Gasto,-5.96,No,Confirmado alerta BAC — 16-Ago 14:46 Internet. BAC ****6201.
 2026-08-16,BAC,Restaurante,LE ROSE (restaurante — tarjeta presente),Gasto,-30.25,No,Confirmado alerta BAC — 16-Ago 16:22 Tarjeta Presente. BAC ****6201.
+2026-08-16,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo cuota Cuscatlán),Gasto,-20.96,No,"Confirmado alerta Cuscatlán 16-Ago 15:00. Ref BAMCSVSS20260816B035622581. Par con ingreso NIU."
+2026-08-16,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo cuota Cuscatlán),Ingreso,20.96,No,"✅ Confirmado alerta Cuscatlán 16-Ago 15:00:41. Ref BAMCSVSS20260816B035622581. Banco origen: BAC X1386."
