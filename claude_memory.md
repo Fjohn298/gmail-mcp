@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 19-Ago-2026 (rev15 — movimientos Ago17-19: NIU $7.25 + Uber ×3 BAC $28.19)
+# CLAUDE MEMORY — Última actualización: 19-Ago-2026 (rev16 — DEL SUR NIU $77.56 Ago19; UNO MONUMENTAL fecha Aug1→Aug2; 🔴 NIU crítico)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -26,7 +26,7 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| NIU ••3997 | ~$82.63 | $89.88 − $1.25 (Ago17) − $6.00 (Ago17) | 19-Ago-2026 |
+| NIU ••3997 | 🔴 ~$5.07 | $89.88 − $1.25 (Ago17) − $6.00 (Ago17) − $77.56 DEL SUR (Ago19) | 19-Ago-2026 |
 | BAC ****6201 | ~$191.56 (+$140 retenido Computienda) | $219.75 − Uber $9.47 (Ago18) − Uber $9.35 (Ago18) − Uber $9.37 (Ago19) | 19-Ago-2026 |
 | AMEX ****3328 | ~$66 (ciclo Ago18–Sep18) | Corte Ago18 cerrado. Fijos: Laptop 06/12 $15.42 + Accid $8.95 + Curacao 04/12 $20.75 + ANDA $2.83 = ~$47.95 mín. Pago vence **10-Sep-2026**. | 18-Ago-2026 |
 | VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
@@ -40,9 +40,9 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| NIU ••3997 | ~$82.63 | $89.88 − $1.25 (Ago17 13:02) − $6.00 (Ago17 17:45) | 19-Ago-2026 |
+| NIU ••3997 | 🔴 ~$5.07 | $89.88 − $1.25 (Ago17) − $6.00 (Ago17) − $77.56 DEL SUR (Ago19 08:13am) | 19-Ago-2026 |
 
-> ✅ NIU ~$89.88 — cuota Cuscatlán $79.79 (23-Ago) cubierta.
+> 🔴 NIU ~$5.07 — cuota Cuscatlán $79.79 vence 23-Ago (4 días). FALTAN ~$75. Transferir desde BAC URGENTE.
 > ✅ MultiMoney $1,005.47 — ahorro Q1 ejecutado ($200, confirmado usuario 17-Ago).
 
 ---
@@ -52,7 +52,7 @@
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
 | Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Sep-2026** | ⚠️ Ago: DTE M001P010 recibido 31-Jul — confirmar pago en app Agrícola |
-| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Primer pago 23-Ago. NIU $68.92 real — faltan ~$11. |
+| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Primer pago 23-Ago. 🔴 NIU ~$5.07 — faltan ~$75. Fondear desde BAC URGENTE. |
 | AMEX BAC ****3328 | ~$47.95+ (ciclo Ago18–Sep18) | — | **10-Sep-2026** | Corte Ago18 cerrado. Fijos mín: Laptop $15.42 + Accid $8.95 + Curacao $20.75 + ANDA $2.83 = $47.95. ¿Algo más en el ciclo? Confirmar en app. |
 | VISA Agrícola ****6114 | ~$1,299.47 | mín $11.84 | ⚠️ 03-Ago ya pasó | ⚠️ DTE Agrícola recibido 03-Ago (M001P014) — probablemente pagada. Confirmar en app. |
 | VISA Cuscatlán ****2789 | ~$0 | — | ✅ PAGADA | ✅ Pagada 13-Ago $82.98 desde NIU (Ref 761118158) |
@@ -67,7 +67,7 @@
 |-------|--------|-------|------------|
 | Claude Pro (Anthropic) | NIU ••3997 / Cuscatlán ****3997 | $20.00 | Mensual — ✅ cobrado Ago14 (ciclo Ago14–Sep14) |
 | ANDA (agua) | AMEX ****3328 | ~$2.83 | Mensual (~día 10) — ⚠️ cobró Ago9 en AMEX — PENDIENTE migrar a NIU |
-| DEL SUR (energía) | NIU ••3997 (desde ago) | ~$70-80 | Mensual (~día 22) ⚠️ PENDIENTE — confirmar factura Ago |
+| DEL SUR (energía) | NIU ••3997 | $77.56 | Mensual (~día 19) ✅ cobrado Ago19 08:13am — $77.56 confirmado app NIU |
 | Google Cloud | BAC ****6201 | $9.60 | Mensual — **PENDIENTE CANCELAR** |
 | Claro pospago | NIU ••3997 | $20.00 | Mensual — ✅ cobrado Ago7 (Pago de Servicio: Claro 12:58pm) |
 | Laptop cuota (AMEX) | AMEX ****3328 | $15.42 | Mensual (cuota 06/12, ciclo AMEX Ago18) |
@@ -81,7 +81,7 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| ✅ | NIU fondeado para cuota Cuscatlán $79.79 | — | NIU ~$89.88 ✅. T365 $20.96 Ago16. Cuota 23-Ago cubierta. |
+| 🔴 URGENTE | Fondear NIU para cuota Cuscatlán $79.79 | **23-Ago-2026** | NIU ~$5.07 tras DEL SUR $77.56. Faltan ~$75. Transferir desde BAC YA. |
 | ✅ | Ahorro Q1 MultiMoney ejecutado | 16-Ago-2026 | $200 transferidos. MultiMoney $805.47 → $1,005.47. |
 | 🟡 | Confirmar pagos Agrícola: DTE M001P010 (31-Jul, prob. préstamo $147.11) y DTE M001P014 (03-Ago, prob. VISA) | Pendiente | Ver PDFs en correo e.factura@bancoagricola.com |
 | 🟡 | AMEX confirmar saldo corte Ago18 en app | Pendiente | Corte cerrado ayer. Mín ~$47.95 fijos. ¿Hay cargos adicionales del ciclo? Ver app BAC. Pago vence 10-Sep. |
