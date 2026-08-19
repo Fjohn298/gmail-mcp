@@ -143,7 +143,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-08-16,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo cuota Cuscatlán),Gasto,-20.96,No,"Confirmado alerta Cuscatlán 16-Ago 15:00. Ref BAMCSVSS20260816B035622581. Par con ingreso NIU."
 2026-08-16,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo cuota Cuscatlán),Ingreso,20.96,No,"✅ Confirmado alerta Cuscatlán 16-Ago 15:00:41. Ref BAMCSVSS20260816B035622581. Banco origen: BAC X1386."
 2026-08-16,BAC,Ahorro - MultiMoney,Transfer365 BAC→MultiMoney Agrícola (ahorro Q1),Gasto,-200.00,No,"Confirmado por usuario 17-Ago. Sin alerta Gmail. Ahorro quincenal Q1 Ago13-28."
-2026-08-16,MultiMoney (Agrícola),Ahorro - Ingreso,Transfer365 desde BAC ****6201 (ahorro Q1),Ingreso,200.00,No,"Confirmado por usuario 17-Ago. MultiMoney: $805.47 + $200 = $1,005.47."
+2026-08-16,MultiMoney (Agrícola),Ahorro - Ingreso,Transfer365 desde BAC ****6201 (ahorro Q1),Ingreso,200.00,No,"Confirmado por usuario 17-Ago. MultiMoney: $807.43 + $200 = $1,007.43."
+2026-07-31,MultiMoney (Agrícola),Ahorro - Intereses,Capitalización normal julio (interés mensual),Ingreso,1.96,No,"✅ Confirmado app MultiMoney 19-Ago. Ganancia mensual julio. MultiMoney: $805.47 + $1.96 = $807.43 (pre T365 Ago16)."
 2026-08-17,NIU ••3997,Alimentación,Flan (postre — confirmado usuario),Gasto,-1.25,No,Confirmado usuario 19-Ago. Alerta Cuscatlán 17-Ago 13:02.
 2026-08-17,NIU ••3997,Transporte/Combustible,Gasolina (confirmado usuario),Gasto,-6.00,No,Confirmado usuario 19-Ago. Alerta Cuscatlán 17-Ago 17:45.
 2026-08-18,BAC,Transporte,DLC UBER RIDES -I- (Uber — Internet),Gasto,-9.47,No,Confirmado alerta BAC — 18-Ago 17:59 Internet. BAC ****6201.

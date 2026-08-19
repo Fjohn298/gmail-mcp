@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 19-Ago-2026 (rev18 — BAC $200.91 + AMEX $15.61 confirmados app; VISA Cusca $0; NIU ~$5.07; bonificación AMEX $2.90)
+# CLAUDE MEMORY — Última actualización: 19-Ago-2026 (rev19 — TODOS los saldos confirmados app: BAC $200.91, AMEX $15.61, NIU ~$5.07, VISA Cusca $0, VISA Agr $1,133.25, MultiMoney $1,007.43, Préstamo $6,153.94)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -29,10 +29,11 @@
 | NIU ••3997 | ~$5.07 | $12.32 liquidado (estado cuenta 19-Ago) − $1.25 flan − $6.00 gasolina (Ago17 pendientes) | 19-Ago-2026 |
 | BAC ****6201 (130961386) | **$200.91** | ✅ App BAC 19-Ago 07:32. Computienda $140 liquidado. Uber $9.37 Ago19 07:24 puede estar pendiente. | 19-Ago-2026 |
 | AMEX ****3328 | **$15.61** (corte Ago18) | ✅ App BAC 19-Ago. Corte cerrado: ANDA $2.83 + Laptop 05/12 $15.42 − pago $342.65 − bonificación $2.90. Pago vence **10-Sep-2026**. | 19-Ago-2026 |
-| VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
+| VISA Agrícola ****6114 | $1,133.25 total | ✅ App Agrícola 19-Ago. VISA Gold. Límite $2,000. Disponible $866.75. Contado $264.75. Mínimo $81.86. Pago **03-Sep**. Corte día 9. Tasa 35.90%. | 19-Ago-2026 |
 | VISA Cuscatlán ****2789 | $0.00 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158). United Platinum Visa MileagePlus. Límite $703.78. Corte 23-Jul / Pago 17-Ago. | 19-Ago-2026 |
-| MultiMoney (ahorro Agrícola) | $1,005.47 | $805.47 + $200 depósito Ago16 (confirmado usuario) | 16-Ago-2026 |
-| Max Electrónico (Agrícola) | $0.00 | App Agrícola | 11-Jul-2026 |
+| MultiMoney (ahorro Agrícola) | **$1,007.43** | ✅ App Agrícola 19-Ago. $805.47 + $1.96 cap Jul31 + $200 T365 Ago16. | 19-Ago-2026 |
+| Cuenta corriente Agrícola (3115392314) | $0.00 | ✅ App Agrícola 19-Ago | 19-Ago-2026 |
+| Reserva ahorro digital (3116827955) | $0.00 | ✅ App Agrícola 19-Ago | 19-Ago-2026 |
 
 ---
 
@@ -51,10 +52,10 @@
 
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
-| Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Sep-2026** | ⚠️ Ago: DTE M001P010 recibido 31-Jul — confirmar pago en app Agrícola |
+| Préstamo consumo Agrícola #2132201069 | **$6,153.94** | $147.11/mes | **07-Sep-2026** | ✅ Confirmado app Agrícola 19-Ago. Deuda total $6,153.94. |
 | Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Primer pago 23-Ago. NIU ~$5.07 — fondear ~$75 antes del 23. |
 | AMEX BAC ****3328 | $15.61 (corte Ago18) | mín TBD | **10-Sep-2026** | ✅ Confirmado app 19-Ago. Ciclo cerrado: ANDA $2.83 + Laptop 05/12 $15.42 − bonificación $2.90. Pago $342.65 cubrió casi todo. |
-| VISA Agrícola ****6114 | ~$1,299.47 | mín $11.84 | ⚠️ 03-Ago ya pasó | ⚠️ DTE Agrícola recibido 03-Ago (M001P014) — probablemente pagada. Confirmar en app. |
+| VISA Agrícola ****6114 (VISA Gold) | $1,133.25 | mín **$81.86** / contado $264.75 | **03-Sep-2026** | ✅ Confirmado app 19-Ago. Límite $2,000. Disponible $866.75. Tasa 35.90%. Corte día 9. |
 | VISA Cuscatlán ****2789 | $0.00 | — | ✅ PAGADA | ✅ Pagada 13-Ago $82.98. United Platinum Visa. Límite $703.78. Próx. corte 23-Ago. |
 | Laptop AMEX cuota 05/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago18 | ✅ Cobrado. Incluido en saldo corte $15.61. |
 | Laptop Agrícola cuota 01/12 | $945.00 | $78.75/mes | VISA Agrícola ****6114 — desde Sep-2026 | Nuevo 21-Jul. Tasa 0% / 12 meses. |
@@ -83,9 +84,9 @@
 |-----------|-------|-------------|-------|
 | ⚠️ | Fondear NIU para cuota Cuscatlán $79.79 | **23-Ago-2026** | NIU ~$5.07 real. Fondear ~$75 desde BAC antes del 23. Usuario al tanto. |
 | ✅ | Ahorro Q1 MultiMoney ejecutado | 16-Ago-2026 | $200 transferidos. MultiMoney $805.47 → $1,005.47. |
-| 🟡 | Confirmar pagos Agrícola: DTE M001P010 (31-Jul, prob. préstamo $147.11) y DTE M001P014 (03-Ago, prob. VISA) | Pendiente | Ver PDFs en correo e.factura@bancoagricola.com |
-| 🟡 | AMEX confirmar saldo corte Ago18 en app | Pendiente | Corte cerrado ayer. Mín ~$47.95 fijos. ¿Hay cargos adicionales del ciclo? Ver app BAC. Pago vence 10-Sep. |
-| 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app. |
+| ✅ | Agrícola confirmado en app 19-Ago | — | Préstamo $6,153.94 (pago 07-Sep). VISA $1,133.25 mín $81.86 (pago 03-Sep). MultiMoney $1,007.43. |
+| ✅ | AMEX corte Ago18 confirmado | — | $15.61 al corte. Pago vence 10-Sep. |
+| ⚠️ | VISA Agrícola pago mínimo $81.86 | **03-Sep-2026** | Contado $264.75. Incluye laptop cuota 01/12 $78.75. |
 | ✅ | Depósitos NIU Aug 5-6: +$35, +$21.59, +$25 | Identificados | ✅ Monica Guirola (esposa) vía App Cuscatlán |
 | ✅ | Merchants NIU desconocidos: −$19.55, −$2.80, −$1.25 | Identificados | ✅ CINEPOLIS I (Aug10 $19.55), FOODMART TEXACO LA GLORIA (Aug14 $2.80 y $1.25) |
 | ✅ | NIU −$7.00 (01-Ago) identificado | — | Gasolina. Confirmado usuario 19-Ago. |
