@@ -129,6 +129,7 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-07-25,AMEX ****3328,Seguros,ACCIDENTES PERSONALES 3 -C- APBAC19919,Gasto,-8.95,Sí,Confirmado app BAC AMEX 16-Ago. Ciclo Jul18–Ago18.,
 2026-07-27,AMEX ****3328,Restaurante,VITTORIOS (restaurante),Gasto,-49.28,No,Confirmado app BAC AMEX 16-Ago. Ciclo Jul18–Ago18.,
 "2026-07-30","AMEX ****3328","Deuda - Tarjeta crédito","Pago recibido (running balance Jul30 — AMEX al día)","Ingreso",342.65,"No","✅ Confirmado app BAC AMEX 16-Ago. Pago cubre: corte $263.67 + Curacao $20.75 + Accidentes $8.95 + Vittorios $49.28 = $342.65. AMEX queda en $0.",
+2026-07-30,AMEX ****3328,Bonificación,BONIFICACION PAGO SALDO DOLARES (cashback/crédito),Ingreso,2.90,No,"✅ Confirmado app BAC AMEX 19-Ago. Crédito por pago de saldo.",
 2026-07-30,BAC,Deuda - Tarjeta crédito,Pago AMEX ****3328 (running balance contado Jul30),Gasto,-342.65,No,"✅ Confirmado app BAC AMEX 16-Ago. Cubre corte Jul18 $263.67 + post-corte $78.98 = $342.65. AMEX al día.",
 2026-08-07,AMEX ****3328,Deuda - Intrafinanciamiento,Laptop BAC cuota 05/12 (LAPTOS VACUOTA:05/12),Gasto,-15.42,Sí,Confirmado app BAC AMEX 16-Ago. Ciclo Ago18–Sep18.,
 2026-08-08,BAC,Transporte,DLC UBER RIDES -I- (Uber — app BAC 08-Ago),Gasto,-9.00,No,"⚠️ Confirmado app BAC 16-Ago (fecha procesado 08-Ago). Monto exacto no legible (~$9.xx). No aparece en alertas Gmail. Pendiente confirmar monto exacto.",
