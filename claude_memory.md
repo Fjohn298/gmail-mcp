@@ -88,7 +88,7 @@
 | 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app. |
 | ✅ | Depósitos NIU Aug 5-6: +$35, +$21.59, +$25 | Identificados | ✅ Monica Guirola (esposa) vía App Cuscatlán |
 | ✅ | Merchants NIU desconocidos: −$19.55, −$2.80, −$1.25 | Identificados | ✅ CINEPOLIS I (Aug10 $19.55), FOODMART TEXACO LA GLORIA (Aug14 $2.80 y $1.25) |
-| 🟡 | Identificar NIU −$7.00 (01-Ago 23:23) | Pendiente | 1 merchant pendiente. |
+| ✅ | NIU −$7.00 (01-Ago) identificado | — | Gasolina. Confirmado usuario 19-Ago. |
 | 🟡 | Confirmar compra COMPUTIENDA $140 (Ago15, BAC) — retenido — ¿qué artículo? | Pendiente | Retenido en BAC. Pendiente procesar. |
 | 🟡 | Confirmar TEF DE:MONICA ALE +$50 (Ago15) — ¿por qué pagó esposa? | Pendiente | Ingreso BAC 15-Ago. |
 | 🟡 | DLC UBER RIDES -$9.xx (08-Ago app BAC) — monto no visible en screenshot | Pendiente | No aparece en alertas Gmail. Verificar en app. |
