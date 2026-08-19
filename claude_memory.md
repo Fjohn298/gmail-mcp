@@ -193,8 +193,8 @@
 | 19-Ago | BAC | DLC UBER RIDES (Internet 07:24) | −$9.37 |
 | 18-Ago | BAC | DLC UBER RIDES (Internet 20:24) | −$9.35 |
 | 18-Ago | BAC | DLC UBER RIDES (Internet 17:59) | −$9.47 |
-| 17-Ago | NIU | Consumo débito X5261 (17:45) — merchant pendiente | −$6.00 |
-| 17-Ago | NIU | Consumo débito X5261 (13:02) — merchant pendiente | −$1.25 |
+| 17-Ago | NIU | Gasolina (17:45 — confirmado) | −$6.00 |
+| 17-Ago | NIU | Flan (13:02 — confirmado) | −$1.25 |
 | 16-Ago | BAC | T365 BAC→NIU ••3997 (fondeo cuota Cuscatlán — 15:00) | −$20.96 |
 | 16-Ago | NIU | T365 desde BAC (Ref BAMCSVSS…B035622581 — 15:00) | +$20.96 |
 | 16-Ago | BAC | **LE ROSE** (restaurante — Tarjeta Presente 16:22) | −$30.25 |
