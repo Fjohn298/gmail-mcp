@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 19-Ago-2026 (rev17 — conciliación estado de cuenta Cuscatlán: NIU $12.32 real; eliminar duplicados FoodMart Ago14; Claude Pro fecha→Ago15)
+# CLAUDE MEMORY — Última actualización: 19-Ago-2026 (rev17b — NIU ~$5.07 real; VISA Cusca $0 confirmado app; FoodMart Ago14 eliminados; Claude Pro→Ago15)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -26,11 +26,11 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| NIU ••3997 | **$12.32** | ✅ Estado de cuenta Cuscatlán X5261 19-Ago 10:54am. Post DEL SUR $77.56. | 19-Ago-2026 |
+| NIU ••3997 | ~$5.07 | $12.32 liquidado (estado cuenta 19-Ago) − $1.25 flan − $6.00 gasolina (Ago17 pendientes) | 19-Ago-2026 |
 | BAC ****6201 | ~$191.56 (+$140 retenido Computienda) | $219.75 − Uber $9.47 (Ago18) − Uber $9.35 (Ago18) − Uber $9.37 (Ago19) | 19-Ago-2026 |
 | AMEX ****3328 | ~$66 (ciclo Ago18–Sep18) | Corte Ago18 cerrado. Fijos: Laptop 06/12 $15.42 + Accid $8.95 + Curacao 04/12 $20.75 + ANDA $2.83 = ~$47.95 mín. Pago vence **10-Sep-2026**. | 18-Ago-2026 |
 | VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
-| VISA Cuscatlán ****2789 | ~$0 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158) | 13-Ago-2026 |
+| VISA Cuscatlán ****2789 | $0.00 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158). United Platinum Visa MileagePlus. Límite $703.78. Corte 23-Jul / Pago 17-Ago. | 19-Ago-2026 |
 | MultiMoney (ahorro Agrícola) | $1,005.47 | $805.47 + $200 depósito Ago16 (confirmado usuario) | 16-Ago-2026 |
 | Max Electrónico (Agrícola) | $0.00 | App Agrícola | 11-Jul-2026 |
 
@@ -40,9 +40,9 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| NIU ••3997 | **$12.32** | ✅ Estado de cuenta Cuscatlán X5261 19-Ago 10:54am. Post DEL SUR $77.56. | 19-Ago-2026 |
+| NIU ••3997 | ~$5.07 | $12.32 liquidado (estado cuenta 19-Ago) − $1.25 flan − $6.00 gasolina (Ago17 pendientes) | 19-Ago-2026 |
 
-> ⚠️ NIU $12.32 — cuota Cuscatlán $79.79 vence 23-Ago. Fondear ~$68 desde BAC antes del 23. Usuario al tanto.
+> ⚠️ NIU ~$5.07 — cuota Cuscatlán $79.79 vence 23-Ago. Fondear ~$75 desde BAC antes del 23. Usuario al tanto.
 > ✅ MultiMoney $1,005.47 — ahorro Q1 ejecutado ($200, confirmado usuario 17-Ago).
 
 ---
@@ -52,10 +52,10 @@
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
 | Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Sep-2026** | ⚠️ Ago: DTE M001P010 recibido 31-Jul — confirmar pago en app Agrícola |
-| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Primer pago 23-Ago. NIU $12.32 — fondear ~$68 antes del 23. |
+| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Primer pago 23-Ago. NIU ~$5.07 — fondear ~$75 antes del 23. |
 | AMEX BAC ****3328 | ~$47.95+ (ciclo Ago18–Sep18) | — | **10-Sep-2026** | Corte Ago18 cerrado. Fijos mín: Laptop $15.42 + Accid $8.95 + Curacao $20.75 + ANDA $2.83 = $47.95. ¿Algo más en el ciclo? Confirmar en app. |
 | VISA Agrícola ****6114 | ~$1,299.47 | mín $11.84 | ⚠️ 03-Ago ya pasó | ⚠️ DTE Agrícola recibido 03-Ago (M001P014) — probablemente pagada. Confirmar en app. |
-| VISA Cuscatlán ****2789 | ~$0 | — | ✅ PAGADA | ✅ Pagada 13-Ago $82.98 desde NIU (Ref 761118158) |
+| VISA Cuscatlán ****2789 | $0.00 | — | ✅ PAGADA | ✅ Pagada 13-Ago $82.98. United Platinum Visa. Límite $703.78. Próx. corte 23-Ago. |
 | Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago18 | Activo — incluido en saldo AMEX |
 | Laptop Agrícola cuota 01/12 | $945.00 | $78.75/mes | VISA Agrícola ****6114 — desde Sep-2026 | Nuevo 21-Jul. Tasa 0% / 12 meses. |
 
@@ -81,7 +81,7 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| ⚠️ | Fondear NIU para cuota Cuscatlán $79.79 | **23-Ago-2026** | NIU $12.32 (estado cuenta 19-Ago). Fondear ~$68 desde BAC antes del 23. Usuario al tanto. |
+| ⚠️ | Fondear NIU para cuota Cuscatlán $79.79 | **23-Ago-2026** | NIU ~$5.07 real. Fondear ~$75 desde BAC antes del 23. Usuario al tanto. |
 | ✅ | Ahorro Q1 MultiMoney ejecutado | 16-Ago-2026 | $200 transferidos. MultiMoney $805.47 → $1,005.47. |
 | 🟡 | Confirmar pagos Agrícola: DTE M001P010 (31-Jul, prob. préstamo $147.11) y DTE M001P014 (03-Ago, prob. VISA) | Pendiente | Ver PDFs en correo e.factura@bancoagricola.com |
 | 🟡 | AMEX confirmar saldo corte Ago18 en app | Pendiente | Corte cerrado ayer. Mín ~$47.95 fijos. ¿Hay cargos adicionales del ciclo? Ver app BAC. Pago vence 10-Sep. |
