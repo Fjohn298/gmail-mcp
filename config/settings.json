@@ -19,9 +19,9 @@
     "run_days": [13, 28],
     "notify_email": "nehe298@gmail.com",
     "cards": [
-      {"name": "AMEX BAC",       "last4": "3328", "balance": 18.25,  "balance_fecha": "2026-08-16", "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 0.00, "pago_contado_corte": 263.67, "pago_minimo_corte": 17.00, "fecha_limite_pago": "2026-09-10", "fecha_corte_proximo": "2026-08-18", "cargos_ciclo_ago18": [{"fecha": "2026-08-07", "descripcion": "Laptop cuota 05/12 (LAPTOS VACUOTA)", "monto": 15.42, "tipo": "fijo"}, {"fecha": "2026-08-09", "descripcion": "ANDA -C- cargo automático", "monto": 2.83, "tipo": "fijo", "nota": "Pendiente migrar a NIU"}], "pago_recibido_jul30": {"monto": 342.65, "fecha": "2026-07-30", "nota": "Pago contado running balance — AMEX al día"}, "nota_balance": "✅ CONFIRMADO app BAC 16-Ago. Saldo: $18.25 (Laptop 05/12 $15.42 + ANDA $2.83). PAGO AL DÍA. Corte 18-Jul fue $263.67 (no $260.77). Pago $342.65 el 30-Jul cubre corte + post-corte (Curacao 03/12 $20.75 + Accidentes $8.95 + VITTORIOS $49.28). Próximo corte 18-Ago — saldo proyectado: $18.25 + fijos ciclo ($8.95 Accid + $15.42 Laptop 06/12 + $20.75 Curacao 04/12 + ANDA ~$2.83) ≈ $66"},
+      {"name": "AMEX BAC",       "last4": "3328", "balance": 15.61,  "balance_fecha": "2026-08-19", "tasa_anual": 43.08, "fecha_pago_dia": 10, "fecha_corte_dia": 18, "min_pago": 0.00, "pago_contado_corte": 15.61, "pago_minimo_corte": 0.00, "fecha_limite_pago": "2026-09-10", "fecha_corte_proximo": "2026-09-18", "cargos_ciclo_ago18": [{"fecha": "2026-08-07", "descripcion": "Laptop cuota 05/12 (LAPTOS VACUOTA)", "monto": 15.42, "tipo": "fijo"}, {"fecha": "2026-08-09", "descripcion": "ANDA -C- cargo automático", "monto": 2.83, "tipo": "fijo", "nota": "Pendiente migrar a NIU"}], "pago_recibido_jul30": {"monto": 342.65, "fecha": "2026-07-30", "nota": "Pago contado running balance — AMEX al día"}, "nota_balance": "✅ CONFIRMADO app BAC 19-Ago. Corte 18-Ago: $15.61. Pago vence Sep10. Laptop 05/12 $15.42 + ANDA $2.83 − bonificación $2.90 + Accidentes $8.95 − parciales = $15.61 neto. Pago $342.65 Jul30 cubrió ciclo anterior completo."},
 {"name": "VISA Cuscatlán", "last4": "2789", "balance": 0.00, "tasa_anual": 34.99, "fecha_pago_dia": 17, "fecha_corte_dia": 23, "min_pago": 0.00, "balance_fecha": "2026-08-13", "nota": "✅ PAGADA 13-Ago-2026 — $82.98 desde NIU X5261 (Ref 761118158). Saldo ~$0. Era $78.48 corte 23-Jul + $4.50 cargos adicionales. Próximo corte: 23-Ago-2026."},
-      {"name": "VISA Agrícola",  "last4": "6114", "balance": 1299.47, "balance_estimado": true, "tasa_anual": 35.90, "fecha_pago_dia": 4,  "fecha_corte_dia": 9,  "min_pago": 11.84, "saldo_disponible": 700.53, "limite_credito": 2000.00, "balance_fecha_corte": "2026-07-09", "pago_contado_corte": 168.47, "pago_minimo_corte": 11.84, "fecha_limite_pago": "2026-08-03", "balance_actual_13jul": 354.47, "balance_actual_fecha": "2026-07-13", "nota_balance": "⚠️ Estimado: $354.47 (app 13-Jul) + $945 laptop MR LAPTOPS 21-Jul = ~$1,299.47. Pendiente confirmar en app. Primera cuota laptop ($78.75) aparece en corte Ago-9. Saldo disponible estimado: ~$700.53."}
+      {"name": "VISA Agrícola",  "last4": "6114", "balance": 1133.25, "balance_estimado": false, "tasa_anual": 35.90, "fecha_pago_dia": 3,  "fecha_corte_dia": 9,  "min_pago": 81.86, "saldo_disponible": 866.75, "limite_credito": 2000.00, "balance_fecha_corte": "2026-08-09", "pago_contado_corte": 264.75, "pago_minimo_corte": 81.86, "fecha_limite_pago": "2026-09-03", "balance_actual_fecha": "2026-08-19", "nota_balance": "✅ CONFIRMADO app Agrícola 19-Ago. Saldo total $1,133.25. Pago mínimo $81.86, pago contado $264.75, vence 03-Sep. Incluye laptop MR LAPTOPS $945 (cuota 1 de $78.75 ya reflejada en corte Ago-9). Disponible $866.75."}
     ],
     "obligaciones_extra": [
       {
@@ -40,20 +40,20 @@
     {
       "nombre": "Préstamo Consumo Agrícola",
       "numero": "2132201069",
-      "saldo": 6171.48,
+      "saldo": 6153.94,
       "cuota_mensual": 147.11,
       "tasa_anual": 14.38,
       "fecha_pago_dia": 7,
-      "cuotas_restantes": 58
+      "cuotas_restantes": 57
     }
   ],
   "fondos_ahorro": [
     {
       "nombre": "Mi Ahorro MultiMoney",
       "banco": "Agrícola",
-      "saldo": 805.47,
-      "saldo_fecha": "2026-07-21",
-      "saldo_fuente": "Transfer365 ID:1416758738 confirmado correo Agrícola 21-Jul-2026",
+      "saldo": 1007.43,
+      "saldo_fecha": "2026-08-19",
+      "saldo_fuente": "✅ CONFIRMADO app Agrícola 19-Ago. Incluye capitalización julio $1.96 + depósito $200 Ago-01.",
       "saldo_intocable": 501.35,
       "deposito_quincena": 280.00,
       "dias_deposito": [15, 30],
@@ -134,21 +134,21 @@
     }
   ],
   "deuda_total": {
-    "fecha": "2026-08-16",
-    "tarjetas": 1317.72,
+    "fecha": "2026-08-19",
+    "tarjetas": 1148.86,
     "intrafinanciamientos": 2851.66,
-    "prestamo": 6171.48,
-    "total": 10340.86,
+    "prestamo": 6153.94,
+    "total": 10154.46,
     "detalle": {
-      "AMEX_3328": 18.25,
-      "VISA_Agricola_6114": 1299.47,
+      "AMEX_3328": 15.61,
+      "VISA_Agricola_6114": 1133.25,
       "VISA_Cuscatlan_2789": 0.00,
       "Prestamo_Nuevo_Cuscatlan": 2490.00,
       "Laptop_BAC": 154.16,
       "Curacao": 207.50,
-      "Prestamo_Consumo_Agricola": 6171.48
+      "Prestamo_Consumo_Agricola": 6153.94
     },
-    "nota": "AMEX $18.25 saldo (al día — pagada $342.65 Jul30, corte Aug18 en 2 días). VISA Agrícola ~$1,299.47 estimado. VISA Cuscatlán $0 (pagada 13-Ago $82.98). Préstamo Cuscatlán $2,490 — primer pago 23-Ago-2026."
+    "nota": "✅ Todos confirmados app 19-Ago. AMEX $15.61 corte Ago18 (vence Sep10). VISA Agrícola $1,133.25 (mín $81.86, contado $264.75, vence Sep03). VISA Cuscatlán $0. Préstamo Agrícola $6,153.94. Préstamo Cuscatlán $2,490 — primer pago 23-Ago."
   },
   "roadmap_liquidacion": {
     "descripcion": "Proyección de liquidación de deudas 2026-2027",
@@ -361,20 +361,20 @@
     }
   ],
   "amex_estado_actual": {
-    "saldo": 260.77,
-    "saldo_fuente": "Estado de cuenta BAC (corte 18-Jul-2026)",
-    "fecha_corte": "2026-07-18",
-    "fecha_corte_proximo": "2026-08-18",
-    "fecha_pago_proximo": "2026-08-10",
-    "pago_minimo": 17.00,
-    "pago_contado": 260.77,
+    "saldo": 15.61,
+    "saldo_fuente": "✅ CONFIRMADO app BAC 19-Ago",
+    "fecha_corte": "2026-08-18",
+    "fecha_corte_proximo": "2026-09-18",
+    "fecha_pago_proximo": "2026-09-10",
+    "pago_minimo": 0.00,
+    "pago_contado": 15.61,
     "cargos_ciclo_jul_confirmados": [
       {"fecha": "2026-07-10", "descripcion": "ANDA -C- (cargo automático)", "monto": 2.83, "nota": "Pendiente migrar a NIU."},
       {"fecha": "2026-07-07", "descripcion": "Laptop BAC cuota 05/12", "monto": 15.42},
       {"descripcion": "Accidentes Personales BAC", "monto": 8.95},
       {"descripcion": "Curacao cuota 2/12", "monto": 20.75}
     ],
-    "notas": "✅ AL DÍA — confirmado app BAC 16-Ago. Saldo actual $18.25 (Laptop 05/12 $15.42 + ANDA $2.83). Pago $342.65 recibido 30-Jul cubrió todo el ciclo. Corte próximo 18-Ago-2026 (en 2 días) — proyección saldo corte: $18.25 + Accidentes $8.95 + Laptop 06/12 $15.42 + Curacao 04/12 $20.75 + ANDA ~$2.83 ≈ $66.20. Pago mínimo vence Sep10.",
+    "notas": "✅ CONFIRMADO app BAC 19-Ago. Corte 18-Ago cerrado: $15.61. Pago vence Sep10. AMEX al día.",
     "estrategia_pago": {
       "pago_agosto_10_minimo": 17.00,
       "pago_agosto_10_contado": 260.77,
@@ -401,10 +401,10 @@
     "protected_labels": ["Label_3", "Label_1834638960901538876"]
   },
   "cuenta_corriente": {
-    "saldo": 54.43,
+    "saldo": 0.00,
     "banco": "Agrícola",
     "numero_cuenta": "3070555263",
-    "notas_cuenta": "Tarjeta débito Max Electrónico. Uso esporádico — plan mover saldo a BAC próximamente.",
+    "notas_cuenta": "Tarjeta débito Max Electrónico. Saldo $0 confirmado. Fue vaciada 11-Jul vía Transfer365 a BAC.",
     "cuentas_adicionales_agricola": [
       {
         "nombre": "Reserva para pagos",
@@ -435,14 +435,14 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 476.92,
-      "saldo_fecha": "2026-08-16",
-      "saldo_retenido": 140.00,
-      "saldo_retenido_nota": "COMPUTIENDA $140 (15-Ago) — cargo en proceso/retenido",
+      "saldo": 200.91,
+      "saldo_fecha": "2026-08-19",
+      "saldo_retenido": 0,
+      "saldo_retenido_nota": "",
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "✅ Saldo real $476.92 confirmado app BAC 16-Ago. Retenido $140 (COMPUTIENDA Ago15). Total comprometido: $616.92. Salario QuincenalAGOSTO $566.92 confirmado 13-Ago. TEF DE:MONICA ALE +$50 15-Ago. AMEX pagada $342.65 el 30-Jul.",
+      "notas": "✅ Saldo real $200.91 confirmado app BAC 19-Ago. Salario Ago13 $566.92. TEF Monica +$50 Ago15. Computienda $140 liquidado. DEL SUR $77.56 Ago19 desde NIU.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -493,13 +493,13 @@
         {"fecha": "2026-07-23", "descripcion": "LA TAQUEADA (restaurante)", "monto": 13.95, "tipo": "egreso", "categoria": "Restaurante", "fuente": "Gmail_BAC_alerta", "hora": "20:16:32", "tipo_compra": "Tarjeta Presente"}
       ],
       "presupuesto": {
-        "fecha_inicio": "2026-07-02",
-        "fecha_fin": "2026-07-13",
-        "saldo_inicio": 261.49,
-        "dias_total": 11,
-        "saldo_actual": 89.72,
-        "dias_restantes": 0,
-        "nota": "Quincena completa. Salario llega 13-Jul (PENDIENTE confirmar). Saldo estimado post-gastos Jul 13 tarde."
+        "fecha_inicio": "2026-08-13",
+        "fecha_fin": "2026-08-28",
+        "saldo_inicio": 200.91,
+        "dias_total": 15,
+        "saldo_actual": 200.91,
+        "dias_restantes": 9,
+        "nota": "Q1 Ago. BAC saldo confirmado 19-Ago. Préstamo Cuscatlán $79.79 debita de NIU el 23-Ago (necesita top-up ~$75 desde BAC)."
       }
     },
     {
@@ -521,10 +521,10 @@
       "nombre": "NIU",
       "tipo": "prepago",
       "cuenta": "••3997",
-      "saldo": 22.56,
-      "saldo_fecha": "2026-07-29",
+      "saldo": 5.07,
+      "saldo_fecha": "2026-08-19",
       "fecha_registro": "2026-07-07",
-      "notas": "Saldo estimado ~$22.56 al 29-Jul ($2.00 + $5.56 T365 24-Jul − $3.00 cancha 24-Jul + $18.00 T365 29-Jul = $22.56). Jul17 $5 + Jul18 $34.97+$25.74 + Jul22 $0.99+$11.50 siguen pendientes de identificar merchant.",
+      "notas": "✅ Saldo ~$5.07 confirmado usuario 19-Ago. NIU = Cuscatlán X5261 = tarjeta ****3997 (débito/ahorro). Flan $1.25 + gasolina $6.00 Ago17 pendientes liquidación.",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},
