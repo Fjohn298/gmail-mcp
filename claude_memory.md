@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 17-Ago-2026 (rev14 — MultiMoney $200 confirmado → saldo $1,005.47)
+# CLAUDE MEMORY — Última actualización: 19-Ago-2026 (rev15 — movimientos Ago17-19: NIU $7.25 + Uber ×3 BAC $28.19)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -26,9 +26,9 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| NIU ••3997 | $68.92 | ✅ App NIU — Cuenta de Ahorro. Saldo actual 16-Ago-2026 | 16-Ago-2026 |
-| BAC ****6201 | ~$219.75 (+$140 retenido Computienda) | App $476.92 − Uber $5.96 − LE ROSE $30.25 − T365→NIU $20.96 − T365→MultiMoney $200 | 16-Ago-2026 |
-| AMEX ****3328 | $18.25 | ✅ App BAC — "Pago de tarjeta al día". Saldo corte Jul18 fue $263.67 (no $260.77). Pagada $342.65 el 30-Jul. | 16-Ago-2026 |
+| NIU ••3997 | ~$82.63 | $89.88 − $1.25 (Ago17) − $6.00 (Ago17) | 19-Ago-2026 |
+| BAC ****6201 | ~$191.56 (+$140 retenido Computienda) | $219.75 − Uber $9.47 (Ago18) − Uber $9.35 (Ago18) − Uber $9.37 (Ago19) | 19-Ago-2026 |
+| AMEX ****3328 | ~$66 (ciclo Ago18–Sep18) | Corte Ago18 cerrado. Fijos: Laptop 06/12 $15.42 + Accid $8.95 + Curacao 04/12 $20.75 + ANDA $2.83 = ~$47.95 mín. Pago vence **10-Sep-2026**. | 18-Ago-2026 |
 | VISA Agrícola ****6114 | ~$1,299.47 | $354.47 app 13-Jul + laptop $945 alerta 21-Jul | 22-Jul-2026 |
 | VISA Cuscatlán ****2789 | ~$0 | ✅ PAGADA 13-Ago — $82.98 desde NIU X5261 (Ref 761118158) | 13-Ago-2026 |
 | MultiMoney (ahorro Agrícola) | $1,005.47 | $805.47 + $200 depósito Ago16 (confirmado usuario) | 16-Ago-2026 |
@@ -40,7 +40,7 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| NIU ••3997 | ~$89.88 | $68.92 (real 2:51pm) + $20.96 (T365 3:00pm) | 16-Ago-2026 |
+| NIU ••3997 | ~$82.63 | $89.88 − $1.25 (Ago17 13:02) − $6.00 (Ago17 17:45) | 19-Ago-2026 |
 
 > ✅ NIU ~$89.88 — cuota Cuscatlán $79.79 (23-Ago) cubierta.
 > ✅ MultiMoney $1,005.47 — ahorro Q1 ejecutado ($200, confirmado usuario 17-Ago).
@@ -53,7 +53,7 @@
 |-------|-------|-------|-------------------|--------|
 | Préstamo consumo Agrícola #2132201069 | ~$6,024 | $147.11/mes | **07-Sep-2026** | ⚠️ Ago: DTE M001P010 recibido 31-Jul — confirmar pago en app Agrícola |
 | Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | $2,490.00 | $79.79/mes | **23-Ago-2026** | Tomado 16-Jul. Primer pago 23-Ago. NIU $68.92 real — faltan ~$11. |
-| AMEX BAC ****3328 | $18.25 | — | **10-Sep-2026** | ✅ AL DÍA. Corte 18-Ago en 2 días → proyección cierre corte ~$66 (fijos: Accid $8.95 + Laptop 06/12 $15.42 + Curacao 04/12 $20.75 + ANDA $2.83) |
+| AMEX BAC ****3328 | ~$47.95+ (ciclo Ago18–Sep18) | — | **10-Sep-2026** | Corte Ago18 cerrado. Fijos mín: Laptop $15.42 + Accid $8.95 + Curacao $20.75 + ANDA $2.83 = $47.95. ¿Algo más en el ciclo? Confirmar en app. |
 | VISA Agrícola ****6114 | ~$1,299.47 | mín $11.84 | ⚠️ 03-Ago ya pasó | ⚠️ DTE Agrícola recibido 03-Ago (M001P014) — probablemente pagada. Confirmar en app. |
 | VISA Cuscatlán ****2789 | ~$0 | — | ✅ PAGADA | ✅ Pagada 13-Ago $82.98 desde NIU (Ref 761118158) |
 | Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Ago18 | Activo — incluido en saldo AMEX |
@@ -84,7 +84,7 @@
 | ✅ | NIU fondeado para cuota Cuscatlán $79.79 | — | NIU ~$89.88 ✅. T365 $20.96 Ago16. Cuota 23-Ago cubierta. |
 | ✅ | Ahorro Q1 MultiMoney ejecutado | 16-Ago-2026 | $200 transferidos. MultiMoney $805.47 → $1,005.47. |
 | 🟡 | Confirmar pagos Agrícola: DTE M001P010 (31-Jul, prob. préstamo $147.11) y DTE M001P014 (03-Ago, prob. VISA) | Pendiente | Ver PDFs en correo e.factura@bancoagricola.com |
-| 🟡 | AMEX corte Ago18 en 2 días — proyección saldo ~$66 | **18-Ago-2026** | Solo fijos del ciclo. Pago mínimo vence Sep10. No urgente pero vigilar. |
+| 🟡 | AMEX confirmar saldo corte Ago18 en app | Pendiente | Corte cerrado ayer. Mín ~$47.95 fijos. ¿Hay cargos adicionales del ciclo? Ver app BAC. Pago vence 10-Sep. |
 | 🟡 | Primera cuota laptop Agrícola $78.75 — corte Ago-9 / pago **04-Sep-2026** | **04-Sep-2026** | Tasa 0%/12. VISA Agrícola ****6114. Confirmar fecha exacta en app. |
 | ✅ | Depósitos NIU Aug 5-6: +$35, +$21.59, +$25 | Identificados | ✅ Monica Guirola (esposa) vía App Cuscatlán |
 | ✅ | Merchants NIU desconocidos: −$19.55, −$2.80, −$1.25 | Identificados | ✅ CINEPOLIS I (Aug10 $19.55), FOODMART TEXACO LA GLORIA (Aug14 $2.80 y $1.25) |
@@ -167,6 +167,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 19-Ago-2026 | Nuevos movimientos Ago17-19: NIU -$1.25 y -$6.00 (Ago17, merchant desconocido — alerta básica Cuscatlán). BAC: 3 Uber rides Ago18 ($9.47+$9.35) y Ago19 ($9.37). BAC estimado ~$191.56. NIU estimado ~$82.63. AMEX corte Ago18 cerrado (~$47.95 mín). |
 | 17-Ago-2026 | MultiMoney $200 transferidos Ago16 (confirmado usuario). MultiMoney $805.47 → $1,005.47 ✅. BAC estimado ~$219.75 (app $476.92 − Uber $5.96 − LE ROSE $30.25 − T365→NIU $20.96 − T365→MultiMoney $200). |
 | 17-Ago-2026 | T365 BAC→NIU $20.96 confirmado (alerta Cuscatlán 15:00 Ago16). NIU ~$89.88 — cuota Cuscatlán 23-Ago cubierta ✅. |
 | 17-Ago-2026 | Alertas BAC Ago16 tarde: DLC UBER RIDES -$5.96 (14:46 Internet) y LE ROSE -$30.25 (16:22 restaurante). BAC estimado ~$440.71 antes del T365 NIU. |
@@ -189,6 +190,11 @@
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
 | 23-Ago | NIU | Cuota préstamo Cuscatlán $2,490 (1/48) — PRÓXIMA | −$79.79 |
+| 19-Ago | BAC | DLC UBER RIDES (Internet 07:24) | −$9.37 |
+| 18-Ago | BAC | DLC UBER RIDES (Internet 20:24) | −$9.35 |
+| 18-Ago | BAC | DLC UBER RIDES (Internet 17:59) | −$9.47 |
+| 17-Ago | NIU | Consumo débito X5261 (17:45) — merchant pendiente | −$6.00 |
+| 17-Ago | NIU | Consumo débito X5261 (13:02) — merchant pendiente | −$1.25 |
 | 16-Ago | BAC | T365 BAC→NIU ••3997 (fondeo cuota Cuscatlán — 15:00) | −$20.96 |
 | 16-Ago | NIU | T365 desde BAC (Ref BAMCSVSS…B035622581 — 15:00) | +$20.96 |
 | 16-Ago | BAC | **LE ROSE** (restaurante — Tarjeta Presente 16:22) | −$30.25 |

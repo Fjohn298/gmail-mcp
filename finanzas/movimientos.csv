@@ -145,3 +145,8 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-08-16,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo cuota Cuscatlán),Ingreso,20.96,No,"✅ Confirmado alerta Cuscatlán 16-Ago 15:00:41. Ref BAMCSVSS20260816B035622581. Banco origen: BAC X1386."
 2026-08-16,BAC,Ahorro - MultiMoney,Transfer365 BAC→MultiMoney Agrícola (ahorro Q1),Gasto,-200.00,No,"Confirmado por usuario 17-Ago. Sin alerta Gmail. Ahorro quincenal Q1 Ago13-28."
 2026-08-16,MultiMoney (Agrícola),Ahorro - Ingreso,Transfer365 desde BAC ****6201 (ahorro Q1),Ingreso,200.00,No,"Confirmado por usuario 17-Ago. MultiMoney: $805.47 + $200 = $1,005.47."
+2026-08-17,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (13:02),Gasto,-1.25,No,Confirmado alerta Cuscatlán 17-Ago. Merchant no incluido en alerta básica.
+2026-08-17,NIU ••3997,Pendiente identificar,Consumo débito Cuscatlán X5261 (17:45),Gasto,-6.00,No,Confirmado alerta Cuscatlán 17-Ago. Merchant no incluido en alerta básica.
+2026-08-18,BAC,Transporte,DLC UBER RIDES -I- (Uber — Internet),Gasto,-9.47,No,Confirmado alerta BAC — 18-Ago 17:59 Internet. BAC ****6201.
+2026-08-18,BAC,Transporte,DLC UBER RIDES -I- (Uber — Internet),Gasto,-9.35,No,Confirmado alerta BAC — 18-Ago 20:24 Internet. BAC ****6201.
+2026-08-19,BAC,Transporte,DLC UBER RIDES -I- (Uber — Internet),Gasto,-9.37,No,Confirmado alerta BAC — 19-Ago 07:24 Internet. BAC ****6201.
