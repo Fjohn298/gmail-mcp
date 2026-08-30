@@ -435,14 +435,14 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 606.05,
+      "saldo": 556.05,
       "saldo_fecha": "2026-08-30",
       "saldo_retenido": 0,
-      "saldo_retenido_nota": "⚠️ ESTIMADO — desde $200.91 (19-Ago): −$168.83 T365→NIU + $566.92 salario + $40 TEF − $32.95 Zona Digital = ~$606.05. Sin alertas BAC de compras en Gmail desde Jul-23. Pendiente confirmar app.",
+      "saldo_retenido_nota": "⚠️ ESTIMADO — desde $200.91 (19-Ago): −$168.83 T365→NIU + $566.92 salario + $40 TEF(Monica) − $32.95 Zona Digital − $50 T365→NIU(audífonos) = ~$556.05. Sin alertas BAC de compras en Gmail desde Jul-23. Pendiente confirmar app.",
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "⚠️ Saldo estimado ~$606.05 al 30-Ago. Desde $200.91 (19-Ago): −T365 NIU $168.83 + salario $566.92 (29-Ago) + TEF $40 (29-Ago) − Zona Digital $32.95 (29-Ago). Sin alertas BAC de compras con tarjeta en Gmail desde 23-Jul. Pendiente confirmar app.",
+      "notas": "⚠️ Saldo estimado ~$556.05 al 30-Ago. Desde $200.91 (19-Ago): −T365 NIU $168.83 + salario $566.92 + TEF $40(Monica) − Zona Digital $32.95 − T365 NIU $50(audífonos Emerson) = ~$556.05. Sin alertas BAC de compras con tarjeta en Gmail desde 23-Jul. Pendiente confirmar app.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -495,15 +495,16 @@
         {"fecha": "2026-08-23", "descripcion": "Transfer365 BAC→NIU ••3997 (fondeo)", "monto": 46.02, "tipo": "egreso", "categoria": "Transferencia", "fuente": "Alerta_Cuscatlan", "nota": "Confirmado alerta Cuscatlán."},
         {"fecha": "2026-08-29", "descripcion": "Transfer365 BAC→NIU ••3997 (fondeo)", "monto": 25.00, "tipo": "egreso", "categoria": "Transferencia", "fuente": "Alerta_Cuscatlan", "nota": "Confirmado alerta Cuscatlán 29-Ago."},
         {"fecha": "2026-08-29", "descripcion": "Salario quincenal Q2 agosto", "monto": 566.92, "tipo": "ingreso", "categoria": "Salario", "nota": "✅ Confirmado usuario 30-Ago."},
-        {"fecha": "2026-08-29", "descripcion": "TEF recibida +$40 (probablemente Monica)", "monto": 40.00, "tipo": "ingreso", "categoria": "Ingreso", "nota": "✅ Confirmado usuario 30-Ago. Pendiente confirmar remitente."},
-        {"fecha": "2026-08-29", "descripcion": "ZONA DIGITAL (compra)", "monto": 32.95, "tipo": "egreso", "categoria": "Tecnología", "nota": "✅ Confirmado usuario 30-Ago. Sin alerta BAC en Gmail. Pendiente confirmar artículo."}
+        {"fecha": "2026-08-29", "descripcion": "TEF recibida +$40 de Monica", "monto": 40.00, "tipo": "ingreso", "categoria": "Ingreso", "nota": "✅ Confirmado usuario 30-Ago."},
+        {"fecha": "2026-08-29", "descripcion": "ZONA DIGITAL — Control Red Dragon GForce G711", "monto": 32.95, "tipo": "egreso", "categoria": "Tecnología", "nota": "✅ Confirmado usuario 30-Ago. Sin alerta BAC en Gmail."},
+        {"fecha": "2026-08-30", "descripcion": "Transfer365 BAC→NIU ••3997 (fondeo audífonos Emerson)", "monto": 50.00, "tipo": "egreso", "categoria": "Transferencia", "fuente": "Alerta_Cuscatlan", "nota": "Ref BAMCSVSS20260830B036269542. 30-Ago 13:45."}
       ],
       "presupuesto": {
         "fecha_inicio": "2026-08-29",
         "fecha_fin": "2026-09-12",
         "saldo_inicio": 606.05,
         "dias_total": 15,
-        "saldo_actual": 606.05,
+        "saldo_actual": 556.05,
         "dias_restantes": 14,
         "nota": "⚠️ Q2 Ago. Saldo estimado ~$606.05. Incluye salario $566.92 + TEF $40 − Zona Digital $32.95 − T365 acumulados. Sin alertas BAC en Gmail — posibles compras no registradas."
       }
