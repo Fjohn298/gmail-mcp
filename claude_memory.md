@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 14-Sep-2026 (rev20 — BAC ~$921.76 ✅salario 12-Sep, NIU ~$86.29. VISA Cusca $0 pagada 13-Sep. ⚠️ NIU riesgo overdraft cuota+Claude Pro)
+# CLAUDE MEMORY — Última actualización: 18-Sep-2026 (rev21 — BAC ~$898.42, NIU ~−$0.91 ⚠️OVERDRAFT. 13 movimientos Sep14-17 registrados vía FINDATA-REPORT pipeline. Claude Pro $20 ✅confirmado. Railway $5 ✅usuario. Cuota préstamo Cusca $82.98 vencida 17-Sep — NO confirmada, probable impago por saldo insuficiente.)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -27,8 +27,8 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| BAC ****6201 (130961386) | **~$921.76** | ✅ Salario Q1 Sep $566.92 confirmado usuario 14-Sep (llegó 12-Sep). Desde ~$556.05 (30-Ago) +$566.92 salario −$15.54 −$12.36 −$198.62 T365→NIU +$25.31 T365←NIU = ~$921.76. | ~14-Sep-2026 |
-| NIU ••3997 | **~$86.29** | ⚠️ ESTIMADO 14-Sep. Desde ~$0.38 (30-Ago): +$226.52 T365 BAC − consumos − pagos. Ver cálculo en Saldos Estimados. | ~14-Sep-2026 |
+| BAC ****6201 (130961386) | **~$898.42** | Desde ~$921.76 (14-Sep) −$3.34 (Susana Bernal 14-Sep) −$20.00 (transferencia 16-Sep) = ~$898.42. | ~18-Sep-2026 |
+| NIU ••3997 | **~−$0.91** ⚠️ | OVERDRAFT. Desde ~$86.29 (14-Sep): −$0.80 −$2.00 −$20.00(Claude Pro) −$13.30 −$0.65 −$1.50 −$29.31 −$1.50 −$10.00 −$3.14(Uber) −$5.00(Railway) = −$87.20 total. $86.29−$87.20 = ~−$0.91. **Cuota préstamo $82.98 vencida 17-Sep NO confirmada — probable impago.** | ~18-Sep-2026 |
 | AMEX ****3328 | **$15.61** (corte Ago18) | ✅ App BAC 19-Ago. Pago venció **10-Sep** — ⚠️ 4 días vencido, pendiente confirmar si se pagó. | 19-Ago-2026 |
 | VISA Agrícola ****6114 | $1,133.25 total | ✅ App Agrícola 19-Ago. Pago mín $81.86 venció **03-Sep** — ⚠️ 11 días vencido, pendiente confirmar. | 19-Ago-2026 |
 | VISA Cuscatlán ****2789 | **$0.00** | ✅ PAGADA 13-Sep — $82.98 desde NIU X5261 (Ref 932823182). Corte Ago-23 cubierto. Próx. corte 23-Sep. | 13-Sep-2026 |
@@ -42,15 +42,17 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| BAC ****6201 | **~$921.76** | ✅ Salario $566.92 confirmado (llegó 12-Sep). Desde ~$556.05 (30-Ago) +$566.92 −$15.54 −$12.36 −$198.62 T365→NIU +$25.31 T365←NIU = ~$921.76. | 14-Sep-2026 |
-| NIU ••3997 | ~$86.29 | Desde ~$0.38 (30-Ago): +$50(audífonos) +$15.54 +$12.36 +$198.62 T365 BAC; −$50(Emerson audífonos) −$6.01 −$3.95 −$4.00(cancha) −$7.56 −$8.00 −$25.31(T365→BAC) −$2.80 −$82.98(VISA Cusca) = ~$86.29 | 14-Sep-2026 |
+| BAC ****6201 | **~$898.42** | Desde ~$921.76 (14-Sep) −$3.34 (T→Susana 14-Sep) −$20.00 (transferencia 16-Sep) = ~$898.42. | 18-Sep-2026 |
+| NIU ••3997 | **~−$0.91** ⚠️ | Desde ~$86.29 (14-Sep) − $87.20 en consumos/suscripciones Sep14-17 = ~−$0.91. | 18-Sep-2026 |
 
-> ⚠️ **ALERTA ROJA — NIU OVERDRAFT INMINENTE**
-> NIU ~$86.29. Pendientes: cuota préstamo Cuscatlán $82.98 (vence 17-Sep) + Claude Pro ~$20 (~14-Sep) = ~$102.98 necesarios.
-> Déficit estimado: **~$16.69**. Fondear desde BAC antes del 17-Sep.
+> 🔴 **ALERTA — NIU EN OVERDRAFT**
+> NIU ~−$0.91 estimado. 13 consumos Sep14-17 totalizaron $87.20 vs saldo $86.29.
+> **Cuota préstamo Cuscatlán $82.98 venció 17-Sep — NO hay alerta de pago. Probable impago por saldo insuficiente.**
+> Acción requerida: verificar en app Cuscatlán si cuota se debitó. Si no, fondear NIU urgente desde BAC (~$84 mínimo).
+> DEL SUR ~$77.56 pendiente ~19-Sep (mañana) — también debita de NIU.
 >
-> ✅ **BAC — Salario Sep confirmado**
-> Salario Q1 Sep $566.92 llegó 12-Sep (confirmado usuario 14-Sep). BAC ~$921.76.
+> ✅ **BAC — Salario Sep confirmado, saldo operativo**
+> BAC ~$898.42. Suficiente para fondear NIU + DEL SUR.
 
 ---
 
@@ -59,7 +61,7 @@
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
 | Préstamo consumo Agrícola #2132201069 | **$6,153.94** | $147.11/mes | **07-Oct-2026** | Cuota Sep (07-Sep) ⚠️ pendiente confirmar pago. Último confirmado app 19-Ago. |
-| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | ~$2,454.72 | **$82.98/mes** | **17-Sep-2026** | Corte día 23, pago día 17. 1 cuota pagada (antes 17-Ago). Saldo ~$2,454.72 tras 1 cuota. Cuota Sep pendiente (vence 17-Sep). Debita automático de NIU. |
+| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | ~$2,454.72 | **$82.98/mes** | ⚠️ **VENCIDO 17-Sep** | Corte día 23, pago día 17. 1 cuota pagada (antes 17-Ago). Cuota Sep #2 **NO CONFIRMADA** — NIU estaba en ~−$0.91 al vencimiento. Probable impago. Verificar en app. |
 | AMEX BAC ****3328 | $15.61 (corte Ago18) | mín TBD | ⚠️ **VENCIDO 10-Sep** | Pendiente confirmar si se pagó. Corte Sep18 generará nuevo ciclo. |
 | VISA Agrícola ****6114 (VISA Gold) | $1,133.25 | mín **$81.86** / contado $264.75 | ⚠️ **VENCIDO 03-Sep** | Pendiente confirmar pago. Laptop cuota 01/12 $78.75 incluida en saldo. Corte día 9. Tasa 35.90%. |
 | VISA Cuscatlán ****2789 | **$0.00** | — | Corte **23-Sep** | ✅ Pagada 13-Sep $82.98 (Ref 932823182). United Platinum Visa MileagePlus. Límite $703.78. |
@@ -72,7 +74,7 @@
 
 | Cargo | Cuenta | Monto | Frecuencia |
 |-------|--------|-------|------------|
-| Claude Pro (Anthropic) | NIU ••3997 / Cuscatlán ****3997 | $20.00 | Mensual — cobrado Ago14 — ⚠️ próximo cobro ~14-Sep (NIU ~$86.29, riesgo si cuota préstamo debita primero) |
+| Claude Pro (Anthropic) | NIU ••3997 / Cuscatlán ****3997 | $20.00 | Mensual — ✅ cobrado 14-Sep (recibo #2809-1052-9366) — próximo ~14-Oct |
 | ANDA (agua) | AMEX ****3328 | ~$2.83 | Mensual (~día 10) — ⚠️ PENDIENTE migrar a NIU |
 | DEL SUR (energía) | NIU ••3997 | ~$77.56 | Mensual (~día 19) — Ago: $77.56 ✅ cobrado 19-Ago — Sep: pendiente (~19-Sep) |
 | Google Cloud | BAC ****6201 | $9.60 | Mensual — **PENDIENTE CANCELAR** |
@@ -88,13 +90,13 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| 🔴 | **Fondear NIU** para cuota préstamo $82.98 + Claude Pro ~$20 | **17-Sep-2026** | NIU ~$86.29. Necesita ~$102.98. Déficit ~$16.69. Fondear al menos ~$17 desde BAC antes del 17. |
-| ✅ | Salario Q1 Sep $566.92 confirmado | 12-Sep-2026 | Confirmado usuario 14-Sep. BAC ~$921.76. |
-| 🟡 | Confirmar pago VISA Agrícola mín $81.86 | VENCIDO 03-Sep | 11 días sin confirmación. ¿Se pagó? Verificar en app Agrícola. |
-| 🟡 | Confirmar cuota Préstamo Agrícola $147.11 | VENCIDO 07-Sep | 7 días sin confirmación. ¿Se debitó? Verificar en app Agrícola. |
-| 🟡 | Confirmar pago AMEX $15.61 | VENCIDO 10-Sep | 4 días sin confirmación. ¿Se pagó? Verificar en app BAC. |
-| 🟡 | **Clarificar $82.98**: VISA Cuscatlán vs préstamo cuota | Pendiente | Pago 13-Sep $82.98 (Ref 932823182) fue a VISA Cuscatlán ****2789 (tarjeta). Cuota préstamo $82.98 es cargo SEPARADO automático desde NIU. Son el mismo monto pero productos distintos. ¿Cuota préstamo Sep ya se debitó o viene el 17-Sep? |
-| 🟡 | 5 merchants NIU sin identificar | Pendiente | Ago31 $6.01, Sep3 $3.95, Sep5 $7.56, Sep6 $8.00, Sep11 $2.80 = $28.32 total. |
+| 🔴 | **Fondear NIU URGENTE** — overdraft + cuota impaga + DEL SUR mañana | **HOY** | NIU ~−$0.91. Cuota préstamo $82.98 venció 17-Sep sin confirmación de pago. DEL SUR ~$77.56 vence ~19-Sep. Necesita ~$161 mínimo desde BAC. |
+| 🔴 | **Verificar cuota préstamo Cuscatlán Sep** | **VENCIDO 17-Sep** | Sin alerta de pago. NIU estaba en ~$4.09 antes del cargo Railway $5. Probable impago. Verificar en app Cuscatlán. |
+| 🟡 | Confirmar pago VISA Agrícola mín $81.86 | VENCIDO 03-Sep | 15 días sin confirmación. Verificar en app Agrícola. |
+| 🟡 | Confirmar cuota Préstamo Agrícola $147.11 | VENCIDO 07-Sep | 11 días sin confirmación. Verificar en app Agrícola. |
+| 🟡 | Confirmar pago AMEX $15.61 | VENCIDO 10-Sep | 8 días sin confirmación. Verificar en app BAC. Corte AMEX Sep-18 es HOY. |
+| 🟡 | 12 merchants NIU sin identificar | Pendiente | Ago31 $6.01, Sep3 $3.95, Sep5 $7.56, Sep6 $8.00, Sep11 $2.80, Sep14 $0.80, Sep15 $13.30+$0.65+$1.50+$29.31+$1.50, Sep16 $10.00 = $83.38 total. |
+| 🟡 | Destino transferencia BAC $20 del 16-Sep | Pendiente | Alerta BAC dice "transferencia en su cuenta" pero no indica destino. |
 | 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | BAC ****6201 |
 | 🟢 | Migrar ANDA de AMEX a NIU | Pendiente | AMEX cobró $2.83 Ago9 — sigue sin migrar |
 
@@ -193,16 +195,23 @@
 | T365 BAC→NIU fondeo VISA Cusca | Real | — | −$198.62 ✅ (13-Sep) |
 | Pago VISA Cuscatlán ****2789 | Real | −$82.98 | −$82.98 ✅ (13-Sep, Ref 932823182, desde NIU) |
 | Cuota Préstamo Cuscatlán (2/48) | Real | −$82.98 | ⏳ vence **17-Sep** (desde NIU — ⚠️ NIU ~$86.29, riesgo overdraft) |
-| Claude Pro Sep | Real | −$20.00 | ⏳ pendiente ~14-Sep (desde NIU) |
-| DEL SUR septiembre | Real | ~−$75.00 | ⏳ pendiente ~19-Sep |
+| Claude Pro Sep | Real | −$20.00 | −$20.00 ✅ (14-Sep, recibo #2809-1052-9366) |
+| NIU consumos Sep14-16 (8 merchants) | Real | — | −$57.20 (Sep14 $0.80, Sep15 $13.30+$0.65+$1.50+$29.31+$1.50, Sep16 $10.00) |
+| Transferencia NIU→Susana Bernal | Real | — | −$2.00 ✅ (14-Sep, Ref 936888753) |
+| Transferencia BAC→Susana Bernal (Donas) | Real | — | −$3.34 ✅ (14-Sep, Ref 205477673) |
+| Uber viaje (NIU) | Real | — | −$3.14 ✅ (16-Sep) |
+| Transferencia BAC enviada | Real | — | −$20.00 (16-Sep, destino pendiente) |
+| Railway hosting (NIU) | Real | — | −$5.00 ✅ (17-Sep, confirmado usuario) |
+| Cuota Préstamo Cuscatlán (2/48) | Real | −$82.98 | ⚠️ **VENCIDO 17-Sep — NO CONFIRMADA. NIU ~−$0.91, probable impago.** |
+| DEL SUR septiembre | Real | ~−$75.00 | ⏳ pendiente ~19-Sep (mañana) — NIU sin fondos |
 | Cuota Préstamo Agrícola Sep | Real | −$147.11 | ⚠️ venció 07-Sep, pendiente confirmar |
-| Pago AMEX Sep | Real | −$15.61 | ⚠️ venció 10-Sep, pendiente confirmar |
+| Pago AMEX Sep | Real | −$15.61 | ⚠️ venció 10-Sep, pendiente confirmar. Corte Sep-18 es HOY. |
 | VISA Agrícola pago Sep | Real | −$81.86 mín | ⚠️ venció 03-Sep, pendiente confirmar |
-| Variables / gastos diarios | 📒 Contable | −$70.00 | — |
+| Variables / gastos diarios | 📒 Contable | −$70.00 | ~−$90.68 (consumos NIU + Uber + Railway + transferencias) |
 | Ahorro MultiMoney (Q1) | 📒 Contable | −$225.00 | — |
-| **Saldo BAC proyectado** | | | **~$921.76** (salario confirmado, pendiente restar pagos Agr/AMEX si se ejecutaron) |
+| **Saldo BAC proyectado** | | | **~$898.42** (−$3.34 Susana −$20 transferencia desde 14-Sep) |
 
-> ✅ Salario confirmado. ⚠️ Prioridad: fondear NIU ~$17 antes del 17-Sep. Confirmar 3 pagos vencidos (VISA Agr, Préstamo Agr, AMEX).
+> ⚠️ **SITUACIÓN CRÍTICA**: NIU en overdraft (~−$0.91). Cuota préstamo Cuscatlán $82.98 venció 17-Sep sin confirmación de pago. DEL SUR ~$77.56 vence mañana (~19-Sep). Fondear NIU urgente ~$161+ desde BAC. 3 pagos vencidos sin confirmar (VISA Agr, Prést Agr, AMEX). Corte AMEX Sep-18 es HOY.
 
 ---
 
@@ -210,6 +219,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 18-Sep-2026 | **rev21**: 13 movimientos Sep14-17 registrados vía FINDATA-REPORT pipeline (n8n). Claude Pro $20 ✅ confirmado (recibo Anthropic #2809-1052-9366). Railway $5 ✅ confirmado usuario. NIU ~−$0.91 OVERDRAFT. Cuota préstamo Cuscatlán $82.98 venció 17-Sep — NO confirmada, probable impago. BAC ~$898.42 (−$3.34 Susana −$20 transferencia). |
 | 14-Sep-2026 | **rev20**: 17 movimientos 31-Ago a 13-Sep + salario Q1 Sep $566.92 (12-Sep, confirmado usuario). BAC ~$921.76. NIU ~$86.29. VISA Cuscatlán pagada 13-Sep $82.98 (Ref 932823182). Cuota préstamo confirmada $82.98 (corte=23, pago=17). ⚠️ NIU riesgo overdraft: cuota $82.98 + Claude Pro ~$20 vs saldo ~$86.29. Pagos vencidos pendientes: VISA Agr (03-Sep), Préstamo Agr (07-Sep), AMEX (10-Sep). |
 | 30-Ago-2026 | Cuota préstamo Cuscatlán corregida: $79.79→$82.98. Fechas corregidas: corte=23, pago=17 (estaban invertidas). TEF +$40 = Monica. Zona Digital = Control Red Dragon GForce G711. T365 $50 BAC→NIU→Emerson Amaya (audífonos). Salario Q2 Ago $566.92 confirmado. BAC ~$556.05. |
 | 19-Ago-2026 | Nuevos movimientos Ago17-19: NIU -$1.25 y -$6.00 (Ago17). BAC: 3 Uber rides Ago18 ($9.47+$9.35) y Ago19 ($9.37). BAC estimado ~$191.56. NIU estimado ~$82.63. AMEX corte Ago18 cerrado (~$47.95 mín). |
@@ -224,35 +234,22 @@
 
 ---
 
-## MOVIMIENTOS RECIENTES CONFIRMADOS (Ago 29 → Sep 14)
+## MOVIMIENTOS RECIENTES CONFIRMADOS (Sep 12 → Sep 18)
 
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
-| 17-Sep | NIU | Cuota préstamo Cuscatlán (2/48) — **PRÓXIMA** | −$82.98 |
-| ~14-Sep | NIU | Claude Pro Sep14–Oct14 — **PENDIENTE** | ~−$20.00 |
+| 17-Sep | NIU | ✅ Railway hosting (confirmado usuario) | −$5.00 |
+| 17-Sep | NIU | Cuota préstamo Cuscatlán (2/48) — ⚠️ **VENCIDA, NO CONFIRMADA** | −$82.98 |
+| 16-Sep | BAC | Transferencia enviada (destino pendiente) | −$20.00 |
+| 16-Sep | NIU | Uber viaje | −$3.14 |
+| 16-Sep | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$10.00 |
+| 15-Sep | NIU | 5 consumos tarjeta débito X5261 | −$46.26 |
+| 14-Sep | NIU | ✅ Claude Pro Sep14–Oct14 (recibo #2809-1052-9366) | −$20.00 |
+| 14-Sep | NIU | Transferencia UNI → Susana Bernal BAC ****7105 | −$2.00 |
+| 14-Sep | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$0.80 |
+| 14-Sep | BAC | Transferencia → Susana Bernal BAC ****7105 (Donas Jonathan) | −$3.34 |
 | 13-Sep | VISA Cuscatlán | ✅ Pago recibido desde NIU (Ref 932823182) | +$82.98 |
 | 13-Sep | NIU | ✅ Pago VISA Cuscatlán ****2789 (corte Ago-23) | −$82.98 |
 | 13-Sep | NIU | Transfer365 desde BAC ****6201 (fondeo) | +$198.62 |
 | 13-Sep | BAC | Transfer365 BAC→NIU (fondeo pago VISA Cusca) | −$198.62 |
 | 12-Sep | BAC | ✅ Salario quincenal Q1 Sep (confirmado usuario) | +$566.92 |
-| 11-Sep | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$2.80 |
-| 11-Sep | NIU | Transfer365 desde BAC ****6201 (fondeo) | +$12.36 |
-| 11-Sep | BAC | Transfer365 BAC→NIU (fondeo) | −$12.36 |
-| 07-Sep | BAC | Transfer365 desde NIU ••3997 (devolución) | +$25.31 |
-| 07-Sep | NIU | Transfer365 NIU→BAC (devolución) | −$25.31 |
-| 06-Sep | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$8.00 |
-| 05-Sep | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$7.56 |
-| 05-Sep | NIU | Transferencia a Emerson Amaya — Cancha | −$4.00 |
-| 03-Sep | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$3.95 |
-| 03-Sep | NIU | Transfer365 desde BAC ****6201 (fondeo) | +$15.54 |
-| 03-Sep | BAC | Transfer365 BAC→NIU (fondeo) | −$15.54 |
-| 31-Ago | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$6.01 |
-| 30-Ago | NIU | Transferencia a Emerson Amaya — Audífonos | −$50.00 |
-| 30-Ago | NIU | Transfer365 desde BAC ****6201 (audífonos) | +$50.00 |
-| 30-Ago | BAC | Transfer365 BAC→NIU (audífonos Emerson) | −$50.00 |
-| 29-Ago | BAC | Zona Digital — Control Red Dragon GForce G711 | −$32.95 |
-| 29-Ago | BAC | TEF recibida +$40 de Monica | +$40.00 |
-| 29-Ago | BAC | Salario quincenal Q2 agosto | +$566.92 |
-| 29-Ago | NIU | Retiro cajero ATM Cuscatlán | −$65.00 |
-| 29-Ago | NIU | Consumo tarjeta débito X5261 | −$5.25 |
-| 29-Ago | Agrícola | Compra QR Banca Móvil | −$5.00 |
