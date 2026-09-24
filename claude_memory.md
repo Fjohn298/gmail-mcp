@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 24-Sep-2026 (rev22 — BAC ~$814.43, NIU ~−$11.49 ⚠️OVERDRAFT persistente. 16 movimientos Sep18-23 registrados. T365 BAC→NIU $9.60 el 20-Sep. Cuota préstamo Cusca $82.98 sigue sin confirmar. DEL SUR no detectado. MANGA Plus $0.99 suscripción nueva.)
+# CLAUDE MEMORY — Última actualización: 24-Sep-2026 (rev23 — BAC ~$814.43, NIU estimado incierto ⚠️. Préstamo Cusca cuota 2/48 ✅PAGADA (confirmado usuario). DEL SUR Sep ✅PAGADO (confirmado usuario). Saldo NIU real desconocido — cálculo acumulado no confiable, verificar en app.)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -28,7 +28,7 @@
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
 | BAC ****6201 (130961386) | **~$814.43** | Desde ~$898.42 (18-Sep) −$1.00(Movistar) −$3.24(Uber) −$14.68(McD) −$36.40(Selectos) −$6.08(El Surco) −$9.60(T365→NIU) −$4.99(DonChicharrón) −$8.00(Texaco) = ~$814.43. | ~24-Sep-2026 |
-| NIU ••3997 | **~−$11.49** ⚠️ | OVERDRAFT persistente. Desde ~−$0.91 (18-Sep): −$2.80 −$3.00(Cancha) −$5.25 +$9.60(T365 BAC) −$5.00 −$2.15(Susana) −$0.99 −$0.99(MANGA Plus) = −$10.58 neto. −$0.91−$10.58 = ~−$11.49. **Nota: consumos siguen pasando → Cuscatlán permite overdraft o saldo real es mayor que estimado.** | ~24-Sep-2026 |
+| NIU ••3997 | **~−$172** ⚠️ INCIERTO | Cálculo acumulado: $86.29 −$87.20(Sep14-17) −$82.98(préstamo) −$77.56(DEL SUR) −$10.58(Sep18-23) +$9.60(T365) = ~−$162. Pero consumos siguen pasando → **estimación NO confiable**. Verificar saldo real en app Cuscatlán. | ~24-Sep-2026 |
 | AMEX ****3328 | **$15.61** (corte Ago18) | ✅ App BAC 19-Ago. Pago venció **10-Sep** — ⚠️ 4 días vencido, pendiente confirmar si se pagó. | 19-Ago-2026 |
 | VISA Agrícola ****6114 | $1,133.25 total | ✅ App Agrícola 19-Ago. Pago mín $81.86 venció **03-Sep** — ⚠️ 11 días vencido, pendiente confirmar. | 19-Ago-2026 |
 | VISA Cuscatlán ****2789 | **$0.00** | ✅ PAGADA 13-Sep — $82.98 desde NIU X5261 (Ref 932823182). Corte Ago-23 cubierto. Próx. corte 23-Sep. | 13-Sep-2026 |
@@ -43,18 +43,19 @@
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
 | BAC ****6201 | **~$814.43** | Desde ~$898.42 (18-Sep) − $83.99 en gastos Sep18-21 = ~$814.43. | 24-Sep-2026 |
-| NIU ••3997 | **~−$11.49** ⚠️ | Desde ~−$0.91 (18-Sep) − $10.58 neto Sep18-23 (incluye +$9.60 fondeo) = ~−$11.49. | 24-Sep-2026 |
+| NIU ••3997 | **INCIERTO** ⚠️ | Acumulado teórico ~−$162 pero consumos siguen pasando → hay fondos no rastreados o cálculo base erróneo. Necesario verificar en app. | 24-Sep-2026 |
 
-> ⚠️ **NIU — OVERDRAFT PERSISTENTE (estimado ~−$11.49)**
-> Consumos siguen procesándose a pesar del saldo negativo estimado → posibilidades:
-> (1) Cuscatlán permite overdraft en cuentas de ahorro, o (2) hay fondos no rastreados.
-> Cuota préstamo Cuscatlán $82.98 vencida 17-Sep — **7 días sin confirmación de pago**.
-> DEL SUR ~$77.56 esperado ~19-Sep — **NO detectado** en FINDATA hasta 24-Sep.
-> VISA Cuscatlán corte 23-Sep fue AYER — nuevo ciclo generado.
-> MANGA Plus $0.99/mes suscripción detectada (Google Play, Visa-3997).
+> ⚠️ **NIU — SALDO REAL DESCONOCIDO**
+> El cálculo acumulado da ~−$162 (imposible si consumos siguen pasando).
+> Conclusión: nuestro punto de partida ($86.29 estimado al 14-Sep) era incorrecto,
+> o hubo fondeos/depósitos que no capturamos. **Verificar saldo en app Cuscatlán.**
+>
+> ✅ **Préstamo Cuscatlán** cuota 2/48 $82.98 — **PAGADA** (confirmado usuario 24-Sep)
+> ✅ **DEL SUR Sep** ~$77.56 — **PAGADO** (confirmado usuario 24-Sep)
+> VISA Cuscatlán corte 23-Sep — nuevo ciclo (incluye MANGA Plus $0.99).
 >
 > ✅ **BAC — saldo operativo ~$814.43**
-> Próximo salario Q2 Sep ~28-Sep. Gastos fuertes: Selectos $36.40, McDonald's $14.68.
+> Próximo salario Q2 Sep ~28-Sep.
 
 ---
 
@@ -63,7 +64,7 @@
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
 | Préstamo consumo Agrícola #2132201069 | **$6,153.94** | $147.11/mes | **07-Oct-2026** | Cuota Sep (07-Sep) ⚠️ pendiente confirmar pago. Último confirmado app 19-Ago. |
-| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | ~$2,454.72 | **$82.98/mes** | ⚠️ **VENCIDO 17-Sep** | Corte día 23, pago día 17. 1 cuota pagada (antes 17-Ago). Cuota Sep #2 **NO CONFIRMADA** — NIU estaba en ~−$0.91 al vencimiento. Probable impago. Verificar en app. |
+| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | ~$2,420 | **$82.98/mes** | **17-Oct-2026** | Corte día 23, pago día 17. **2 cuotas pagadas** (Ago17 + Sep17 ✅confirmado usuario 24-Sep). Próxima cuota Oct-17. |
 | AMEX BAC ****3328 | $15.61 (corte Ago18) | mín TBD | ⚠️ **VENCIDO 10-Sep** | Pendiente confirmar si se pagó. Corte Sep18 generará nuevo ciclo. |
 | VISA Agrícola ****6114 (VISA Gold) | $1,133.25 | mín **$81.86** / contado $264.75 | ⚠️ **VENCIDO 03-Sep** | Pendiente confirmar pago. Laptop cuota 01/12 $78.75 incluida en saldo. Corte día 9. Tasa 35.90%. |
 | VISA Cuscatlán ****2789 | **$0.00** | — | Corte **23-Sep** | ✅ Pagada 13-Sep $82.98 (Ref 932823182). United Platinum Visa MileagePlus. Límite $703.78. |
@@ -93,9 +94,8 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| 🔴 | **Verificar cuota préstamo Cuscatlán Sep** | **VENCIDO 17-Sep (7 días)** | Sin alerta de pago ni deducción visible. Verificar en app Cuscatlán urgente. |
-| 🔴 | **DEL SUR septiembre NO detectado** | **Esperado ~19-Sep** | 5 días sin cargo. ¿No se cobró por fondos insuficientes? ¿O se cobró sin alerta? Verificar en app/NIU. |
-| 🔴 | **VISA Cuscatlán corte 23-Sep** | **23-Sep (ayer)** | Nuevo ciclo generado. MANGA Plus $0.99 cargado 23-Sep. Verificar estado de cuenta. |
+| 🔴 | **Verificar saldo real NIU en app** | **URGENTE** | Estimación acumulada no confiable (~−$162 teórico vs consumos activos). Necesario anclar saldo real. |
+| 🟡 | **VISA Cuscatlán corte 23-Sep** | **23-Sep** | Nuevo ciclo generado. MANGA Plus $0.99 cargado 23-Sep. Verificar estado de cuenta. Pago vence 17-Oct. |
 | 🟡 | Confirmar pago VISA Agrícola mín $81.86 | VENCIDO 03-Sep (21 días) | Verificar en app Agrícola. |
 | 🟡 | Confirmar cuota Préstamo Agrícola $147.11 | VENCIDO 07-Sep (17 días) | Verificar en app Agrícola. |
 | 🟡 | Confirmar pago AMEX $15.61 | VENCIDO 10-Sep (14 días) | Corte AMEX Sep-18 ya pasó — nuevo ciclo con cargos automáticos. |
@@ -206,8 +206,8 @@
 | Claude Pro Sep | Real | −$20.00 | −$20.00 ✅ (14-Sep, recibo #2809-1052-9366) |
 | T365 BAC→NIU fondeos | Real | — | +$9.60 ✅ (20-Sep) |
 | BAC gastos directos Sep14-21 | Real | — | −$107.33 (Susana $3.34, T→? $20, Movistar $1, Uber $3.24, McD $14.68, Selectos $36.40, El Surco $6.08, T365→NIU $9.60, DonChicharrón $4.99, Texaco $8.00) |
-| Cuota Préstamo Cuscatlán (2/48) | Real | −$82.98 | ⚠️ **VENCIDO 17-Sep (7 días) — NO CONFIRMADA** |
-| DEL SUR septiembre | Real | ~−$75.00 | ⚠️ **NO DETECTADO** — esperado ~19-Sep, sin cargo en FINDATA hasta 24-Sep |
+| Cuota Préstamo Cuscatlán (2/48) | Real | −$82.98 | −$82.98 ✅ (17-Sep, confirmado usuario 24-Sep) |
+| DEL SUR septiembre | Real | ~−$75.00 | ~−$77.56 ✅ (~19-Sep, confirmado usuario 24-Sep, monto estimado) |
 | Cuota Préstamo Agrícola Sep | Real | −$147.11 | ⚠️ venció 07-Sep (17 días), pendiente confirmar |
 | Pago AMEX Sep | Real | −$15.61 | ⚠️ venció 10-Sep (14 días), pendiente confirmar. Corte Sep-18 ya pasó. |
 | VISA Agrícola pago Sep | Real | −$81.86 mín | ⚠️ venció 03-Sep (21 días), pendiente confirmar |
@@ -223,6 +223,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 24-Sep-2026 | **rev23**: Cuota préstamo Cuscatlán 2/48 $82.98 ✅ PAGADA (confirmado usuario). DEL SUR Sep ~$77.56 ✅ PAGADO (confirmado usuario). NIU saldo acumulado no confiable (~−$162 teórico vs consumos activos) — verificar en app. |
 | 24-Sep-2026 | **rev22**: 16 movimientos Sep18-23 registrados vía FINDATA-REPORT. T365 BAC→NIU $9.60 (20-Sep). Gastos BAC: Selectos $36.40, McD $14.68, Texaco $8, El Surco $6.08, DonChicharrón $4.99, Uber $3.24, Movistar $1. NIU: Cancha $3, consumos $19.04, MANGA Plus $0.99 (suscripción nueva Google Play). NIU ~−$11.49 overdraft persistente. BAC ~$814.43. Cuota préstamo 7 días vencida. DEL SUR no detectado. VISA Cusca corte 23-Sep. |
 | 18-Sep-2026 | **rev21**: 13 movimientos Sep14-17 registrados vía FINDATA-REPORT pipeline (n8n). Claude Pro $20 ✅ confirmado (recibo Anthropic #2809-1052-9366). Railway $5 ✅ confirmado usuario. NIU ~−$0.91 OVERDRAFT. Cuota préstamo Cuscatlán $82.98 venció 17-Sep — NO confirmada, probable impago. BAC ~$898.42 (−$3.34 Susana −$20 transferencia). |
 | 14-Sep-2026 | **rev20**: 17 movimientos 31-Ago a 13-Sep + salario Q1 Sep $566.92 (12-Sep, confirmado usuario). BAC ~$921.76. NIU ~$86.29. VISA Cuscatlán pagada 13-Sep $82.98 (Ref 932823182). Cuota préstamo confirmada $82.98 (corte=23, pago=17). ⚠️ NIU riesgo overdraft: cuota $82.98 + Claude Pro ~$20 vs saldo ~$86.29. Pagos vencidos pendientes: VISA Agr (03-Sep), Préstamo Agr (07-Sep), AMEX (10-Sep). |
@@ -239,7 +240,7 @@
 
 ---
 
-## MOVIMIENTOS RECIENTES CONFIRMADOS (Sep 18 → Sep 24)
+## MOVIMIENTOS RECIENTES CONFIRMADOS (Sep 17 → Sep 24)
 
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
@@ -259,3 +260,5 @@
 | 18-Sep | NIU | Transferencia Emerson Amaya (Cancha) Ref 960384624 | −$3.00 |
 | 18-Sep | BAC | PAQUETES MOVISTAR -BEL (recarga $1) | −$1.00 |
 | 18-Sep | NIU | Consumo tarjeta débito X5261 (merchant pendiente) | −$2.80 |
+| ~19-Sep | NIU | ✅ DEL SUR cargo automático (confirmado usuario) | ~−$77.56 |
+| 17-Sep | NIU | ✅ Cuota préstamo Cuscatlán 2/48 (confirmado usuario) | −$82.98 |

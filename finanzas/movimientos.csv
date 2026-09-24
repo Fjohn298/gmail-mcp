@@ -221,4 +221,6 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-09-21,NIU ••3997,Transferencia,Transfer365 NIU→BAC ****7105 (Susana Bernal),Gasto,-2.15,No,"Confirmado FINDATA-REPORT 22-Sep. Alerta Cuscatlán 21-Sep 13:36."
 2026-09-21,BAC,Gasolina,TEXACO LA GLORIA PISTA,Gasto,-8.00,No,"Confirmado FINDATA-REPORT 22-Sep. Alerta BAC 21-Sep 17:48."
 2026-09-22,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-0.99,No,"Confirmado FINDATA-REPORT 23-Sep. Alerta Cuscatlán 22-Sep 12:43. Merchant pendiente identificar."
+2026-09-17,NIU ••3997,Deuda - Préstamo Cuscatlán,Cuota préstamo Cuscatlán (2/48) auto-débito,Gasto,-82.98,Sí,"✅ Confirmado usuario 24-Sep. Vencía 17-Sep. Débito automático desde NIU X5261."
+2026-09-19,NIU ••3997,Servicios - Energía,DEL SUR cargo automático NIU,Gasto,-77.56,Sí,"✅ Confirmado usuario 24-Sep. Monto estimado igual a Ago ($77.56) — pendiente confirmar monto exacto."
 2026-09-23,NIU ••3997,Suscripciones,MANGA Plus by SHUEISHA (Google Play) Visa-3997,Gasto,-0.99,No,"✅ Confirmado FINDATA-REPORT 24-Sep. Google Play pedido GPA.3377-9704-0570-65321..12."
