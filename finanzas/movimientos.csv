@@ -224,3 +224,90 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-09-17,NIU ••3997,Deuda - Préstamo Cuscatlán,Cuota préstamo Cuscatlán (2/48) auto-débito,Gasto,-82.98,Sí,"✅ Confirmado usuario 24-Sep. Vencía 17-Sep. Débito automático desde NIU X5261."
 2026-09-19,NIU ••3997,Servicios - Energía,DEL SUR cargo automático NIU,Gasto,-77.56,Sí,"✅ Confirmado usuario 24-Sep. Monto estimado igual a Ago ($77.56) — pendiente confirmar monto exacto."
 2026-09-23,NIU ••3997,Suscripciones,MANGA Plus by SHUEISHA (Google Play) Visa-3997,Gasto,-0.99,No,"✅ Confirmado FINDATA-REPORT 24-Sep. Google Play pedido GPA.3377-9704-0570-65321..12."
+2026-09-24,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-5.51,No,FINDATA-REPORT 25-Sep. Alerta Cuscatlán 24-Sep 20:48.
+2026-09-24,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,5.51,No,FINDATA-REPORT 25-Sep. Alerta Cuscatlán 24-Sep 20:48.
+2026-09-24,BAC,Deporte,Transferencia a Guillermo Stanley Recinos (Cancha Jonathan),Gasto,-3.50,No,FINDATA-REPORT 25-Sep. Alerta BAC 24-Sep 13:31.
+2026-09-24,Visa ****3194 (por identificar),Suscripciones,Crunchyroll Mega Fan (Ellation) vía Google Play,Gasto,-4.99,Sí,"FINDATA-REPORT 25-Sep. Forma de pago Visa-3194: tarjeta no identificada en los datos, pendiente confirmar cuenta."
+2026-09-25,AMEX ****3328,Seguros,ACCIDENTES PERSONALES (cargo automático AMEX),Gasto,-8.95,Sí,FINDATA-REPORT 25-Sep. Alerta BAC 25-Sep 06:08.
+2026-09-25,NIU ••3997,Deporte,Transferencia a Emerson Amaya (Cancha),Gasto,-3.00,No,FINDATA-REPORT 26-Sep. Alerta Cuscatlán 25-Sep 08:34.
+2026-09-25,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-2.30,No,FINDATA-REPORT 26-Sep. Alerta Cuscatlán 25-Sep 12:52. Merchant pendiente identificar.
+2026-09-25,Tarjeta crédito Agrícola ****3819 (por identificar),Farmacia,FV20 FARMA VALUE SANTA TECLA,Gasto,-5.63,No,"FINDATA-REPORT 26-Sep. Alerta Agrícola 25-Sep 19:56. Tarjeta ****3819 no figura en los datos, pendiente identificar."
+2026-09-25,Tarjeta crédito Agrícola ****3819 (por identificar),Farmacia,N1CO*FCIA SAN NICOLAS,Gasto,-11.53,No,"FINDATA-REPORT 26-Sep. Alerta Agrícola 25-Sep 20:51. Tarjeta ****3819 no figura en los datos, pendiente identificar."
+2026-09-26,Max Electrónico,Transferencia,Transfer365 Max Electrónico→BAC,Gasto,-35.00,No,FINDATA-REPORT 27-Sep. Alerta Agrícola ID 1416723563.
+2026-09-26,BAC,Transferencia,Transfer365 desde Agrícola Max Electrónico,Ingreso,35.00,No,FINDATA-REPORT 27-Sep. Alerta Agrícola ID 1416723563.
+2026-09-26,BAC,Transferencia,Transfer365 BAC→Max Electrónico,Gasto,-10.00,No,FINDATA-REPORT 27-Sep. Alerta Agrícola ID 1416021862.
+2026-09-26,Max Electrónico,Transferencia,Transfer365 desde BAC,Ingreso,10.00,No,FINDATA-REPORT 27-Sep. Alerta Agrícola ID 1416021862.
+2026-09-26,BAC,Restaurante,DLC UBER EATS,Gasto,-9.27,No,FINDATA-REPORT 27-Sep. Alerta BAC 26-Sep 19:31.
+2026-09-27,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-2.99,No,FINDATA-REPORT 28-Sep. Alerta Cuscatlán 27-Sep 16:37. Merchant pendiente identificar.
+2026-09-27,BAC,Restaurante,PedidosYa*Ban Ban Sant,Gasto,-10.39,No,FINDATA-REPORT 28-Sep. Alerta BAC 27-Sep 16:02.
+2026-09-28,BAC,Restaurante,PedidosYa*Propina,Gasto,-0.50,No,FINDATA-REPORT 28-Sep. Alerta BAC 28-Sep 00:02.
+2026-09-28,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-8.92,No,FINDATA-REPORT 29-Sep. Alerta Cuscatlán 28-Sep 15:03.
+2026-09-28,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,8.92,No,FINDATA-REPORT 29-Sep. Alerta Cuscatlán 28-Sep 15:03.
+2026-09-28,NIU ••3997,Transferencia,Transfer365 NIU→William Rivas BAC ****7451 (KFC Jonathan),Gasto,-5.50,No,FINDATA-REPORT 29-Sep. Alerta Cuscatlán 28-Sep 15:07.
+2026-09-28,NIU ••3997,Transferencia,Transfer365 NIU→Susana Bernal BAC ****7105 (Sorbete Jonathan),Gasto,-2.15,No,FINDATA-REPORT 29-Sep. Alerta Cuscatlán 28-Sep 15:08.
+2026-09-30,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-11.00,No,FINDATA-REPORT 01-Oct. Alerta Cuscatlán 30-Sep 23:17. Ref BAMCSVSS20260930B037880252.
+2026-09-30,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,11.00,No,FINDATA-REPORT 01-Oct. Alerta Cuscatlán 30-Sep 23:17. Ref BAMCSVSS20260930B037880252.
+2026-09-30,Max Electrónico,Ingreso - Transferencia,Transfer365 recibido de Monica Guirola,Ingreso,3.00,No,FINDATA-REPORT 01-Oct. Alerta Agrícola 30-Sep 12:27.
+2026-10-01,BAC,Transferencia,Transfer365 BAC→Max Electrónico,Gasto,-25.00,No,FINDATA-REPORT 02-Oct. Alerta Agrícola.
+2026-10-01,Max Electrónico,Transferencia,Transfer365 desde BAC,Ingreso,25.00,No,FINDATA-REPORT 02-Oct. Alerta Agrícola.
+2026-10-01,Max Electrónico,Efectivo,Código de retiro sin tarjeta (cajero),Gasto,-25.00,No,FINDATA-REPORT 02-Oct. Alerta Agrícola.
+2026-10-01,BAC,Transferencia,Transfer365 BAC→Max Electrónico,Gasto,-386.86,No,"FINDATA-REPORT 02-Oct. Alerta Agrícola. Destino probable: pagos Agrícola del mismo día (ver memoria, montos sin confirmar)."
+2026-10-01,Max Electrónico,Transferencia,Transfer365 desde BAC,Ingreso,386.86,No,"FINDATA-REPORT 02-Oct. Alerta Agrícola. Destino probable: pagos Agrícola del mismo día (ver memoria, montos sin confirmar)."
+2026-10-01,Max Electrónico,Educación,UTEC mensualidad (pago de servicio sin factura),Gasto,-81.00,Sí,FINDATA-REPORT 02-Oct. Alerta Agrícola.
+2026-10-01,BAC,Transporte,DLC UBER RIDES,Gasto,-3.46,No,FINDATA-REPORT 02-Oct. Alerta BAC.
+2026-10-01,BAC,Transporte,DLC UBER RIDES,Gasto,-3.27,No,FINDATA-REPORT 02-Oct. Alerta BAC.
+2026-10-01,BAC,Transporte,HONDA SANTA TECLA (¿cuota o mantenimiento vehículo?),Gasto,-64.18,No,FINDATA-REPORT 02-Oct. Alerta BAC. Concepto pendiente confirmar.
+2026-10-01,BAC,Transporte,DLC UBER RIDES,Gasto,-4.18,No,FINDATA-REPORT 02-Oct. Alerta BAC.
+2026-10-01,BAC,Transporte,DLC UBER RIDES,Gasto,-4.15,No,FINDATA-REPORT 02-Oct. Alerta BAC.
+2026-10-02,BAC,Restaurante,PedidosYa*Willys Wings,Gasto,-34.13,No,FINDATA-REPORT 03-Oct. Alerta BAC.
+2026-10-02,BAC,Restaurante,PedidosYa*Propina,Gasto,-0.75,No,FINDATA-REPORT 03-Oct. Alerta BAC.
+2026-10-03,NIU ••3997,Suscripciones,ViX Premium (Univision) vía Google Play,Gasto,-6.20,Sí,FINDATA-REPORT 04-Oct. Alerta Cuscatlán 03-Oct 10:14.
+2026-10-03,BAC,Transporte,Uber Rides (cargo aprobado),Gasto,-1.00,No,FINDATA-REPORT 04-Oct. Alerta BAC 03-Oct 09:49.
+2026-10-04,NIU ••3997,Transferencia,Transferencia a Emerson Amaya (Lo que faltaba),Gasto,-7.00,No,FINDATA-REPORT 05-Oct. Alerta Cuscatlán 04-Oct 15:50. Ref 1042932333.
+2026-10-05,BAC,Transferencia,Transferencia a cuenta BAC (destino por identificar),Gasto,-4.00,No,FINDATA-REPORT 06-Oct. Alerta BAC 05-Oct 13:17.
+2026-10-09,BAC,Restaurante,N1CO*POLLO PINULITO CL,Gasto,-3.25,No,FINDATA-REPORT 10-Oct. Alerta BAC 09-Oct 12:38.
+2026-10-09,BAC,Alimentación,FOODMART TEXACO LA GLO,Gasto,-1.85,No,FINDATA-REPORT 10-Oct. Alerta BAC 09-Oct 12:56.
+2026-10-10,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-11.59,No,FINDATA-REPORT 11-Oct. Alerta Cuscatlán 10-Oct 13:34. Merchant pendiente identificar.
+2026-10-10,AMEX ****3328,Servicios - Agua,ANDA cargo automático AMEX,Gasto,-2.62,Sí,FINDATA-REPORT 11-Oct. Alerta BAC 10-Oct 21:55.
+2026-10-12,BAC,Alimentación,FOODMART TEXACO LA GLO,Gasto,-1.25,No,FINDATA-REPORT 13-Oct. Alerta BAC 12-Oct 12:48.
+2026-10-12,BAC,Alimentación,FOODMART TEXACO LA GLO,Gasto,-0.85,No,FINDATA-REPORT 13-Oct. Alerta BAC 12-Oct 13:00.
+2026-10-12,BAC,Gasolina,TEXACO LA GLORIA PISTA,Gasto,-7.00,No,FINDATA-REPORT 13-Oct. Alerta BAC 12-Oct 18:04.
+2026-10-13,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-1.37,No,FINDATA-REPORT 14-Oct. Alerta Cuscatlán 13-Oct 09:30. Ref BAMCSVSS20261013B038452536.
+2026-10-13,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,1.37,No,FINDATA-REPORT 14-Oct. Alerta Cuscatlán 13-Oct 09:30. Ref BAMCSVSS20261013B038452536.
+2026-10-13,BAC,Supermercado,SELECTOS SANTA ROSA,Gasto,-16.85,No,FINDATA-REPORT 14-Oct. Alerta BAC 13-Oct 20:17.
+2026-10-13,BAC,Compras,DOLLAR CITY CONDADO ST,Gasto,-1.65,No,FINDATA-REPORT 14-Oct. Alerta BAC 13-Oct 20:23.
+2026-10-14,BAC,Restaurante,PedidosYa*Freakie Dogs,Gasto,-19.24,No,FINDATA-REPORT 15-Oct. Alerta BAC 14-Oct 12:27.
+2026-10-14,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-29.18,No,FINDATA-REPORT 15-Oct. Alerta Cuscatlán 14-Oct 12:34. Ref BAMCSVSS20261014B038512904.
+2026-10-14,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,29.18,No,FINDATA-REPORT 15-Oct. Alerta Cuscatlán 14-Oct 12:34. Ref BAMCSVSS20261014B038512904.
+2026-10-14,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-160.00,No,FINDATA-REPORT 15-Oct. Alerta Cuscatlán 14-Oct 12:35. Ref BAMCSVSS20261014B038513049.
+2026-10-14,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,160.00,No,FINDATA-REPORT 15-Oct. Alerta Cuscatlán 14-Oct 12:35. Ref BAMCSVSS20261014B038513049.
+2026-10-14,NIU ••3997,Pagos,Pago VISA Cuscatlán ****2789 (corte Sep-23),Gasto,-82.98,No,FINDATA-REPORT 15-Oct. Alerta Cuscatlán 14-Oct 12:38. Ref 1098284519. Desde NIU X5261.
+2026-10-14,VISA Cuscatlán ****2789,Pagos,Pago recibido desde NIU ••3997,Ingreso,82.98,No,FINDATA-REPORT 15-Oct. Ref 1098284519.
+2026-10-14,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-10.00,No,FINDATA-REPORT 15-Oct. Alerta Cuscatlán 14-Oct 12:48. Merchant pendiente identificar.
+2026-10-14,BAC,Restaurante,PedidosYa*Propina,Gasto,-0.75,No,FINDATA-REPORT 15-Oct. Alerta BAC 14-Oct 13:03.
+2026-10-14,NIU ••3997,Suscripciones,Claude Pro Oct14–Nov14 (probable: mismo monto/hora que ciclo anterior),Gasto,-20.00,Sí,FINDATA-REPORT 15-Oct. Alerta Cuscatlán 14-Oct 21:28. Sin recibo Anthropic verificado aún.
+2026-10-15,BAC,Servicios - Telecom,PAQUETES MOVISTAR -BEL (recarga),Gasto,-1.00,No,FINDATA-REPORT 16-Oct. Alerta BAC 15-Oct 16:02.
+2026-10-15,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-30.00,No,FINDATA-REPORT 16-Oct. Alerta Cuscatlán 15-Oct 20:10. Merchant pendiente identificar.
+2026-10-16,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-2.25,No,FINDATA-REPORT 17-Oct. Alerta Cuscatlán 16-Oct 13:03. Merchant pendiente identificar.
+2026-10-16,BAC,Transporte,DLC UBER RIDES,Gasto,-4.62,No,FINDATA-REPORT 18-Oct. Alerta BAC 16-Oct 22:29.
+2026-10-16,BAC,Transporte,DLC UBER RIDES,Gasto,-5.94,No,FINDATA-REPORT 18-Oct. Alerta BAC 16-Oct 22:36.
+2026-10-17,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-8.41,No,FINDATA-REPORT 18-Oct. Alerta Cuscatlán 17-Oct 07:08. Merchant pendiente identificar.
+2026-10-17,BAC,Transporte,SERTRACEN BTP (refrenda vehicular),Gasto,-28.85,No,FINDATA-REPORT 18-Oct. Alerta BAC 17-Oct 10:08.
+2026-10-17,BAC,Efectivo,Retiro cajero automático BAC ****1386,Gasto,-10.00,No,FINDATA-REPORT 18-Oct. Alerta BAC 17-Oct 11:37.
+2026-10-18,BAC,Transporte,DLC UBER RIDES,Gasto,-3.70,No,FINDATA-REPORT 19-Oct. Alerta BAC 18-Oct 09:16.
+2026-10-18,BAC,Transporte,DLC UBER RIDES,Gasto,-3.14,No,FINDATA-REPORT 19-Oct. Alerta BAC 18-Oct 09:27.
+2026-10-18,BAC,Restaurante,REST PUEBLO VIEJO,Gasto,-24.18,No,FINDATA-REPORT 19-Oct. Alerta BAC 18-Oct 11:22.
+2026-10-18,BAC,Transporte,DLC UBER RIDES,Gasto,-3.30,No,FINDATA-REPORT 19-Oct. Alerta BAC 18-Oct 12:49.
+2026-10-19,BAC,Transferencia,Transfer365 BAC→Max Electrónico,Gasto,-81.00,No,FINDATA-REPORT 20-Oct. Alerta Agrícola 19-Oct 06:25.
+2026-10-19,Max Electrónico,Transferencia,Transfer365 desde BAC,Ingreso,81.00,No,FINDATA-REPORT 20-Oct. Alerta Agrícola 19-Oct 06:25.
+2026-10-19,Max Electrónico,Educación,UTEC mensualidad (pago de servicio sin factura),Gasto,-81.00,Sí,FINDATA-REPORT 20-Oct. Alerta Agrícola 19-Oct 06:27.
+2026-10-19,BAC,Transferencia,Transfer365 BAC→Max Electrónico,Gasto,-66.84,No,FINDATA-REPORT 20-Oct. Alerta Agrícola 19-Oct 06:29.
+2026-10-19,Max Electrónico,Transferencia,Transfer365 desde BAC,Ingreso,66.84,No,FINDATA-REPORT 20-Oct. Alerta Agrícola 19-Oct 06:29.
+2026-10-19,Max Electrónico,Transferencia,Transferencia Max Electrónico→BAC (otro banco),Gasto,-76.84,No,FINDATA-REPORT 20-Oct. Alerta Agrícola 19-Oct 08:56.
+2026-10-19,BAC,Transferencia,Transferencia desde Agrícola Max Electrónico,Ingreso,76.84,No,FINDATA-REPORT 20-Oct. Alerta Agrícola 19-Oct 08:56.
+2026-10-19,BAC,Alimentación,TEXACO LA GLORIA FOOD,Gasto,-2.05,No,FINDATA-REPORT 20-Oct. Alerta BAC 19-Oct 12:57.
+2026-10-19,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-62.79,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 13:07.
+2026-10-19,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,62.79,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 13:07.
+2026-10-19,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-2.00,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 18:10.
+2026-10-19,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,2.00,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 18:10.
+2026-10-19,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-3.00,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 18:16. Merchant pendiente identificar.

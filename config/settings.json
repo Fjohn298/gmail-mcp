@@ -439,14 +439,14 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 814.43,
-      "saldo_fecha": "2026-09-24",
+      "saldo": 360.47,
+      "saldo_fecha": "2026-10-21",
       "saldo_retenido": 0,
-      "saldo_retenido_nota": "Desde ~$898.42 (18-Sep) −$1(Movistar) −$3.24(Uber) −$14.68(McD) −$36.40(Selectos) −$6.08(El Surco) −$9.60(T365→NIU) −$4.99(DonChicharrón) −$8(Texaco) = ~$814.43.",
+      "saldo_retenido_nota": "~$360.47 al 21-Oct = 814.43 (24-Sep) − 1,020.88 (movimientos 24-Sep→19-Oct) + 566.92 (salario 28-Sep INFERIDO, no confirmado). Si también llegó el salario ~13-Oct: ~$927.39.",
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo estimado ~$814.43 al 24-Sep. Gastos Sep18-21: Movistar $1, Uber $3.24, McD $14.68, Selectos $36.40, El Surco $6.08, T365→NIU $9.60, DonChicharrón $4.99, Texaco $8. Salario Q2 Sep esperado ~28-Sep.",
+      "notas": "Saldo estimado ~$360.47 al 21-Oct (rango hasta ~$927.39). BAC no envía alerta de depósito: salarios 28-Sep y ~13-Oct SIN confirmar. Verificar saldo real en app BAC.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -521,7 +521,7 @@
       "banco": "Agrícola",
       "numero_cuenta": "3070555263",
       "fecha_registro": "2026-07-08",
-      "notas": "✅ Saldo $0 confirmado al 11-Jul. Desglose: +$54.43 ISR Hacienda (MINHDA) + $65.00 suegra = $119.43 total → transferido a BAC ****6201 vía Transfer365. La suegra transfirió $65 a esta cuenta; usuario retiró el efectivo en cajero BAC para devolvérselo. Cuenta vacía.",
+      "notas": "Último saldo confirmado $0 (11-Jul). Desde 26-Sep hay flujo registrado de +$273.86 neto (depósitos de BAC, UTEC $81 ×2, retiro $25, transf. a BAC) y ≥6 operaciones sin monto (pagos TC/préstamo propios, QR, transf. a terceros); saldo actual desconocido, verificar en app. Desglose original 11-Jul: +$54.43 ISR Hacienda (MINHDA) + $65.00 suegra = $119.43 total → transferido a BAC ****6201 vía Transfer365. La suegra transfirió $65 a esta cuenta; usuario retiró el efectivo en cajero BAC para devolvérselo. Cuenta vacía.",
       "movimientos": [
         {"fecha": "2026-07-08", "descripcion": "Devolución de renta — MINHDA (Transfer365, ID: 1416015803)", "monto": 54.43, "tipo": "ingreso", "nota": "Confirmado: devolución ISR Ministerio de Hacienda."},
         {"fecha": "2026-07-11", "descripcion": "Transfer365 desde suegra → Agrícola Max", "monto": 65.00, "tipo": "ingreso", "nota": "Suegra transfirió $65 a esta cuenta para que usuario le devolviera efectivo."},
@@ -535,7 +535,7 @@
       "saldo": -11.49,
       "saldo_fecha": "2026-09-24",
       "fecha_registro": "2026-07-07",
-      "notas": "⚠️ OVERDRAFT persistente. Desde ~−$0.91 (18-Sep): −$2.80 −$3(Cancha) −$5.25 +$9.60(T365 BAC) −$5.00 −$2.15(Susana) −$0.99 −$0.99(MANGA Plus) = −$10.58. −$0.91−$10.58 = ~−$11.49. Consumos siguen pasando — Cuscatlán permite overdraft o saldo real > estimado.",
+      "notas": "⚠️ SALDO REAL DESCONOCIDO al 21-Oct. El valor de arriba (~−$11.49, 24-Sep) es una estimación vieja y NO confiable. Desde entonces: fondeos BAC→NIU +$280.77, consumos/pagos −$197.37 (incl. pago VISA Cuscatlán $82.98 el 14-Oct). Auto-débitos no detectados: cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct, Claro. Verificar saldo en app Cuscatlán.",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},
