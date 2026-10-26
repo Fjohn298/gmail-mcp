@@ -439,14 +439,14 @@
     {
       "nombre": "Débito BAC",
       "tipo": "debito",
-      "saldo": 360.47,
-      "saldo_fecha": "2026-10-21",
+      "saldo": 290.47,
+      "saldo_fecha": "2026-10-26",
       "saldo_retenido": 0,
-      "saldo_retenido_nota": "~$360.47 al 21-Oct = 814.43 (24-Sep) − 1,020.88 (movimientos 24-Sep→19-Oct) + 566.92 (salario 28-Sep INFERIDO, no confirmado). Si también llegó el salario ~13-Oct: ~$927.39.",
+      "saldo_retenido_nota": "~$290.47 al 26-Oct = 814.43 (24-Sep) − 1,090.88 (movimientos 24-Sep→25-Oct) + 566.92 (salario 28-Sep INFERIDO, no confirmado). Si también llegó el salario ~13-Oct: ~$857.39.",
       "banco": "BAC",
       "tarjeta_last4": "6201",
       "fecha_registro": "2026-06-29",
-      "notas": "Saldo estimado ~$360.47 al 21-Oct (rango hasta ~$927.39). BAC no envía alerta de depósito: salarios 28-Sep y ~13-Oct SIN confirmar. Verificar saldo real en app BAC.",
+      "notas": "Saldo estimado ~$290.47 al 26-Oct (rango hasta ~$857.39). BAC no envía alerta de depósito: salarios 28-Sep y ~13-Oct SIN confirmar. Verificar saldo real en app BAC.",
       "movimientos": [
         {"fecha": "2026-06-29", "descripcion": "Transfer365 esposa (pago préstamo efectivo)", "monto": 55.25, "tipo": "ingreso", "categoria": "Ingreso"},
         {"fecha": "2026-06-30", "descripcion": "N1CO*FCIA SAN NICOLAS (farmacia)", "monto": 15.52, "tipo": "egreso", "categoria": "Farmacia"},
@@ -535,7 +535,7 @@
       "saldo": -11.49,
       "saldo_fecha": "2026-09-24",
       "fecha_registro": "2026-07-07",
-      "notas": "⚠️ SALDO REAL DESCONOCIDO al 21-Oct. El valor de arriba (~−$11.49, 24-Sep) es una estimación vieja y NO confiable. Desde entonces: fondeos BAC→NIU +$280.77, consumos/pagos −$197.37 (incl. pago VISA Cuscatlán $82.98 el 14-Oct). Auto-débitos no detectados: cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct, Claro. Verificar saldo en app Cuscatlán.",
+      "notas": "⚠️ SALDO REAL DESCONOCIDO al 26-Oct. El valor de arriba (~−$11.49, 24-Sep) es una estimación vieja y NO confiable. Desde entonces (hasta 25-Oct): fondeos BAC→NIU +$295.77, consumos/pagos −$210.35 (incl. pago VISA Cuscatlán $82.98 el 14-Oct). Auto-débitos no detectados: cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct, Claro. Verificar saldo en app Cuscatlán.",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},

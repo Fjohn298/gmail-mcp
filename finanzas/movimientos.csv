@@ -311,3 +311,18 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-10-19,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-2.00,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 18:10.
 2026-10-19,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,2.00,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 18:10.
 2026-10-19,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-3.00,No,FINDATA-REPORT 20-Oct. Alerta Cuscatlán 19-Oct 18:16. Merchant pendiente identificar.
+2026-10-21,BAC,Compras,MINISO RAMBLAS STA TEC,Gasto,-10.00,No,FINDATA-REPORT 22-Oct. Alerta BAC 21-Oct 19:32.
+2026-10-21,BAC,Transferencia,Transferencia a Monica Guirola BAC ****4565,Gasto,-10.00,No,FINDATA-REPORT 22-Oct. Alerta BAC 21-Oct 20:12. Ref 205408616.
+2026-10-22,BAC,Mascotas,Petland (compra en línea),Gasto,-24.69,No,FINDATA-REPORT 23-Oct. Alerta BAC 22-Oct 08:37.
+2026-10-22,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-0.99,No,FINDATA-REPORT 23-Oct. Alerta Cuscatlán 22-Oct 12:43. Merchant pendiente identificar.
+2026-10-22,NIU ••3997,Servicios - Recarga,Recarga celular Telefónica,Gasto,-3.00,No,FINDATA-REPORT 23-Oct. Alerta Cuscatlán 22-Oct 22:33. Ref 1146905458.
+2026-10-22,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-5.31,No,FINDATA-REPORT 23-Oct. Alerta Cuscatlán 22-Oct 22:33. Ref BAMCSVSS20261022B038994054.
+2026-10-22,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,5.31,No,FINDATA-REPORT 23-Oct. Alerta Cuscatlán 22-Oct 22:33. Ref BAMCSVSS20261022B038994054.
+2026-10-23,BAC,Restaurante,N1CO*POLLO PINULITO CL,Gasto,-4.25,No,FINDATA-REPORT 24-Oct. Alerta BAC 23-Oct 12:45.
+2026-10-23,BAC,Transporte,DLC UBER RIDES,Gasto,-6.06,No,FINDATA-REPORT 24-Oct. Alerta BAC 23-Oct 18:46.
+2026-10-23,NIU ••3997,Suscripciones,MANGA Plus by SHUEISHA (Google Play) Visa-3997,Gasto,-0.99,Sí,FINDATA-REPORT 24-Oct. Renovación automática.
+2026-10-24,Visa ****3194 (por identificar),Suscripciones,Crunchyroll Mega Fan (Ellation) vía Google Play,Gasto,-4.99,Sí,FINDATA-REPORT 25-Oct. Renovación mensual (también 24-Sep). Tarjeta sin identificar.
+2026-10-25,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-8.00,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:45. Merchant pendiente identificar.
+2026-10-25,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-9.69,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:16.
+2026-10-25,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,9.69,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:16.
+2026-10-25,AMEX ****3328,Suscripciones,"ViX Premium (Univision) vía Google Play, Amex-3328",Gasto,-6.20,Sí,FINDATA-REPORT 26-Oct. Alerta Google Play 25-Oct 13:38. Segundo cargo ViX de octubre (el 03-Oct se cobró en NIU); el reporte 25-Oct menciona un intento ViX rechazado.
