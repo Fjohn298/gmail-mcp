@@ -261,7 +261,6 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-10-01,BAC,Transporte,DLC UBER RIDES,Gasto,-4.15,No,FINDATA-REPORT 02-Oct. Alerta BAC.
 2026-10-02,BAC,Restaurante,PedidosYa*Willys Wings,Gasto,-34.13,No,FINDATA-REPORT 03-Oct. Alerta BAC.
 2026-10-02,BAC,Restaurante,PedidosYa*Propina,Gasto,-0.75,No,FINDATA-REPORT 03-Oct. Alerta BAC.
-2026-10-03,NIU ••3997,Suscripciones,ViX Premium (Univision) vía Google Play,Gasto,-6.20,Sí,FINDATA-REPORT 04-Oct. Alerta Cuscatlán 03-Oct 10:14.
 2026-10-03,BAC,Transporte,Uber Rides (cargo aprobado),Gasto,-1.00,No,FINDATA-REPORT 04-Oct. Alerta BAC 03-Oct 09:49.
 2026-10-04,NIU ••3997,Transferencia,Transferencia a Emerson Amaya (Lo que faltaba),Gasto,-7.00,No,FINDATA-REPORT 05-Oct. Alerta Cuscatlán 04-Oct 15:50. Ref 1042932333.
 2026-10-05,BAC,Transferencia,Transferencia a cuenta BAC (destino por identificar),Gasto,-4.00,No,FINDATA-REPORT 06-Oct. Alerta BAC 05-Oct 13:17.
@@ -325,7 +324,7 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-10-25,NIU ••3997,Compras,Consumo tarjeta débito X5261,Gasto,-8.00,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:45. Merchant pendiente identificar.
 2026-10-25,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-9.69,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:16.
 2026-10-25,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,9.69,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:16.
-2026-10-25,AMEX ****3328,Suscripciones,"ViX Premium (Univision) vía Google Play, Amex-3328",Gasto,-6.20,Sí,FINDATA-REPORT 26-Oct. Alerta Google Play 25-Oct 13:38. Segundo cargo ViX de octubre (el 03-Oct se cobró en NIU); el reporte 25-Oct menciona un intento ViX rechazado.
+2026-10-25,AMEX ****3328,Suscripciones,"ViX Premium (Univision) vía Google Play, Amex-3328",Gasto,-6.20,Sí,"FINDATA-REPORT 26-Oct. Alerta Google Play 25-Oct 13:38. ✅ Único cobro ViX de octubre (confirmado usuario 26-Oct)."
 2026-09-28,BAC,Salario,Salario quincenal Q2 septiembre,Ingreso,566.92,Sí,✅ Confirmado usuario 26-Oct ('siempre llegan los salarios'). Monto habitual; no hay alerta BAC.
 2026-10-13,BAC,Salario,Salario quincenal Q1 octubre,Ingreso,566.92,Sí,✅ Confirmado usuario 26-Oct ('siempre llegan los salarios'). Monto habitual; no hay alerta BAC.
 2026-10-07,NIU ••3997,Servicios - Telefonía,Claro pospago (octubre),Gasto,-20.00,Sí,"✅ Pagado según usuario 26-Oct ('todo ya está pagado'). Fecha y monto aproximados (habitual $20, ~día 7); sin alerta de correo."

@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 26-Oct-2026 (rev27 — Usuario confirma «todo ya está pagado»: cuota préstamo Cusca 17-Oct, DEL SUR y Claro Oct, y pagos vencidos Agrícola/AMEX. NIU real $6.12 ✅. BAC ~$857.39 (estimado). Montos/fechas de Agrícola y AMEX sin detalle. Falta saldo Max Electrónico.)
+# CLAUDE MEMORY — Última actualización: 26-Oct-2026 (rev28 — Usuario: octubre TODO pagado; BAC y demás cuentas en $0 hasta el salario del jueves 29-Oct. NIU real $6.12 ✅. ViX se cobró 1 sola vez (25-Oct AMEX), corregido. Estimado BAC ~$857 era erróneo: ~$857 de salidas no rastreadas.)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -27,7 +27,7 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| BAC ****6201 (130961386) | **~$857.39** (estimado) | Ancla estimada ~$814.43 (24-Sep) − $1,090.88 (movimientos 24-Sep→25-Oct) + $1,133.84 (salarios 28-Sep y 13-Oct, ✅usuario). Sin confirmar en app. | ~26-Oct-2026 |
+| BAC ****6201 (130961386) | **$0.00** ✅ | ✅ Confirmado usuario 26-Oct: cuentas en $0 hasta que caiga el salario (jueves 29-Oct). El estimado previo (~$857.39) quedó ~$857 por encima: salidas no rastreadas (probables pagos de préstamo/tarjetas Agrícola y AMEX hechos desde BAC sin monto en el correo). | 26-Oct-2026 |
 | NIU ••3997 | **$6.12** ✅ | ✅ Confirmado usuario 26-Oct-2026 (app Cuscatlán). Nueva ancla: a partir de aquí se estima. | 26-Oct-2026 |
 | AMEX ****3328 | **$15.61** (corte Ago18) | ✅ App BAC 19-Ago. Pago venció **10-Sep** — ⚠️ 4 días vencido, pendiente confirmar si se pagó. | 19-Ago-2026 |
 | VISA Agrícola ****6114 | $1,133.25 total | ✅ App Agrícola 19-Ago. Pago mín $81.86 venció **03-Sep** — ⚠️ 11 días vencido, pendiente confirmar. | 19-Ago-2026 |
@@ -42,9 +42,9 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| BAC ****6201 | **~$857.39** | 814.43 (24-Sep) − 1,090.88 (movimientos 24-Sep→25-Oct) + 1,133.84 (salarios 28-Sep y 13-Oct confirmados usuario). | 26-Oct-2026 |
+| BAC ****6201 | **$0.00 real** ✅ | Ver Saldos Reales. Nuevo ancla 26-Oct. Próximo ingreso: salario jueves 29-Oct. | 26-Oct-2026 |
 | NIU ••3997 | **$6.12 real** ✅ | Saldo real confirmado usuario 26-Oct. Cuota préstamo Cusca 17-Oct, DEL SUR y Claro de octubre ✅ pagados según usuario. | 26-Oct-2026 |
-| Max Electrónico (Agrícola) | **DESCONOCIDO** | Flujo registrado +$273.86 neto, pero hay ≥6 operaciones Agrícola sin monto (ver Pendientes). Último saldo confirmado: $0 (11-Jul). | — |
+| Max Electrónico (Agrícola) | **$0.00** ✅ | ✅ Confirmado usuario 26-Oct («las demás cuentas a 0»). MultiMoney y tarjetas de crédito no incluidas en esa afirmación; MultiMoney sigue en su último saldo confirmado. | 26-Oct-2026 |
 
 > ⚠️ **4 SEMANAS SIN ACTUALIZAR (24-Sep → 21-Oct)**
 > Se procesaron 26 FINDATA-REPORT (87 filas nuevas en movimientos.csv). Faltan anclas reales:
@@ -84,7 +84,7 @@
 | Laptop cuota (AMEX) | AMEX ****3328 | $15.42 | Mensual (cuota 06/12, ciclo AMEX Sep18) |
 | Laptop MR LAPTOPS (Agrícola) | VISA Agrícola ****6114 | $78.75 | Mensual (cuota 1/12, corte Sep-9-2026) — tasa 0% |
 | MANGA Plus by SHUEISHA | NIU ••3997 (Visa débito 3997) | $0.99 | Mensual — Google Play — 23-Sep |
-| ViX Premium (Univision) | NIU ••3997 (03-Oct $6.20) y AMEX ****3328 (25-Oct $6.20) | $6.20 | Mensual — Google Play — ⚠️ cobrado 2 veces en octubre; el reporte 25-Oct menciona un intento ViX rechazado (posible falta de fondos en NIU) |
+| ViX Premium (Univision) | AMEX ****3328 | $6.20 | Mensual — Google Play — ✅ un solo cobro en octubre (25-Oct, confirmado usuario) |
 | Crunchyroll Mega Fan | Visa ****3194 (por identificar) | $4.99 | Mensual — Google Play — ✅ 24-Sep y 24-Oct |
 | Cuscatlán Accidentes | AMEX ****3328 | $8.95 | Mensual — 25-Sep ✅ (ciclo AMEX) |
 | Curacao cuota 5/12 | AMEX ****3328 | $20.75 | Mensual (ciclo AMEX Sep18) |
@@ -95,15 +95,14 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| 🔴 | **Anclar saldos reales**: BAC y Max Electrónico (NIU ✅ $6.12) | **YA** | Faltan saldo real de BAC y de Max Electrónico en app. |
 | 🟡 | Operaciones Agrícola **sin monto** en el correo | Pendiente | 26-Sep transferencia a terceros; 30-Sep transferencia cuentas propias + pago QR; 01-Oct pago TC propia + pago préstamo propio; 19-Oct transferencia cuentas propias. Montos en comprobante PDF adjunto o app. |
 | 🟡 | Identificar tarjetas **Visa ****3194** (Crunchyroll $4.99, cobra mensual) y **crédito Agrícola ****3819** (FV20 $5.63 + N1CO farmacia $11.53) | Pendiente | No aparecen en settings.json. ¿Tarjeta nueva/reemplazo de ****6114? |
-| 🟡 | ViX Premium $6.20 cobrado 2 veces en octubre (03-Oct NIU, 25-Oct AMEX) | Pendiente | ¿Intento rechazado en NIU y reintento en AMEX, o doble suscripción? Revisar en Google Play. |
 | 🟡 | UTEC $81 pagado 01-Oct **y** 19-Oct | Pendiente | ¿Dos mensualidades (Sep atrasada + Oct)? Confirmar. |
 | 🟡 | HONDA SANTA TECLA $64.18 (01-Oct, BAC) y SERTRACEN refrenda $28.85 (17-Oct) | Pendiente | Confirmar concepto de Honda (cuota extrafinanciamiento / mantenimiento). |
 | 🟡 | Claude Pro 14-Oct $20 | Pendiente | Registrado como probable (mismo monto y hora 21:28). Falta recibo Anthropic. |
 | 🟡 | 8 consumos NIU sin merchant (24-Sep→19-Oct) = $70.54 | Pendiente | $2.30, $2.99, $11.59, $10.00, $30.00, $2.25, $8.41, $3.00. Más los de Ago-Sep ya listados ($99.42 hasta 22-Sep). |
 | 🟡 | Destinos sin identificar: BAC $20 (16-Sep), BAC $4.00 "a su cuenta BAC" (05-Oct) | Pendiente | Alertas BAC no indican beneficiario. |
+| 🔴 | **Salario jueves 29-Oct** | 29-Oct | BAC y demás cuentas en $0; NIU $6.12. Al caer el salario: fondear NIU para Claude Pro (14-Nov) y cuota Cusca (17-Nov), y reservar DEL SUR/Claro. |
 | 🟢 | Cancelar Google Cloud $9.60/mes | Pendiente | BAC ****6201. |
 | 🟢 | Migrar ANDA de AMEX a NIU | Pendiente | AMEX cobró $2.62 el 10-Oct — sigue sin migrar. |
 | 🟢 | Subs Google Play nuevas: MANGA Plus $0.99, ViX Premium $6.20, Crunchyroll $4.99 | Revisar | ¿Todas deseadas? Suman $12.18/mes. |
@@ -222,7 +221,7 @@
 | Max Electrónico: UTEC −$81, retiro sin tarjeta −$25, +$3 Monica | Real | −$103.00 |
 | Agrícola 01-Oct: pago TC propia y pago préstamo propio | Real | ⚠️ montos sin confirmar |
 | Agrícola 07-Oct: pago préstamo propio | Real | ❌ **RECHAZADO** |
-| NIU: ViX $6.20, Emerson $7, consumo $11.59 | Real | −$24.79 |
+| NIU: Emerson $7, consumo $11.59 | Real | −$18.59 |
 | AMEX: ANDA $2.62 (10-Oct) | Real | −$2.62 |
 | Claro, préstamo Cuscatlán, DEL SUR (desde NIU) | Real | ✅ pagados según usuario 26-Oct (Claro ~$20, préstamo $82.98, DEL SUR ~$77.56) |
 
@@ -253,6 +252,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 26-Oct-2026 | **rev28**: Usuario aclara que ViX se pagó UNA sola vez (25-Oct, AMEX): se elimina del CSV el cargo ViX 03-Oct en NIU. Usuario confirma octubre todo pagado y BAC/Max Electrónico/demás cuentas en $0 hasta el salario del jueves 29-Oct. BAC pasa de ~$857.39 (estimado) a $0.00 real: ~$857 de salidas no rastreadas (pagos Agrícola/AMEX sin monto, probable). |
 | 26-Oct-2026 | **rev27**: Usuario confirma «todo ya está pagado»: cuota préstamo Cuscatlán 17-Oct (3/48), DEL SUR Oct, Claro Oct (agregados al CSV; montos/fechas de DEL SUR y Claro estimados) y los pagos vencidos de préstamo Agrícola, VISA Agrícola y AMEX (sin montos; solo memoria). |
 | 26-Oct-2026 | **rev26**: Usuario confirma que los salarios siempre llegan (28-Sep y 13-Oct, $566.92 c/u, agregados al CSV) y que NIU tiene $6.12 reales. BAC pasa a ~$857.39 (estimado). Con NIU en $6.12 es probable que no se debitaran cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct ni Claro; pendiente confirmar. |
 | 26-Oct-2026 | **rev25**: 5 FINDATA-REPORT (22→26-Oct): +15 filas en movimientos.csv (21→25-Oct), BAC −$70.00 neto, NIU +$2.02 neto. BAC ~$290.47 (solo salario 28-Sep inferido) / ~$857.39 (ambos). ViX Premium $6.20 cobrado 2 veces en octubre (NIU 03-Oct, AMEX 25-Oct; hubo un intento rechazado). Crunchyroll 24-Oct confirma cobro mensual en Visa 3194. Sin respuestas del usuario a las preguntas de rev24; siguen pendientes los saldos reales y los salarios. |
@@ -278,7 +278,7 @@
 
 | Fecha | Cuenta | Descripción | Monto |
 |-------|--------|-------------|-------|
-| 25-Oct | AMEX | ViX Premium (Google Play) | −$6.20 |
+| 25-Oct | AMEX | ViX Premium (Google Play) — único cobro de octubre | −$6.20 |
 | 25-Oct | NIU | Consumo débito (merchant pendiente) | −$8.00 |
 | 25-Oct | NIU | Transfer365 desde BAC | +$9.69 |
 | 24-Oct | Visa ****3194 | Crunchyroll Mega Fan | −$4.99 |
