@@ -535,7 +535,7 @@
       "saldo": 6.12,
       "saldo_fecha": "2026-10-26",
       "fecha_registro": "2026-07-07",
-      "notas": "✅ Saldo real $6.12 confirmado usuario 26-Oct. Con ese saldo es probable que no se hayan debitado cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct ni Claro; pendiente confirmar. Fondear desde BAC.",
+      "notas": "✅ Saldo real $6.12 confirmado usuario 26-Oct. Cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct y Claro Oct pagados según usuario (26-Oct). Fondear desde BAC para el próximo ciclo.",
       "movimientos": [
         {"fecha": "2026-06-28", "descripcion": "Top-up desde Agrícola", "monto": 28.44, "tipo": "ingreso"},
         {"fecha": "2026-06-28", "descripcion": "Cajero efectivo", "monto": 25.00, "tipo": "egreso"},

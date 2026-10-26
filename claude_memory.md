@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 26-Oct-2026 (rev26 — Salarios 28-Sep y 13-Oct ✅confirmados usuario. NIU saldo REAL $6.12 ✅usuario 26-Oct. BAC ~$857.39 (estimado). Max Electrónico desconocido. Pendientes: cuota préstamo Cusca 17-Oct, DEL SUR/Claro Oct, préstamo Agrícola rechazado.)
+# CLAUDE MEMORY — Última actualización: 26-Oct-2026 (rev27 — Usuario confirma «todo ya está pagado»: cuota préstamo Cusca 17-Oct, DEL SUR y Claro Oct, y pagos vencidos Agrícola/AMEX. NIU real $6.12 ✅. BAC ~$857.39 (estimado). Montos/fechas de Agrícola y AMEX sin detalle. Falta saldo Max Electrónico.)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -13,7 +13,7 @@
 | Saldo real ≠ proyectado | Solo actualizar saldo real con confirmación de app / Gmail / usuario explícito |
 | Fuente de verdad | Claude Chat (correcciones del usuario) > Gmail confirmado > Proyección |
 | Préstamo Agrícola | Vence **día 7** de cada mes (NO día 15) |
-| Préstamo Cuscatlán | Corte **día 23** (genera cuota) — Pago vence **día 17** — desde NIU ••3997 — **$82.98/mes** — 1 cuota pagada (antes 17-Ago) |
+| Préstamo Cuscatlán | Corte **día 23** (genera cuota) — Pago vence **día 17** — desde NIU ••3997 — **$82.98/mes** — 3 cuotas pagadas (Ago, Sep y Oct ✅usuario) |
 | VISA Cuscatlán ****2789 | Pago tarjeta TAMBIÉN $82.98 — mismo banco, mismas fechas (corte 23, pago 17) — **producto distinto al préstamo**. No confundir. |
 | Salario | Llega días 13 y 28/30 del mes (quincenas BAC Nómina) |
 | BAC depósitos | BAC **no envía alertas de correo** para depósitos/salario — verificar en app |
@@ -43,7 +43,7 @@
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
 | BAC ****6201 | **~$857.39** | 814.43 (24-Sep) − 1,090.88 (movimientos 24-Sep→25-Oct) + 1,133.84 (salarios 28-Sep y 13-Oct confirmados usuario). | 26-Oct-2026 |
-| NIU ••3997 | **$6.12 real** ✅ | Saldo real confirmado usuario 26-Oct. Con $6.12 es probable que NO se hayan debitado cuota préstamo Cusca 17-Oct, DEL SUR Oct ni Claro: confirmar. | 26-Oct-2026 |
+| NIU ••3997 | **$6.12 real** ✅ | Saldo real confirmado usuario 26-Oct. Cuota préstamo Cusca 17-Oct, DEL SUR y Claro de octubre ✅ pagados según usuario. | 26-Oct-2026 |
 | Max Electrónico (Agrícola) | **DESCONOCIDO** | Flujo registrado +$273.86 neto, pero hay ≥6 operaciones Agrícola sin monto (ver Pendientes). Último saldo confirmado: $0 (11-Jul). | — |
 
 > ⚠️ **4 SEMANAS SIN ACTUALIZAR (24-Sep → 21-Oct)**
@@ -51,8 +51,8 @@
 > **saldo BAC, saldo NIU y saldo Max Electrónico en app**, y confirmar si llegaron los salarios 28-Sep y ~13-Oct.
 >
 > ✅ **VISA Cuscatlán** pago $82.98 el 14-Oct (Ref 1098284519) — corte Sep-23 cubierto.
-> ⚠️ **Préstamo Agrícola** — pago del 07-Oct **RECHAZADO** (notificación Agrícola 07-Oct 06:00). El 01-Oct hubo un "pago de préstamo propio" y un "pago de tarjeta de crédito propia" sin monto en el correo (vía Max Electrónico tras recibir $386.86 de BAC).
-> ❓ **No detectados en correos** (se cargan desde NIU, sin alerta): cuota préstamo Cuscatlán 17-Oct, DEL SUR octubre (~19-Oct), Claro pospago (~7-Oct). Confirmar con el usuario.
+> ✅ **Todo pagado según usuario (26-Oct)**: incluye el préstamo Agrícola (tras el rechazo del 07-Oct; el 01-Oct hubo pagos de préstamo y tarjeta propios sin monto en el correo), VISA Agrícola y AMEX. Sin montos/fechas exactos; verificar en apps cuando se pueda.
+> ✅ **Cargos desde NIU sin alerta de correo, pagados según usuario**: cuota préstamo Cuscatlán 17-Oct ($82.98), DEL SUR Oct (~$77.56 estimado), Claro (~$20).
 > ❓ Tarjetas **Visa ****3194** (Crunchyroll $4.99) y **crédito Agrícola ****3819** (farmacias $17.16) no figuran en los datos: pendiente identificar.
 
 ---
@@ -61,10 +61,10 @@
 
 | Deuda | Saldo | Cuota | Próx. vencimiento | Estado |
 |-------|-------|-------|-------------------|--------|
-| Préstamo consumo Agrícola #2132201069 | **$6,153.94** (último confirmado app 19-Ago) | $147.11/mes | **07-Nov-2026** | ⚠️ Pago 07-Oct **RECHAZADO**. 01-Oct hubo "pago de préstamo propio" sin monto (probable cuota Sep atrasada, **no confirmado**). Verificar saldo/mora en app Agrícola. |
-| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | ~$2,420 | **$82.98/mes** | **17-Oct (¿pagada?) / 17-Nov** | Corte día 23, pago día 17. **2 cuotas pagadas** (Ago17 + Sep17 ✅usuario 24-Sep). Cuota 17-Oct: **sin alerta, confirmar**. |
-| AMEX BAC ****3328 | $15.61 (corte Ago18) + cargos ciclos Sep/Oct | mín TBD | ⚠️ **VENCIDO 10-Sep / 10-Oct** | Sin confirmar pagos. Cargos recientes: Accidentes $8.95 (25-Sep), ANDA $2.62 (10-Oct). |
-| VISA Agrícola ****6114 (VISA Gold) | $1,133.25 (19-Ago) | mín **$81.86** / contado $264.75 | ⚠️ **VENCIDO 03-Sep / 03-Oct** | 01-Oct "pago de tarjeta de crédito propia" sin monto (¿esta tarjeta?). **No confirmado.** Corte día 9. Tasa 35.90%. |
+| Préstamo consumo Agrícola #2132201069 | **$6,153.94** (último confirmado app 19-Ago; sin actualizar) | $147.11/mes | **07-Nov-2026** | ✅ Al día según usuario 26-Oct (pago del 07-Oct fue rechazado; luego regularizado, sin monto/fecha). Verificar saldo en app. |
+| Préstamo Cuscatlán $2,490 / 22.99% / 48 meses | ~$2,340 | **$82.98/mes** | **17-Nov-2026** | Corte día 23, pago día 17. **3 cuotas pagadas** (Ago, Sep ✅usuario 24-Sep, Oct ✅usuario 26-Oct). Próxima cuota 17-Nov. |
+| AMEX BAC ****3328 | $15.61 (corte Ago18) + cargos ciclos Sep/Oct | mín TBD | **10-Nov** | ✅ Pagos al día según usuario 26-Oct (sin monto). Cargos recientes: Accidentes $8.95, ANDA $2.62, ViX $6.20. |
+| VISA Agrícola ****6114 (VISA Gold) | $1,133.25 (19-Ago; sin actualizar) | mín **$81.86** / contado $264.75 | **03-Nov** | ✅ Al día según usuario 26-Oct (sin monto). Corte día 9. Tasa 35.90%. |
 | VISA Cuscatlán ****2789 | **$0.00** | — | Corte **23-Oct** | ✅ Pagada 14-Oct $82.98 (Ref 1098284519). United Platinum Visa MileagePlus. Límite $703.78. |
 | Laptop AMEX cuota 06/12 | — | $15.42/mes | cargo automático AMEX ciclo Sep18 | Próximo cobro con corte Sep18. |
 | Laptop Agrícola cuota 01/12 | $945.00 | $78.75/mes | VISA Agrícola ****6114 — corte Sep-9 | Primera cuota Sep-2026. Tasa 0% / 12 meses. Incluida en saldo VISA Agr. |
@@ -77,10 +77,10 @@
 |-------|--------|-------|------------|
 | Claude Pro (Anthropic) | NIU ••3997 / Cuscatlán ****3997 | $20.00 | Mensual — ✅ 14-Sep (recibo #2809-1052-9366) — 14-Oct $20 a las 21:28 (probable, sin recibo verificado) — próximo ~14-Nov |
 | ANDA (agua) | AMEX ****3328 | ~$2.62–2.83 | Mensual (~día 10) — 10-Oct $2.62 — ⚠️ PENDIENTE migrar a NIU |
-| DEL SUR (energía) | NIU ••3997 | ~$77.56 | Mensual (~día 19) — Sep ✅ pagado (usuario) — Oct: **no detectado, confirmar** |
+| DEL SUR (energía) | NIU ••3997 | ~$77.56 | Mensual (~día 19) — Sep ✅, Oct ✅ pagados (usuario 26-Oct; monto estimado) |
 | UTEC (mensualidad) | Max Electrónico (Agrícola) | $81.00 | Mensual — 01-Oct y 19-Oct ambos $81 (¿dos meses? confirmar) |
 | Google Cloud | BAC ****6201 | $9.60 | Mensual — **PENDIENTE CANCELAR** |
-| Claro pospago | NIU ••3997 | $20.00 | Mensual — cobrado Ago7, Sep pendiente (~7-Oct próximo) |
+| Claro pospago | NIU ••3997 | $20.00 | Mensual (~día 7) — Oct ✅ pagado (usuario 26-Oct) |
 | Laptop cuota (AMEX) | AMEX ****3328 | $15.42 | Mensual (cuota 06/12, ciclo AMEX Sep18) |
 | Laptop MR LAPTOPS (Agrícola) | VISA Agrícola ****6114 | $78.75 | Mensual (cuota 1/12, corte Sep-9-2026) — tasa 0% |
 | MANGA Plus by SHUEISHA | NIU ••3997 (Visa débito 3997) | $0.99 | Mensual — Google Play — 23-Sep |
@@ -96,12 +96,9 @@
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
 | 🔴 | **Anclar saldos reales**: BAC y Max Electrónico (NIU ✅ $6.12) | **YA** | Faltan saldo real de BAC y de Max Electrónico en app. |
-| 🔴 | **Préstamo Agrícola**: pago 07-Oct RECHAZADO | Vencido | Verificar en app si quedó en mora y el estado de las cuotas Sep/Oct. El 01-Oct hubo "pago de préstamo propio" sin monto. |
-| 🔴 | Confirmar si se debitaron desde NIU: **cuota préstamo Cuscatlán 17-Oct ($82.98)**, **DEL SUR Oct (~$77)**, **Claro Oct ($20)** | Vencidos | Sin alertas en correo. Si NIU no tenía fondos, no se pagaron. |
 | 🟡 | Operaciones Agrícola **sin monto** en el correo | Pendiente | 26-Sep transferencia a terceros; 30-Sep transferencia cuentas propias + pago QR; 01-Oct pago TC propia + pago préstamo propio; 19-Oct transferencia cuentas propias. Montos en comprobante PDF adjunto o app. |
 | 🟡 | Identificar tarjetas **Visa ****3194** (Crunchyroll $4.99, cobra mensual) y **crédito Agrícola ****3819** (FV20 $5.63 + N1CO farmacia $11.53) | Pendiente | No aparecen en settings.json. ¿Tarjeta nueva/reemplazo de ****6114? |
 | 🟡 | ViX Premium $6.20 cobrado 2 veces en octubre (03-Oct NIU, 25-Oct AMEX) | Pendiente | ¿Intento rechazado en NIU y reintento en AMEX, o doble suscripción? Revisar en Google Play. |
-| 🟡 | Confirmar pagos vencidos: VISA Agrícola (mín $81.86, 03-Sep/03-Oct), AMEX (10-Sep/10-Oct) | Vencidos | AMEX tiene cargos nuevos: Accidentes $8.95, ANDA $2.62. |
 | 🟡 | UTEC $81 pagado 01-Oct **y** 19-Oct | Pendiente | ¿Dos mensualidades (Sep atrasada + Oct)? Confirmar. |
 | 🟡 | HONDA SANTA TECLA $64.18 (01-Oct, BAC) y SERTRACEN refrenda $28.85 (17-Oct) | Pendiente | Confirmar concepto de Honda (cuota extrafinanciamiento / mantenimiento). |
 | 🟡 | Claude Pro 14-Oct $20 | Pendiente | Registrado como probable (mismo monto y hora 21:28). Falta recibo Anthropic. |
@@ -227,7 +224,7 @@
 | Agrícola 07-Oct: pago préstamo propio | Real | ❌ **RECHAZADO** |
 | NIU: ViX $6.20, Emerson $7, consumo $11.59 | Real | −$24.79 |
 | AMEX: ANDA $2.62 (10-Oct) | Real | −$2.62 |
-| Claro, préstamo Cuscatlán, DEL SUR (desde NIU) | Real | ❓ no detectados |
+| Claro, préstamo Cuscatlán, DEL SUR (desde NIU) | Real | ✅ pagados según usuario 26-Oct (Claro ~$20, préstamo $82.98, DEL SUR ~$77.56) |
 
 ---
 
@@ -246,9 +243,9 @@
 | BAC→NIU (22-Oct $5.31, 25-Oct $9.69) | Real | −$15.00 |
 | NIU 22→25-Oct: consumos $0.99 + $8.00, recarga Telefónica $3.00, MANGA Plus $0.99 | Real | −$12.98 |
 | AMEX: ViX Premium $6.20 (25-Oct) · Visa 3194: Crunchyroll $4.99 (24-Oct) | Real | −$11.19 |
-| Cuota préstamo Cuscatlán 17-Oct / DEL SUR Oct | Real | ❓ no detectados |
+| Cuota préstamo Cuscatlán 17-Oct $82.98 / DEL SUR Oct ~$77.56 / Claro ~$20 | Real | ✅ pagados según usuario 26-Oct |
 
-> ⚠️ Prioridad: NIU solo $6.12 con cuota préstamo Cusca, DEL SUR y Claro de octubre sin confirmar; fondear NIU desde BAC (~$857 estimado). Préstamo Agrícola con pago rechazado.
+> Prioridad: NIU con $6.12 reales tras pagar cargos de octubre; fondear desde BAC antes del próximo ciclo (Claude Pro 14-Nov, cuota Cusca 17-Nov).
 
 ---
 
@@ -256,6 +253,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 26-Oct-2026 | **rev27**: Usuario confirma «todo ya está pagado»: cuota préstamo Cuscatlán 17-Oct (3/48), DEL SUR Oct, Claro Oct (agregados al CSV; montos/fechas de DEL SUR y Claro estimados) y los pagos vencidos de préstamo Agrícola, VISA Agrícola y AMEX (sin montos; solo memoria). |
 | 26-Oct-2026 | **rev26**: Usuario confirma que los salarios siempre llegan (28-Sep y 13-Oct, $566.92 c/u, agregados al CSV) y que NIU tiene $6.12 reales. BAC pasa a ~$857.39 (estimado). Con NIU en $6.12 es probable que no se debitaran cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct ni Claro; pendiente confirmar. |
 | 26-Oct-2026 | **rev25**: 5 FINDATA-REPORT (22→26-Oct): +15 filas en movimientos.csv (21→25-Oct), BAC −$70.00 neto, NIU +$2.02 neto. BAC ~$290.47 (solo salario 28-Sep inferido) / ~$857.39 (ambos). ViX Premium $6.20 cobrado 2 veces en octubre (NIU 03-Oct, AMEX 25-Oct; hubo un intento rechazado). Crunchyroll 24-Oct confirma cobro mensual en Visa 3194. Sin respuestas del usuario a las preguntas de rev24; siguen pendientes los saldos reales y los salarios. |
 | 21-Oct-2026 | **rev24**: 4 semanas sin actualizar. 26 FINDATA-REPORT (25-Sep→20-Oct) procesados: 87 filas nuevas en movimientos.csv (24-Sep→19-Oct). VISA Cuscatlán $82.98 ✅ pagada 14-Oct. Préstamo Agrícola: pago 07-Oct RECHAZADO. Nuevas subs Google Play: ViX $6.20, Crunchyroll $4.99 (Visa ****3194, sin identificar), MANGA Plus. Tarjeta crédito Agrícola ****3819 sin identificar. Salarios 28-Sep y ~13-Oct NO confirmados (BAC sin alerta de depósito). BAC ~$360.47 (solo salario 28-Sep inferido) / ~$927.39 (ambos). NIU y Max Electrónico: saldo desconocido. Corrección: MANGA Plus se cobra con Visa débito ****3997 (NIU), no con la VISA Cuscatlán de crédito. Claude Pro 14-Oct $20 registrado como probable. |

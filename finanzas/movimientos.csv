@@ -328,3 +328,6 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-10-25,AMEX ****3328,Suscripciones,"ViX Premium (Univision) vía Google Play, Amex-3328",Gasto,-6.20,Sí,FINDATA-REPORT 26-Oct. Alerta Google Play 25-Oct 13:38. Segundo cargo ViX de octubre (el 03-Oct se cobró en NIU); el reporte 25-Oct menciona un intento ViX rechazado.
 2026-09-28,BAC,Salario,Salario quincenal Q2 septiembre,Ingreso,566.92,Sí,✅ Confirmado usuario 26-Oct ('siempre llegan los salarios'). Monto habitual; no hay alerta BAC.
 2026-10-13,BAC,Salario,Salario quincenal Q1 octubre,Ingreso,566.92,Sí,✅ Confirmado usuario 26-Oct ('siempre llegan los salarios'). Monto habitual; no hay alerta BAC.
+2026-10-07,NIU ••3997,Servicios - Telefonía,Claro pospago (octubre),Gasto,-20.00,Sí,"✅ Pagado según usuario 26-Oct ('todo ya está pagado'). Fecha y monto aproximados (habitual $20, ~día 7); sin alerta de correo."
+2026-10-17,NIU ••3997,Deuda - Préstamo Cuscatlán,Cuota préstamo Cuscatlán (3/48) auto-débito,Gasto,-82.98,Sí,✅ Pagado según usuario 26-Oct ('todo ya está pagado'). Fecha de vencimiento 17-Oct; sin alerta de correo.
+2026-10-19,NIU ••3997,Servicios - Energía,DEL SUR cargo automático octubre,Gasto,-77.56,Sí,✅ Pagado según usuario 26-Oct ('todo ya está pagado'). Fecha (~19-Oct) y monto estimados igual que Sep/Ago; sin alerta de correo.
