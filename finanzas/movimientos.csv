@@ -326,3 +326,5 @@ Fecha,Cuenta,Categoría,Descripción,Tipo,Monto,Recurrente,Notas,Tipo_Contable
 2026-10-25,BAC,Transferencia,Transfer365 BAC→NIU ••3997 (fondeo),Gasto,-9.69,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:16.
 2026-10-25,NIU ••3997,Transferencia,Transfer365 desde BAC ****6201 (fondeo),Ingreso,9.69,No,FINDATA-REPORT 26-Oct. Alerta Cuscatlán 25-Oct 16:16.
 2026-10-25,AMEX ****3328,Suscripciones,"ViX Premium (Univision) vía Google Play, Amex-3328",Gasto,-6.20,Sí,FINDATA-REPORT 26-Oct. Alerta Google Play 25-Oct 13:38. Segundo cargo ViX de octubre (el 03-Oct se cobró en NIU); el reporte 25-Oct menciona un intento ViX rechazado.
+2026-09-28,BAC,Salario,Salario quincenal Q2 septiembre,Ingreso,566.92,Sí,✅ Confirmado usuario 26-Oct ('siempre llegan los salarios'). Monto habitual; no hay alerta BAC.
+2026-10-13,BAC,Salario,Salario quincenal Q1 octubre,Ingreso,566.92,Sí,✅ Confirmado usuario 26-Oct ('siempre llegan los salarios'). Monto habitual; no hay alerta BAC.

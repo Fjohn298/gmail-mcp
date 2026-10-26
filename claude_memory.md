@@ -1,4 +1,4 @@
-# CLAUDE MEMORY — Última actualización: 26-Oct-2026 (rev25 — +15 filas 21→25-Oct vía FINDATA-REPORT. BAC ~$290.47 (solo salario 28-Sep inferido) o ~$857.39 (si llegó también el del 13-Oct) — SALARIOS NO CONFIRMADOS. NIU y Max Electrónico: saldo desconocido. ViX Premium cobrado 2 veces en octubre (NIU 03-Oct y AMEX 25-Oct). Sin respuestas del usuario desde rev24.)
+# CLAUDE MEMORY — Última actualización: 26-Oct-2026 (rev26 — Salarios 28-Sep y 13-Oct ✅confirmados usuario. NIU saldo REAL $6.12 ✅usuario 26-Oct. BAC ~$857.39 (estimado). Max Electrónico desconocido. Pendientes: cuota préstamo Cusca 17-Oct, DEL SUR/Claro Oct, préstamo Agrícola rechazado.)
 
 > Este archivo es la **fuente de verdad** para el estado financiero.
 > Leer al inicio de cada sesión antes de generar cualquier recomendación o resumen.
@@ -27,8 +27,8 @@
 
 | Cuenta | Saldo | Fuente | Fecha confirmación |
 |--------|-------|--------|--------------------|
-| BAC ****6201 (130961386) | **~$290.47** (estimado) | Último ancla estimado ~$814.43 (24-Sep). Movimientos 24-Sep→25-Oct = −$1,090.88 (incluye T365 a NIU/Max Electrónico). Con salario 28-Sep ($566.92, **inferido, no confirmado**) = ~$290.47. Si el salario del 13-Oct también llegó: ~$857.39. | ~26-Oct-2026 |
-| NIU ••3997 | **DESCONOCIDO** ⚠️ | Cadena de estimaciones inservible (da ~−$79 pero los consumos siguen pasando). Hay auto-débitos no vistos (préstamo 17-Oct, DEL SUR Oct, Claro). **Verificar saldo real en app Cuscatlán.** | — |
+| BAC ****6201 (130961386) | **~$857.39** (estimado) | Ancla estimada ~$814.43 (24-Sep) − $1,090.88 (movimientos 24-Sep→25-Oct) + $1,133.84 (salarios 28-Sep y 13-Oct, ✅usuario). Sin confirmar en app. | ~26-Oct-2026 |
+| NIU ••3997 | **$6.12** ✅ | ✅ Confirmado usuario 26-Oct-2026 (app Cuscatlán). Nueva ancla: a partir de aquí se estima. | 26-Oct-2026 |
 | AMEX ****3328 | **$15.61** (corte Ago18) | ✅ App BAC 19-Ago. Pago venció **10-Sep** — ⚠️ 4 días vencido, pendiente confirmar si se pagó. | 19-Ago-2026 |
 | VISA Agrícola ****6114 | $1,133.25 total | ✅ App Agrícola 19-Ago. Pago mín $81.86 venció **03-Sep** — ⚠️ 11 días vencido, pendiente confirmar. | 19-Ago-2026 |
 | VISA Cuscatlán ****2789 | **$0.00** (ciclo Sep-23 pagado) | ✅ PAGADA 14-Oct — $82.98 desde NIU X5261 (Ref 1098284519). Corte Sep-23 cubierto. Próx. corte 23-Oct, pago vence 17-Nov. | 14-Oct-2026 |
@@ -42,8 +42,8 @@
 
 | Cuenta | Saldo estimado | Cálculo | Fecha estimación |
 |--------|---------------|---------|-----------------|
-| BAC ****6201 | **~$290.47** (rango hasta ~$857.39) | 814.43 (24-Sep) − 1,090.88 (movimientos 24-Sep→25-Oct) + 566.92 (salario 28-Sep inferido). Sin salario 28-Sep el saldo habría quedado negativo, por eso se asume. Salario ~13-Oct: **sin evidencia directa**. | 26-Oct-2026 |
-| NIU ••3997 | **DESCONOCIDO** ⚠️ | Flujo registrado 24-Sep→19-Oct: +$85.42 neto (fondeos BAC +$295.77 vs consumos/pagos −$210.35). Sin ancla confiable no se calcula saldo. | — |
+| BAC ****6201 | **~$857.39** | 814.43 (24-Sep) − 1,090.88 (movimientos 24-Sep→25-Oct) + 1,133.84 (salarios 28-Sep y 13-Oct confirmados usuario). | 26-Oct-2026 |
+| NIU ••3997 | **$6.12 real** ✅ | Saldo real confirmado usuario 26-Oct. Con $6.12 es probable que NO se hayan debitado cuota préstamo Cusca 17-Oct, DEL SUR Oct ni Claro: confirmar. | 26-Oct-2026 |
 | Max Electrónico (Agrícola) | **DESCONOCIDO** | Flujo registrado +$273.86 neto, pero hay ≥6 operaciones Agrícola sin monto (ver Pendientes). Último saldo confirmado: $0 (11-Jul). | — |
 
 > ⚠️ **4 SEMANAS SIN ACTUALIZAR (24-Sep → 21-Oct)**
@@ -95,8 +95,7 @@
 
 | Prioridad | Tarea | Fecha límite | Notas |
 |-----------|-------|-------------|-------|
-| 🔴 | **Anclar saldos reales en apps**: BAC, NIU (Cuscatlán), Max Electrónico (Agrícola) | **YA** | 4 semanas de movimientos acumulados sin ancla. Sin esto no hay saldos confiables. |
-| 🔴 | **Confirmar salarios**: Q2 Sep (~28-Sep) y Q1 Oct (~13-Oct), $566.92 c/u | **YA** | BAC no envía alerta de depósito. El del 28-Sep se infiere (BAC habría quedado negativo sin él); el del 13-Oct no tiene evidencia. |
+| 🔴 | **Anclar saldos reales**: BAC y Max Electrónico (NIU ✅ $6.12) | **YA** | Faltan saldo real de BAC y de Max Electrónico en app. |
 | 🔴 | **Préstamo Agrícola**: pago 07-Oct RECHAZADO | Vencido | Verificar en app si quedó en mora y el estado de las cuotas Sep/Oct. El 01-Oct hubo "pago de préstamo propio" sin monto. |
 | 🔴 | Confirmar si se debitaron desde NIU: **cuota préstamo Cuscatlán 17-Oct ($82.98)**, **DEL SUR Oct (~$77)**, **Claro Oct ($20)** | Vencidos | Sin alertas en correo. Si NIU no tenía fondos, no se pagaron. |
 | 🟡 | Operaciones Agrícola **sin monto** en el correo | Pendiente | 26-Sep transferencia a terceros; 30-Sep transferencia cuentas propias + pago QR; 01-Oct pago TC propia + pago préstamo propio; 19-Oct transferencia cuentas propias. Montos en comprobante PDF adjunto o app. |
@@ -210,9 +209,9 @@
 | Claude Pro Sep | Real | −$20.00 | −$20.00 ✅ (14-Sep, recibo #2809-1052-9366) |
 | Railway | Real | — | −$5.00 ✅ (17-Sep, usuario) |
 | Cuota Préstamo Agrícola Sep / pago VISA Agr / pago AMEX | Real | — | ⚠️ sin confirmar (ver Pendientes) |
-| Salario Q2 Sep (28-Sep) | Real | +$566.92 | ⚠️ **no confirmado** (inferido) |
+| Salario Q2 Sep (28-Sep) | Real | +$566.92 ✅ (usuario 26-Oct) |
 
-> Q1 Sep cerrada con salario Q2 Sep pendiente de confirmación.
+> Q1 Sep cerrada.
 
 ---
 
@@ -236,7 +235,7 @@
 
 | Movimiento | Tipo | Real |
 |------------|------|:----:|
-| Salario Q1 Oct (~13-Oct) | Real | ⚠️ **no confirmado** (sin evidencia) |
+| Salario Q1 Oct (13-Oct) | Real | +$566.92 ✅ (usuario 26-Oct) |
 | BAC gasto directo 13→19-Oct (Uber ×5, Pueblo Viejo $24.18, Freakie Dogs $19.24, Selectos $16.85, refrenda $28.85, ATM $10) | Real | −$125.27 |
 | BAC→NIU (13-Oct $1.37, 14-Oct $29.18 + $160, 19-Oct $62.79 + $2) | Real | −$255.34 |
 | BAC→Max Electrónico (19-Oct $81 + $66.84) y Max→BAC $76.84 | Real | −$147.84 / +$76.84 |
@@ -249,7 +248,7 @@
 | AMEX: ViX Premium $6.20 (25-Oct) · Visa 3194: Crunchyroll $4.99 (24-Oct) | Real | −$11.19 |
 | Cuota préstamo Cuscatlán 17-Oct / DEL SUR Oct | Real | ❓ no detectados |
 
-> ⚠️ Prioridad: anclar saldos en apps y confirmar salarios (28-Sep, ~13-Oct). Préstamo Agrícola con pago rechazado.
+> ⚠️ Prioridad: NIU solo $6.12 con cuota préstamo Cusca, DEL SUR y Claro de octubre sin confirmar; fondear NIU desde BAC (~$857 estimado). Préstamo Agrícola con pago rechazado.
 
 ---
 
@@ -257,6 +256,7 @@
 
 | Fecha | Corrección |
 |-------|-----------|
+| 26-Oct-2026 | **rev26**: Usuario confirma que los salarios siempre llegan (28-Sep y 13-Oct, $566.92 c/u, agregados al CSV) y que NIU tiene $6.12 reales. BAC pasa a ~$857.39 (estimado). Con NIU en $6.12 es probable que no se debitaran cuota préstamo Cuscatlán 17-Oct, DEL SUR Oct ni Claro; pendiente confirmar. |
 | 26-Oct-2026 | **rev25**: 5 FINDATA-REPORT (22→26-Oct): +15 filas en movimientos.csv (21→25-Oct), BAC −$70.00 neto, NIU +$2.02 neto. BAC ~$290.47 (solo salario 28-Sep inferido) / ~$857.39 (ambos). ViX Premium $6.20 cobrado 2 veces en octubre (NIU 03-Oct, AMEX 25-Oct; hubo un intento rechazado). Crunchyroll 24-Oct confirma cobro mensual en Visa 3194. Sin respuestas del usuario a las preguntas de rev24; siguen pendientes los saldos reales y los salarios. |
 | 21-Oct-2026 | **rev24**: 4 semanas sin actualizar. 26 FINDATA-REPORT (25-Sep→20-Oct) procesados: 87 filas nuevas en movimientos.csv (24-Sep→19-Oct). VISA Cuscatlán $82.98 ✅ pagada 14-Oct. Préstamo Agrícola: pago 07-Oct RECHAZADO. Nuevas subs Google Play: ViX $6.20, Crunchyroll $4.99 (Visa ****3194, sin identificar), MANGA Plus. Tarjeta crédito Agrícola ****3819 sin identificar. Salarios 28-Sep y ~13-Oct NO confirmados (BAC sin alerta de depósito). BAC ~$360.47 (solo salario 28-Sep inferido) / ~$927.39 (ambos). NIU y Max Electrónico: saldo desconocido. Corrección: MANGA Plus se cobra con Visa débito ****3997 (NIU), no con la VISA Cuscatlán de crédito. Claude Pro 14-Oct $20 registrado como probable. |
 | 24-Sep-2026 | **rev23**: Cuota préstamo Cuscatlán 2/48 $82.98 ✅ PAGADA (confirmado usuario). DEL SUR Sep ~$77.56 ✅ PAGADO (confirmado usuario). NIU saldo acumulado no confiable (~−$162 teórico vs consumos activos) — verificar en app. |
