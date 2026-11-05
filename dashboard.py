@@ -819,7 +819,8 @@ def logs():
     files = sorted(os.listdir(log_dir), reverse=True)
     selected = request.args.get('f', files[0] if files else '')
     content = ''
-    if selected and os.path.exists(os.path.join(log_dir, selected)):
+    # Solo nombres listados en logs/: evita leer archivos fuera (?f=../token.json)
+    if selected in files:
         with open(os.path.join(log_dir, selected), 'r', encoding='utf-8') as f:
             content = f.read()
     return render_template_string(LOGS_HTML, files=files, content=content, current=selected)
