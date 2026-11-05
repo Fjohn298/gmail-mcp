@@ -22,6 +22,8 @@ finanzas/movimientos.csv   → historial CSV de transacciones
 finanzas/dashboard.py      → genera resumen + gráfico PNG
 claude_memory.md           → memoria de sesión (leer siempre al inicio)
 banco_de_ideas.md          → ideas pendientes de implementar
+gmailmcp/                  → código de la app (gmail, parsers, repositorios, servicios, web)
+tests/                     → tests (`uv run pytest`)
 ```
 
 ## Flujo de trabajo estándar
@@ -33,7 +35,11 @@ banco_de_ideas.md          → ideas pendientes de implementar
 5. Commit y push a `main`
 6. Generar prompt de resumen para Claude Chat
 
-## Rama de despliegue
+## Ramas y despliegue
 
-- `main` → Railway (app en producción)
-- Toda actualización de datos financieros va a `main` directamente
+- `main` → Railway PROD. `develop` → Railway DEV (dry-run: no modifica ni envía correos).
+- Toda actualización de **datos** financieros va a `main` directamente (`chore(data): ...`).
+- Todo cambio de **código** va en una rama `feat/*` o `fix/*` desde `develop`, con
+  `uv run ruff check . && uv run pytest` en verde, PR a `develop` y luego release a `main`.
+  Urgencias de producción: `hotfix/*` desde `main`. Detalle en `CONTRIBUTING.md`.
+- No cambiar la estructura de `config/settings.json` sin actualizar `gmailmcp/` y sus tests.
