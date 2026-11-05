@@ -1,7 +1,7 @@
 [project]
 name = "gmail-mcp"
 version = "0.1.0"
-description = "Add your description here"
+description = "Automatización de Gmail y finanzas personales: limpieza, etiquetado, extracción de movimientos y dashboard"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
@@ -14,3 +14,25 @@ dependencies = [
     "pdfplumber>=0.11.0",
     "tzdata>=2026.6",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["finanzas"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+
+[tool.ruff.lint.per-file-ignores]
+# HTML inline de los correos: partir esas líneas lo vuelve ilegible
+"gmailmcp/notifications/*_email.py" = ["E501"]
