@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🗓️ Estado de Deuda</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 13px; flex-shrink: 0; }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .container { padding: 14px; max-width: 720px; margin: 0 auto; }
+  .section { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px;
+             padding: 18px; margin-bottom: 12px; }
+  .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
+                letter-spacing: .06em; margin-bottom: 14px; }
+  /* Liquidez */
+  .liq-hero { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
+  .liq-saldo { font-size: 36px; font-weight: 700; color: #e2e8f0; }
+  .liq-banco { font-size: 12px; color: #64748b; }
+  .liq-proyectado { font-size: 13px; color: #94a3b8; margin-bottom: 14px; }
+  .liq-proyectado strong { color: #f59e0b; }
+  .mov-list { display: flex; flex-direction: column; gap: 4px; }
+  .mov-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+             background: #0f1117; border-radius: 8px; font-size: 12px; }
+  .mov-date { color: #64748b; min-width: 80px; flex-shrink: 0; }
+  .mov-desc { flex: 1; color: #e2e8f0; }
+  .mov-monto { font-weight: 700; min-width: 80px; text-align: right; flex-shrink: 0; }
+  .mov-monto.ingreso { color: #22c55e; }
+  .mov-monto.egreso { color: #ef4444; }
+  /* Calendario de tarjetas */
+  .cal-grid { display: grid; gap: 10px; margin-bottom: 12px; }
+  @media(min-width:500px){ .cal-grid { grid-template-columns: repeat(2,1fr); } }
+  .cal-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px;
+              position: relative; }
+  .cal-card.best { border-color: #22c55e; box-shadow: 0 0 0 1px rgba(34,197,94,.3); }
+  .cal-card.has-balance { border-color: #ef444466; }
+  .cal-best-badge { position: absolute; top: 10px; right: 10px; background: #22c55e;
+                    color: #0f1117; font-size: 10px; font-weight: 700; padding: 2px 7px;
+                    border-radius: 99px; text-transform: uppercase; letter-spacing: .04em; }
+  .cal-name { font-size: 12px; font-weight: 700; margin-bottom: 2px; }
+  .cal-last4 { font-size: 11px; color: #64748b; }
+  .cal-balance { font-size: 18px; font-weight: 700; margin: 6px 0 8px; }
+  .cal-dates { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
+  .cal-date-box { background: #1a1d27; border-radius: 7px; padding: 8px 10px; }
+  .cal-date-lbl { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 3px; }
+  .cal-date-val { font-size: 13px; font-weight: 700; }
+  .cal-days { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .cal-grace-bar { height: 4px; background: #2a2d3e; border-radius: 99px; margin: 8px 0 4px; overflow: hidden; }
+  .cal-grace-fill { height: 100%; border-radius: 99px; }
+  .cal-warning { font-size: 11px; padding: 6px 8px; border-radius: 6px;
+                 background: rgba(239,68,68,.12); color: #fca5a5; margin-top: 6px; }
+  .cal-tip { font-size: 11px; padding: 6px 8px; border-radius: 6px;
+             background: rgba(34,197,94,.1); color: #86efac; margin-top: 6px; }
+  /* Tarjetas de crédito */
+  .tc-grid { display: grid; gap: 10px; margin-bottom: 12px; }
+  @media(min-width:500px){ .tc-grid { grid-template-columns: repeat(2,1fr); } }
+  .tc-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
+  .tc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+  .tc-name { font-size: 12px; font-weight: 700; }
+  .tc-last4 { font-size: 11px; color: #64748b; }
+  .tc-balance { font-size: 26px; font-weight: 700; margin: 4px 0 6px; }
+  .tc-meta { font-size: 11px; color: #64748b; margin-bottom: 8px; }
+  .tc-payoff { font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 6px;
+               background: rgba(255,255,255,.04); display: inline-block; }
+  /* Intrafinanciamientos */
+  .fi-grid { display: grid; gap: 10px; }
+  @media(min-width:540px){ .fi-grid { grid-template-columns: repeat(3,1fr); } }
+  .fi-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
+  .fi-card.urgent { border-color: #ef4444; }
+  .fi-ref { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing: .06em; }
+  .fi-desc { font-size: 12px; color: #a5b4fc; font-weight: 600; margin: 4px 0 8px; }
+  .fi-cuota { font-size: 18px; font-weight: 700; color: #e2e8f0; }
+  .fi-cuota span { font-size: 11px; color: #64748b; font-weight: 400; }
+  .fi-progress { height: 6px; background: #2a2d3e; border-radius: 99px; margin: 10px 0 4px; overflow: hidden; }
+  .fi-progress-bar { height: 100%; border-radius: 99px; background: #0ea5e9; }
+  .fi-progress-bar.near { background: #ef4444; }
+  .fi-meta { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; margin-top: 6px; }
+  .fi-saldo { font-size: 12px; color: #94a3b8; margin-top: 6px; }
+  .fi-saldo strong { color: #e2e8f0; }
+  .fi-total { margin-top: 12px; padding: 10px 12px; background: #1a1d27; border: 1px solid #2a2d3e;
+              border-radius: 8px; display: flex; justify-content: space-between; align-items: center; }
+  .fi-total .fi-total-label { font-size: 12px; color: #64748b; }
+  .fi-total .fi-total-val { font-size: 15px; font-weight: 700; color: #0ea5e9; }
+  /* Préstamos */
+  .prestamo-row { display: flex; justify-content: space-between; align-items: center;
+                  padding: 10px 0; border-bottom: 1px solid #1e2130; }
+  .prestamo-row:last-child { border-bottom: none; }
+  .prestamo-name { font-size: 13px; color: #e2e8f0; font-weight: 600; }
+  .prestamo-meta { font-size: 11px; color: #64748b; margin-top: 2px; }
+  .prestamo-cuota { text-align: right; }
+  .prestamo-cuota .amount { font-size: 16px; font-weight: 700; color: #f59e0b; }
+  .prestamo-cuota .per { font-size: 10px; color: #64748b; }
+  /* Fondo */
+  .fondo-card { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+                border-radius: 10px; padding: 14px; display: flex; justify-content: space-between;
+                align-items: center; }
+  .fondo-balance { font-size: 24px; font-weight: 700; color: #22c55e; }
+  .fondo-label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+  .fondo-meta { font-size: 12px; color: #86efac; margin-top: 4px; }
+  .fondo-right { text-align: right; }
+  .fondo-tasa { font-size: 20px; font-weight: 700; color: #22c55e; }
+  .fondo-intocable { display: inline-block; background: rgba(34,197,94,.15); color: #86efac;
+                     font-size: 10px; padding: 2px 7px; border-radius: 99px; margin-top: 6px; }
+  /* Totales */
+  .tot-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .tot-table td { padding: 8px 4px; border-bottom: 1px solid #1e2130; }
+  .tot-table tr:last-child td { border-bottom: none; font-weight: 700; font-size: 15px; padding-top: 12px; }
+  .tot-table .tot-val { text-align: right; font-weight: 600; color: #ef4444; }
+  .tot-table tr:last-child .tot-val { color: #f59e0b; font-size: 17px; }
+  .tot-section-title { font-size: 11px; color: #64748b; text-transform: uppercase;
+                       letter-spacing: .05em; margin: 14px 0 6px; }
+  .toast { position: fixed; bottom: 20px; right: 20px; background: #22c55e; color: white;
+           padding: 12px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+           display: none; z-index: 999; box-shadow: 0 4px 12px rgba(0,0,0,.4); }
+  .toast.error { background: #ef4444; }
+  .loading-msg { color: #64748b; font-size: 12px; padding: 8px 0; }
+  /* Flujo mensual */
+  .flujo-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin: 10px 0; }
+  @media(min-width:480px){ .flujo-grid { grid-template-columns: repeat(4,1fr); } }
+  .flujo-item { background: #0f1117; border-radius: 8px; padding: 10px 12px; }
+  .flujo-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing:.04em; }
+  .flujo-val { font-size: 15px; font-weight: 700; margin-top: 3px; }
+  /* Calendario de pagos */
+  .cal-pago-list { display: flex; flex-direction: column; gap: 6px; }
+  .cal-pago-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+                  background: #0f1117; border-radius: 8px; border-left: 3px solid #2a2d3e;
+                  transition: opacity .2s; }
+  .cal-pago-row.passed { opacity: .45; }
+  .cal-pago-row.done { opacity: .4; }
+  .cal-pago-row.done .cal-pago-desc { text-decoration: line-through; color: #64748b; }
+  .cal-pago-row.done .cal-pago-monto { text-decoration: line-through; color: #64748b !important; }
+  .cal-pago-row.today { border-left-color: #f59e0b; }
+  .cal-pago-row.soon { border-left-color: #ef4444; }
+  .cal-pago-row.ahorro { border-left-color: #22c55e; }
+  .cal-pago-row.done { border-left-color: #22c55e !important; }
+  .cal-dia-badge { min-width: 30px; height: 30px; border-radius: 6px; background: #1a1d27;
+                   display: flex; align-items: center; justify-content: center;
+                   font-size: 13px; font-weight: 700; color: #e2e8f0; flex-shrink: 0; }
+  .cal-pago-row.passed .cal-dia-badge { background: #111318; color: #64748b; }
+  .cal-pago-desc { flex: 1; font-size: 12px; color: #e2e8f0; }
+  .cal-pago-desc .cal-sub { font-size: 10px; color: #64748b; }
+  .cal-pago-monto { font-size: 13px; font-weight: 700; text-align: right; flex-shrink: 0; }
+  .cal-pago-next { font-size: 10px; color: #64748b; text-align: right; margin-top: 1px; }
+  .cal-check { width: 18px; height: 18px; border-radius: 5px; border: 2px solid #2a2d3e;
+               background: transparent; cursor: pointer; appearance: none; flex-shrink: 0;
+               transition: background .15s, border-color .15s; }
+  .cal-check:checked { background: #22c55e; border-color: #22c55e; }
+  .cal-check:checked::after { content: '✓'; display: block; text-align: center;
+                               font-size: 11px; line-height: 14px; color: #000; font-weight: 700; }
+  /* Recomendaciones */
+  .rec-card { background: #0f1117; border: 1px solid #2a2d3e; border-left: 3px solid #64748b;
+              border-radius: 10px; padding: 14px; margin-bottom: 8px; }
+  .rec-card.alta { border-left-color: #ef4444; }
+  .rec-card.media { border-left-color: #f59e0b; }
+  .rec-card.baja { border-left-color: #22c55e; }
+  .rec-header { display: flex; justify-content: space-between; align-items: flex-start;
+                gap: 8px; margin-bottom: 4px; }
+  .rec-titulo { font-size: 13px; font-weight: 700; color: #e2e8f0; flex: 1; }
+  .rec-badges { display: flex; gap: 4px; flex-shrink: 0; flex-wrap: wrap; justify-content: flex-end; }
+  .rec-badge { font-size: 10px; padding: 2px 6px; border-radius: 99px; font-weight: 600;
+               white-space: nowrap; }
+  .rec-fecha { font-size: 10px; color: #64748b; margin-bottom: 6px; }
+  .rec-texto { font-size: 12px; color: #94a3b8; line-height: 1.6; }
+  /* Presupuesto BAC */
+  .ppto-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 8px; margin-bottom: 12px; }
+  @media(min-width:480px){ .ppto-grid { grid-template-columns: repeat(4,1fr); } }
+  .ppto-item { background: #0f1117; border-radius: 8px; padding: 10px 12px; }
+  .ppto-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing:.04em; }
+  .ppto-val { font-size: 15px; font-weight: 700; margin-top: 3px; }
+  .ppto-bar-wrap { background: #1a1d27; border-radius: 99px; height: 8px; margin: 10px 0 4px; overflow: hidden; }
+  .ppto-bar { height: 100%; border-radius: 99px; transition: width .4s; }
+  .ppto-bar-label { display: flex; justify-content: space-between; font-size: 10px; color: #64748b; }
+  .ppto-veredicto { padding: 8px 12px; border-radius: 8px; font-size: 12px; font-weight: 600;
+                    display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .ppto-veredicto.ok { background: #052e16; color: #22c55e; border: 1px solid #166534; }
+  .ppto-veredicto.over { background: #450a0a; color: #ef4444; border: 1px solid #991b1b; }
+  /* Efectivo en mano */
+  .efectivo-saldo { font-size: 28px; font-weight: 800; color: #22c55e; margin-bottom: 12px; }
+  .efectivo-mov { display: flex; flex-direction: column; gap: 4px; }
+  .efectivo-row { display: flex; justify-content: space-between; align-items: center;
+                  padding: 6px 10px; background: #0f1117; border-radius: 7px;
+                  font-size: 12px; }
+  .efectivo-row .ef-desc { color: #e2e8f0; flex: 1; }
+  .efectivo-row .ef-fecha { color: #64748b; font-size: 10px; margin: 0 10px; }
+  .efectivo-row .ef-monto { font-weight: 700; flex-shrink: 0; }
+  /* Notas para Claude */
+  .notas-area { width: 100%; background: #0f1117; border: 1px solid #2a2d3e; border-radius: 8px;
+                color: #e2e8f0; font-family: -apple-system, sans-serif; font-size: 13px;
+                padding: 10px 12px; resize: vertical; min-height: 90px; line-height: 1.6;
+                outline: none; transition: border-color .15s; }
+  .notas-area:focus { border-color: #6366f1; }
+  .notas-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; }
+  .notas-hint { font-size: 11px; color: #64748b; }
+  .notas-btn { background: #6366f1; color: white; border: none; border-radius: 7px;
+               padding: 7px 18px; font-size: 13px; font-weight: 600; cursor: pointer;
+               transition: background .15s; }
+  .notas-btn:hover { background: #4f46e5; }
+  .notas-btn:disabled { background: #2a2d3e; color: #64748b; cursor: default; }
+  .notas-saved { font-size: 11px; color: #22c55e; display: none; }
+  /* Plan Quincenal */
+  .pq-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .pq-table th { text-align: left; color: #64748b; font-weight: 500; padding: 6px 8px;
+                 border-bottom: 1px solid #2a2d3e; font-size: 11px; text-transform: uppercase; }
+  .pq-table td { padding: 8px 6px; border-bottom: 1px solid #1e2130; font-size: 13px; }
+  .pq-table tr.total-row td { border-bottom: none; font-weight: 700; background: rgba(99,102,241,.06);
+                               border-radius: 6px; padding: 10px 6px; }
+  .pq-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 6px; vertical-align: middle; }
+  /* Fondos Esporádicos */
+  .fe-grid { display: grid; gap: 10px; }
+  @media(min-width:500px){ .fe-grid { grid-template-columns: repeat(2,1fr); } }
+  .fe-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px; padding: 14px; }
+  .fe-nombre { font-size: 12px; font-weight: 700; color: #e2e8f0; margin-bottom: 2px; }
+  .fe-saldo { font-size: 26px; font-weight: 700; color: #22c55e; margin: 4px 0; }
+  .fe-bar-wrap { background: #2a2d3e; border-radius: 99px; height: 5px; margin: 8px 0 4px; overflow: hidden; }
+  .fe-bar { height: 100%; border-radius: 99px; background: #22c55e; transition: width .4s; }
+  .fe-meta { font-size: 10px; color: #64748b; }
+  /* Gastos Fijos AMEX */
+  .gf-row { display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+            background: #0f1117; border-radius: 8px; margin-bottom: 4px; }
+  .gf-desc { flex: 1; font-size: 12px; color: #e2e8f0; }
+  .gf-cancelar-badge { font-size: 10px; color: #ef4444; background: rgba(239,68,68,.1);
+                       padding: 1px 6px; border-radius: 99px; white-space: nowrap; }
+  .gf-monto { font-weight: 700; font-size: 13px; color: #ef4444; flex-shrink: 0; }
+  .gf-monto.tachado { text-decoration: line-through; color: #64748b; }
+  /* AMEX payoff */
+  .amex-payoff { background: rgba(228,0,43,.06); border: 1px solid rgba(228,0,43,.2);
+                 border-radius: 10px; padding: 14px; }
+  .amex-payoff-saldo { font-size: 28px; font-weight: 700; color: #e4002b; }
+  .amex-payoff-meta { font-size: 12px; color: #94a3b8; margin-top: 4px; line-height: 1.6; }
+  /* AMEX History */
+  .amex-hist-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+  .amex-status-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-bottom:1.5rem;}
+  .amex-stat{background:#1a1d27;border:1px solid #2a2d3e;border-radius:8px;padding:.75rem 1rem;}
+  .amex-stat-label{font-size:.72rem;color:#64748b;text-transform:uppercase;letter-spacing:.05em;}
+  .amex-stat-value{font-size:1.25rem;font-weight:700;margin-top:.2rem;}
+  .amex-accordion{display:flex;flex-direction:column;gap:.5rem;}
+  .amex-acc-item{border:1px solid #2a2d3e;border-radius:8px;overflow:hidden;}
+  .amex-acc-trigger{width:100%;display:flex;justify-content:space-between;align-items:center;padding:.75rem 1rem;background:#1a1d27;cursor:pointer;border:none;color:inherit;font-size:.9rem;text-align:left;}
+  .amex-acc-trigger:hover{background:rgba(255,255,255,.04);}
+  .amex-acc-body{display:none;padding:1rem;border-top:1px solid #2a2d3e;background:#0f1117;}
+  .amex-acc-body.open{display:block;}
+  .amex-acc-meta{display:flex;gap:1.5rem;font-size:.8rem;color:#64748b;margin-bottom:.75rem;}
+  .amex-tx-table{width:100%;border-collapse:collapse;font-size:.82rem;}
+  .amex-tx-table th{text-align:left;padding:.4rem .5rem;border-bottom:1px solid #2a2d3e;color:#64748b;font-weight:600;}
+  .amex-tx-table td{padding:.35rem .5rem;border-bottom:1px solid #2a2d3e;}
+  .amex-tx-fijo{color:#64748b;}
+  .amex-tx-cancelar{color:#e53e3e;font-size:.72rem;margin-left:.25rem;}
+  .amex-cat-badge{display:inline-block;padding:.1rem .4rem;border-radius:4px;font-size:.7rem;background:rgba(99,102,241,.12);color:#6366f1;}
+  .amex-period-totals{display:flex;gap:1rem;margin-top:.75rem;font-size:.82rem;}
+  .amex-proj-table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:.5rem;}
+  .amex-proj-table th{text-align:left;padding:.5rem;border-bottom:2px solid #2a2d3e;color:#64748b;}
+  .amex-proj-table td{padding:.5rem;border-bottom:1px solid #2a2d3e;}
+  .amex-proj-liquidada{color:#22c55e;font-weight:700;}
+  .amex-proj-bar-wrap{height:6px;background:#2a2d3e;border-radius:3px;overflow:hidden;width:80px;display:inline-block;vertical-align:middle;margin-left:.5rem;}
+  .amex-proj-bar-fill{height:100%;background:#6366f1;border-radius:3px;transition:width .4s;}
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Menú</a>
+  <h1>🗓️ Estado de Deuda</h1>
+</div>
+<div class="container">
+
+  <!-- AMEX History -->
+  <div class="section" id="amex-hist-section" style="margin-bottom:2rem">
+    <div class="amex-hist-header">
+      <h2 style="margin:0">&#x1F4B3; AMEX BAC ****3328 &mdash; Historial</h2>
+      <span id="amex-saldo-badge" style="font-size:1.1rem;font-weight:700;color:#e53e3e"></span>
+    </div>
+    <div class="amex-status-grid" id="amex-status-grid"></div>
+    <h3 style="margin:.5rem 0 .75rem;font-size:.95rem;color:#64748b">Proyecci&oacute;n de liquidaci&oacute;n ($250/mes)</h3>
+    <div style="overflow-x:auto;margin-bottom:1.5rem">
+      <table class="amex-proj-table" id="amex-proj-table">
+        <thead><tr><th>Mes</th><th>Saldo inicio</th><th>Fijos est.</th><th>Pago</th><th>Saldo fin</th><th>Progreso</th></tr></thead>
+        <tbody id="amex-proj-body"></tbody>
+      </table>
+    </div>
+    <h3 style="margin:.5rem 0 .75rem;font-size:.95rem;color:#64748b">Estados de cuenta</h3>
+    <div class="amex-accordion" id="amex-accordion"></div>
+  </div>
+
+  <!-- Plan Quincenal -->
+  <div class="section" id="pq-section">
+    <h2>📋 Plan quincenal <span style="font-size:10px;color:#22c55e;background:rgba(34,197,94,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">activo desde 13-Jul</span></h2>
+    <div id="pq-wrap"><div class="loading-msg">Cargando...</div></div>
+  </div>
+
+  <!-- Liquidez -->
+  <div class="section" id="liquidez-section">
+    <h2>💵 Liquidez</h2>
+    <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+      <div class="liq-saldo" id="liq-total">—</div>
+      <div style="font-size:11px;color:#64748b">total disponible</div>
+    </div>
+    <div id="liq-breakdown" style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px"></div>
+    <div class="liq-hero">
+      <div class="liq-saldo" id="liq-saldo" style="font-size:20px">—</div>
+      <div class="liq-banco" id="liq-banco"></div>
+    </div>
+    <div class="flujo-grid" id="flujo-grid" style="display:none">
+      <div class="flujo-item">
+        <div class="flujo-label">Ingresos/mes</div>
+        <div class="flujo-val" style="color:#22c55e" id="flujo-ing">—</div>
+      </div>
+      <div class="flujo-item">
+        <div class="flujo-label">Obligaciones</div>
+        <div class="flujo-val" style="color:#ef4444" id="flujo-oblig">—</div>
+      </div>
+      <div class="flujo-item">
+        <div class="flujo-label">MultiMoney</div>
+        <div class="flujo-val" style="color:#0ea5e9" id="flujo-mm">—</div>
+      </div>
+      <div class="flujo-item">
+        <div class="flujo-label">Remanente</div>
+        <div class="flujo-val" id="flujo-rem">—</div>
+      </div>
+    </div>
+    <div class="mov-list" id="mov-list"></div>
+    <div id="otras-cuentas-wrap" style="display:none;margin-top:10px"></div>
+  </div>
+
+  <!-- Calendario de pagos -->
+  <div class="section">
+    <h2>📆 Calendario de pagos mensual</h2>
+    <div class="cal-pago-list" id="cal-pago-list"><div class="loading-msg">Cargando...</div></div>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Total egresos/mes</span>
+        <span class="fi-total-val" style="color:#ef4444" id="cal-total-egresos">—</span>
+      </div>
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Total ahorro/mes</span>
+        <span class="fi-total-val" style="color:#22c55e" id="cal-total-ahorro">—</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tarjetas de crédito -->
+  <div class="section">
+    <h2>💳 Tarjetas de crédito</h2>
+    <div class="tc-grid" id="tc-grid"><div class="loading-msg">Cargando...</div></div>
+    <div class="fi-total">
+      <span class="fi-total-label">Total saldo tarjetas</span>
+      <span class="fi-total-val" id="tc-total">—</span>
+    </div>
+    <div class="fi-total" style="margin-top:6px">
+      <span class="fi-total-label">Pagos mínimos / mes</span>
+      <span class="fi-total-val" id="tc-min-total">—</span>
+    </div>
+  </div>
+
+  <!-- Calendario — mejor tarjeta para usar -->
+  <div class="section" id="cal-section">
+    <h2>📅 Mejor tarjeta para usar hoy</h2>
+    <div class="cal-grid" id="cal-grid"><div class="loading-msg">Cargando...</div></div>
+  </div>
+
+  <!-- Compras a plazos / Extrafinanciamientos -->
+  <div class="section" id="fi-section" style="display:none">
+    <h2>🏦 Compras a plazos <span style="font-size:10px;color:#0ea5e9;background:rgba(14,165,233,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">cuotas activas</span></h2>
+    <div class="fi-grid" id="fi-grid"></div>
+    <div class="fi-total">
+      <span class="fi-total-label">Deuda total financiamientos</span>
+      <span class="fi-total-val" id="fi-total-saldo">—</span>
+    </div>
+    <div class="fi-total" style="margin-top:6px">
+      <span class="fi-total-label">Cuota mensual combinada</span>
+      <span class="fi-total-val" id="fi-total-cuota">—</span>
+    </div>
+  </div>
+
+  <!-- Préstamos fijos -->
+  <div class="section" id="prestamos-section" style="display:none">
+    <h2>🏛️ Préstamos fijos</h2>
+    <div id="prestamos-list"></div>
+  </div>
+
+  <!-- Fondo de emergencia -->
+  <div class="section" id="fondo-section" style="display:none">
+    <h2>🛡️ Fondo de emergencia <span style="font-size:10px;color:#22c55e;background:rgba(34,197,94,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">intocable</span></h2>
+    <div id="fondo-list"></div>
+  </div>
+
+  <!-- Fondos Esporádicos -->
+  <div class="section" id="fe-section">
+    <h2>🎯 Fondos esporádicos <span style="font-size:10px;color:#a5b4fc;background:rgba(99,102,241,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">acumulan en MultiMoney · $40/quincena</span></h2>
+    <div class="fe-grid" id="fe-grid"><div class="loading-msg">Cargando...</div></div>
+    <div class="fi-total" style="margin-top:10px">
+      <span class="fi-total-label">Total fondos acumulados</span>
+      <span class="fi-total-val" style="color:#a5b4fc" id="fe-total-saldo">—</span>
+    </div>
+    <div class="fi-total" style="margin-top:6px">
+      <span class="fi-total-label">Aportación por quincena</span>
+      <span class="fi-total-val" style="color:#64748b;font-size:13px" id="fe-total-q">—</span>
+    </div>
+  </div>
+
+  <!-- Gastos Fijos AMEX -->
+  <div class="section" id="gf-section">
+    <h2>💳 Gastos fijos en AMEX <span style="font-size:10px;color:#e4002b;background:rgba(228,0,43,.1);padding:2px 8px;border-radius:99px;vertical-align:middle">····3328</span></h2>
+    <div id="gf-wrap"><div class="loading-msg">Cargando...</div></div>
+    <div class="amex-payoff" style="margin-top:12px">
+      <div style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Objetivo AMEX</div>
+      <div class="amex-payoff-saldo" id="amex-saldo-actual">—</div>
+      <div class="amex-payoff-meta">
+        Pagando <strong style="color:#f59e0b">$125/quincena</strong> ($250/mes) → liquidar saldo revolving en ~5 meses (Nov 2026)<br>
+        Interés mensual: ~$14/mes al 3.59%/mes · A partir de May 2027 baja carga en ~$36/mes (Laptop + Curacao terminan)
+      </div>
+    </div>
+  </div>
+
+  <!-- Recomendaciones financieras -->
+  <div class="section" id="rec-section">
+    <h2>💡 Recomendaciones financieras</h2>
+    <div id="rec-list"><div class="loading-msg">Cargando...</div></div>
+  </div>
+
+  <!-- Presupuesto BAC diario -->
+  <div class="section">
+    <h2>📊 Presupuesto BAC — hasta el 13-Jul</h2>
+    <div id="presupuesto-wrap"><div class="loading-msg">Cargando...</div></div>
+  </div>
+
+  <!-- Efectivo en mano -->
+  <div class="section">
+    <h2>💵 Efectivo en mano</h2>
+    <div id="efectivo-wrap">
+      <div class="loading-msg">Cargando...</div>
+    </div>
+  </div>
+
+  <!-- Notas para Claude -->
+  <div class="section">
+    <h2>✏️ Notas para Claude</h2>
+    <p style="font-size:12px;color:#64748b;margin-bottom:10px">
+      Escribe correcciones o movimientos nuevos. Cuando me avises, leo esto y aplico los cambios.
+    </p>
+    <textarea class="notas-area" id="notas-text" placeholder="Ej: Pagué $60.87 a VISA Agrícola hoy&#10;Ej: Nuevo ingreso $200 freelance&#10;Ej: Cuota Curacao subió a $22.00"></textarea>
+    <div class="notas-footer">
+      <span class="notas-hint">Ctrl+Enter para guardar</span>
+      <div style="display:flex;align-items:center;gap:10px">
+        <span class="notas-saved" id="notas-saved">✓ Guardado</span>
+        <button class="notas-btn" id="notas-btn" onclick="guardarNotas()">Guardar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resumen total -->
+  <div class="section" id="totals-section">
+    <h2>📊 Resumen total</h2>
+    <div class="tot-section-title">Deuda</div>
+    <table class="tot-table">
+      <tr><td>Tarjetas de crédito</td><td class="tot-val" id="tot-cards">—</td></tr>
+      <tr><td>Compras a plazos</td><td class="tot-val" id="tot-fi">—</td></tr>
+      <tr><td>Préstamos</td><td class="tot-val" id="tot-prestamos">—</td></tr>
+      <tr><td>TOTAL DEUDA</td><td class="tot-val" id="tot-total">—</td></tr>
+    </table>
+    <div class="tot-section-title">Obligaciones mensuales fijas</div>
+    <table class="tot-table">
+      <tr><td>Tarjetas (mínimos)</td><td class="tot-val" id="tot-min">—</td></tr>
+      <tr><td>Compras a plazos</td><td class="tot-val" id="tot-cuota-fi">—</td></tr>
+      <tr><td>Préstamos</td><td class="tot-val" id="tot-cuota-p">—</td></tr>
+      <tr><td>TOTAL MENSUAL</td><td class="tot-val" id="tot-mensual">—</td></tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+function fmt(n) { return '$' + parseFloat(n).toFixed(2); }
+
+let _totCards = 0, _totFi = 0, _totPrestamos = 0;
+let _minCards = 0, _cuotaFi = 0, _cuotaP = 0;
+
+function updateTotals() {
+  const gran = _totCards + _totFi + _totPrestamos;
+  const mensual = _minCards + _cuotaFi + _cuotaP;
+  document.getElementById('tot-cards').textContent = fmt(_totCards);
+  document.getElementById('tot-fi').textContent = fmt(_totFi);
+  document.getElementById('tot-prestamos').textContent = fmt(_totPrestamos);
+  document.getElementById('tot-total').textContent = fmt(gran);
+  document.getElementById('tot-min').textContent = fmt(_minCards);
+  document.getElementById('tot-cuota-fi').textContent = fmt(_cuotaFi);
+  document.getElementById('tot-cuota-p').textContent = fmt(_cuotaP);
+  document.getElementById('tot-mensual').textContent = fmt(mensual);
+}
+
+function renderCards(data) {
+  if (!data || data.error) {
+    document.getElementById('tc-grid').innerHTML = '<div class="loading-msg">Error al cargar tarjetas</div>';
+    return;
+  }
+  _totCards = data.total_balance;
+  _minCards = data.total_min;
+
+  const COLORS = { 'BAC': '#e4002b', 'Agrícola': '#22c55e', 'Cuscatlán': '#0ea5e9' };
+  function cardColor(name) {
+    for (const [k, v] of Object.entries(COLORS)) if (name.includes(k)) return v;
+    return '#64748b';
+  }
+
+  const grid = document.getElementById('tc-grid');
+  grid.innerHTML = data.cards.map(c => {
+    const color = cardColor(c.name);
+    const isPaid = c.balance === 0;
+    const isNever = c.payoff.never;
+    const payoffColor = isPaid ? '#22c55e' : isNever ? '#ef4444' : '#f59e0b';
+    const payoffIcon = isPaid ? '✓' : isNever ? '⚠️' : '→';
+    return `<div class="tc-card" style="border-left:3px solid ${color}">
+      <div class="tc-header">
+        <span class="tc-name" style="color:${color}">${c.name}</span>
+        <span class="tc-last4">····${c.last4}</span>
+      </div>
+      <div class="tc-balance" style="color:${isPaid?'#22c55e':'#e2e8f0'}">${fmt(c.balance)}</div>
+      <div class="tc-meta">${c.tasa_anual}% anual · mín ${fmt(c.min_pago)}/mes</div>
+      <div class="tc-payoff" style="color:${payoffColor}">${payoffIcon} ${c.payoff.label}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('tc-total').textContent = fmt(data.total_balance);
+  document.getElementById('tc-min-total').textContent = fmt(data.total_min) + '/mes';
+  updateTotals();
+}
+
+function renderFinanciamientos(data) {
+  if (!data || !data.items || !data.items.length) return;
+  _totFi = data.total_saldo;
+  _cuotaFi = data.total_cuota;
+  const section = document.getElementById('fi-section');
+  section.style.display = 'block';
+  document.getElementById('fi-total-saldo').textContent = fmt(data.total_saldo);
+  document.getElementById('fi-total-cuota').textContent = fmt(data.total_cuota) + '/mes';
+  const grid = document.getElementById('fi-grid');
+  const bancoColor = { 'BAC': '#e4002b', 'Cuscatlán': '#004b87', 'Agrícola': '#2b7a3c', 'Curacao': '#a855f7' };
+  grid.innerHTML = data.items.map(fi => {
+    const isNear = fi.cuotas_restantes <= 3;
+    const banco = fi.banco || 'Otro';
+    const color = bancoColor[banco] || '#64748b';
+    const cardChip = fi.tarjeta_last4
+      ? `<span style="font-size:10px;color:${color};background:${color}22;padding:1px 6px;border-radius:99px;margin-left:4px">···${fi.tarjeta_last4}</span>`
+      : '';
+    const tasaText = fi.tasa_mensual > 0 ? `· ${fi.tasa_mensual}%/mes` : '· 0% interés';
+    return `<div class="fi-card${isNear?' urgent':''}" style="border-left:3px solid ${color}">
+      <div class="fi-ref" style="display:flex;align-items:center;gap:4px">
+        <span style="font-size:10px;color:${color};font-weight:700">${banco}</span>${cardChip}
+        <span style="margin-left:auto;font-size:10px;color:#64748b">Ref ${fi.ref}</span>
+      </div>
+      <div class="fi-desc">${fi.descripcion}</div>
+      <div class="fi-cuota">${fmt(fi.cuota_mensual)} <span>/mes</span></div>
+      <div class="fi-progress">
+        <div class="fi-progress-bar${isNear?' near':''}" style="width:${fi.progress_pct}%"></div>
+      </div>
+      <div class="fi-meta">
+        <span>${fi.cuotas_pagadas}/${fi.cuotas_total} cuotas</span>
+        <span>${fi.cuotas_restantes} restantes → ${fi.payoff_label}</span>
+      </div>
+      <div class="fi-saldo">Saldo: <strong>${fmt(fi.saldo_actual)}</strong>
+        <span style="color:#64748b;font-size:10px"> ${tasaText}</span>
+      </div>
+    </div>`;
+  }).join('');
+  updateTotals();
+}
+
+function renderFondos(data) {
+  if (!data) return;
+  const { fondos = [], prestamos = [] } = data;
+  if (prestamos.length) {
+    _totPrestamos = prestamos.reduce((s, p) => s + p.saldo, 0);
+    _cuotaP = prestamos.reduce((s, p) => s + p.cuota_mensual, 0);
+    document.getElementById('prestamos-section').style.display = 'block';
+    document.getElementById('prestamos-list').innerHTML = prestamos.map(p => `
+      <div class="prestamo-row">
+        <div>
+          <div class="prestamo-name">${p.nombre}</div>
+          <div class="prestamo-meta">Saldo: ${fmt(p.saldo)} · ${p.tasa_anual}% anual · vence día ${p.fecha_pago_dia}</div>
+          <div class="prestamo-meta">~${p.cuotas_restantes} cuotas restantes (${Math.round(p.cuotas_restantes/12*10)/10} años)</div>
+        </div>
+        <div class="prestamo-cuota">
+          <div class="amount">${fmt(p.cuota_quincenal)}</div>
+          <div class="per">/quincena</div>
+          <div class="per" style="color:#94a3b8">${fmt(p.cuota_mensual)}/mes</div>
+        </div>
+      </div>`).join('');
+    updateTotals();
+  }
+  if (fondos.length) {
+    document.getElementById('fondo-section').style.display = 'block';
+    document.getElementById('fondo-list').innerHTML = fondos.map(f => `
+      <div class="fondo-card">
+        <div>
+          <div class="fondo-label">${f.nombre} · ${f.banco}</div>
+          <div class="fondo-balance">${fmt(f.saldo)}</div>
+          <div class="fondo-meta">+${fmt(f.ganancia_mensual)}/mes · +${fmt(f.ganancia_anual)}/año</div>
+          ${f.intocable ? '<span class="fondo-intocable">🔒 colchón intocable</span>' : ''}
+        </div>
+        <div class="fondo-right">
+          <div class="fondo-tasa">${f.tasa_anual}%</div>
+          <div style="font-size:10px;color:#64748b">anual</div>
+        </div>
+      </div>`).join('');
+  }
+}
+
+function renderCalendario(data) {
+  if (!data || data.error) {
+    document.getElementById('cal-grid').innerHTML = '<div class="loading-msg">Error al cargar</div>';
+    return;
+  }
+  const COLORS = { 'BAC': '#e4002b', 'Agrícola': '#22c55e', 'Cuscatlán': '#0ea5e9' };
+  function cardColor(name) {
+    for (const [k, v] of Object.entries(COLORS)) if (name.includes(k)) return v;
+    return '#64748b';
+  }
+  const cards = data.cards;
+  const maxDays = Math.max(...cards.map(c => c.days_until_payment));
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = cards.map((c, i) => {
+    const color = cardColor(c.name);
+    const isBest = i === 0 && c.safe_to_use;
+    const pct = maxDays > 0 ? Math.round(c.days_until_payment / maxDays * 100) : 0;
+    const barColor = c.has_balance ? '#ef4444' : (c.days_until_payment > 45 ? '#22c55e' : '#f59e0b');
+    return `<div class="cal-card${isBest?' best':''}${c.has_balance?' has-balance':''}" style="border-left:3px solid ${color}">
+      ${isBest ? '<span class="cal-best-badge">✓ Recomendada</span>' : ''}
+      <div class="cal-name" style="color:${color}">${c.name}</div>
+      <div class="cal-last4">····${c.last4}</div>
+      <div class="cal-balance" style="color:${c.has_balance?'#ef4444':'#22c55e'}">${fmt(c.balance)}</div>
+      <div class="cal-dates">
+        <div class="cal-date-box">
+          <div class="cal-date-lbl">Fecha de corte</div>
+          <div class="cal-date-val">${c.next_cut_label}</div>
+          <div class="cal-days">en ${c.days_until_cut}d</div>
+        </div>
+        <div class="cal-date-box">
+          <div class="cal-date-lbl">Fecha de pago</div>
+          <div class="cal-date-val">${c.next_payment_label}</div>
+          <div class="cal-days">en ${c.days_until_payment}d</div>
+        </div>
+      </div>
+      <div class="cal-grace-bar">
+        <div class="cal-grace-fill" style="width:${pct}%;background:${barColor}"></div>
+      </div>
+      ${c.has_balance
+        ? `<div class="cal-warning">⚠️ Saldo pendiente — compras nuevas generan interés de inmediato</div>`
+        : `<div class="cal-tip">✓ Sin saldo — gracia completa hasta ${c.next_payment_label} (${c.days_until_payment} días)</div>`
+      }
+    </div>`;
+  }).join('');
+}
+
+const _liq = {};
+function _recalcLiqTotal() {
+  const total = Object.values(_liq).reduce((s, v) => s + v.saldo, 0);
+  const el = document.getElementById('liq-total');
+  if (el) el.textContent = fmt(total);
+  const bd = document.getElementById('liq-breakdown');
+  if (bd) bd.innerHTML = Object.values(_liq).map(v =>
+    `<span style="background:#1a1d27;border:1px solid #2a2d3e;border-radius:6px;
+                  padding:3px 8px;font-size:11px;color:#94a3b8">
+      <span style="color:#e2e8f0;font-weight:700">${v.label}</span>
+      <span style="color:${v.saldo>0?'#22c55e':'#64748b'};margin-left:4px">$${v.saldo.toFixed(2)}</span>
+    </span>`
+  ).join('');
+}
+
+function renderCuenta(data) {
+  if (!data || data.error) return;
+  _liq['cc'] = { label: data.banco, saldo: data.saldo };
+  _recalcLiqTotal();
+  document.getElementById('liq-saldo').textContent = fmt(data.saldo);
+  document.getElementById('liq-banco').textContent = 'Agrícola CC';
+
+  // Cash flow breakdown
+  const fg = document.getElementById('flujo-grid');
+  fg.style.display = 'grid';
+  document.getElementById('flujo-ing').textContent = fmt(data.ingreso_mensual);
+  document.getElementById('flujo-oblig').textContent = fmt(data.obligaciones_mes);
+  document.getElementById('flujo-mm').textContent = fmt(data.multimoney_mes || 0);
+  const rem = data.remanente_mes || 0;
+  const remEl = document.getElementById('flujo-rem');
+  remEl.textContent = fmt(rem);
+  remEl.style.color = rem >= 0 ? '#22c55e' : '#ef4444';
+
+  const movs = data.movimientos || [];
+  if (!movs.length) {
+    document.getElementById('mov-list').innerHTML = '<div style="color:#64748b;font-size:12px;padding:6px 0">Sin movimientos registrados</div>';
+    return;
+  }
+  document.getElementById('mov-list').innerHTML = movs.map(m => {
+    const isIng = m.tipo === 'ingreso';
+    return `<div class="mov-row">
+      <span class="mov-date">${m.fecha}</span>
+      <span class="mov-desc">${m.descripcion}</span>
+      <span class="mov-monto ${m.tipo}">${isIng ? '+' : '−'}${fmt(m.monto)}</span>
+    </div>`;
+  }).join('');
+}
+
+function pagoKey(e) {
+  return 'pago_' + e.dia + '_' + e.descripcion.replace(/\s+/g,'_');
+}
+function pagoChecks() {
+  const k = 'pagos_check_' + new Date().toISOString().slice(0,7);
+  try { return JSON.parse(localStorage.getItem(k) || '{}'); } catch { return {}; }
+}
+function savePagoCheck(key, val) {
+  const k = 'pagos_check_' + new Date().toISOString().slice(0,7);
+  const checks = pagoChecks();
+  if (val) checks[key] = true; else delete checks[key];
+  localStorage.setItem(k, JSON.stringify(checks));
+}
+function togglePago(key) {
+  const checks = pagoChecks();
+  const nowDone = !checks[key];
+  savePagoCheck(key, nowDone);
+  const row = document.querySelector(`[data-pago-key="${key}"]`);
+  if (!row) return;
+  const cb = row.querySelector('.cal-check');
+  if (nowDone) { row.classList.add('done'); if(cb) cb.checked = true; }
+  else { row.classList.remove('done'); if(cb) cb.checked = false; }
+}
+
+function renderCalendarioPagos(data) {
+  if (!data || data.error) {
+    document.getElementById('cal-pago-list').innerHTML = '<div class="loading-msg">Error al cargar.</div>';
+    return;
+  }
+  const today = data.today_day;
+  const checks = pagoChecks();
+  const SUBTIPO_COLOR = { tarjeta: '#e4002b', intrafinanciamiento: '#0ea5e9', prestamo: '#f59e0b', extra: '#a855f7', ahorro: '#22c55e' };
+  const SUBTIPO_ICON = { tarjeta: '💳', intrafinanciamiento: '🏦', prestamo: '🏛️', extra: '📚', ahorro: '💰' };
+
+  document.getElementById('cal-pago-list').innerHTML = data.events.map(e => {
+    const color = SUBTIPO_COLOR[e.subtipo] || '#64748b';
+    const icon = SUBTIPO_ICON[e.subtipo] || '•';
+    const isAhorro = e.tipo === 'deposito';
+    const isPassed = e.passed;
+    const isToday = e.dia === today;
+    const isSoon = !isPassed && e.days_away <= 3;
+    const key = pagoKey(e);
+    const isDone = !!checks[key];
+    let rowClass = isDone ? 'done' : isPassed ? 'passed' : isAhorro ? 'ahorro' : isToday ? 'today' : isSoon ? 'soon' : '';
+    const montoColor = isAhorro ? '#22c55e' : '#ef4444';
+    const prefix = isAhorro ? '+' : '−';
+    return `<div class="cal-pago-row ${rowClass}" data-pago-key="${key}" onclick="togglePago('${key}')" style="cursor:pointer">
+      <input type="checkbox" class="cal-check" ${isDone?'checked':''} onclick="event.stopPropagation();togglePago('${key}')">
+      <div class="cal-dia-badge" style="${!isPassed&&!isDone?'background:'+color+'22;color:'+color:''}">${e.dia}</div>
+      <div class="cal-pago-desc">
+        <span>${icon} ${e.descripcion}</span>
+        ${e.notas ? `<div class="cal-sub">${e.notas}</div>` : ''}
+      </div>
+      <div>
+        <div class="cal-pago-monto" style="color:${isPassed||isDone?'#64748b':montoColor}">${prefix}${fmt(e.monto)}</div>
+        <div class="cal-pago-next">${isDone ? '✓ hecho' : isPassed ? '✓ pasado' : e.next_label + ' ('+e.days_away+'d)'}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('cal-total-egresos').textContent = fmt(data.total_egresos) + '/mes';
+  document.getElementById('cal-total-ahorro').textContent = fmt(data.total_ahorro) + '/mes';
+}
+
+fetch('/api/plan/quincenal').then(r => r.json()).then(renderPlanQuincenal).catch(() => {});
+fetch('/api/plan/fondos_esporadicos').then(r => r.json()).then(renderFondosEsporadicos).catch(() => {});
+fetch('/api/plan/gastos_fijos_amex').then(r => r.json()).then(renderGastosFijosAmex).catch(() => {});
+fetch('/api/amex/historial').then(r=>r.json()).then(renderAmexHistorial).catch(console.error);
+fetch('/api/cuenta').then(r => r.json()).then(renderCuenta).catch(() => {});
+fetch('/api/otras_cuentas').then(r => r.json()).then(data => {
+  if (!Array.isArray(data) || !data.length) return;
+  data.forEach(c => { _liq['oc_'+c.nombre] = { label: c.nombre, saldo: parseFloat(c.saldo) }; });
+  _recalcLiqTotal();
+  const wrap = document.getElementById('otras-cuentas-wrap');
+  wrap.style.display = 'block';
+  wrap.innerHTML = data.map(c => `
+    <div style="display:flex;justify-content:space-between;align-items:center;
+                background:#0f1117;border:1px solid #2a2d3e;border-radius:8px;
+                padding:10px 12px;font-size:12px">
+      <div>
+        <span style="font-weight:700;color:#a5b4fc">${c.nombre}</span>
+        <span style="color:#64748b;margin-left:6px">${c.tipo}</span>
+        ${c.notas ? `<div style="color:#64748b;font-size:10px;margin-top:2px">${c.notas}</div>` : ''}
+      </div>
+      <span style="font-size:16px;font-weight:700;color:#e2e8f0">$${parseFloat(c.saldo).toFixed(2)}</span>
+    </div>`).join('');
+}).catch(() => {});
+fetch('/api/calendario_pagos').then(r => r.json()).then(renderCalendarioPagos).catch(() => {});
+fetch('/api/plan/snapshot').then(r => r.json()).then(renderCards).catch(() => {});
+fetch('/api/tarjetas/calendario').then(r => r.json()).then(renderCalendario).catch(() => {});
+fetch('/api/plan/financiamientos').then(r => r.json()).then(renderFinanciamientos).catch(() => {});
+fetch('/api/plan/fondos').then(r => r.json()).then(renderFondos).catch(() => {});
+
+// Recomendaciones
+fetch('/api/recomendaciones').then(r => r.json()).then(data => {
+  if (!Array.isArray(data) || !data.length) {
+    document.getElementById('rec-list').innerHTML = '<div class="loading-msg">Sin recomendaciones registradas.</div>';
+    return;
+  }
+  const TIPO_ICON = { accion: '⚡', estrategia: '📈', ahorro: '💰', deuda: '💳', alerta: '⚠️', recordatorio: '📌' };
+  const TIPO_COLOR = { accion: '#a5b4fc', estrategia: '#34d399', ahorro: '#22c55e', deuda: '#f59e0b', alerta: '#fca5a5', recordatorio: '#94a3b8' };
+  const PRIO_COLOR = { alta: '#ef444433', media: '#f59e0b33', baja: '#22c55e33' };
+  const PRIO_TEXT = { alta: '#fca5a5', media: '#fcd34d', baja: '#86efac' };
+  document.getElementById('rec-list').innerHTML = data.map(r => {
+    const icon = TIPO_ICON[r.tipo] || '•';
+    const tc = TIPO_COLOR[r.tipo] || '#64748b';
+    const pc = PRIO_COLOR[r.prioridad] || '';
+    const pt = PRIO_TEXT[r.prioridad] || '#94a3b8';
+    return `<div class="rec-card ${r.prioridad}">
+      <div class="rec-header">
+        <span class="rec-titulo">${icon} ${r.titulo}</span>
+        <div class="rec-badges">
+          <span class="rec-badge" style="background:${tc}22;color:${tc}">${r.tipo}</span>
+          <span class="rec-badge" style="background:${pc};color:${pt}">${r.prioridad}</span>
+        </div>
+      </div>
+      <div class="rec-fecha">${r.fecha}</div>
+      <div class="rec-texto">${r.texto}</div>
+    </div>`;
+  }).join('');
+}).catch(() => {
+  document.getElementById('rec-list').innerHTML = '<div class="loading-msg">Error al cargar.</div>';
+});
+
+// Notas
+fetch('/api/presupuesto_bac').then(r => r.json()).then(p => {
+  const wrap = document.getElementById('presupuesto-wrap');
+  if (!wrap || p.error) return;
+  const pct = Math.min(100, Math.round((p.dias_transcurridos / p.dias_total) * 100));
+  const gastoPct = Math.min(100, Math.round((p.gasto_periodo / p.saldo_inicio) * 100));
+  const bajo = p.remanente >= 0;
+  const verdColor = bajo ? '#22c55e' : '#ef4444';
+  const movRows = (p.movimientos || []).map(m => {
+    const isIng = m.tipo === 'ingreso';
+    return `<div class="efectivo-row">
+      <span class="ef-desc">${isIng?'↑':'↓'} ${m.descripcion}</span>
+      <span class="ef-fecha">${m.fecha}</span>
+      <span class="ef-monto" style="color:${isIng?'#22c55e':'#ef4444'}">${isIng?'+':'−'}$${m.monto.toFixed(2)}</span>
+    </div>`;
+  }).join('');
+  wrap.innerHTML = `
+    <div class="ppto-veredicto ${bajo?'ok':'over'}">
+      <span>${bajo?'✓':'⚠'}</span>
+      <span>Ayer: gastaste $${p.gasto_periodo.toFixed(2)} vs presupuesto $${p.presupuesto_diario.toFixed(2)}/día —
+        ${bajo ? 'bajo presupuesto, remanente $'+p.remanente.toFixed(2) : 'excediste $'+Math.abs(p.remanente).toFixed(2)}</span>
+    </div>
+    <div class="ppto-grid">
+      <div class="ppto-item">
+        <div class="ppto-label">Presupuesto/día</div>
+        <div class="ppto-val" style="color:#e2e8f0">$${p.presupuesto_diario.toFixed(2)}</div>
+      </div>
+      <div class="ppto-item">
+        <div class="ppto-label">Saldo actual BAC</div>
+        <div class="ppto-val" style="color:#22c55e">$${p.saldo_actual.toFixed(2)}</div>
+      </div>
+      <div class="ppto-item">
+        <div class="ppto-label">Días restantes</div>
+        <div class="ppto-val" style="color:#a5b4fc">${p.dias_restantes}d</div>
+      </div>
+      <div class="ppto-item">
+        <div class="ppto-label">Proyección/día</div>
+        <div class="ppto-val" style="color:${p.proyeccion_diaria<=p.presupuesto_diario?'#22c55e':'#f59e0b'}">$${p.proyeccion_diaria.toFixed(2)}</div>
+      </div>
+    </div>
+    <div class="ppto-bar-wrap">
+      <div class="ppto-bar" style="width:${gastoPct}%;background:${bajo?'#22c55e':'#ef4444'}"></div>
+    </div>
+    <div class="ppto-bar-label">
+      <span>Gasto: $${p.gasto_periodo.toFixed(2)} de $${p.saldo_inicio.toFixed(2)}</span>
+      <span>Días: ${p.dias_transcurridos}/${p.dias_total}</span>
+    </div>
+    ${movRows ? '<div class="efectivo-mov" style="margin-top:10px">'+movRows+'</div>' : ''}
+    <div style="font-size:10px;color:#64748b;margin-top:8px">
+      Remanente acumulado: <strong style="color:${verdColor}">$${p.remanente.toFixed(2)}</strong>
+      ${bajo ? '→ disponible para ahorros o pago de tarjetas' : '→ reajustar los días restantes'}
+    </div>`;
+}).catch(() => {});
+
+fetch('/api/efectivo').then(r => r.json()).then(data => {
+  const wrap = document.getElementById('efectivo-wrap');
+  if (!wrap) return;
+  const saldo = data.saldo || 0;
+  _liq['efectivo'] = { label: 'Efectivo', saldo };
+  _recalcLiqTotal();
+  const movs = data.movimientos || [];
+  wrap.innerHTML = `
+    <div class="efectivo-saldo">$${saldo.toFixed(2)}</div>
+    <div class="efectivo-mov">${movs.map(m => {
+      const isIngreso = m.tipo === 'ingreso';
+      return `<div class="efectivo-row">
+        <span class="ef-desc">${isIngreso ? '↑' : '↓'} ${m.descripcion}</span>
+        <span class="ef-fecha">${m.fecha}</span>
+        <span class="ef-monto" style="color:${isIngreso?'#22c55e':'#ef4444'}">${isIngreso?'+':'−'}$${m.monto.toFixed(2)}</span>
+      </div>`;
+    }).join('')}</div>`;
+}).catch(() => {});
+
+// Plan Quincenal
+function renderPlanQuincenal(data) {
+  const wrap = document.getElementById('pq-wrap');
+  if (!wrap || data.error || !data.distribucion) { if(wrap) wrap.innerHTML='<div class="loading-msg">Sin plan configurado</div>'; return; }
+  const TIPO_COLOR = {obligacion:'#ef4444',deuda:'#f59e0b',ahorro:'#22c55e',operativo:'#0ea5e9',colchon:'#a855f7'};
+  const dist = data.distribucion;
+  const totalQ = dist.reduce((s,d)=>s+d.quincenal,0);
+  const totalM = dist.reduce((s,d)=>s+d.mensual,0);
+  wrap.innerHTML = `
+    <div style="font-size:12px;color:#64748b;margin-bottom:10px">
+      Salario quincena: <strong style="color:#22c55e">$${(data.salario_quincena||0).toFixed(2)}</strong>
+      &nbsp;·&nbsp;vigente desde <strong style="color:#a5b4fc">${data.fecha_inicio||'—'}</strong>
+    </div>
+    <table class="pq-table">
+      <thead><tr><th>Destino</th><th style="text-align:right">Quincenal</th><th style="text-align:right">Mensual</th></tr></thead>
+      <tbody>
+        ${dist.map(d=>`<tr>
+          <td><span class="pq-dot" style="background:${TIPO_COLOR[d.tipo]||'#64748b'}"></span>${d.destino}</td>
+          <td style="text-align:right;font-weight:600">$${d.quincenal.toFixed(2)}</td>
+          <td style="text-align:right;color:#64748b">$${d.mensual.toFixed(2)}</td>
+        </tr>`).join('')}
+        <tr class="total-row">
+          <td>TOTAL</td>
+          <td style="text-align:right;color:#a5b4fc">$${totalQ.toFixed(2)}</td>
+          <td style="text-align:right;color:#a5b4fc">$${totalM.toFixed(2)}</td>
+        </tr>
+      </tbody>
+    </table>`;
+}
+
+// Fondos Esporádicos
+function renderFondosEsporadicos(data) {
+  const grid = document.getElementById('fe-grid');
+  const totalSaldoEl = document.getElementById('fe-total-saldo');
+  const totalQEl = document.getElementById('fe-total-q');
+  if (!grid || !data.fondos) return;
+  if (totalSaldoEl) totalSaldoEl.textContent = '$' + (data.total_saldo||0).toFixed(2);
+  if (totalQEl) totalQEl.textContent = '$' + (data.total_quincenal||0).toFixed(2) + '/quincena';
+  grid.innerHTML = data.fondos.map(f => {
+    const pct = f.quincenal > 0 ? Math.min(100, Math.round((f.saldo/f.quincenal)*100)) : 0;
+    return `<div class="fe-card">
+      <div class="fe-nombre">${f.nombre}</div>
+      <div class="fe-saldo">$${f.saldo.toFixed(2)}</div>
+      <div class="fe-bar-wrap"><div class="fe-bar" style="width:${pct}%"></div></div>
+      <div class="fe-meta">Meta quincena: $${f.quincenal.toFixed(2)} · Mensual: $${f.mensual.toFixed(2)}</div>
+    </div>`;
+  }).join('');
+}
+
+// Gastos Fijos AMEX
+function renderGastosFijosAmex(data) {
+  const wrap = document.getElementById('gf-wrap');
+  if (!wrap || !data.gastos) return;
+  wrap.innerHTML = data.gastos.map(g => `
+    <div class="gf-row">
+      <span class="gf-desc">
+        ${g.descripcion}
+        ${g.variable ? '<span style="font-size:10px;color:#64748b"> (variable)</span>' : ''}
+        ${g.cancelar ? '<span class="gf-cancelar-badge">⚠ cancelar</span>' : ''}
+        ${g.notas&&g.cancelar ? '<span style="font-size:10px;color:#64748b"> — '+g.notas+'</span>' : ''}
+      </span>
+      <span class="gf-monto ${g.cancelar?'tachado':''}">$${g.monto_mensual.toFixed(2)}</span>
+    </div>`).join('') +
+    `<div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Total activo/mes</span>
+        <span class="fi-total-val" style="color:#e4002b">$${(data.total||0).toFixed(2)}</span>
+      </div>
+      <div class="fi-total" style="flex:1;margin-top:0">
+        <span class="fi-total-label">Ahorro al cancelar Google</span>
+        <span class="fi-total-val" style="color:#22c55e">$${((data.total_bruto||0)-(data.total||0)).toFixed(2)}/mes</span>
+      </div>
+    </div>`;
+  // Update AMEX saldo display
+  fetch('/api/plan/snapshot').then(r=>r.json()).then(snap => {
+    const amex = (snap.cards||[]).find(c=>c.last4==='3328');
+    const el = document.getElementById('amex-saldo-actual');
+    if (el && amex) el.textContent = '$' + amex.balance.toFixed(2);
+  }).catch(()=>{});
+}
+
+// AMEX Historial
+function renderAmexHistorial(data) {
+  const estado = data.estado_actual || {};
+  const hist = data.historial || [];
+
+  // Status badge
+  const badge = document.getElementById('amex-saldo-badge');
+  if (badge) badge.textContent = '$' + (estado.saldo || 0).toFixed(2);
+
+  // Status grid
+  const grid = document.getElementById('amex-status-grid');
+  if (grid && estado.saldo !== undefined) {
+    const ep = estado.estrategia_pago || {};
+    grid.innerHTML = [
+      {label: 'Saldo actual', value: '$' + estado.saldo.toFixed(2), color: '#e53e3e'},
+      {label: 'Próximo corte', value: estado.fecha_corte_proximo || '—'},
+      {label: 'Próximo pago', value: estado.fecha_pago_proximo || '—'},
+      {label: 'Pago mensual', value: '$' + (ep.pago_mensual || 250).toFixed(2), color: '#22c55e'},
+      {label: 'Fijos estimados', value: '$' + (ep.fijos_estimados_mes || 0).toFixed(2)},
+    ].map(s => `<div class="amex-stat">
+      <div class="amex-stat-label">${s.label}</div>
+      <div class="amex-stat-value" style="${s.color ? 'color:' + s.color : ''}">${s.value}</div>
+    </div>`).join('');
+  }
+
+  // Projection table
+  const tbody = document.getElementById('amex-proj-body');
+  if (tbody && estado.proyeccion_liquidacion) {
+    const maxSaldo = (estado.proyeccion_liquidacion[0] && estado.proyeccion_liquidacion[0].saldo_inicio) || 1;
+    tbody.innerHTML = estado.proyeccion_liquidacion.map(p => {
+      const pct = Math.max(0, Math.min(100, (p.saldo_fin / maxSaldo) * 100));
+      if (p.liquidada) {
+        return `<tr><td>${p.mes}</td><td colspan="4"></td><td class="amex-proj-liquidada">✅ LIQUIDADA</td></tr>`;
+      }
+      return `<tr>
+        <td>${p.mes}</td>
+        <td>$${p.saldo_inicio.toFixed(2)}</td>
+        <td>$${p.fijos_est.toFixed(2)}</td>
+        <td style="color:#22c55e">-$${p.pago.toFixed(2)}</td>
+        <td style="color:${p.saldo_fin < 100 ? '#22c55e' : '#e53e3e'}">$${p.saldo_fin.toFixed(2)}</td>
+        <td><span class="amex-proj-bar-wrap"><span class="amex-proj-bar-fill" style="width:${pct}%"></span></span></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // Accordion
+  const acc = document.getElementById('amex-accordion');
+  if (!acc) return;
+  acc.innerHTML = [...hist].reverse().map((mes) => {
+    const totalFijo = mes.transacciones.filter(t => t.tipo === 'fijo').reduce((s, t) => s + t.monto, 0);
+    const totalVar = mes.transacciones.filter(t => t.tipo === 'variable').reduce((s, t) => s + t.monto, 0);
+    const rows = mes.transacciones.map(t => `<tr class="${t.tipo === 'fijo' ? 'amex-tx-fijo' : ''}">
+      <td>${t.descripcion}${t.cancelar ? '<span class="amex-tx-cancelar">⚠ cancelar</span>' : ''}</td>
+      <td><span class="amex-cat-badge">${t.categoria}</span></td>
+      <td>${t.tipo === 'fijo' ? 'Fijo' : 'Variable'}</td>
+      <td style="text-align:right">$${t.monto.toFixed(2)}</td>
+    </tr>`).join('');
+    return `<div class="amex-acc-item">
+      <button class="amex-acc-trigger" onclick="this.nextElementSibling.classList.toggle('open')">
+        <span><strong>${mes.periodo}</strong> &nbsp; corte: ${mes.fecha_corte}</span>
+        <span>Saldo al corte: <strong>$${mes.saldo_corte.toFixed(2)}</strong> &nbsp; ▾</span>
+      </button>
+      <div class="amex-acc-body">
+        <div class="amex-acc-meta">
+          <span>Saldo anterior: $${mes.saldo_anterior.toFixed(2)}</span>
+          <span>Interés: $${mes.interes.toFixed(2)}</span>
+          <span>Pago: ${mes.fecha_pago}</span>
+        </div>
+        <table class="amex-tx-table">
+          <thead><tr><th>Descripción</th><th>Categoría</th><th>Tipo</th><th style="text-align:right">Monto</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+        <div class="amex-period-totals">
+          <span>Fijos: <strong>$${totalFijo.toFixed(2)}</strong></span>
+          <span>Variables: <strong>$${totalVar.toFixed(2)}</strong></span>
+          <span>Total: <strong>$${(totalFijo + totalVar + mes.interes).toFixed(2)}</strong></span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+const _NOTAS_KEY = 'finanzas_notas_v1';
+fetch('/api/notas').then(r => r.json()).then(d => {
+  const local = localStorage.getItem(_NOTAS_KEY) || '';
+  const server = d.texto || '';
+  const texto = server || local;
+  if (texto) document.getElementById('notas-text').value = texto;
+  if (!server && local) _postNotas(local);
+}).catch(() => {
+  const local = localStorage.getItem(_NOTAS_KEY) || '';
+  if (local) document.getElementById('notas-text').value = local;
+});
+
+document.getElementById('notas-text').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) guardarNotas();
+});
+
+async function _postNotas(texto) {
+  try {
+    await fetch('/api/notas', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({texto})
+    });
+  } catch(e) {}
+}
+
+async function guardarNotas() {
+  const btn = document.getElementById('notas-btn');
+  const saved = document.getElementById('notas-saved');
+  const texto = document.getElementById('notas-text').value;
+  btn.disabled = true;
+  localStorage.setItem(_NOTAS_KEY, texto);
+  try {
+    const r = await fetch('/api/notas', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({texto})
+    });
+    const d = await r.json();
+    if (d.ok) {
+      saved.style.display = 'inline';
+      setTimeout(() => { saved.style.display = 'none'; }, 2500);
+    }
+  } catch(e) {
+    saved.style.display = 'inline';
+    setTimeout(() => { saved.style.display = 'none'; }, 2500);
+  }
+  btn.disabled = false;
+}
+</script>
+</body>
+</html>

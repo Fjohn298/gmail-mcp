@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔍 Detector de fugas</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 13px; flex-shrink: 0; }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .container { padding: 14px; max-width: 760px; margin: 0 auto; }
+  .section { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px;
+             padding: 18px; margin-bottom: 12px; }
+  .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
+                letter-spacing: .06em; margin-bottom: 14px; }
+  .loading { color: #64748b; font-size: 12px; }
+  /* Alert cards */
+  .alert-card { background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.3);
+                border-radius: 10px; padding: 12px 14px; margin-bottom: 8px;
+                display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .alert-icon { font-size: 20px; flex-shrink: 0; }
+  .alert-info { flex: 1; }
+  .alert-desc { font-size: 13px; font-weight: 700; color: #fca5a5; }
+  .alert-meta { font-size: 11px; color: #94a3b8; margin-top: 2px; }
+  .alert-monto { font-size: 18px; font-weight: 800; color: #ef4444; flex-shrink: 0; }
+  .alert-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 99px;
+                 background: #ef4444; color: white; text-transform: uppercase; letter-spacing: .04em; }
+  /* Trend rows */
+  .trend-row { display: flex; align-items: center; gap: 10px; padding: 10px 0;
+               border-bottom: 1px solid #1e2130; }
+  .trend-row:last-child { border-bottom: none; }
+  .trend-cat { flex: 1; font-size: 13px; font-weight: 600; }
+  .trend-prev { font-size: 11px; color: #64748b; flex-shrink: 0; }
+  .trend-arrow { font-size: 11px; color: #64748b; flex-shrink: 0; }
+  .trend-now { font-size: 13px; font-weight: 700; color: #f59e0b; flex-shrink: 0; }
+  .trend-pct { font-size: 12px; font-weight: 700; color: #ef4444; flex-shrink: 0; min-width: 50px; text-align: right; }
+  /* Bar chart */
+  .bar-wrap { margin-top: 4px; }
+  .bar-bg { background: #2a2d3e; border-radius: 99px; height: 4px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 99px; background: #f59e0b; }
+  /* Subscriptions table */
+  .sub-row { display: flex; align-items: center; gap: 10px; padding: 8px 10px;
+             border-radius: 8px; margin-bottom: 4px; background: #0f1117; }
+  .sub-row.cancelar { background: rgba(239,68,68,.06); border: 1px solid rgba(239,68,68,.2); }
+  .sub-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .sub-desc { flex: 1; font-size: 12px; font-weight: 600; }
+  .sub-cat { font-size: 10px; color: #64748b; }
+  .sub-meses { font-size: 10px; color: #64748b; flex-shrink: 0; }
+  .sub-monto { font-size: 13px; font-weight: 700; color: #e2e8f0; flex-shrink: 0; }
+  .sub-badge { font-size: 10px; font-weight: 700; padding: 1px 7px; border-radius: 99px;
+               background: #ef4444; color: white; flex-shrink: 0; }
+  /* Category heatmap */
+  .cat-table { width: 100%; border-collapse: collapse; font-size: 11px; overflow-x: auto; display: block; }
+  .cat-table th { text-align: right; color: #64748b; padding: 4px 6px; white-space: nowrap;
+                  border-bottom: 1px solid #2a2d3e; }
+  .cat-table th:first-child { text-align: left; }
+  .cat-table td { padding: 5px 6px; border-bottom: 1px solid #1a1d27; text-align: right; white-space: nowrap; }
+  .cat-table td:first-child { text-align: left; color: #e2e8f0; font-weight: 500; min-width: 120px; }
+  .cell-val { display: inline-block; padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .empty { color: #2a2d3e; }
+  .no-alerts { color: #64748b; font-size: 12px; padding: 8px 0; }
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Inicio</a>
+  <h1>🔍 Detector de fugas de gastos</h1>
+</div>
+<div class="container">
+
+  <div class="section" id="alertas-section">
+    <h2>🚨 Alertas — suscripciones a cancelar</h2>
+    <div id="alertas-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="tendencias-section">
+    <h2>📈 Categorías en alza (últimos 3 meses vs anteriores)</h2>
+    <div id="tendencias-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="sobre-section">
+    <h2>⚠️ Gasto sobre el promedio histórico (último mes)</h2>
+    <div id="sobre-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="subs-section">
+    <h2>🔄 Suscripciones activas (últimos 3 meses)</h2>
+    <div id="subs-wrap"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="heatmap-section">
+    <h2>📅 Gasto por categoría y mes (AMEX)</h2>
+    <div id="heatmap-wrap" style="overflow-x:auto"><div class="loading">Cargando...</div></div>
+  </div>
+
+</div>
+<script>
+function fmt(n) { return '$' + parseFloat(n||0).toFixed(2); }
+
+function heatColor(val, max) {
+  if (!val || val === 0) return 'transparent';
+  const pct = Math.min(val / max, 1);
+  const r = Math.round(239 * pct);
+  const g = Math.round(68 * pct);
+  const b = Math.round(68 * pct);
+  return 'rgba(' + r + ',' + g + ',' + b + ',' + (0.12 + pct * 0.5) + ')';
+}
+
+fetch('/api/fugas').then(r => r.json()).then(d => {
+  if (d.error) {
+    document.getElementById('alertas-wrap').innerHTML = 'Error: ' + d.error;
+    return;
+  }
+
+  // Alertas: suscripciones con cancelar:true
+  const alertas = d.suscripciones.filter(s => s.cancelar);
+  const alertasHtml = alertas.length
+    ? alertas.map(s =>
+        '<div class="alert-card">' +
+        '<div class="alert-icon">⛔</div>' +
+        '<div class="alert-info">' +
+        '<div class="alert-desc">' + s.descripcion + '</div>' +
+        '<div class="alert-meta">' + s.categoria + ' · activo ' + s.meses_activos + ' mes(es) recientes</div>' +
+        '</div>' +
+        '<div style="display:flex;flex-direction:column;align-items:flex-end;gap:4px">' +
+        '<div class="alert-monto">' + fmt(s.ultimo_monto) + '/mes</div>' +
+        '<span class="alert-badge">CANCELAR</span>' +
+        '</div>' +
+        '</div>'
+      ).join('')
+    : '<div class="no-alerts">✅ No hay suscripciones marcadas para cancelar</div>';
+  document.getElementById('alertas-wrap').innerHTML = alertasHtml;
+
+  // Tendencias al alza
+  const tendHtml = d.tendencias_al_alza.length
+    ? d.tendencias_al_alza.map(t => {
+        const maxAvg = Math.max(t.promedio_reciente, t.promedio_anterior);
+        const fillPct = Math.round(t.promedio_reciente / maxAvg * 100);
+        return '<div class="trend-row">' +
+          '<div><div class="trend-cat">' + t.categoria + '</div>' +
+          '<div class="bar-wrap"><div class="bar-bg"><div class="bar-fill" style="width:' + fillPct + '%"></div></div></div></div>' +
+          '<div class="trend-prev">' + fmt(t.promedio_anterior) + '</div>' +
+          '<div class="trend-arrow">→</div>' +
+          '<div class="trend-now">' + fmt(t.promedio_reciente) + '</div>' +
+          '<div class="trend-pct">+' + t.variacion_pct + '%</div>' +
+          '</div>';
+      }).join('')
+    : '<div class="no-alerts">✅ Sin categorías con alza significativa</div>';
+  document.getElementById('tendencias-wrap').innerHTML = tendHtml;
+
+  // Sobre histórico
+  const sobreHtml = d.sobre_historico.length
+    ? d.sobre_historico.map(s =>
+        '<div class="trend-row">' +
+        '<div><div class="trend-cat">' + s.categoria + '</div>' +
+        '<div style="font-size:10px;color:#64748b">Promedio histórico: ' + fmt(s.promedio_historico) + ' · ' + s.mes_actual_label + '</div></div>' +
+        '<div class="trend-now">' + fmt(s.mes_actual) + '</div>' +
+        '<div class="trend-pct">+' + s.variacion_pct + '%</div>' +
+        '</div>'
+      ).join('')
+    : '<div class="no-alerts">✅ El último mes estuvo dentro del rango normal</div>';
+  document.getElementById('sobre-wrap').innerHTML = sobreHtml;
+
+  // Suscripciones activas
+  const subsHtml = d.suscripciones.length
+    ? d.suscripciones.map(s => {
+        const dot = s.cancelar ? '#ef4444' : '#22c55e';
+        return '<div class="sub-row' + (s.cancelar ? ' cancelar' : '') + '">' +
+          '<div class="sub-dot" style="background:' + dot + '"></div>' +
+          '<div><div class="sub-desc">' + s.descripcion + '</div>' +
+          '<div class="sub-cat">' + s.categoria + '</div></div>' +
+          '<div class="sub-meses">' + s.meses_activos + '/3 meses</div>' +
+          '<div class="sub-monto">' + fmt(s.ultimo_monto) + '</div>' +
+          (s.cancelar ? '<span class="sub-badge">CANCELAR</span>' : '') +
+          '</div>';
+      }).join('')
+    : '<div class="no-alerts">Sin suscripciones detectadas</div>';
+  document.getElementById('subs-wrap').innerHTML = subsHtml;
+
+  // Heatmap by category and month
+  const periodos = d.periodos;
+  const monthly = d.monthly_cats;
+  const allCats = [...new Set(periodos.flatMap(p => Object.keys(monthly[p] || {})))].sort();
+  const maxVal = Math.max(...periodos.flatMap(p => Object.values(monthly[p] || {})));
+
+  const headerRow = '<tr><th>Categoría</th>' + periodos.map(p => '<th>' + p.split(' ')[0].substring(0,3) + ' ' + p.split(' ')[1].slice(-2) + '</th>').join('') + '</tr>';
+  const bodyRows = allCats.map(cat => {
+    const cells = periodos.map(p => {
+      const val = (monthly[p] || {})[cat] || 0;
+      const bg = heatColor(val, maxVal);
+      return val > 0
+        ? '<td><span class="cell-val" style="background:' + bg + '">' + fmt(val) + '</span></td>'
+        : '<td class="empty">—</td>';
+    }).join('');
+    return '<tr><td>' + cat + '</td>' + cells + '</tr>';
+  }).join('');
+
+  document.getElementById('heatmap-wrap').innerHTML =
+    '<table class="cat-table"><thead>' + headerRow + '</thead><tbody>' + bodyRows + '</tbody></table>';
+
+}).catch(() => {
+  document.getElementById('alertas-wrap').innerHTML = '<div class="loading">Error de conexión</div>';
+});
+</script>
+</body>
+</html>

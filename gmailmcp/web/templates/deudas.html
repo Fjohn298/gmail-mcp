@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎯 Destructor de deudas</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, sans-serif; }
+  .header { background: #1a1d27; border-bottom: 1px solid #2a2d3e; padding: 16px 20px;
+            display: flex; align-items: center; gap: 12px; }
+  .header a { color: #6366f1; text-decoration: none; font-size: 13px; flex-shrink: 0; }
+  .header h1 { font-size: 17px; font-weight: 700; }
+  .container { padding: 14px; max-width: 760px; margin: 0 auto; }
+  .section { background: #1a1d27; border: 1px solid #2a2d3e; border-radius: 12px;
+             padding: 18px; margin-bottom: 12px; }
+  .section h2 { font-size: 13px; color: #64748b; text-transform: uppercase;
+                letter-spacing: .06em; margin-bottom: 14px; }
+  .loading { color: #64748b; font-size: 12px; }
+  /* Budget summary */
+  .budget-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 4px; }
+  @media(min-width:480px) { .budget-grid { grid-template-columns: repeat(4, 1fr); } }
+  .budget-item { background: #0f1117; border-radius: 8px; padding: 10px 12px; }
+  .budget-label { font-size: 10px; color: #64748b; text-transform: uppercase; letter-spacing:.04em; }
+  .budget-val { font-size: 16px; font-weight: 700; margin-top: 3px; }
+  /* Strategy cards */
+  .strategy-grid { display: grid; gap: 10px; }
+  @media(min-width:520px) { .strategy-grid { grid-template-columns: repeat(3, 1fr); } }
+  .strategy-card { background: #0f1117; border: 1px solid #2a2d3e; border-radius: 10px;
+                   padding: 14px; position: relative; transition: border-color .15s; }
+  .strategy-card.recommended { border-color: #22c55e; box-shadow: 0 0 0 1px rgba(34,197,94,.25); }
+  .strategy-badge { position: absolute; top: 10px; right: 10px; font-size: 10px; font-weight: 700;
+                    padding: 2px 8px; border-radius: 99px; background: #22c55e; color: #0f1117;
+                    text-transform: uppercase; letter-spacing: .04em; }
+  .strategy-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+  .strategy-desc { font-size: 10px; color: #64748b; margin-bottom: 10px; }
+  .strategy-fecha { font-size: 20px; font-weight: 700; color: #e2e8f0; margin-bottom: 2px; }
+  .strategy-meses { font-size: 11px; color: #64748b; margin-bottom: 8px; }
+  .strategy-interes { font-size: 13px; font-weight: 700; }
+  .strategy-interes span { font-size: 10px; color: #64748b; font-weight: 400; }
+  /* Debt order list */
+  .order-list { display: flex; flex-direction: column; gap: 4px; margin-top: 10px; }
+  .order-item { display: flex; align-items: center; gap: 8px; padding: 6px 8px;
+                background: #1a1d27; border-radius: 7px; font-size: 11px; }
+  .order-num { width: 20px; height: 20px; border-radius: 50%; background: #2a2d3e;
+               display: flex; align-items: center; justify-content: center; font-size: 10px;
+               font-weight: 700; flex-shrink: 0; }
+  .order-nombre { flex: 1; color: #e2e8f0; }
+  .order-saldo { color: #ef4444; font-weight: 700; flex-shrink: 0; }
+  .order-tasa { color: #64748b; flex-shrink: 0; }
+  .order-liq { color: #f59e0b; font-size: 10px; flex-shrink: 0; text-align: right; }
+  /* Detailed recommended */
+  .debt-row { display: grid; grid-template-columns: 1fr auto auto auto;
+              gap: 8px; align-items: center; padding: 10px 0;
+              border-bottom: 1px solid #1e2130; font-size: 12px; }
+  .debt-row:last-child { border-bottom: none; }
+  .debt-nombre { font-weight: 600; }
+  .debt-tipo { font-size: 10px; color: #64748b; margin-top: 1px; }
+  .debt-saldo { font-weight: 700; color: #ef4444; text-align: right; }
+  .debt-tasa { color: #f59e0b; font-size: 11px; text-align: right; }
+  .debt-liq { font-size: 10px; color: #94a3b8; text-align: right; }
+  /* Savings banner */
+  .savings-banner { background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.2);
+                    border-radius: 10px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; }
+  .savings-val { font-size: 22px; font-weight: 800; color: #22c55e; }
+  .savings-text { font-size: 12px; color: #86efac; line-height: 1.5; }
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="/">← Inicio</a>
+  <h1>🎯 Motor de destrucción de deudas</h1>
+</div>
+<div class="container">
+
+  <div class="section">
+    <h2>💰 Presupuesto mensual de pago</h2>
+    <div class="budget-grid" id="budget-grid"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section">
+    <h2>📊 Comparación de estrategias</h2>
+    <div class="strategy-grid" id="strategy-grid"><div class="loading">Cargando...</div></div>
+  </div>
+
+  <div class="section" id="rec-section" style="display:none">
+    <h2 id="rec-title">✅ Estrategia recomendada — detalle por deuda</h2>
+    <div id="rec-detail"></div>
+  </div>
+
+  <div class="section" id="savings-section" style="display:none">
+    <h2>💡 Ahorro vs. pago mínimo</h2>
+    <div id="savings-content"></div>
+  </div>
+
+</div>
+<script>
+function fmt(n) { return '$' + parseFloat(n||0).toFixed(2); }
+
+const NOMBRES = {
+  avalancha: 'Avalancha',
+  bola_de_nieve: 'Bola de nieve',
+  hibrida: 'Híbrida',
+};
+const DESCS = {
+  avalancha: 'Mayor tasa de interés primero — minimiza el costo total',
+  bola_de_nieve: 'Menor saldo primero — victorias rápidas y motivación',
+  hibrida: 'Saldos pequeños primero, luego por tasa — balance práctico',
+};
+const COLORS = { avalancha: '#6366f1', bola_de_nieve: '#0ea5e9', hibrida: '#f59e0b' };
+
+fetch('/api/deudas/estrategias').then(r => r.json()).then(d => {
+  if (d.error) {
+    document.getElementById('budget-grid').innerHTML = '<div class="loading">Error: ' + d.error + '</div>';
+    return;
+  }
+
+  // Budget
+  const totalDeuda = d.debts.reduce((s, x) => s + x.saldo, 0);
+  document.getElementById('budget-grid').innerHTML = [
+    ['Deuda total', fmt(totalDeuda), '#ef4444'],
+    ['Ingreso mensual', fmt(d.ingreso_mensual), '#22c55e'],
+    ['Pagos mínimos', fmt(d.total_min), '#f59e0b'],
+    ['Presupuesto total', fmt(d.budget_total), '#6366f1'],
+  ].map(([label, val, color]) =>
+    '<div class="budget-item">' +
+    '<div class="budget-label">' + label + '</div>' +
+    '<div class="budget-val" style="color:' + color + '">' + val + '</div>' +
+    '</div>'
+  ).join('');
+
+  // Strategy cards
+  const keys = ['avalancha', 'bola_de_nieve', 'hibrida'];
+  const interests = keys.map(k => d.estrategias[k].interes_total);
+  const minInt = Math.min(...interests);
+
+  document.getElementById('strategy-grid').innerHTML = keys.map(k => {
+    const s = d.estrategias[k];
+    const isRec = k === d.recomendada;
+    const color = COLORS[k];
+    const isCheapest = s.interes_total === minInt;
+    const interestColor = isCheapest ? '#22c55e' : '#ef4444';
+    const orderHtml = s.orden.map((item, i) =>
+      '<div class="order-item">' +
+      '<div class="order-num" style="background:' + color + '22;color:' + color + '">' + (i+1) + '</div>' +
+      '<div class="order-nombre">' + item.nombre + '</div>' +
+      '<div class="order-liq">' + item.liquidacion_label + '</div>' +
+      '</div>'
+    ).join('');
+    return '<div class="strategy-card' + (isRec ? ' recommended' : '') + '">' +
+      (isRec ? '<span class="strategy-badge">Recomendada</span>' : '') +
+      '<div class="strategy-name" style="color:' + color + '">' + NOMBRES[k] + '</div>' +
+      '<div class="strategy-desc">' + DESCS[k] + '</div>' +
+      '<div class="strategy-fecha">' + s.liquidacion_label + '</div>' +
+      '<div class="strategy-meses">' + s.meses + ' meses</div>' +
+      '<div class="strategy-interes" style="color:' + interestColor + '">' + fmt(s.interes_total) +
+        ' <span>en intereses</span></div>' +
+      '<div class="order-list">' + orderHtml + '</div>' +
+      '</div>';
+  }).join('');
+
+  // Recommended detail
+  const rec = d.estrategias[d.recomendada];
+  document.getElementById('rec-title').textContent =
+    '✅ ' + NOMBRES[d.recomendada] + ' — orden de liquidación';
+  document.getElementById('rec-section').style.display = 'block';
+  document.getElementById('rec-detail').innerHTML = rec.orden.map((item, i) =>
+    '<div class="debt-row">' +
+    '<div><div class="debt-nombre">' + (i+1) + '. ' + item.nombre + '</div>' +
+    '<div class="debt-tipo">Tasa: ' + item.tasa_anual + '% anual</div></div>' +
+    '<div class="debt-saldo">' + fmt(item.saldo) + '</div>' +
+    '<div class="debt-liq">Liquidación<br>' + item.liquidacion_label + '</div>' +
+    '</div>'
+  ).join('');
+
+  // Savings vs min only (estimate: budget = total_min only)
+  const maxInt = Math.max(...interests);
+  const minInt2 = Math.min(...interests);
+  const saving = round2(maxInt - minInt2);
+  document.getElementById('savings-section').style.display = 'block';
+  document.getElementById('savings-content').innerHTML =
+    '<div class="savings-banner">' +
+    '<div class="savings-val">' + fmt(saving) + '</div>' +
+    '<div class="savings-text">Diferencia en intereses entre la peor y la mejor estrategia.<br>' +
+    'Elige bien y ahorras ese dinero extra.</div>' +
+    '</div>';
+}).catch(e => {
+  document.getElementById('budget-grid').innerHTML = '<div class="loading">Error de conexión</div>';
+});
+
+function round2(n) { return Math.round(n * 100) / 100; }
+</script>
+</body>
+</html>
